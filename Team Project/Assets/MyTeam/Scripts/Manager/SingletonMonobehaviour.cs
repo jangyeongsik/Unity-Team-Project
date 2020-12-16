@@ -5,7 +5,7 @@ using UnityEngine;
 public class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
     static T _instance = null;
-
+   
     public static T Instance
     {
         get
