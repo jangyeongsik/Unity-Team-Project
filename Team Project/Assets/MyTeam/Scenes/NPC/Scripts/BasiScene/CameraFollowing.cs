@@ -1,17 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class IsoMetric : MonoBehaviour
+public class CameraFollowing : MonoBehaviour
 {
-    [SerializeField] private float offsetY = 4.0f;
+    [SerializeField]
+    float offsetY = 4f;
     public GameObject player;
-
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
