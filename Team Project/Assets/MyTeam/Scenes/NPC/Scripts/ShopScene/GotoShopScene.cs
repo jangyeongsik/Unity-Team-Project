@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NPCReader
-{
-    public class NPCTalk
-    {
-        public int id;
-        public string name;
-        public List<string> talk;
-    }
-}
 
 public class GotoShopScene : MonoBehaviour
 {
