@@ -76,7 +76,7 @@ public class PlayerMoving : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.F))
                 {
                     talkOnOff = !talkOnOff;
-                    BetweenPlayerAndShop.Instance.OnEventTalkOnOff(talkOnOff, 1000, hit.collider.gameObject.name);
+                    BetweenPlayerAndShop.Instance.OnEventTalkOnOff(talkOnOff, 1001, hit.collider.gameObject.name);
                 }
             }
         }

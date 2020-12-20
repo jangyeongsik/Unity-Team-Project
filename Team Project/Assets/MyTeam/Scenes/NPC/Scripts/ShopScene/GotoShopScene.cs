@@ -12,7 +12,7 @@ public class GotoShopScene : MonoBehaviour
     private bool startTalking = false;
     Text talk;
 
-    List<NPCReader.NPCTalk> talkData;
+   
 
     int count;
     int firstTxt;
@@ -23,14 +23,14 @@ public class GotoShopScene : MonoBehaviour
     {
         BetweenPlayerAndShop.Instance.onOff += ShopOn;
         BetweenPlayerAndShop.Instance.talk += TalkOn;
-        talkData = new List<NPCReader.NPCTalk>();
+
     }
 
     private void Start()
     {
         GameObject text = TalkCanvas.transform.Find("sorse").gameObject;
         talk = text.GetComponent<Text>() as Text;
-        Test();
+
 
     }
 
@@ -39,19 +39,6 @@ public class GotoShopScene : MonoBehaviour
         NextDialouge();
     }
 
-    void Test()
-    {
-        NPCReader.NPCTalk t = new NPCReader.NPCTalk();
-        t.id = 1000;
-        t.name = "Npc";
-        t.talk = new List<string>();
-        t.talk.Add("ㅎㅇ");
-        t.talk.Add("1");
-        t.talk.Add("2");
-        t.talk.Add("3");
-
-        talkData.Add(t);
-    }
 
 
     public void ShopOn(bool isOn)
@@ -67,19 +54,17 @@ public class GotoShopScene : MonoBehaviour
 
     public void FindNpc(int id, string NpcName)
     {
-        for (int i = 0; i < talkData.Count; i++)
+        for (int i = 0; i < talkdataTest.Instance.data.Count; i++)
         {
-            if(talkData[i].id == id && talkData[i].Equals(NpcName))
+            if(talkdataTest.Instance.data[i].id == id && talkdataTest.Instance.data[i].name.Equals(NpcName))
             {
-                for (int k = 0; k < talkData[i].talk.Count; k++)
-                {
-                    firstTxt = k;
-                    startTalking = true;
-                    break;
-                }
+                firstTxt = i;
+                startTalking = true;
+                count = 0;
+                break;
             }
         }
-        talk.text = talkData[firstTxt].talk[count];
+        talk.text = talkdataTest.Instance.data[firstTxt].talk[count++];
     }
 
     void NextDialouge()
@@ -88,9 +73,16 @@ public class GotoShopScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                if (count < talkData[firstTxt].talk.Count)
-                    talk.text = talkData[firstTxt].talk[count++];
+                if (count < talkdataTest.Instance.data[firstTxt].talk.Count)
+                {
+                    talk.text = talkdataTest.Instance.data[firstTxt].talk[count++];
+                }
+                else
+                {
+                    startTalking = false;
+                }
             }
+            
         }
     }
 }
