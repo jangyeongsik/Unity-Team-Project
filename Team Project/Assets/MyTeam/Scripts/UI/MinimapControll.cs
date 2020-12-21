@@ -8,6 +8,6 @@ public class MinimapControll : MonoBehaviour
 
     public void ExitFromMiniMap()
     {
-        BetweenPlayerAndShop.Instance.OnEventMinimapOnOff(miniMapOnOff);
+        GameEventToUI.Instance.OnEventMinimapOnOff(miniMapOnOff);
     }
 }

@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     float speed = 10f;
-
+    private Vector3 MoveDirection = Vector3.zero;
     [SerializeField]
     float dashSpeed = 30f;
     Vector3 startPos;
@@ -54,14 +54,16 @@ public class PlayerMove : MonoBehaviour
     {
         //대쉬중이면 못움직임
         if (isDash) return;
-        x = Input.GetAxisRaw("Horizontal");
-        z = Input.GetAxisRaw("Vertical");
+         x = Input.GetAxisRaw("Horizontal");
+         z = Input.GetAxisRaw("Vertical");
 
-        dir = new Vector3(x, 0, z).normalized;
+         dir = new Vector3(x, 0, z).normalized;
 
-        controller.Move(dir * speed * Time.deltaTime);
+         controller.Move(dir * speed * Time.deltaTime);
 
-        transform.LookAt(transform.position + dir);
+         transform.LookAt(transform.position + dir);
+
+
     }
 
     void Dash()
@@ -73,6 +75,7 @@ public class PlayerMove : MonoBehaviour
         }
         if(isDash)
         {
+            
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             float d = Vector3.Distance(startPos, transform.position);
             if (d > 3)
@@ -98,6 +101,11 @@ public class PlayerMove : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
     }
 
 }

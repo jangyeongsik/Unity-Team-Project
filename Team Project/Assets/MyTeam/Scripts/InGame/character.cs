@@ -28,6 +28,7 @@ namespace State
     public enum MonsterState
     {
         None
+
     }
 
 }

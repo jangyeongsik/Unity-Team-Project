@@ -28,30 +28,30 @@ public class PlayerButtonEvent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             shopOnOff = !shopOnOff;
-            BetweenPlayerAndShop.Instance.OnEventShopOnOff(shopOnOff);
+            GameEventToUI.Instance.OnEventShopOnOff(shopOnOff);
         }
     }
 
     public void OpenMiniMap()
     {
-        BetweenPlayerAndShop.Instance.OnEventMinimapOnOff(true);
+        GameEventToUI.Instance.OnEventMinimapOnOff(true);
     }
 
     void FindTarget()
     {
-       /* Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, range))
-        {
-            if (hit.collider.gameObject.CompareTag("Npc"))
-            {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    talkOnOff = !talkOnOff;
-                    BetweenPlayerAndShop.Instance.OnEventTalkOnOff(talkOnOff, 1001, hit.collider.gameObject.name);
-                }
-            }
-        }*/
+        /* Ray ray = new Ray(transform.position, transform.forward);
+         RaycastHit hit;
+         if (Physics.Raycast(ray, out hit, range))
+         {
+             if (hit.collider.gameObject.CompareTag("Npc"))
+             {
+                 if (Input.GetKeyDown(KeyCode.F))
+                 {
+                     talkOnOff = !talkOnOff;
+                     GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, hit.collider.gameObject.name);
+                 }
+             }
+         }*/
 
     }
 }
