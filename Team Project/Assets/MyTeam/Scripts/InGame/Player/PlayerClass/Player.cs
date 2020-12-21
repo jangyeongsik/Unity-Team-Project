@@ -12,7 +12,6 @@ public class Player : character
     public string p_name;               //이름
     public State.MonsterState m_state;  //상태
 
-
     Player(Transform t)                 //생성자
     {
         position = t;

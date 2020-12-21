@@ -22,8 +22,8 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         //나중에 조이스틱 사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -46,8 +46,8 @@ public class PlayerMove : MonoBehaviour
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
@@ -58,6 +58,11 @@ public class PlayerMove : MonoBehaviour
         z = Input.GetAxisRaw("Vertical");
 
         dir = new Vector3(x, 0, z).normalized;
+        //카메라 방향으로 변환
+        Transform cmT = Camera.main.transform;
+        dir = cmT.TransformDirection(dir);
+        dir.y = 0;
+        dir.Normalize();
 
         controller.Move(dir * speed * Time.deltaTime);
 
@@ -83,6 +88,10 @@ public class PlayerMove : MonoBehaviour
     void PlayerJoyMove(Vector2 direction, float amount)
     {
         Vector3 dir = new Vector3(direction.x, 0f, direction.y);
+        Transform cmT = Camera.main.transform;
+        dir = cmT.TransformDirection(dir);
+        dir.y = 0;
+        dir.Normalize();
         controller.Move(dir * amount * speed * Time.deltaTime);
         transform.LookAt(transform.position + dir);
     }
