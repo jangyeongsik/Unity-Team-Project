@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GameEventToUI : Singleton<GameEventToUI>
 {
+
+
+
     public event System.Action<Vector2> FollowPlayerUI;
     public event System.Action<bool> onOff;
     public event System.Action<bool> miniOnOff;
+    public event System.Action<bool> inventoryOnOff;
     public event System.Action<bool, int, string> talk;
 
     public void OnFollowPlayerUI(Vector2 playerPos)
@@ -15,7 +19,6 @@ public class GameEventToUI : Singleton<GameEventToUI>
             FollowPlayerUI(playerPos);
     }
 
-    
 
     public void OnEventShopOnOff(bool isOn)
     {
@@ -25,10 +28,19 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventMinimapOnOff(bool isOn)
     {
         miniOnOff(isOn);
+
     }
 
     public void OnEventTalkOnOff(bool isOn, int id, string npcName)
     {
         talk(isOn, id, npcName);
     }
+
+    public void OnEventInventoryOnOff(bool isOn)
+    {
+        inventoryOnOff(isOn);
+    }
+
+
+
 }

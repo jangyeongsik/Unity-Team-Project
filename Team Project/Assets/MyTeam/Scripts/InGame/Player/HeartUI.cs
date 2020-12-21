@@ -59,7 +59,6 @@ public class HeartUI : MonoBehaviour
         }
         if (currentHeart == 0 && hearts[currentHeart].fillAmount == 0)
         {
-            Debug.Log(currentHeart);
             currentHeart = 0;
             return;
         }

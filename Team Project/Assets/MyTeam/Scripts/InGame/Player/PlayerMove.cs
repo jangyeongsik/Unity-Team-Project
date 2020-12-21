@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     float speed = 10f;
-    private Vector3 MoveDirection = Vector3.zero;
+
     [SerializeField]
     float dashSpeed = 30f;
     Vector3 startPos;
@@ -22,8 +22,8 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         //나중에 조이스틱 사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         //방향키 wasd이동
-         Move();
+        Move();
         GameEventToUI.Instance.OnFollowPlayerUI(Camera.main.WorldToScreenPoint(transform.position));
     }
 
@@ -46,36 +46,38 @@ public class PlayerMove : MonoBehaviour
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
     {
         //대쉬중이면 못움직임
         if (isDash) return;
-         x = Input.GetAxisRaw("Horizontal");
-         z = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
 
-         dir = new Vector3(x, 0, z).normalized;
+        dir = new Vector3(x, 0, z).normalized;
+        //카메라 방향으로 변환
+        Transform cmT = Camera.main.transform;
+        dir = cmT.TransformDirection(dir);
+        dir.y = 0;
+        dir.Normalize();
 
-         controller.Move(dir * speed * Time.deltaTime);
+        controller.Move(dir * speed * Time.deltaTime);
 
-         transform.LookAt(transform.position + dir);
-
-
+        transform.LookAt(transform.position + dir);
     }
 
     void Dash()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !isDash)
+        if (Input.GetKeyDown(KeyCode.Space) && !isDash)
         {
             isDash = true;
             startPos = transform.position;
         }
-        if(isDash)
+        if (isDash)
         {
-            
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             float d = Vector3.Distance(startPos, transform.position);
             if (d > 3)
@@ -86,6 +88,10 @@ public class PlayerMove : MonoBehaviour
     void PlayerJoyMove(Vector2 direction, float amount)
     {
         Vector3 dir = new Vector3(direction.x, 0f, direction.y);
+        Transform cmT = Camera.main.transform;
+        dir = cmT.TransformDirection(dir);
+        dir.y = 0;
+        dir.Normalize();
         controller.Move(dir * amount * speed * Time.deltaTime);
         transform.LookAt(transform.position + dir);
     }
@@ -100,12 +106,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
     }
 
 }
