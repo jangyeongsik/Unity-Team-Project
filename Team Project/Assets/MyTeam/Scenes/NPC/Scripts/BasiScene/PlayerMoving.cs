@@ -12,6 +12,7 @@ public class PlayerMoving : MonoBehaviour
 
     private bool shopOnOff = false;
     private bool talkOnOff = false;
+    private bool miniMapOnOff = false;
 
 
 
@@ -23,7 +24,7 @@ public class PlayerMoving : MonoBehaviour
 
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
 
-        SceneManager.LoadScene("ShopScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
     }
 
     private void Update()
@@ -37,6 +38,7 @@ public class PlayerMoving : MonoBehaviour
             }
         }
         FindTarget();
+        
     }
 
     void Move()
@@ -45,7 +47,6 @@ public class PlayerMoving : MonoBehaviour
         Vector3 ForwardMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 
         Vector3 FinalMovement = RightMovement + ForwardMovement;
-
         Vector3 direction = Vector3.Normalize(FinalMovement);
 
         if(direction != Vector3.zero)
@@ -60,12 +61,16 @@ public class PlayerMoving : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I))
         {
             shopOnOff = !shopOnOff;
-
             BetweenPlayerAndShop.Instance.OnEventShopOnOff(shopOnOff);
         }
     }
 
-    public void FindTarget()
+    public void OpenMiniMap()
+    {
+        BetweenPlayerAndShop.Instance.OnEventMinimapOnOff(true);
+    }
+
+    void FindTarget()
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -82,4 +87,6 @@ public class PlayerMoving : MonoBehaviour
         }
         
     }
+
+
 }

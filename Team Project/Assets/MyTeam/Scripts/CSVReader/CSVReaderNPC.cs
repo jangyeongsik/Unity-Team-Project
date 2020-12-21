@@ -41,6 +41,7 @@ namespace CSVReaderNPC
                 entry.talk = new List<string>();
                 for (int l = 0; l < values.Length; l++)
                 {
+                    if (values[l] == "") continue;
                     int n;
                     switch (l)
                     {
