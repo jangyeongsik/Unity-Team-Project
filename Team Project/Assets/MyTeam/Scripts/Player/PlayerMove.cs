@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
     {
         //방향키 wasd이동
          Move();
-        
+        GameEventToUI.Instance.OnFollowPlayerUI(Camera.main.WorldToScreenPoint(transform.position));
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
     {
         //조이스틱사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
@@ -97,7 +97,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log(hit.moveLength);
+        
     }
 
 }

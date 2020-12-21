@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,9 @@ public class TicktokGauge : MonoBehaviour
 
     public TICKTOKZONE zone;
 
+    float followDistX = 42f;
+    float followDistY = 27f;
+
     private void Start()
     {
         greenZone = new TicktokZone(Green);
@@ -50,6 +54,20 @@ public class TicktokGauge : MonoBehaviour
         redZone = new TicktokZone(Red);
 
         endPos = GetComponent<RectTransform>().sizeDelta.x;
+
+        GameEventToUI.Instance.FollowPlayerUI += FollowPlayer;
+    }
+
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.FollowPlayerUI -= FollowPlayer;
+    }
+
+    private void FollowPlayer(Vector2 pos)
+    {
+        pos.x -= followDistX;
+        pos.y += followDistY;
+        transform.position = pos;
     }
 
     private void OnEnable()
