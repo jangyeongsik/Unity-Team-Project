@@ -19,13 +19,13 @@ public class ObjectPoolManager : SingletonMonobehaviour<ObjectPoolManager>
             return bullet;
         });*/
 
-        bulletPool.Allocate();
+       // bulletPool.Allocate();
     }
 
-    void OnDestroy()
+    /*void OnDestroy()
     {
         bulletPool.Dispose();
         singleton = null;
-    }
+    }*/
 
 }
