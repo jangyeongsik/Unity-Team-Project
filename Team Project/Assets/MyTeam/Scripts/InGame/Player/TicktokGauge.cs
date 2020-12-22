@@ -44,7 +44,9 @@ public class TicktokGauge : MonoBehaviour
 
     public TICKTOKZONE zone;
 
+    [SerializeField]
     float followDistX = 42f;
+    [SerializeField]
     float followDistY = 27f;
 
     private void Start()
