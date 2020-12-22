@@ -20,7 +20,6 @@ public class PlayerButtonEvent : MonoBehaviour
             if (!talkOnOff)
             {
                 GotoShopScene();
-                FindTarget();
                 GotoInven();
             }
         }
@@ -44,24 +43,16 @@ public class PlayerButtonEvent : MonoBehaviour
 
     public void OpenMiniMap()
     {
-        GameEventToUI.Instance.OnEventMinimapOnOff(true);
+        BetweenPlayerAndShop.Instance.OnEventMinimapOnOff(true);
     }
 
-    void FindTarget()
+    private void OnTriggerStay(Collider other)
     {
-        /* Ray ray = new Ray(transform.position, transform.forward);
-         RaycastHit hit;
-         if (Physics.Raycast(ray, out hit, range))
-         {
-             if (hit.collider.gameObject.CompareTag("Npc"))
-             {
-                 if (Input.GetKeyDown(KeyCode.F))
-                 {
-                     talkOnOff = !talkOnOff;
-                     GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, hit.collider.gameObject.name);
-                 }
-             }
-         }*/
+        if (Input.GetKeyDown(KeyCode.F))
+        {
 
+            talkOnOff = !talkOnOff;
+            BetweenPlayerAndShop.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
+        }
     }
 }
