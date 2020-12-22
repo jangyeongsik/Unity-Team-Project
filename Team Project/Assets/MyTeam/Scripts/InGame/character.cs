@@ -27,7 +27,9 @@ namespace State
 
     public enum MonsterState
     {
-        None
+        M_None,
+        M_Idle,
+        M_Dead
 
     }
 

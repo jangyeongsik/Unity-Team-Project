@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3978160828444636250}
   - component: {fileID: 3978160828444636249}
   - component: {fileID: 3978160828444636248}
-  m_Layer: 0
+  - component: {fileID: 1163380207}
+  m_Layer: 8
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +95,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -114,6 +115,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   dashSpeed: 30
+--- !u!114 &1163380207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978160828444636327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991a14adf127e804da1ada31c1a11477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3978160828925306325
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +139,7 @@ GameObject:
   - component: {fileID: 3978160828925306313}
   - component: {fileID: 3978160828925306312}
   - component: {fileID: 3978160828925306327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
