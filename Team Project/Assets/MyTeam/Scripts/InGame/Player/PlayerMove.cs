@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     CharacterController controller;
+    public Animator animator;
 
     [SerializeField]
     float speed = 10f;
@@ -67,6 +68,13 @@ public class PlayerMove : MonoBehaviour
         controller.Move(dir * speed * Time.deltaTime);
 
         transform.LookAt(transform.position + dir);
+        if (x > 0 || z > 0)
+        {
+            animator.SetBool("isInput", true);
+            Debug.Log('a');
+        }
+        else
+            animator.SetBool("isInput", false);
     }
 
     void Dash()
