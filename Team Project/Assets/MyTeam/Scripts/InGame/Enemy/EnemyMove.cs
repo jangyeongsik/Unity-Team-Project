@@ -44,6 +44,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
+        
         switch (enemy.m_state)
         {
             case State.MonsterState.M_None:
