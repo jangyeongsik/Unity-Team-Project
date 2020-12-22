@@ -11,6 +11,8 @@ public class GotoShopScene : MonoBehaviour
     public GameObject miniMapCanvas;
     public GameObject inventory;
 
+    //private bool questOnOff = false;
+
     private bool startTalking = false;
     Text talk;
 
@@ -87,10 +89,8 @@ public class GotoShopScene : MonoBehaviour
         }
     }
 
-
     public void InventoryOnOff(bool isOn)
     {
         inventory.gameObject.SetActive(isOn);
     }
-
 }

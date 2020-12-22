@@ -121,32 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &167249790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7001468586858081092, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1554562458}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &167249792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167249790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd94dcb588a1944384fd0779024809e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemSlotList: {fileID: 510680069}
-  ItemSlots: []
---- !u!1 &510680069 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7001468586610907434, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1554562458}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &668530206 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2962375618551867672, guid: 9536fad2d1aa4a648bc431cafd8c5407,
@@ -406,18 +380,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1438412780 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1554562464, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1554562458}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76497cb0a85d6824fbe711afeb1b2194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1554562458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,18 +388,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1554562463, guid: 5a8d28225208a3b4d89d1e2cca379cc4, type: 3}
-      propertyPath: inventory
+      propertyPath: questList
       value: 
-      objectReference: {fileID: 1709273480}
-    - target: {fileID: 1709273480, guid: 5a8d28225208a3b4d89d1e2cca379cc4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3779525801435779005, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1554562459}
     - target: {fileID: 3779525802320408281, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
         type: 3}
       propertyPath: m_Name
@@ -498,29 +451,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3779525802366306129, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
+    - target: {fileID: 4106849981877751044, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1438412780}
-    - target: {fileID: 3779525802366306129, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitFromMiniMap
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a8d28225208a3b4d89d1e2cca379cc4, type: 3}
+--- !u!1 &1554562459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4106849981877751044, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1554562458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1606549120 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3915121068469594850, guid: 1f01a970ae7f8164cb3b9091def21c0c,
     type: 3}
   m_PrefabInstance: {fileID: 3915121067030926434}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1709273480 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1709273480, guid: 5a8d28225208a3b4d89d1e2cca379cc4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1554562458}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1824786908
 GameObject:

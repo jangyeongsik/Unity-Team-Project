@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GameEventToUI : Singleton<GameEventToUI>
 {
-
-
-
     public event System.Action<Vector2> FollowPlayerUI;
     public event System.Action<bool> onOff;
     public event System.Action<bool> miniOnOff;
@@ -40,7 +37,4 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         inventoryOnOff(isOn);
     }
-
-
-
 }

@@ -9,6 +9,8 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
     private bool invenOnOff = false;
+    private bool questListOnOff = false;
+
     private void Start()
     {
         SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive); 
@@ -43,16 +45,15 @@ public class PlayerButtonEvent : MonoBehaviour
 
     public void OpenMiniMap()
     {
-        BetweenPlayerAndShop.Instance.OnEventMinimapOnOff(true);
+        GameEventToUI.Instance.OnEventMinimapOnOff(true);
     }
-
+    
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-
             talkOnOff = !talkOnOff;
-            BetweenPlayerAndShop.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
+            GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
         }
     }
 }
