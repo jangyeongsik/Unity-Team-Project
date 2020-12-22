@@ -261,7 +261,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110544852}
-  m_LocalRotation: {x: 0.3361865, y: -0.000000016204888, z: 0.0000000057845524, w: 0.94179547}
+  m_LocalRotation: {x: 0.33618647, y: 0.000000016204893, z: -0.0000000057845533, w: 0.94179547}
   m_LocalPosition: {x: 0, y: 8.5, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -698,7 +698,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3361865, y: -0.000000016204888, z: 0.0000000057845524, w: 0.94179547}
+  m_LocalRotation: {x: 0.33618647, y: 0.000000016204893, z: -0.0000000057845533, w: 0.94179547}
   m_LocalPosition: {x: 0, y: 8.5, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007518804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e787d2f6fdee31b4eb60391276633cb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 73f9f0c688922e54182b45e8dadd48b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1007518806
@@ -808,6 +808,7 @@ GameObject:
   - component: {fileID: 1036621806}
   - component: {fileID: 1036621805}
   - component: {fileID: 1036621804}
+  - component: {fileID: 1036621810}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -929,6 +930,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1036621810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036621803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4848c2135eb9c47a1efa2c14a98770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 1163380201}
 --- !u!1 &1163380201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3978160828444636327, guid: fba8bb4b3eab0064886ceea598c517ec,
@@ -941,18 +958,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3978160829198421208}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1163380207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163380201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991a14adf127e804da1ada31c1a11477, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1188224142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1216,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504765149}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.35
   m_Height: 3.56
@@ -1393,7 +1398,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1163380207}
+      - m_Target: {fileID: 0}
         m_MethodName: OpenMiniMap
         m_Mode: 1
         m_Arguments:

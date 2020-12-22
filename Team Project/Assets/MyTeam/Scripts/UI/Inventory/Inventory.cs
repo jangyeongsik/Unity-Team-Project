@@ -2,57 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using ItemType;
 
 public class Inventory : MonoBehaviour
 {
-    List<Weapon> WeaponList = new List<Weapon>();
-    List<Armor> ArmorList = new List<Armor>();
-    List<Potion> PotionList = new List<Potion>();
+    public static bool inventoryActivated = false;
 
+    //필요한 컴포넌트
     [SerializeField]
-    GameObject ItemSlotList;
+    private GameObject goInventoryBase;
     [SerializeField]
-    List<GameObject> ItemSlots = new List<GameObject>();
+    private GameObject goSlotsParent;
 
-    private int a = 0;
+    //슬롯들
+    private Slot[] slots;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        ItemSlots.Clear();
-        for (int i = 0; i < ItemSlotList.transform.childCount; i++)
-        {
-            ItemSlots.Add(ItemSlotList.transform.GetChild(i).gameObject);
-        }
         
-        Weapon temp = new Weapon();
-        temp.CreateItem(001, "Sword 0", 100, 20, 0, "It's Sword 0");
-        WeaponList.Add(temp);
+    }
 
-        Weapon temp1 = new Weapon();
-        temp1.CreateItem(002, "Sword 1", 110, 21, 1, "It's Sword 1");
-        WeaponList.Add(temp1);
+    private void Start()
+    {
+        slots = goSlotsParent.GetComponentsInChildren<Slot>();
+    }
 
-        Weapon temp2 = new Weapon();
-        temp2.CreateItem(003, "Sword 2", 120, 22, 2, "It's Sword 2");
-        WeaponList.Add(temp2);
+    private void Update()
+    {
+        TryOpenInventory();
+    }
 
-        Weapon temp3 = new Weapon();
-        temp3.CreateItem(004, "Sword 3", 130, 23, 3, "It's Sword 3");
-        WeaponList.Add(temp3);
-
-        Weapon temp4 = new Weapon();
-        temp4.CreateItem(005, "Sword 4", 140, 24, 4, "It's Sword 4");
-        WeaponList.Add(temp4);
-
-        Weapon temp5 = new Weapon();
-        temp5.CreateItem(006, "Sword 5", 150, 25, 5, "It's Sword 5");
-        WeaponList.Add(temp5);
-
-        for (int i = 0; i < WeaponList.Count; i++)
+    private void TryOpenInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            ItemSlots[i].GetComponentInChildren<Text>().text = WeaponList[i].Name;
+            inventoryActivated = !inventoryActivated;
+            if (inventoryActivated)
+                OpenInventory();
+            else
+                CloseInventory();
         }
+    }
+
+    private void CloseInventory()
+    {
+        goInventoryBase.SetActive(false);
+    }
+
+    private void OpenInventory()
+    {
+        goInventoryBase.SetActive(true);
+    }
+
+   
+
+    public void AddItem(string itemName, int count)
+    {
+        for (int i = 0; i < slots.Length; i++)
+            {
+                //동일한 아이템이 있다면 카운트++
+                if (slots[i].item != null)
+                {
+                    if (slots[i].item.itemName.Equals(itemName))
+                    {
+                        slots[i].SetSlotCount(count);
+                        return;
+                    }
+                }
+            }
+        for (int i = 0; i < slots.Length; i++)
+        {
+            //빈자리를 찾아서 추가
+            if (slots[i].item == null)
+            {
+                if (slots[i].item.itemName.Equals(""))
+                {
+                    //slots[i].AddItem(ITEM, count);
+                    return;
+                }
+            }
+        }
+        print("인벤토리에 빈 공간이 없습니다");
     }
 }

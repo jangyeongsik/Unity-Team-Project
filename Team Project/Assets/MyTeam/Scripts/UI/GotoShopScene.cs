@@ -12,6 +12,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject inventory;
 
     private bool startTalking = false;
+    private bool inventoryOnOff = false;
     Text talk;
 
     int count;
@@ -22,7 +23,6 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.onOff += ShopOn;
         GameEventToUI.Instance.miniOnOff += MiniMapOn; ;
         GameEventToUI.Instance.talk += TalkOn;
-        GameEventToUI.Instance.inventoryOnOff += InventoryOnOff;
     }
 
     private void Start()
@@ -34,6 +34,11 @@ public class GotoShopScene : MonoBehaviour
     void Update()
     {
         NextDialouge();
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            invenOnOff();
+        }
     }
 
     public void ShopOn(bool isOn)
@@ -54,9 +59,9 @@ public class GotoShopScene : MonoBehaviour
 
     public void FindNpc(int id, string NpcName)
     {
-        for (int i = 0; i < talkdataTest.Instance.data.Count; i++)
+        for (int i = 0; i < GameData.Instance.data.Count; i++)
         {
-            if(talkdataTest.Instance.data[i].id == id && talkdataTest.Instance.data[i].name.Equals(NpcName))
+            if(GameData.Instance.data[i].id == id && GameData.Instance.data[i].name.Equals(NpcName))
             {
                 firstTxt = i;
                 startTalking = true;
@@ -64,7 +69,7 @@ public class GotoShopScene : MonoBehaviour
                 break;
             }
         }
-        talk.text = talkdataTest.Instance.data[firstTxt].talk[count++];
+        talk.text = GameData.Instance.data[firstTxt].talk[count++];
     }
 
     void NextDialouge()
@@ -73,10 +78,10 @@ public class GotoShopScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                Debug.Log(count + "dd " + talkdataTest.Instance.data[firstTxt].talk.Count);
-                if (count < talkdataTest.Instance.data[firstTxt].talk.Count)
+                Debug.Log(count + "dd " + GameData.Instance.data[firstTxt].talk.Count);
+                if (count < GameData.Instance.data[firstTxt].talk.Count)
                 {
-                    talk.text = talkdataTest.Instance.data[firstTxt].talk[count++];
+                    talk.text = GameData.Instance.data[firstTxt].talk[count++];
                 }
                 else
                 {
@@ -87,10 +92,10 @@ public class GotoShopScene : MonoBehaviour
         }
     }
 
-
-    public void InventoryOnOff(bool isOn)
+    void invenOnOff()
     {
-        inventory.gameObject.SetActive(isOn);
+        inventoryOnOff = !inventoryOnOff;
+        inventory.gameObject.SetActive(inventoryOnOff);
     }
 
 }

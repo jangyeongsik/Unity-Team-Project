@@ -11,6 +11,7 @@ public class EnemyMove : MonoBehaviour
     private NavMeshAgent navigation;
 
     private Monster enemy;
+    private bool targeting;
 
     private bool hasTarget
     {
@@ -30,7 +31,7 @@ public class EnemyMove : MonoBehaviour
         enemy = new Monster(gameObject.transform);
         enemy.hp = 10;
         enemy.damage = 10.0f;
-        enemy.movespeed = 4.0f;
+        enemy.movespeed = 7.0f;
         enemy.m_state = State.MonsterState.M_Idle;
         navigation.speed = enemy.movespeed;
 
@@ -38,29 +39,50 @@ public class EnemyMove : MonoBehaviour
     private void Awake()
     {
         monsterSetting();
-    }
-    private void Start()
-    {
-        StartCoroutine(UpdatePath());
-
+        targeting = false;
     }
 
-    private IEnumerator UpdatePath()
+    private void Update()
     {
-        
-        while (enemy.m_state != State.MonsterState.M_Dead) {
-            if (target)
-            {
-                navigation.isStopped = false;
-                navigation.SetDestination(target.transform.position);
-
-            }
-            else
-            {
-                navigation.isStopped = true;
-               
-            }
+        switch (enemy.m_state)
+        {
+            case State.MonsterState.M_None:
+                break;
+            case State.MonsterState.M_Idle:
+                break;
+            case State.MonsterState.M_Dead:
+                break;
+            case State.MonsterState.M_Move:
+                UpdatePath();
+                break;
+            default:
+                break;
         }
-        yield return new WaitForSeconds(0.25f);
+    }
+
+    private void UpdatePath()
+    {
+
+        if (targeting)
+        {
+            navigation.isStopped = false;
+            navigation.SetDestination(target.transform.position);
+
+        }
+        else
+        {
+            navigation.isStopped = true;
+
+        }
+
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            targeting = true;
+            enemy.m_state = State.MonsterState.M_Move;
+        }
     }
 }

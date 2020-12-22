@@ -29,6 +29,7 @@ namespace State
     {
         M_None,
         M_Idle,
+        M_Move,
         M_Dead
 
     }
