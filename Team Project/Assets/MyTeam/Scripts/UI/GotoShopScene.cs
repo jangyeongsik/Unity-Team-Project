@@ -78,7 +78,6 @@ public class GotoShopScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                Debug.Log(count + "dd " + GameData.Instance.data[firstTxt].talk.Count);
                 if (count < GameData.Instance.data[firstTxt].talk.Count)
                 {
                     talk.text = GameData.Instance.data[firstTxt].talk[count++];
