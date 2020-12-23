@@ -8,7 +8,6 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool shopOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
-    private bool invenOnOff = false;
     private void Awake()
     {
         SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive); 
@@ -20,7 +19,6 @@ public class PlayerButtonEvent : MonoBehaviour
             if (!talkOnOff)
             {
                 GotoShopScene();
-                GotoInven();
             }
         }
     }
@@ -30,14 +28,6 @@ public class PlayerButtonEvent : MonoBehaviour
         {
             shopOnOff = !shopOnOff;
             GameEventToUI.Instance.OnEventShopOnOff(shopOnOff);
-        }
-    }
-    void GotoInven()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            invenOnOff = !invenOnOff;
-            GameEventToUI.Instance.OnEventInventoryOnOff(invenOnOff);
         }
     }
 

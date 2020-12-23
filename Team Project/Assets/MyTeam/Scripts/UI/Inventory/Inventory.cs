@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,81 +7,64 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false;
-
-    //필요한 컴포넌트
-    [SerializeField]
-    private GameObject goInventoryBase;
-    [SerializeField]
-    private GameObject goSlotsParent;
-
+    
     //슬롯들
-    private Slot[] slots;
-
+    public Slot.SlotAddition[] slots;
+    public Transform slotHolder;
+    
+    public int slotCount;
+    
     private void Awake()
     {
-        
+        slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
+        slotCount = 4;
+        AddSlot();
     }
 
-    private void Start()
+    private void SlotChange(int val)
     {
-        slots = goSlotsParent.GetComponentsInChildren<Slot>();
-    }
-
-    private void Update()
-    {
-        TryOpenInventory();
-    }
-
-    private void TryOpenInventory()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
+        for (int i = 0; i < slots.Length; i++)
         {
-            inventoryActivated = !inventoryActivated;
-            if (inventoryActivated)
-                OpenInventory();
-            else
-                CloseInventory();
+            if (i < val) slots[i].GetComponent<Button>().interactable = true;
+            else slots[i].GetComponent<Button>().interactable = false;
         }
     }
 
-    private void CloseInventory()
+    public void AddSlot()
     {
-        goInventoryBase.SetActive(false);
+        slotCount++;
+
+        SlotChange(slotCount);
     }
 
-    private void OpenInventory()
-    {
-        goInventoryBase.SetActive(true);
-    }
 
-   
+    //public void AddItem(string itemName, int count)
+    //{
+    //    for (int i = 0; i < slots.Length; i++)
+    //        {
+    //            //동일한 아이템이 있다면 카운트++
+    //            if (slots[i].item != null)
+    //            {
+    //                if (slots[i].item.itemName.Equals(itemName))
+    //                {
+    //                    slots[i].SetSlotCount(count);
+    //                    return;
+    //                }
+    //            }
+    //        }
+    //    for (int i = 0; i < slots.Length; i++)
+    //    {
+    //        //빈자리를 찾아서 추가
+    //        if (slots[i].item == null)
+    //        {
+    //            if (slots[i].item.itemName.Equals(""))
+    //            {
+    //                //slots[i].AddItem(ITEM, count);
+    //                return;
+    //            }
+    //        }
+    //    }
+    //    print("인벤토리에 빈 공간이 없습니다");
+    //}
 
-    public void AddItem(string itemName, int count)
-    {
-        for (int i = 0; i < slots.Length; i++)
-            {
-                //동일한 아이템이 있다면 카운트++
-                if (slots[i].item != null)
-                {
-                    if (slots[i].item.itemName.Equals(itemName))
-                    {
-                        slots[i].SetSlotCount(count);
-                        return;
-                    }
-                }
-            }
-        for (int i = 0; i < slots.Length; i++)
-        {
-            //빈자리를 찾아서 추가
-            if (slots[i].item == null)
-            {
-                if (slots[i].item.itemName.Equals(""))
-                {
-                    
-                    return;
-                }
-            }
-        }
-        print("인벤토리에 빈 공간이 없습니다");
-    }
 }
