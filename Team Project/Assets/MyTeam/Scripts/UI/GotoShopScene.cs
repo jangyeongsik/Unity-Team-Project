@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,11 @@ public class GotoShopScene : MonoBehaviour
     public GameObject TalkCanvas;
     public GameObject miniMapCanvas;
     public GameObject inventory;
+    public GameObject equipment;
 
     private bool startTalking = false;
     private bool inventoryOnOff = false;
+    private bool equipmentOnOff = false;
     Text talk;
 
     int count;
@@ -39,8 +42,12 @@ public class GotoShopScene : MonoBehaviour
         {
             invenOnOff();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            equipOnOff();
+        }
     }
-
+    
     public void ShopOn(bool isOn)
     {
         shopCanvas.SetActive(isOn);
@@ -93,8 +100,14 @@ public class GotoShopScene : MonoBehaviour
 
     void invenOnOff()
     {
+        if (equipmentOnOff) equipmentOnOff = !equipmentOnOff;
         inventoryOnOff = !inventoryOnOff;
         inventory.gameObject.SetActive(inventoryOnOff);
     }
-
+    void equipOnOff()
+    {
+        if (inventoryOnOff) inventoryOnOff = !inventoryOnOff;
+        equipmentOnOff = !equipmentOnOff;
+        equipment.gameObject.SetActive(equipmentOnOff);
+    }
 }

@@ -10,6 +10,8 @@ public enum EquipmentType
         Glove,
         Shoes
     }
+
+[System.Serializable]
 public class Equipment
 {
     public string ID;

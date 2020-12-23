@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour   
+public class Slots : MonoBehaviour   
 {
     public Item item;
     public int itemCount;
