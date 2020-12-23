@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
     {
         Dash();
         Guard();
-        Debug.Log(player.damage);
+
     }
 
     private void OnDestroy()

@@ -15,12 +15,6 @@ public class GameData : SingletonMonobehaviour<GameData>
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         equipmentData = table.TableToList<Equipment>();
         System.GC.Collect();
-        string a = "abc";
-        string b = "abc";
-        if (a.Equals(b))
-        {
-            Debug.Log("A");
-        }
         //this.Print();
 
         player = new Player();
