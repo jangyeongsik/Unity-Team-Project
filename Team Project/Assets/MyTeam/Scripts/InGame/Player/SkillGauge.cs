@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class TicktokZone
+class ColorZone
 {
     float startPos;
     float endPos;
 
-    public TicktokZone(RectTransform tr)
+    public ColorZone(RectTransform tr)
     {
         startPos = tr.localPosition.x;
         endPos = startPos + tr.sizeDelta.x;
@@ -22,27 +22,27 @@ class TicktokZone
     }
 }
 
-public enum TICKTOKZONE
+public enum COLORZONE
 {
     NONE,GREEN,YELLOW,RED
 }
 
-public class TicktokGauge : MonoBehaviour
+public class SkillGauge : MonoBehaviour
 {
     public RectTransform Green;
     public RectTransform Yellow;
     public RectTransform Red;
 
-    private TicktokZone greenZone;
-    private TicktokZone yellowZone;
-    private TicktokZone redZone;
+    private ColorZone greenZone;
+    private ColorZone yellowZone;
+    private ColorZone redZone;
 
     public RectTransform Ticktok;
     [SerializeField]
     float ticktokSpeed = 10f;
     float endPos;
 
-    public TICKTOKZONE zone;
+    public COLORZONE zone;
 
     [SerializeField]
     float followDistX = 42f;
@@ -51,9 +51,9 @@ public class TicktokGauge : MonoBehaviour
 
     private void Start()
     {
-        greenZone = new TicktokZone(Green);
-        yellowZone = new TicktokZone(Yellow);
-        redZone = new TicktokZone(Red);
+        greenZone = new ColorZone(Green);
+        yellowZone = new ColorZone(Yellow);
+        redZone = new ColorZone(Red);
 
         endPos = GetComponent<RectTransform>().sizeDelta.x;
 
@@ -75,7 +75,7 @@ public class TicktokGauge : MonoBehaviour
     private void OnEnable()
     {
         Ticktok.localPosition = Vector3.zero;
-        zone = TICKTOKZONE.NONE;
+        zone = COLORZONE.NONE;
     }
 
     private void Update()
@@ -97,13 +97,13 @@ public class TicktokGauge : MonoBehaviour
     {
         float x = Ticktok.localPosition.x;
         if (redZone.CheckInZone(x))
-            zone = TICKTOKZONE.RED;
+            zone = COLORZONE.RED;
         else if (yellowZone.CheckInZone(x))
-            zone = TICKTOKZONE.YELLOW;
+            zone = COLORZONE.YELLOW;
         else if (greenZone.CheckInZone(x))
-            zone = TICKTOKZONE.GREEN;
+            zone = COLORZONE.GREEN;
         else
-            zone = TICKTOKZONE.NONE;
+            zone = COLORZONE.NONE;
     }
 
 }

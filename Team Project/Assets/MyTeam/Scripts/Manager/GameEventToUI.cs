@@ -9,6 +9,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> miniOnOff;
     public event System.Action<bool> inventoryOnOff;
     public event System.Action<bool, int, string> talk;
+    public event System.Action<STAMINAGAUGE, float> staminaRestore;
 
     public void OnFollowPlayerUI(Vector2 playerPos)
     {
@@ -36,5 +37,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventInventoryOnOff(bool isOn)
     {
         inventoryOnOff(isOn);
+    }
+
+    public void OnEventStaminaRestore(STAMINAGAUGE state, float percent = 0)
+    {
+        if (staminaRestore != null)
+            staminaRestore(state,percent);
     }
 }

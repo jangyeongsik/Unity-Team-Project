@@ -5,6 +5,7 @@ using CSVReader;
 
 public class GameData : SingletonMonobehaviour<GameData>
 {
+    public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
 
@@ -21,6 +22,8 @@ public class GameData : SingletonMonobehaviour<GameData>
             Debug.Log("A");
         }
         //this.Print();
+
+        player = new Player();
     }
 
     public void Print()

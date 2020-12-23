@@ -19,10 +19,9 @@ public class character : MonoBehaviour
 
 namespace State
 {
-    public enum PlayerState
+    public enum PlayerState : int
     {
-        None
-
+        P_Idle, P_Run, P_Dash, P_Guard, P_1st_Skill, P_2nd_Skill, P_3rd_Skill
     }
 
     public enum MonsterState

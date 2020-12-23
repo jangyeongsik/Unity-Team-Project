@@ -22,4 +22,8 @@ public class UIEventToGame : Singleton<UIEventToGame>
             PlayerDash(isDash);
     }
     #endregion
+
+
+    #region "플레이어 스킬버튼"
+    #endregion
 }

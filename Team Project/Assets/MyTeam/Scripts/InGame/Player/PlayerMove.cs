@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    Player player;
     CharacterController controller;
     public Animator animator;
 
@@ -12,8 +13,6 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     float dashSpeed = 30f;
-    Vector3 startPos;
-    bool isDash;
 
     float x;
     float z;
@@ -22,39 +21,42 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        
         //나중에 조이스틱 사용할때 주석해제
-        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
     {
-        isDash = false;
+        player = GameData.Instance.player;
     }
 
     private void FixedUpdate()
     {
         //방향키 wasd이동
         Move();
+        //스킬게이지 플레이어 따라다니게 하기
         GameEventToUI.Instance.OnFollowPlayerUI(Camera.main.WorldToScreenPoint(transform.position));
     }
 
     private void Update()
     {
         Dash();
+        Guard();
     }
 
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
     {
         //대쉬중이면 못움직임
-        if (isDash) return;
+        if (player.m_state == State.PlayerState.P_Dash) return;
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
@@ -68,10 +70,9 @@ public class PlayerMove : MonoBehaviour
         controller.Move(dir * speed * Time.deltaTime);
 
         transform.LookAt(transform.position + dir);
-        if (x > 0 || z > 0)
+        if (x != 0 || z != 0)
         {
             animator.SetBool("isInput", true);
-            Debug.Log('a');
         }
         else
             animator.SetBool("isInput", false);
@@ -79,17 +80,9 @@ public class PlayerMove : MonoBehaviour
 
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isDash)
+        if (Input.GetKeyDown(KeyCode.Space) && player.m_state != State.PlayerState.P_Dash)
         {
-            isDash = true;
-            startPos = transform.position;
-        }
-        if (isDash)
-        {
-            controller.Move(transform.forward * dashSpeed * Time.deltaTime);
-            float d = Vector3.Distance(startPos, transform.position);
-            if (d > 3)
-                isDash = false;
+            animator.SetTrigger("Dash");
         }
     }
 
@@ -102,15 +95,30 @@ public class PlayerMove : MonoBehaviour
         dir.Normalize();
         controller.Move(dir * amount * speed * Time.deltaTime);
         transform.LookAt(transform.position + dir);
+
+        if (direction.sqrMagnitude > 0)
+        {
+            animator.SetBool("isInput", true);
+        }
+        else
+            animator.SetBool("isInput", false);
     }
 
     void PlayerBtnDash(bool _isDash)
     {
-        if (isDash) return;
-        isDash = _isDash;
-        startPos = transform.position;
-
+        if (player.m_state == State.PlayerState.P_Dash) return;
+        animator.SetTrigger("Dash");
     }
+
+    void Guard()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+            animator.SetBool("isGuard", true);
+        else if (Input.GetKeyUp(KeyCode.Z))
+            animator.SetBool("isGuard", false);
+    }
+
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
