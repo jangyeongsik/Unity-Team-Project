@@ -76,7 +76,7 @@ public class Inventory : MonoBehaviour
             {
                 if (slots[i].item.itemName.Equals(""))
                 {
-                    //slots[i].AddItem(ITEM, count);
+                    
                     return;
                 }
             }

@@ -10,7 +10,7 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     private void Start()
     {
-        Table table = CSVReader.Reader.ReadCSVToTable("equipmentData");
+        Table table = CSVReader.Reader.ReadCSVToTable("EqupmentData");
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         equipmentData = table.TableToList<Equipment>();
         System.GC.Collect();
@@ -31,4 +31,25 @@ public class GameData : SingletonMonobehaviour<GameData>
         }
        
     }
+
+    //아이템 매니저 함수들
+    //===================================================================
+
+    //
+    public Equipment findEquipment(string itemname)
+    {
+        int i;
+        for (i = 0;i < equipmentData.Count; i++)
+        {
+            if (equipmentData[i].Name.Equals(itemname))
+            {
+                break;
+            }        
+        }
+        return equipmentData[i];
+    }
+
+
+
+    //===================================================================
 }
