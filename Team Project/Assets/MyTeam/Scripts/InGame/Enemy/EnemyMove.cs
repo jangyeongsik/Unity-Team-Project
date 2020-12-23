@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
     public LayerMask targetlayer;
-
     public  GameObject target;
     private NavMeshAgent navigation;
 
@@ -64,26 +64,24 @@ public class EnemyMove : MonoBehaviour
     private void UpdatePath()
     {
 
-        if (targeting)
+        if (navigation.destination != target.transform.position)
         {
-            navigation.isStopped = false;
             navigation.SetDestination(target.transform.position);
-
         }
         else
         {
-            navigation.isStopped = true;
-
+            navigation.SetDestination(transform.position);
         }
-
-
     }
+
+
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            targeting = true;
             enemy.m_state = State.MonsterState.M_Move;
         }
+        
     }
 }

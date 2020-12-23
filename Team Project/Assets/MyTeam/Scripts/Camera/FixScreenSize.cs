@@ -8,5 +8,6 @@ public class FixScreenSize : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Screen.SetResolution(1600, 900, true);
+        filestream.Instance.Save();
     }
 }
