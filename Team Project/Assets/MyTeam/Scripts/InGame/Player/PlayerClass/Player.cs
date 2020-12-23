@@ -16,6 +16,24 @@ public class PlayerData
     public int defence;
     public float counterJudgement;
     public int presetID;
+
+    public Player WriteData(Player player)
+    {
+        player.id = slotID;
+        player.p_name = name;
+        player.damage = damage;
+        player.movespeed = moveSpeed;
+        player.criticalpercent = criticalPercent;
+        player.criticaldamage = criticalDamage;
+        player.attackspeed = attackSpeed;
+        player.hp = hp;
+        player.stamina = stamina;
+        player.defence = defence;
+        player.counter_judgement = counterJudgement;
+        player.presetID = presetID;
+        player.m_state = State.PlayerState.P_Idle;
+        return player;
+    }
 }
 
 
@@ -25,7 +43,7 @@ public class Player : character
     public float counter_judgement;     //카운터 판결
     public string p_name;               //이름
     public State.PlayerState m_state;  //상태
-
+    public int presetID;
 
     public Player() { }
     Player(Transform t)                 //생성자

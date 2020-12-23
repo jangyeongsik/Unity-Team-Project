@@ -27,7 +27,7 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         Table t = CSVReader.Reader.ReadCSVToTable("PlayerDataCSV");
         PlayerData[] playerDatas = t.TableToArray<PlayerData>();
-        
+        player = playerDatas[0].WriteData(player);
     }
 
     public void Print()
