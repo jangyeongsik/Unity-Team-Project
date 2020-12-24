@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.AI;
+using System;
 
 public class EnemyMove : MonoBehaviour
 {
+    EnemyData enemyData;
+    public GameObject target;
     public LayerMask targetlayer;
-    public  GameObject target;
-    private NavMeshAgent navigation;
 
-    private Monster enemy;
+    public GameObject attackRange;
+
     private bool targeting;
 
 
@@ -26,8 +28,27 @@ public class EnemyMove : MonoBehaviour
 
     //================================
 
-   
+    #region 에너미 필요 변수 
+    private float afterGroaringTime = 3.0f;
+    private float afterGroaringDelay = 0.0f;
+    private float attackDistance = 2.0f;
+    private bool goBack = false;
+
+    Vector3 startPos;
+    #endregion
+
+    private void monsterSetting()
+    {
+        enemyData = GetComponent<EnemyData>();
+        float monsterSpeed = 10.0f;
+        enemyData.navigation.speed = monsterSpeed;
+    }
+
     private void Awake()
+    {
+        startPos = transform.position;
+    }
+    private void Start()
     {
         stateEventManager.Instance.Player_Attack = Player_AttackEvent;
         monsterSetting();
@@ -38,23 +59,23 @@ public class EnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        switch (enemy.m_state)
+        Debug.Log(enemyData.monsterState);
+        switch (enemyData.monsterState)
         {
-            case State.MonsterState.M_None:
-                break;
             case State.MonsterState.M_Idle:
-                break;
-            case State.MonsterState.M_Dead:
                 break;
             case State.MonsterState.M_Move:
                 UpdatePath();
+                TryingtoATTACK();
                 break;
-            default:
+            case State.MonsterState.M_Attack:
+                ATTACK();
+                break;
+            case State.MonsterState.M_Groar:
+                Groar();
                 break;
         }
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,19 +85,55 @@ public class EnemyMove : MonoBehaviour
         }
 
     }
-    private void UpdatePath()
+    private void ATTACK()
     {
-
-        if (navigation.destination != target.transform.position)
+        if (GetDistanceFromPlayer() > 3.0f)
         {
-            navigation.SetDestination(target.transform.position);
+            enemyData.animator.SetBool("isReadyToPunch", false);
+            enemyData.monsterState = State.MonsterState.M_Move;
         }
-        else
+    }
+    private void Groar()
+    {
+        afterGroaringDelay += Time.deltaTime;
+        if (afterGroaringDelay > afterGroaringTime)
         {
-            navigation.SetDestination(transform.position);
+            enemyData.monsterState = State.MonsterState.M_Move;
+            enemyData.animator.SetTrigger("isRun");
+          
         }
     }
 
+    private void UpdatePath()
+    {
+        if (enemyData.navigation.destination != target.transform.position)
+        {
+            enemyData.navigation.SetDestination(target.transform.position);
+        }
+        else
+        {
+            enemyData.navigation.SetDestination(transform.position);
+            targeting = false;
+        }
+    }
+
+    public void TryingtoATTACK()
+    {
+        if (GetDistanceFromPlayer() < 3.0f)               
+        {
+            enemyData.animator.SetBool("isReadyToPunch", true);
+            enemyData.monsterState = State.MonsterState.M_Attack;
+        }
+    }
+
+    private void Return()
+    {
+        enemyData.navigation.SetDestination(startPos);
+        if(Vector3.Distance(startPos, transform.position) < 0.1f)
+        {
+            enemyData.animator.SetTrigger("RuntoIdle");
+        }
+    }
 
     private bool hasTarget
     {
@@ -103,8 +160,6 @@ public class EnemyMove : MonoBehaviour
 
     }
 
-
-    
 
     void attackCount()
     {
