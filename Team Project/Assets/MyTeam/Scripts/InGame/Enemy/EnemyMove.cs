@@ -177,4 +177,9 @@ public class EnemyMove : MonoBehaviour
     {
         return counterjudgement;
     }
+
+    public void AttackSetting()
+    {
+        attackTime = 0;
+    }
 }
