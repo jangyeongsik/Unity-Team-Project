@@ -8,14 +8,12 @@ public class GameData : SingletonMonobehaviour<GameData>
     public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
-
     private void Start()
     {
-        Table table = CSVReader.Reader.ReadCSVToTable("EqupmentData");
+        Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         equipmentData = table.TableToList<Equipment>();
         System.GC.Collect();
-        //this.Print();
 
         player = new Player();
 
@@ -37,7 +35,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     //===================================================================
 
     //
-    public Equipment findEquipment(string itemname)
+    public PlayerInventory findEquipment(string itemname)
     {
         int i;
         for (i = 0;i < equipmentData.Count; i++)
@@ -47,10 +45,17 @@ public class GameData : SingletonMonobehaviour<GameData>
                 break;
             }        
         }
-        return equipmentData[i];
+        if (i >= equipmentData.Count)
+            return null;
+
+        PlayerInventory p = new PlayerInventory();
+        p.ID = equipmentData[i].ID;
+        p.name = equipmentData[i].Name;
+        p.scriptName = equipmentData[i].itemScriptID;
+        p.itemCategory = ItemCategory.Equipment;
+        p.count = 1;
+        return p;
     }
-
-
 
     //===================================================================
 }

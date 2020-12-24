@@ -9,12 +9,9 @@ public class Monster : character
     public float user_aware_distance;   //유저 인식 거리
 
     public State.MonsterState m_state;   //상태
-
-
+    
     public Monster(Transform t)                 //생성자
     {
         position = t;
-
     }
-
 }
