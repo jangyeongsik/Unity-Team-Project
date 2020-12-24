@@ -11,45 +11,50 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //슬롯들
     public Slot.SlotAddition[] slots;
     public Transform slotHolder;
-    public List<PlayerInventory> pInven = new List<PlayerInventory>();
-    public List<Sprite> itemImages;
     public int slotCount;
 
-    private void Awake()
+    //플레이어 인벤토리
+    public List<PlayerInventory> pInven = new List<PlayerInventory>();
+    //아이템 이미지 리스트
+    public List<Sprite> itemImages;
+    
+    private void Start()
     {
+        //슬롯초기화
         slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
         slotCount = 4;
         AddSlot();
         SetSlotNumber();
-    }
 
-    private void Start()
-    {
+        //플레이어 인벤토리 초기화
         PlayerInventory a = new PlayerInventory();
+        //테스트용 검 1개 추가
         a.ID = 1;
         a.name = "검";
         a.scriptName = 0;
         a.count = 1;
         a.itemCategory = ItemCategory.Equipment;
         pInven.Add(a);
+        slots[0].GetComponent<ItemInfo>().RefreshCount(true);
+        SetImage();
     }
     private void Update()
     {
+        //이미지 찾아서 넣어주는 코드
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            for (int i = 0; i < pInven.Count; i++)
-            {
-                pInven[i].image = itemImages[pInven[i].scriptName];
-                slots[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven[i].image;
-            }
+            SetImage();
         }
+        //인벤에 아이템 추가
         if (Input.GetKeyDown(KeyCode.A))
         {
             AddItem("활", ItemCategory.Equipment);
-            
+            AddItem("검", ItemCategory.Equipment);
         }
     }
+    //=====================================
+    //아이템 슬롯 관련
+    //슬롯버튼 사용가능으로 바꾸기
     private void SlotChange(int val)
     {
         for (int i = 0; i < slots.Length; i++)
@@ -58,13 +63,13 @@ public class Inventory : SingletonMonobehaviour<Inventory>
             else slots[i].GetComponent<Button>().interactable = false;
         }
     }
-
+    //슬롯버튼 한개 잠금해제
     public void AddSlot()
     {
         slotCount++;
         SlotChange(slotCount);
     }
-
+    //각 슬롯에 번호 붙여주기
     public void SetSlotNumber()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -72,10 +77,27 @@ public class Inventory : SingletonMonobehaviour<Inventory>
             slots[i].GetComponent<ItemInfo>().SetSlotNum(i);
         }
     }
+    //=====================================
 
+    //=====================================
+    //아이템 관련
+    //아이템 이미지 찾아서 추가
+    public void SetImage()
+    {
+        for (int i = 0; i < pInven.Count; i++)
+        {
+            if (pInven[i].image != null) continue;
+            pInven[i].image = itemImages[pInven[i].scriptName];
+            slots[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven[i].image;
+        }
+    }
+
+    //아이템 추가
     public void AddItem(string itemName, ItemCategory itemType)
     {
         int i = 0;
+        //동일한 아이템이 있으면 카운트 ++
         for (; i < pInven.Count; i++)
         {
             if (pInven[i].name.Equals(itemName))
@@ -86,6 +108,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
             }
         }
 
+        //동일한 아이템이 없으면 새 칸에 추가
         if (i >= pInven.Count)
         {
             switch (itemType)
@@ -104,5 +127,8 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     break;
             }
         }
+
+        SetImage();
     }
+    //=====================================
 }
