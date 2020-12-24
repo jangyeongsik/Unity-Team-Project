@@ -56,14 +56,9 @@ public class SkillGauge : MonoBehaviour
         redZone = new ColorZone(Red);
 
         endPos = GetComponent<RectTransform>().sizeDelta.x;
-
-        GameEventToUI.Instance.FollowPlayerUI += FollowPlayer;
     }
 
-    private void OnDestroy()
-    {
-        GameEventToUI.Instance.FollowPlayerUI -= FollowPlayer;
-    }
+    
 
     private void FollowPlayer(Vector2 pos)
     {
@@ -105,5 +100,5 @@ public class SkillGauge : MonoBehaviour
         else
             zone = COLORZONE.NONE;
     }
-
+    
 }

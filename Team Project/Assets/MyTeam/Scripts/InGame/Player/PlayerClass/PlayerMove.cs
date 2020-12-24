@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Player player;
     CharacterController controller;
-    public Animator animator;
+    Animator animator;
 
     [SerializeField]
     float speed = 10f;
@@ -21,7 +20,8 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        
+        animator = transform.GetChild(0).GetComponent<Animator>();
+
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
         //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
@@ -29,15 +29,12 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        player = GameData.Instance.player;
     }
 
     private void FixedUpdate()
     {
         //방향키 wasd이동
         Move();
-        //스킬게이지 플레이어 따라다니게 하기
-        GameEventToUI.Instance.OnFollowPlayerUI(Camera.main.WorldToScreenPoint(transform.position));
     }
 
     private void Update()
@@ -57,7 +54,7 @@ public class PlayerMove : MonoBehaviour
     void Move()
     {
         //대쉬중이면 못움직임
-        if (player.m_state == State.PlayerState.P_Dash) return;
+        if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
@@ -81,7 +78,7 @@ public class PlayerMove : MonoBehaviour
 
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && player.m_state != State.PlayerState.P_Dash)
+        if (Input.GetKeyDown(KeyCode.Space) && GameData.Instance.player.m_state != State.PlayerState.P_Dash)
         {
             animator.SetTrigger("Dash");
         }
@@ -107,7 +104,7 @@ public class PlayerMove : MonoBehaviour
 
     void PlayerBtnDash(bool _isDash)
     {
-        if (player.m_state == State.PlayerState.P_Dash) return;
+        if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
         animator.SetTrigger("Dash");
     }
 
