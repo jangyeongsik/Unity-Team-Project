@@ -11,8 +11,6 @@ public class Monster : character
     public float counter_reslstance;    //카운터 저항
     public float user_aware_distance;   //유저 인식 거리
 
-    public State.MonsterState m_state;   //상태
-
     public State.MonsterState monsterState;
     public NavMeshAgent navigation;
 

@@ -11,12 +11,12 @@ public class Equipment
         4	GLOVE
         5	SHOES
  */
-    public string ID;
+    public int ID;
     public string Name;
     public string Category;
     public int  equipmentType;
     public string itemGrade;
-    public string itemScriptID;
+    public int itemScriptID;
     public float damage;
     public float moveSpeed;
     public float critPercent;
