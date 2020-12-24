@@ -45,6 +45,8 @@ public class Player : character
     public State.PlayerState m_state;  //상태
     public int presetID;
 
+    public float counterTime;           //카운터 판정 타임
+
     public Player() { }
     Player(Transform t)                 //생성자
     {

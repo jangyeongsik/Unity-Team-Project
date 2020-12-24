@@ -5,7 +5,6 @@ using UnityEngine;
 public class P_Dash : StateMachineBehaviour
 {
     CharacterController controller;
-    Player player;
     float dashSpeed = 30f;
     [SerializeField]
     float dashDistance = 5f;
@@ -16,9 +15,7 @@ public class P_Dash : StateMachineBehaviour
     {
         if(controller == null)
         controller = animator.transform.parent.GetComponent<CharacterController>();
-        if(player == null)
-        player = GameData.Instance.player;
-        player.m_state = State.PlayerState.P_Dash;
+        GameData.Instance.player.m_state = State.PlayerState.P_Dash;
 
         startPos = animator.transform.parent.position;
         dashSpeed = 30f;

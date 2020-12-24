@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class P_Run : StateMachineBehaviour
 {
-    Player player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (player == null)
-            player = GameData.Instance.player;
-        player.m_state = State.PlayerState.P_Run;
+        GameData.Instance.player.m_state = State.PlayerState.P_Run;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
