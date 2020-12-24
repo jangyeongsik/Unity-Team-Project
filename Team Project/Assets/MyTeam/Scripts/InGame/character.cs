@@ -32,6 +32,7 @@ namespace State
         M_Dead,
         M_Groar,
         M_Attack
+            
     }
 
 }

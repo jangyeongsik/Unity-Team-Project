@@ -3,66 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.AI;
+using System;
 
 public class EnemyMove : MonoBehaviour
 {
-    CharacterController controller;
-
+    EnemyData enemyData;
     public GameObject target;
     public LayerMask targetlayer;
-    private NavMeshAgent navigation;
 
     public GameObject attackRange;
-
-    private Monster enemy;
 
     private bool targeting;
 
     ColliderForAttack checkAttack;
-    public Animator animator;
     
-    private bool hasTarget
-    {
-        get
-        {
-            if (target != null)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
+    //private bool hasTarget
+    //{
+    //    get
+    //    {
+    //        if (target != null)
+    //        {
+    //            return true;
+    //        }
+    //        return false;
+    //    }
+    //}
 
     #region 에너미 필요 변수 
     private float afterGroaringTime = 3.0f;
     private float afterGroaringDelay = 0.0f;
+    private float attackDistance = 2.0f;
+    private bool goBack = false;
+
+    Vector3 startPos;
     #endregion
 
     private void monsterSetting()
     {
-        navigation = GetComponent<NavMeshAgent>();
-        enemy = new Monster(gameObject.transform);
-        enemy.hp = 10;
-        enemy.damage = 7.0f;
-        enemy.movespeed = 10.0f;
-        enemy.m_state = State.MonsterState.M_Idle;
-        navigation.speed = enemy.movespeed;
+        enemyData = GetComponent<EnemyData>();
+        float monsterSpeed = 10.0f;
+        enemyData.navigation.speed = monsterSpeed;
+    }
+
+    private void Awake()
+    {
+        startPos = transform.position;
     }
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
         monsterSetting();
         targeting = false;
     }
 
     private void Update()
     {
-        switch (enemy.m_state)
+        Debug.Log(enemyData.monsterState);
+        switch (enemyData.monsterState)
         {
             case State.MonsterState.M_Idle:
                 break;
             case State.MonsterState.M_Move:
                 UpdatePath();
+                TryingtoATTACK();
                 break;
             case State.MonsterState.M_Attack:
                 ATTACK();
@@ -75,48 +77,67 @@ public class EnemyMove : MonoBehaviour
 
     private void ATTACK()
     {
-
+        if (GetDistanceFromPlayer() > 3.0f)
+        {
+            enemyData.animator.SetBool("isReadyToPunch", false);
+            enemyData.monsterState = State.MonsterState.M_Move;
+        }
     }
-
     private void Groar()
-    {
-        enemy.m_state = State.MonsterState.M_Move;
-    }
-
-    private void UpdatePath()
     {
         afterGroaringDelay += Time.deltaTime;
         if (afterGroaringDelay > afterGroaringTime)
         {
-            if (navigation.destination != target.transform.position)
-            {
-                navigation.SetDestination(target.transform.position);
-            }
-            else
-            {
-                navigation.SetDestination(transform.position);
-                targeting = false;
-            }
-            //afterGroaringDelay = 0.0f;
+            enemyData.monsterState = State.MonsterState.M_Move;
+            enemyData.animator.SetTrigger("isRun");
+          
         }
-    
     }
 
+    private void UpdatePath()
+    {
+        if (enemyData.navigation.destination != target.transform.position)
+        {
+            enemyData.navigation.SetDestination(target.transform.position);
+        }
+        else
+        {
+            enemyData.navigation.SetDestination(transform.position);
+            targeting = false;
+        }
+    }
 
     public void TryingtoATTACK()
     {
-        
+        if (GetDistanceFromPlayer() < 3.0f)               
+        {
+            enemyData.animator.SetBool("isReadyToPunch", true);
+            enemyData.monsterState = State.MonsterState.M_Attack;
+        }
     }
 
-
+    private void Return()
+    {
+        enemyData.navigation.SetDestination(startPos);
+        if(Vector3.Distance(startPos, transform.position) < 0.1f)
+        {
+            enemyData.animator.SetTrigger("RuntoIdle");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             targeting = true;
-            animator.SetBool("isMeet", true);
-            enemy.m_state = State.MonsterState.M_Groar;
+            enemyData.animator.SetTrigger("isMeet");
+            enemyData.monsterState = State.MonsterState.M_Groar;
         }
+    }
+
+    float GetDistanceFromPlayer()
+    {
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        return distance;
     }
 }
