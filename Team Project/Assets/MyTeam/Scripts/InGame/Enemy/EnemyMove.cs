@@ -13,36 +13,30 @@ public class EnemyMove : MonoBehaviour
     private Monster enemy;
     private bool targeting;
 
-    private bool hasTarget
-    {
-        get
-        {
-            if(target != null)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
 
-    private void  monsterSetting()
-    {
-        navigation = GetComponent<NavMeshAgent>();
-        enemy = new Monster(gameObject.transform);
-        enemy.hp = 10;
-        enemy.damage = 10.0f;
-        enemy.movespeed = 7.0f;
-        enemy.m_state = State.MonsterState.M_Idle;
-        navigation.speed = enemy.movespeed;
+    //에너미 어택 이벤트 관련
+    //================================
 
-    }
+    public bool counterjudgement;
+
+    float attackTime;
+
+    float attckCountMin = 0.7f;
+    float attckCountMax = 1.5f;
+
+    //================================
+
+   
     private void Awake()
     {
+        stateEventManager.Instance.Player_Attack = Player_AttackEvent;
         monsterSetting();
         targeting = false;
+
     }
 
-    private void Update()
+
+    private void FixedUpdate()
     {
         
         switch (enemy.m_state)
@@ -61,6 +55,15 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemy.m_state = State.MonsterState.M_Move;
+        }
+
+    }
     private void UpdatePath()
     {
 
@@ -75,13 +78,53 @@ public class EnemyMove : MonoBehaviour
     }
 
 
-    
-    private void OnTriggerEnter(Collider other)
+    private bool hasTarget
     {
-        if (other.gameObject.CompareTag("Player"))
+        get
         {
-            enemy.m_state = State.MonsterState.M_Move;
+            if (target != null)
+            {
+                return true;
+            }
+
+            return false;
         }
-        
     }
+
+    private void monsterSetting()
+    {
+        navigation = GetComponent<NavMeshAgent>();
+        enemy = new Monster(gameObject.transform);
+        enemy.hp = 10;
+        enemy.damage = 10.0f;
+        enemy.movespeed = 7.0f;
+        enemy.m_state = State.MonsterState.M_Idle;
+        navigation.speed = enemy.movespeed;
+
+    }
+
+
+    
+
+    void attackCount()
+    {
+        attackTime += Time.deltaTime;
+
+        if (attackTime > attckCountMin && attackTime < attckCountMax)
+        {
+            counterjudgement = true;
+        }
+        else
+        {
+            counterjudgement = false;
+        }
+    }
+
+
+    private bool Player_AttackEvent()
+    {
+        return counterjudgement;
+    }
+
+
 }
