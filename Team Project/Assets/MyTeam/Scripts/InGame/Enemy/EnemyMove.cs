@@ -6,18 +6,26 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
+    CharacterController controller;
+
+    public GameObject target;
     public LayerMask targetlayer;
-    public  GameObject target;
     private NavMeshAgent navigation;
 
+    public GameObject attackRange;
+
     private Monster enemy;
+
     private bool targeting;
 
+    ColliderForAttack checkAttack;
+    public Animator animator;
+    
     private bool hasTarget
     {
         get
         {
-            if(target != null)
+            if (target != null)
             {
                 return true;
             }
@@ -25,63 +33,90 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    private void  monsterSetting()
+    #region 에너미 필요 변수 
+    private float afterGroaringTime = 3.0f;
+    private float afterGroaringDelay = 0.0f;
+    #endregion
+
+    private void monsterSetting()
     {
         navigation = GetComponent<NavMeshAgent>();
         enemy = new Monster(gameObject.transform);
         enemy.hp = 10;
-        enemy.damage = 10.0f;
-        enemy.movespeed = 7.0f;
+        enemy.damage = 7.0f;
+        enemy.movespeed = 10.0f;
         enemy.m_state = State.MonsterState.M_Idle;
         navigation.speed = enemy.movespeed;
-
     }
-    private void Awake()
+    private void Start()
     {
+        controller = GetComponent<CharacterController>();
         monsterSetting();
         targeting = false;
     }
 
     private void Update()
     {
-        
         switch (enemy.m_state)
         {
-            case State.MonsterState.M_None:
-                break;
             case State.MonsterState.M_Idle:
-                break;
-            case State.MonsterState.M_Dead:
                 break;
             case State.MonsterState.M_Move:
                 UpdatePath();
                 break;
-            default:
+            case State.MonsterState.M_Attack:
+                ATTACK();
+                break;
+            case State.MonsterState.M_Groar:
+                Groar();
                 break;
         }
     }
 
-    private void UpdatePath()
+    private void ATTACK()
     {
 
-        if (navigation.destination != target.transform.position)
+    }
+
+    private void Groar()
+    {
+        enemy.m_state = State.MonsterState.M_Move;
+    }
+
+    private void UpdatePath()
+    {
+        afterGroaringDelay += Time.deltaTime;
+        if (afterGroaringDelay > afterGroaringTime)
         {
-            navigation.SetDestination(target.transform.position);
+            if (navigation.destination != target.transform.position)
+            {
+                navigation.SetDestination(target.transform.position);
+            }
+            else
+            {
+                navigation.SetDestination(transform.position);
+                targeting = false;
+            }
+            //afterGroaringDelay = 0.0f;
         }
-        else
-        {
-            navigation.SetDestination(transform.position);
-        }
+    
     }
 
 
-    
+    public void TryingtoATTACK()
+    {
+        
+    }
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            enemy.m_state = State.MonsterState.M_Move;
+            targeting = true;
+            animator.SetBool("isMeet", true);
+            enemy.m_state = State.MonsterState.M_Groar;
         }
-        
     }
 }

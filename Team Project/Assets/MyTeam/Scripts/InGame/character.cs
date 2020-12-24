@@ -29,8 +29,9 @@ namespace State
         M_None,
         M_Idle,
         M_Move,
-        M_Dead
-
+        M_Dead,
+        M_Groar,
+        M_Attack
     }
 
 }
