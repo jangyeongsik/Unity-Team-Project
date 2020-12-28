@@ -43,9 +43,9 @@ public class ItemInfo : MonoBehaviour, IPointerClickHandler
         if (slotNum < data.equipmentData.Count)
         {
             //아이템 이미지 받아와 넣기
-            TName.text = Inventory.Instance.pInven[slotNum].name;
-            TCategory.text = Inventory.Instance.pInven[slotNum].itemCategory.ToString();
-            image.sprite = Inventory.Instance.pInven[slotNum].image;
+            TName.text = Inventory.Instance.pInven.ListData[slotNum].name;
+            TCategory.text = Inventory.Instance.pInven.ListData[slotNum].itemCategory.ToString();
+            image.sprite = Inventory.Instance.pInven.ListData[slotNum].image;
             //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
             TStat.text = data.equipmentData[slotNum].itemGrade;
             TSubStat.text = "ID : " + data.equipmentData[slotNum].ID;
@@ -55,7 +55,7 @@ public class ItemInfo : MonoBehaviour, IPointerClickHandler
     {
         if (isAdded)
         {
-            gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven[slotNum].count.ToString());
+            gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.ListData[slotNum].count.ToString());
         }
     }
     public void OnPointerClick(PointerEventData eventData)

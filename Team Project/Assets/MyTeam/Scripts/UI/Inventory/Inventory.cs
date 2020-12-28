@@ -14,9 +14,11 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public int slotCount;
 
     //플레이어 인벤토리
-    public List<PlayerInventory> pInven = new List<PlayerInventory>();
+    public PlayerInven pInven = new PlayerInven();
     //아이템 이미지 리스트
     public List<Sprite> itemImages;
+
+    public DataManager dataManager = new DataManager();
     
     private void Start()
     {
@@ -28,15 +30,17 @@ public class Inventory : SingletonMonobehaviour<Inventory>
 
         //플레이어 인벤토리 초기화
         PlayerInventory a = new PlayerInventory();
-        //테스트용 검 1개 추가
-        a.ID = 1;
-        a.name = "검";
-        a.scriptName = 0;
-        a.count = 1;
-        a.itemCategory = ItemCategory.Equipment;
-        pInven.Add(a);
-        slots[0].GetComponent<ItemInfo>().RefreshCount(true);
+        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "InvenData/playerInvenData");
         SetImage();
+
+        ////테스트용 검 1개 추가
+        //a.ID = 1;
+        //a.name = "검";
+        //a.scriptName = 0;
+        //a.count = 1;
+        //a.itemCategory = ItemCategory.Equipment;
+        //pInven.ListData.Add(a);
+        //slots[0].GetComponent<ItemInfo>().RefreshCount(true);
     }
     private void Update()
     {
@@ -84,12 +88,12 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //아이템 이미지 찾아서 추가
     public void SetImage()
     {
-        for (int i = 0; i < pInven.Count; i++)
+        for (int i = 0; i < pInven.ListData.Count; i++)
         {
-            if (pInven[i].image != null) continue;
-            pInven[i].image = itemImages[pInven[i].scriptName];
+            if (pInven.ListData[i].image == null) pInven.ListData[i].image = itemImages[pInven.ListData[i].scriptName];
             slots[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
-            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven[i].image;
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven.ListData[i].image;
+            slots[i].GetComponent<ItemInfo>().RefreshCount(true);
         }
     }
 
@@ -98,23 +102,23 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     {
         int i = 0;
         //동일한 아이템이 있으면 카운트 ++
-        for (; i < pInven.Count; i++)
+        for (; i < pInven.ListData.Count; i++)
         {
-            if (pInven[i].name.Equals(itemName))
+            if (pInven.ListData[i].name.Equals(itemName))
             {
-                pInven[i].count++;
+                pInven.ListData[i].count++;
                 slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                 break;
             }
         }
 
         //동일한 아이템이 없으면 새 칸에 추가
-        if (i >= pInven.Count)
+        if (i >= pInven.ListData.Count)
         {
             switch (itemType)
             {
                 case ItemCategory.Equipment:
-                    pInven.Add(GameData.Instance.findEquipment(itemName));
+                    pInven.ListData.Add(GameData.Instance.findEquipment(itemName));
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                     break;
                 case ItemCategory.Consumable:
@@ -127,8 +131,10 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     break;
             }
         }
-
         SetImage();
+
+        //아이템 추가할 때 마다 데이터 저장
+        JsonManager.Instance.CreateJsonFile(Application.dataPath, "InvenData/playerInvenData", pInven);
     }
     //=====================================
 }
