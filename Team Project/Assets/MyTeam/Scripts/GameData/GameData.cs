@@ -5,21 +5,26 @@ using CSVReader;
 
 public class GameData : SingletonMonobehaviour<GameData>
 {
+    public PlayerData[] playerData;
+    public int playerSlot;
     public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
     private void Start()
     {
-        Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
-        data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
-        equipmentData = table.TableToList<Equipment>();
-        System.GC.Collect();
+        //Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
+        //data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
+        //equipmentData = table.TableToList<Equipment>();
+        //System.GC.Collect();
 
         player = new Player();
 
         Table t = CSVReader.Reader.ReadCSVToTable("PlayerDataCSV");
-        PlayerData[] playerDatas = t.TableToArray<PlayerData>();
-        player = playerDatas[0].WriteData(player);
+        playerData = t.TableToArray<PlayerData>();
+        Debug.Log(playerData[0].slotID);
+        Debug.Log(playerData[1].slotID);
+        Debug.Log(playerData[2].slotID);
+        player = playerData[0].WriteData(player);
     }
 
     public void Print()
@@ -58,4 +63,10 @@ public class GameData : SingletonMonobehaviour<GameData>
     }
 
     //===================================================================
+
+    //게임 끝날때 저장
+    private void OnDestroy()
+    {
+        filestream.Instance.PlayerSave();
+    }
 }

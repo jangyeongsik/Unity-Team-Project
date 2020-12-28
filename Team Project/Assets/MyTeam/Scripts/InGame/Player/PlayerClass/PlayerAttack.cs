@@ -35,15 +35,7 @@ public class PlayerAttack : MonoBehaviour
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
                         break;
                     case COLORZONE.GREEN:
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        GameEventToUI.Instance.OnSkillGaugeActive(true);
-                        break;
                     case COLORZONE.YELLOW:
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        GameEventToUI.Instance.OnSkillGaugeActive(true);
-                        break;
                     case COLORZONE.RED:
                         animator.SetTrigger("NextSkill");
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
@@ -58,13 +50,7 @@ public class PlayerAttack : MonoBehaviour
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
                         break;
                     case COLORZONE.GREEN:
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        break;
                     case COLORZONE.YELLOW:
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        break;
                     case COLORZONE.RED:
                         animator.SetTrigger("NextSkill");
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
