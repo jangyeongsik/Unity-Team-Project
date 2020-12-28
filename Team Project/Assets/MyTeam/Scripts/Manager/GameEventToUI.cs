@@ -38,7 +38,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> onOff;
     public event System.Action<bool> miniOnOff;
     public event System.Action<bool, int, string> talk;
-   
+
 
     public void OnEventShopOnOff(bool isOn)
     {
@@ -57,5 +57,5 @@ public class GameEventToUI : Singleton<GameEventToUI>
     }
 
    
-
+    
 }

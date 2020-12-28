@@ -21,13 +21,15 @@ public class EnemyMove : MonoBehaviour
 
     //에너미 어택 이벤트 관련
     //================================
+    public GameObject AttackNocice;
+
 
     public bool counterjudgement;
 
     float attackTime;
 
-    float attckCountMin = 0.7f;
-    float attckCountMax = 1.5f;
+    float attckCountMin = 0.3f;
+    float attckCountMax = 0.5f;
 
 
     //================================
@@ -69,11 +71,12 @@ public class EnemyMove : MonoBehaviour
     {
         monsterSetting();
         targeting = false;
+        EnemyEvent.Instance.EnemyResetTime += AttackSetting;
     }
 
     private void Update()
     {
-
+        Debug.Log(attackTime);
         switch (enemyData.monsterState)
         {
             case State.MonsterState.M_Idle:
@@ -84,6 +87,7 @@ public class EnemyMove : MonoBehaviour
                 break;
             case State.MonsterState.M_Attack:
                 ATTACK();
+                attackCount();
                 break;
             case State.MonsterState.M_Groar:
                 Groar();
@@ -93,7 +97,7 @@ public class EnemyMove : MonoBehaviour
 
     private void ATTACK()
     {
-        if (GetDistanceFromPlayer() > 3.0f)
+        if (GetDistanceFromPlayer() > 4.0f)
         {
             enemyData.animator.SetBool("isReadyToPunch", false);
             enemyData.monsterState = State.MonsterState.M_Move;
@@ -165,11 +169,13 @@ public class EnemyMove : MonoBehaviour
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
             counterjudgement = true;
+            
         }
         else
         {
             counterjudgement = false;
         }
+        AttackNocice.SetActive(counterjudgement);
     }
 
 
