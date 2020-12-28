@@ -14,6 +14,20 @@ public class PlayerAttack : MonoBehaviour
         stateEventManager.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
     }
 
+    private void Update()
+    {
+        if (GameData.Instance.player.counterTime < 1.1f && stateEventManager.Instance.OnPlayer_AttackEvent() &&
+           GameData.Instance.player.m_state == State.PlayerState.P_Guard)
+        {
+            animator.SetTrigger("NextSkill");
+            GameEventToUI.Instance.OnSkillGaugeActive(true);
+            Attack_Success = true;
+        }
+
+        if (GameData.Instance.player.m_state == State.PlayerState.P_Delay)
+            Attack_Success = false;
+    }
+
     private void OnDestroy()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
@@ -23,17 +37,6 @@ public class PlayerAttack : MonoBehaviour
     {
         switch (GameData.Instance.player.m_state)
         {
-            case State.PlayerState.P_Guard:
-                if (stateEventManager.Instance.OnPlayer_AttackEvent())
-                {
-                    Attack_Success = true;
-                }
-                if (time < 1.1f)
-                {
-                    animator.SetTrigger("NextSkill");
-                    GameEventToUI.Instance.OnSkillGaugeActive(true);
-                }
-                break;
             case State.PlayerState.P_1st_Skill:
                 switch (color)
                 {

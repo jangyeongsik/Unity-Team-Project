@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -45,12 +44,12 @@ public class EnemyMove : MonoBehaviour
     //        return false;
     //    }
     //}
-    
+
 
     #region 에너미 필요 변수 
     private float afterGroaringTime = 3.0f;
     private float afterGroaringDelay = 0.0f;
-    private float attackDistance = 2.0f;
+    private float attackDistance = 4.0f;
     private bool goBack = false;
 
     Vector3 startPos;
@@ -173,7 +172,7 @@ public class EnemyMove : MonoBehaviour
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
             counterjudgement = true;
-            
+
         }
         else
         {
