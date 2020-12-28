@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     public PlayerInven AllInvenData { get; set; }
 
@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
     }
     void ParsingInvenList()
     {
-        AllInvenData = JsonInstance.LoadJsonFile<PlayerInven>(Application.dataPath, "InvenData/playerInvenData");
+        AllInvenData = JsonInstance.LoadJsonFile<PlayerInven>(Application.dataPath, "playerInvenData");
         if (AllInvenData != null)
         {
             for (int i = 0; i < AllInvenData.ListData.Count; ++i)
@@ -32,7 +32,7 @@ public class DataManager : MonoBehaviour
             AllInvenData.ListData.Add(_pInven);
         }
 
-        JsonInstance.CreateJsonFile(Application.dataPath, "InvenData/playerInvenData", AllInvenData);
+        JsonInstance.CreateJsonFile(Application.dataPath, "playerInvenData", AllInvenData);
     }
     bool CheakDuplicateTranineeData(PlayerInventory _pInven)
     {

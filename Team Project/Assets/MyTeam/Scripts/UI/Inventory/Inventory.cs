@@ -18,7 +18,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //아이템 이미지 리스트
     public List<Sprite> itemImages;
 
-    public DataManager dataManager = new DataManager();
+    public DataManager dataManager = DataManager.Instance;
     
     private void Start()
     {
@@ -30,7 +30,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
 
         //플레이어 인벤토리 초기화
         PlayerInventory a = new PlayerInventory();
-        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "InvenData/playerInvenData");
+        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "playerInvenData");
         SetImage();
 
         ////테스트용 검 1개 추가
@@ -90,13 +90,13 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     {
         for (int i = 0; i < pInven.ListData.Count; i++)
         {
-            if (pInven.ListData[i].image == null) pInven.ListData[i].image = itemImages[pInven.ListData[i].scriptName];
+            //if (pInven.ListData[i].image == null) 
+            pInven.ListData[i].image = itemImages[pInven.ListData[i].scriptName];
             slots[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
             slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven.ListData[i].image;
             slots[i].GetComponent<ItemInfo>().RefreshCount(true);
         }
     }
-
     //아이템 추가
     public void AddItem(string itemName, ItemCategory itemType)
     {
@@ -134,7 +134,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         SetImage();
 
         //아이템 추가할 때 마다 데이터 저장
-        JsonManager.Instance.CreateJsonFile(Application.dataPath, "InvenData/playerInvenData", pInven);
+        JsonManager.Instance.CreateJsonFile(Application.dataPath, "playerInvenData", pInven);
     }
     //=====================================
 }

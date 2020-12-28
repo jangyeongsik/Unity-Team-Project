@@ -20,6 +20,7 @@ public class PlayerInventory
     public int ID;
     public string name;
     public int scriptName;
+    [NonSerialized]
     public Sprite image;
     public ItemCategory itemCategory;
     public int count;
