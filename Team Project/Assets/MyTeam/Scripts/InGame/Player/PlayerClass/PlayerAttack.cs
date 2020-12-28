@@ -6,9 +6,12 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
 
+    bool Attack_Success = false; 
+
     private void Start()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
+        stateEventManager.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
     }
 
     private void OnDestroy()
@@ -22,7 +25,12 @@ public class PlayerAttack : MonoBehaviour
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Guard:
-                if(time < 1.1f)
+                if (stateEventManager.Instance.OnPlayer_AttackEvent())
+                {
+                    Debug.Log("A");
+                    Attack_Success = true;
+                }
+                if (time < 1.1f)
                 {
                     animator.SetTrigger("NextSkill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
@@ -65,6 +73,11 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("Guard");
                 break;
         }
+    }
+
+    public bool Attack_SuccessEvent()
+    {
+        return Attack_Success;
     }
 
 }

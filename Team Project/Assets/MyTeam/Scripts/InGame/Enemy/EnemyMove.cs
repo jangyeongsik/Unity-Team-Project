@@ -29,7 +29,7 @@ public class EnemyMove : MonoBehaviour
     float attackTime;
 
     float attckCountMin = 0.3f;
-    float attckCountMax = 0.5f;
+    float attckCountMax = 0.7f;
 
 
     //================================
@@ -72,11 +72,16 @@ public class EnemyMove : MonoBehaviour
         monsterSetting();
         targeting = false;
         EnemyEvent.Instance.EnemyResetTime += AttackSetting;
+        stateEventManager.Instance.Player_Attack += Player_AttackEvent;
     }
 
     private void Update()
     {
-        Debug.Log(attackTime);
+
+        if (stateEventManager.Instance.OnAttack_SuccessEvent())
+        {
+            Debug.Log("B");
+        }
         switch (enemyData.monsterState)
         {
             case State.MonsterState.M_Idle:

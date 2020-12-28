@@ -21,9 +21,6 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         Table t = CSVReader.Reader.ReadCSVToTable("PlayerDataCSV");
         playerData = t.TableToArray<PlayerData>();
-        Debug.Log(playerData[0].slotID);
-        Debug.Log(playerData[1].slotID);
-        Debug.Log(playerData[2].slotID);
         player = playerData[0].WriteData(player);
     }
 
