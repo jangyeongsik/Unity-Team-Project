@@ -80,7 +80,6 @@ public class EnemyMove : MonoBehaviour
 
         if (stateEventManager.Instance.OnAttack_SuccessEvent())
         {
-            Debug.Log("B");
         }
         switch (enemyData.monsterState)
         {

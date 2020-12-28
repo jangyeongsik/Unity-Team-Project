@@ -21,13 +21,11 @@ public class PlayerAttack : MonoBehaviour
 
     void playerAttack(float time, COLORZONE color)
     {
-        Debug.Log(color);
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Guard:
                 if (stateEventManager.Instance.OnPlayer_AttackEvent())
                 {
-                    Debug.Log("A");
                     Attack_Success = true;
                 }
                 if (time < 1.1f)
