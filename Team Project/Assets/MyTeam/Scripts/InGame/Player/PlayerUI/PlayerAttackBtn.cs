@@ -25,7 +25,6 @@ public class PlayerAttackBtn : MonoBehaviour
 
     void SkillGaugeActive(bool isOn)
     {
-        Debug.Log(isOn);
         skillGauge.gameObject.SetActive(isOn);
     }
 }

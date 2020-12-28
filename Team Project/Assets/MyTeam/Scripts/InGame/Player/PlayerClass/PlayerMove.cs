@@ -54,7 +54,8 @@ public class PlayerMove : MonoBehaviour
     void Move()
     {
         //대쉬중이면 못움직임
-        if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
+        if (GameData.Instance.player.m_state != State.PlayerState.P_Run && 
+            GameData.Instance.player.m_state != State.PlayerState.P_Idle) return;
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
@@ -86,6 +87,8 @@ public class PlayerMove : MonoBehaviour
 
     void PlayerJoyMove(Vector2 direction, float amount)
     {
+        if (GameData.Instance.player.m_state != State.PlayerState.P_Run &&
+            GameData.Instance.player.m_state != State.PlayerState.P_Idle) return;
         Vector3 dir = new Vector3(direction.x, 0f, direction.y);
         Transform cmT = Camera.main.transform;
         dir = cmT.TransformDirection(dir);
