@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum EQUIPMENTTYPE
+{
+    WEAPON = 1,
+    ARMOR,
+    HELM,
+    GLOVE,
+    SHOES
+}
 public class Equipment
-{/*  
-     EqupmentType	
-        1	WEAPON
-        2	ARMOR
-        3	HELM
-        4	GLOVE
-        5	SHOES
- */
+{
     public int ID;
     public string Name;
-    public string Category;
+    public ITEMCATEGORY Category;
     public int  equipmentType;
     public string itemGrade;
     public int itemScriptID;
@@ -26,5 +26,4 @@ public class Equipment
     public int staminaAdd;
     public float def;
     public int counterJudgement;
-
 }

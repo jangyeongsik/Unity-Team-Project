@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public enum ItemCategory
+public enum ITEMCATEGORY
 {
-    Equipment,
-    Consumable,
-    Ingredient,
-    Misc
+    EQUIPMENT,
+    INGREDIENT,
+    CONSUMABLE,
+    MISC
 }
 [Serializable]
 public class PlayerInven
@@ -20,17 +20,19 @@ public class PlayerInventory
     public int ID;
     public string name;
     public int scriptName;
+    public string itemGrade;
     [NonSerialized]
     public Sprite image;
-    public ItemCategory itemCategory;
+    public ITEMCATEGORY itemCategory;
     public int count;
 
     public PlayerInventory() { }
-    public PlayerInventory(int _ID, string _name, int _scriptName, Sprite _image, ItemCategory _itemCategory, int _count)
+    public PlayerInventory(int _ID, string _name, int _scriptName, string _itemGrade, Sprite _image, ITEMCATEGORY _itemCategory, int _count)
     {
         ID = _ID;
         name = _name;
         scriptName = _scriptName;
+        itemGrade = _itemGrade;
         image = _image;
         itemCategory = _itemCategory;
         count = _count;

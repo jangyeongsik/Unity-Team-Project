@@ -12,9 +12,9 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<Equipment> equipmentData;
     private void Start()
     {
-        //Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
         //data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
-        //equipmentData = table.TableToList<Equipment>();
+        Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
+        equipmentData = table.TableToList<Equipment>();
         //System.GC.Collect();
 
         player = new Player();
@@ -28,16 +28,38 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         foreach(Equipment a in equipmentData)
         {
-            Debug.Log(a.ID + " " + a.Name + " " + a.counterJudgement);
+            Debug.Log(a.ID + " " + a.Name + " " + a.itemGrade);
         }
        
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Print();
+        }
     }
 
     //아이템 매니저 함수들
     //===================================================================
-
-    //
-    public PlayerInventory findEquipment(string itemname)
+    public Equipment findEquipment(string itemname)
+    {
+        int i;
+        for (i = 0; i < equipmentData.Count; i++)
+        {
+            if (equipmentData[i].Name.Equals(itemname))
+            {
+                break;
+            }
+        }
+        if (i >= equipmentData.Count)
+            return null;
+    
+        Equipment p = new Equipment();
+        p = equipmentData[i];
+        return p;
+    }
+    public PlayerInventory findEquipmentAsPlayerInventoryItem(string itemname)
     {
         int i;
         for (i = 0;i < equipmentData.Count; i++)
@@ -54,7 +76,8 @@ public class GameData : SingletonMonobehaviour<GameData>
         p.ID = equipmentData[i].ID;
         p.name = equipmentData[i].Name;
         p.scriptName = equipmentData[i].itemScriptID;
-        p.itemCategory = ItemCategory.Equipment;
+        p.itemGrade = equipmentData[i].itemGrade;
+        p.itemCategory = ITEMCATEGORY.EQUIPMENT;
         p.count = 1;
         return p;
     }
