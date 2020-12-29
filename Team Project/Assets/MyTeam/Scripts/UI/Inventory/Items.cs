@@ -39,6 +39,7 @@ public class Ingredient
     public ITEMCATEGORY itemCategory;
     public int scriptName;
     public string itemGrade;
+    public int itemScriptID;
     [NonSerialized]
     public Sprite image;
     public int count;
@@ -51,6 +52,7 @@ public class Misc
     public ITEMCATEGORY itemCategory;
     public int scriptName;
     public string itemGrade;
+    public int itemScriptID;
     [NonSerialized]
     public Sprite image;
     public int count;

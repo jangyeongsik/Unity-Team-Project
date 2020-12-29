@@ -37,11 +37,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     }
     private void Update()
     {
-        //이미지 찾아서 넣어주는 코드
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SetImage();
-        }
         //인벤에 아이템 추가
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -55,7 +50,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         {
             AddEquipment("창");
         }
-        Debug.Log(pInven.EquipmentList.Count);
         isVisible = gameObject.activeSelf;
     }
     //=====================================
@@ -101,12 +95,76 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //아이템 이미지 찾아서 추가
     public void SetImage()
     {
-        for (int i = 0; i < pInven.EquipmentList.Count; i++)
+        switch (InvenTabNum)
         {
-            slots[i].transform.GetChild(0).gameObject.SetActive(true);
-            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.EquipmentList[i].itemScriptID]; ;
-            slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+            case 0:
+                #region 장비 인벤토리 아이템 개수 따라 표시
+                for (int i = 0; i <= pInven.EquipmentList.Count; i++)
+                {
+                    if (i >= pInven.EquipmentList.Count)
+                    {
+                        if (i < slots.Length)
+                        {
+                            for (int j = i; j < slots.Length; j++)
+                            {
+                                slots[j].transform.GetChild(0).gameObject.SetActive(false);
+                                slots[j].transform.GetChild(1).gameObject.SetActive(false);
+                            }
+                        }
+                        break;
+                    }
+                    slots[i].transform.GetChild(0).gameObject.SetActive(true);
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.EquipmentList[i].itemScriptID]; ;
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                #endregion
+                break;
+            case 1:
+                #region 재료 인벤토리 아이템 개수 따라 표시
+                for (int i = 0; i <= pInven.IngredientList.Count; i++)
+                {
+                    if (i >= pInven.IngredientList.Count)
+                    {
+                        if (i < slots.Length)
+                        {
+                            for (int j = i; j < slots.Length; j++)
+                            {
+                                slots[j].transform.GetChild(0).gameObject.SetActive(false);
+                                slots[j].transform.GetChild(1).gameObject.SetActive(false);
+                            }
+                        }
+                        break;
+                    }
+                    slots[i].transform.GetChild(0).gameObject.SetActive(true);
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.IngredientList[i].itemScriptID]; ;
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                #endregion
+                break;
+            case 2:
+                #region 기타 인벤토리 아이템 개수 따라 표시
+                for (int i = 0; i <= pInven.MiscList.Count; i++)
+                {
+                    if (i >= pInven.MiscList.Count)
+                    {
+                        if (i < slots.Length)
+                        {
+                            for (int j = i; j < slots.Length; j++)
+                            {
+                                slots[j].transform.GetChild(0).gameObject.SetActive(false);
+                                slots[j].transform.GetChild(1).gameObject.SetActive(false);
+                            }
+                        }
+                        break;
+                    }
+                    slots[i].transform.GetChild(0).gameObject.SetActive(true);
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.MiscList[i].itemScriptID]; ;
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                #endregion
+                break;
         }
+        
     }
     //아이템 추가
     public void AddEquipment(string itemName)
@@ -126,14 +184,24 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public void ChangeTabToEquipment()
     {
         InvenTabNum = 0;
+        ChangeTab();
     }
     public void ChangeTabToIngredient()
     {
         InvenTabNum = 1;
+        ChangeTab();
     }
     public void ChangeTabToMisc()
     {
         InvenTabNum = 2;
+        ChangeTab();
     }
     //=====================================
+    //아이템 탭에 따라 슬롯 아이템 교체
+    //=====================================
+    public void ChangeTab()
+    {
+        AddSlot();
+        SetImage();
+    }
 }

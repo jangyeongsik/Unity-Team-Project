@@ -104,6 +104,7 @@ public class ItemInfo : MonoBehaviour
     }
     public void RefreshCount(bool isAdded)
     {
+        InvenTabNum = Inventory.Instance.InvenTabNum;
         if (isAdded)
         {
             switch (InvenTabNum)
@@ -111,12 +112,12 @@ public class ItemInfo : MonoBehaviour
                 case 0:
                     gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.EquipmentList[slotNum].count.ToString());
                     break;
-                //case 1:
-                //    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.IngredientList[slotNum].count.ToString());
-                //    break;
-                //case 2:
-                //    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.EquipmentList[slotNum].count.ToString());
-                //    break;
+                case 1:
+                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.IngredientList[slotNum].count.ToString());
+                    break;
+                case 2:
+                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.EquipmentList[slotNum].count.ToString());
+                    break;
             }
         }
     }
