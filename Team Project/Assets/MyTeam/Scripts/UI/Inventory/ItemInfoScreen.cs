@@ -13,6 +13,6 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void EquipItem()
     {
-        EquipUI.GetComponent<PlayerEquipment>().EquipItem(Inventory.Instance.pInven.ListData[slotNum]);
+        EquipUI.GetComponent<PlayerEquipment>().EquipItem(Inventory.Instance.pInven.EquipmentList[slotNum]);
     }
 }

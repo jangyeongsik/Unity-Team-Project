@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerEquipment
 {
-    public List<PlayerInventory> EquipingItems = new List<PlayerInventory>();
+    public List<Equipment> EquipmentList = new List<Equipment>();
 
-    public void EquipItem(PlayerInventory _item)
+    public void EquipItem(Equipment _item)
     {
         Equipment temp = new Equipment();
         temp = GameData.Instance.findEquipment(_item.name);
 
-        for (int i = 0; i < EquipingItems.Count; i++)
+        for (int i = 0; i < EquipmentList.Count; i++)
         {
             
         }

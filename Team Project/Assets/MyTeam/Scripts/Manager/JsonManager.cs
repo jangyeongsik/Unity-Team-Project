@@ -7,7 +7,7 @@ public class JsonManager : Singleton<JsonManager>
     #region 데이터 형변환용
     public string ObjectToJson(object _obj)
     {
-        return JsonUtility.ToJson(_obj);
+        return JsonUtility.ToJson(_obj, true);
     }
     public T JsonToObject<T>(string _jsonData)
     {
