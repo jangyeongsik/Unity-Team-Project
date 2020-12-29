@@ -6,12 +6,34 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
 
+    public AnimationClip clips;
+
     bool Attack_Success = false; 
 
     private void Start()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
         stateEventManager.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
+
+        //AnimatorOverrideController con = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        //var list = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        //foreach(AnimationClip a in con.animationClips)
+        //{
+        //    if(a.name.Contains("Attack1"))
+        //    list.Add(new KeyValuePair<AnimationClip, AnimationClip>(a,clips));
+        //    else
+        //    list.Add(new KeyValuePair<AnimationClip, AnimationClip>(a,a));
+        //}
+        //con.ApplyOverrides(list);
+        //animator.runtimeAnimatorController = con;
+
+
+        //AnimatorOverrideController c = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        //foreach (AnimationClip a in c.animationClips)
+        //{
+        //    Debug.Log(a.name);
+        //}
+
     }
 
     private void Update()

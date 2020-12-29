@@ -32,7 +32,41 @@ public class PlayerData
         player.counter_judgement = counterJudgement;
         player.presetID = presetID;
         player.m_state = State.PlayerState.P_Idle;
+        player.counterTime = 0f;
         return player;
+    }
+
+    public PlayerData CreateNewPlayer(int slot, string name)
+    {
+        slotID = slot;
+        this.name = name;
+        damage = 0;
+        moveSpeed = 0;
+        criticalPercent = 0;
+        criticalDamage = 0;
+        attackSpeed = 0;
+        hp = 0;
+        stamina = 0;
+        defence = 0;
+        counterJudgement = 0;
+        presetID = 0;
+        return this;
+    }
+    public PlayerData DeleteData(int slot)
+    {
+        slotID = slot;
+        this.name = "";
+        damage = 0;
+        moveSpeed = 0;
+        criticalPercent = 0;
+        criticalDamage = 0;
+        attackSpeed = 0;
+        hp = 0;
+        stamina = 0;
+        defence = 0;
+        counterJudgement = 0;
+        presetID = 0;
+        return this;
     }
 }
 
