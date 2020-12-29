@@ -5,7 +5,8 @@ using CSVReader;
 
 public class GameData : SingletonMonobehaviour<GameData>
 {
-    public PlayerData[] playerData;
+    private PlayerDataList playerDataList;
+    public List<PlayerData> playerData;
     public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
@@ -21,8 +22,8 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         player = new Player();
 
-        Table t = CSVReader.Reader.ReadCSVToTable("PlayerDataCSV");
-        playerData = t.TableToArray<PlayerData>();
+        playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
+        playerData = playerDataList.datas;
     }
 
     public void Print()
@@ -87,13 +88,14 @@ public class GameData : SingletonMonobehaviour<GameData>
     //게임 끝날때 저장
     private void OnDestroy()
     {
-        filestream.Instance.PlayerSave();
+        playerDataList.datas = playerData;
+        JsonManager.Instance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerData", playerDataList);
     }
 
     //플레이어 슬롯에서 데이터 읽기
     public void LoadFromPlayerSlot(int slot)
     {
-        player = playerData[slot].WriteData(player);
+        playerData[slot].WriteData(in player);
     }
 
     //플레이어 슬롯 새로만들기

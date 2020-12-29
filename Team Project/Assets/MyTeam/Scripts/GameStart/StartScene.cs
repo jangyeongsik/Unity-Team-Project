@@ -22,7 +22,7 @@ public class StartScene : MonoBehaviour
             isSlotEmpty[i] = false;
         }
 
-        for(int i = 0; i < GameData.Instance.playerData.Length; ++i)
+        for(int i = 0; i < GameData.Instance.playerData.Count; ++i)
         {
             if(GameData.Instance.playerData[i].name == "")
             {
@@ -37,11 +37,18 @@ public class StartScene : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
+    //씬 로드
     public void GoToMainGameScene()
     {
         LoadingProgress.LoadScene("MainGameScene");
     }
 
+    //슬롯 선택
     public void SlotSelect(GameObject obj)
     {
         for(int i = 0; i < Slots.Length; ++i)
@@ -64,6 +71,7 @@ public class StartScene : MonoBehaviour
         }
     }
 
+    //스텟 텍스트 설정
     void setPlayerStat(int slot)
     {
         if(isSlotEmpty[slot] == true)
@@ -84,22 +92,35 @@ public class StartScene : MonoBehaviour
         }
     }
 
+    //obj 액티브 끄기
     public void Cancle(GameObject obj)
     {
         obj.SetActive(false);
     }
 
+    public void InputPopupCancle(GameObject obj)
+    {
+        //슬롯 텍스트 초기화 (없으면 이전에 입력했던거 유지됌@.@)
+        obj.transform.Find("InputField").GetComponent<InputField>().text = "";
+        obj.SetActive(false);
+    }
+
+    //슬롯 생성
     public void CreatePlayer(GameObject obj)
     {
         //슬롯 새로생성
         GameData.Instance.CreateNewPlayerSlot(slotIdx, obj.transform.Find("InputField").GetComponent<InputField>().text);
         obj.SetActive(false);
 
+        //슬롯 텍스트 초기화 (없으면 이전에 입력했던거 유지됌@.@)
+        obj.transform.Find("InputField").GetComponent<InputField>().text = "";
+
         //슬롯이름 변경
         Slots[slotIdx].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[slotIdx].name;
         isSlotEmpty[slotIdx] = false;
     }
 
+    //슬롯 데이터 삭제
     public void DeleteSlot(GameObject obj)
     {
         GameData.Instance.DeletePlayerData(slotIdx);
@@ -109,8 +130,10 @@ public class StartScene : MonoBehaviour
         isSlotEmpty[slotIdx] = true;
     }
 
+    //obj 팝업 액티브
     public void Popup(GameObject obj)
     {
         obj.SetActive(true);
     }
+
 }

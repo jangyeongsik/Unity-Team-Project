@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CylinderGauge : MonoBehaviour
 {
-    int cylinderCount;
-
     float maxGauge = 100;
     float curGauge;
     float targetGauge;
