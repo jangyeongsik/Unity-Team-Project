@@ -85,9 +85,4 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     //===================================================================
 
-    //게임 끝날때 저장
-    private void OnDestroy()
-    {
-        filestream.Instance.PlayerSave();
-    }
 }
