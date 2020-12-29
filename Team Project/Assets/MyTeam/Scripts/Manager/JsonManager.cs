@@ -5,7 +5,7 @@ using System.Text;
 public class JsonManager : Singleton<JsonManager>
 {
     #region 데이터 형변환용
-    public string ObjectToJson(object _obj)
+    public string ObjectToJson(object _obj,true)
     {
         return JsonUtility.ToJson(_obj);
     }

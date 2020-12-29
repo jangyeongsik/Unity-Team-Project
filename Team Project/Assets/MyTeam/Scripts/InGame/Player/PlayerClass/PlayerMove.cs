@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
+       
 
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
