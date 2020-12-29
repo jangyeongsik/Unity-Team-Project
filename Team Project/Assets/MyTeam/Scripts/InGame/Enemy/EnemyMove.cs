@@ -17,7 +17,7 @@ public class EnemyMove : MonoBehaviour
 
     ColliderForAttack checkAttack;
 
-
+    
     //에너미 어택 이벤트 관련
     //================================
     public GameObject AttackNocice;
@@ -57,6 +57,7 @@ public class EnemyMove : MonoBehaviour
 
     private void monsterSetting()
     {
+        
         enemyData = GetComponent<EnemyData>();
         float monsterSpeed = 10.0f;
         enemyData.navigation.speed = monsterSpeed;

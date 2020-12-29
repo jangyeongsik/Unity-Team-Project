@@ -10,6 +10,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
+
     private void Start()
     {
         //Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");

@@ -581,6 +581,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 174208974}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &760936699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1163380207, guid: fba8bb4b3eab0064886ceea598c517ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 174208974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760936697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991a14adf127e804da1ada31c1a11477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &760936702 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3522275232604752680, guid: fba8bb4b3eab0064886ceea598c517ec,
@@ -1237,7 +1249,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 760936699}
         m_MethodName: OpenMiniMap
         m_Mode: 1
         m_Arguments:
@@ -1484,6 +1496,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CM vcam1
       objectReference: {fileID: 0}
+    - target: {fileID: 5948767843721168044, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5948767843721168046, guid: 4cf26a4fff95b9243b0492ed423d5162,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1552,7 +1569,22 @@ PrefabInstance:
     - target: {fileID: 5948767843721168047, guid: 4cf26a4fff95b9243b0492ed423d5162,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7779751
+      value: 1.7793103
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948767843721168047, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_Priority
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948767844717650115, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_SoftZoneWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948767844717650115, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_SoftZoneHeight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf26a4fff95b9243b0492ed423d5162, type: 3}
