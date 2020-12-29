@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
     public static bool inventoryActivated = false;
-
     //슬롯들
     public Slot.SlotAddition[] slots;
     public Transform slotHolder;
@@ -19,28 +18,21 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public List<Sprite> itemImages;
 
     public DataManager dataManager = DataManager.Instance;
+    public bool isVisible;
     
     private void Start()
     {
+        //플레이어 인벤토리 초기화
+        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "/MyTeam/Resources/playerInvenData");
+
         //슬롯초기화
         slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
-        slotCount = 4;
-        AddSlot();
+        slotCount = pInven.ListData.Count;
         SetSlotNumber();
-
-        //플레이어 인벤토리 초기화
-        PlayerInventory a = new PlayerInventory();
-        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "playerInvenData");
+        SlotChange(slotCount);
         SetImage();
 
-        ////테스트용 검 1개 추가
-        //a.ID = 1;
-        //a.name = "검";
-        //a.scriptName = 0;
-        //a.count = 1;
-        //a.itemCategory = ItemCategory.Equipment;
-        //pInven.ListData.Add(a);
-        //slots[0].GetComponent<ItemInfo>().RefreshCount(true);
+        isVisible = gameObject.activeSelf;
     }
     private void Update()
     {
@@ -52,9 +44,15 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         //인벤에 아이템 추가
         if (Input.GetKeyDown(KeyCode.A))
         {
-            AddItem("활", ItemCategory.Equipment);
-            AddItem("검", ItemCategory.Equipment);
+            AddItem("활", ITEMCATEGORY.EQUIPMENT);
+            AddItem("검", ITEMCATEGORY.EQUIPMENT);
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            AddItem("창", ITEMCATEGORY.EQUIPMENT);
+        }
+
+        isVisible = gameObject.activeSelf;
     }
     //=====================================
     //아이템 슬롯 관련
@@ -70,7 +68,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //슬롯버튼 한개 잠금해제
     public void AddSlot()
     {
-        slotCount++;
+        slotCount = pInven.ListData.Count;
         SlotChange(slotCount);
     }
     //각 슬롯에 번호 붙여주기
@@ -90,17 +88,37 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     {
         for (int i = 0; i < pInven.ListData.Count; i++)
         {
-            //if (pInven.ListData[i].image == null) 
             pInven.ListData[i].image = itemImages[pInven.ListData[i].scriptName];
-            slots[i].transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
+            slots[i].transform.GetChild(0).gameObject.SetActive(true);
             slots[i].transform.GetChild(0).GetComponent<Image>().sprite = pInven.ListData[i].image;
             slots[i].GetComponent<ItemInfo>().RefreshCount(true);
         }
     }
     //아이템 추가
-    public void AddItem(string itemName, ItemCategory itemType)
+    public void AddItem(string itemName, ITEMCATEGORY itemType)
     {
         int i = 0;
+        //아이템창에 하나도 없으면 바로 추가
+        if (pInven.ListData.Count == 0)
+        {
+            switch (itemType)
+            {
+                case ITEMCATEGORY.EQUIPMENT:
+                    pInven.ListData.Add(GameData.Instance.findEquipmentAsPlayerInventoryItem(itemName));
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                    break;
+                case ITEMCATEGORY.INGREDIENT:
+                    break;
+                case ITEMCATEGORY.CONSUMABLE:
+                    break;
+                case ITEMCATEGORY.MISC:
+                    break;
+                default:
+                    break;
+            }
+            AddSlot();
+            return;
+        }
         //동일한 아이템이 있으면 카운트 ++
         for (; i < pInven.ListData.Count; i++)
         {
@@ -111,30 +129,30 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 break;
             }
         }
-
         //동일한 아이템이 없으면 새 칸에 추가
         if (i >= pInven.ListData.Count)
         {
             switch (itemType)
             {
-                case ItemCategory.Equipment:
-                    pInven.ListData.Add(GameData.Instance.findEquipment(itemName));
+                case ITEMCATEGORY.EQUIPMENT:
+                    pInven.ListData.Add(GameData.Instance.findEquipmentAsPlayerInventoryItem(itemName));
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                     break;
-                case ItemCategory.Consumable:
+                case ITEMCATEGORY.INGREDIENT:
                     break;
-                case ItemCategory.Ingredient:
+                case ITEMCATEGORY.CONSUMABLE:
                     break;
-                case ItemCategory.Misc:
+                case ITEMCATEGORY.MISC:
                     break;
                 default:
                     break;
             }
+            AddSlot();
         }
         SetImage();
 
         //아이템 추가할 때 마다 데이터 저장
-        JsonManager.Instance.CreateJsonFile(Application.dataPath, "playerInvenData", pInven);
+        JsonManager.Instance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/playerInvenData", pInven);
     }
     //=====================================
 }
