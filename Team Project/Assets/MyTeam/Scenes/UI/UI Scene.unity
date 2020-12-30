@@ -799,6 +799,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14f21949d55cde94f9e3bf17936bd19d, type: 3}
+--- !u!1 &1804045776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6716257763550562731, guid: 14f21949d55cde94f9e3bf17936bd19d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1804045775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1804045777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804045776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd94dcb588a1944384fd0779024809e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  slotHolder: {fileID: 34923185}
+  slotCount: 0
+  pInven:
+    EquipmentList: []
+    IngredientList: []
+    MiscList: []
+  itemImages:
+  - {fileID: 21300000, guid: 02998d8db83ec8a4398640cecae295d6, type: 3}
+  - {fileID: 21300000, guid: 10d44b4f8327aed4eb92cf8d482ae99c, type: 3}
+  - {fileID: 21300000, guid: 02998d8db83ec8a4398640cecae295d6, type: 3}
+  - {fileID: 21300000, guid: 10d44b4f8327aed4eb92cf8d482ae99c, type: 3}
+  isVisible: 0
+  InvenTabNum: 0
 --- !u!1 &1824786908
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,8 +945,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2084608225}
   - component: {fileID: 2084608226}
-  - component: {fileID: 2084608227}
   - component: {fileID: 2084608228}
+  - component: {fileID: 2084608227}
   m_Layer: 0
   m_Name: GameData
   m_TagString: Untagged
