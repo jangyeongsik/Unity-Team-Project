@@ -23,7 +23,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     private void Start()
     {
         //플레이어 인벤토리 초기화
-        pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "/MyTeam/Resources/PlayerInvenData");
+        //pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "/MyTeam/Resources/PlayerInvenData");
 
         //슬롯초기화
         slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
