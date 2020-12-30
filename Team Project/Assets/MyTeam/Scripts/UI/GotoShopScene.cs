@@ -11,10 +11,16 @@ public class GotoShopScene : MonoBehaviour
     public GameObject TalkCanvas;
     public GameObject miniMapCanvas;
     public GameObject inventory;
+    public GameObject BadgeCanvas;
+    public GameObject EncyclopediaCanvas;
+    public GameObject MinimapCanvas;
 
     private bool startTalking = false;
     private bool inventoryOnOff = false;
     private bool equipmentOnOff = false;
+    private bool BadgeCanvastOnOff = false;
+    private bool EncyclopediaCanvasOnOff = false;
+    private bool MinimapCanvasOnOff = false;
     Text talk;
 
     int count;
@@ -96,4 +102,23 @@ public class GotoShopScene : MonoBehaviour
         inventoryOnOff = !inventoryOnOff;
         inventory.gameObject.SetActive(inventoryOnOff);
     }
+
+    public void OnOffbadgeCabvas()
+    {
+        BadgeCanvastOnOff = !BadgeCanvastOnOff;
+        BadgeCanvas.SetActive(BadgeCanvastOnOff);
+    }
+
+    public void OnOffEncyclopediaCanvas()
+    {
+        EncyclopediaCanvasOnOff = !EncyclopediaCanvasOnOff;
+        EncyclopediaCanvas.SetActive(EncyclopediaCanvasOnOff);
+    }
+
+    public void OnOffMinimapCanvas()
+    {
+        MinimapCanvasOnOff = !MinimapCanvasOnOff;
+        MinimapCanvas.SetActive(MinimapCanvasOnOff);
+    }
+
 }
