@@ -29,16 +29,15 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         foreach(Equipment a in equipmentData)
         {
-            Debug.Log(a.ID + " " + a.Name + " " + a.itemGrade);
+            Debug.Log(a.ID + " " + a.name + " " + a.itemGrade);
         }
-       
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Print();
-        }
+        //if (Input.GetKeyDown(KeyCode.F2))
+        //{
+        //    Print();
+        //}
     }
 
     //아이템 매니저 함수들
@@ -48,7 +47,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         int i;
         for (i = 0; i < equipmentData.Count; i++)
         {
-            if (equipmentData[i].Name.Equals(itemname))
+            if (equipmentData[i].name.Equals(itemname))
             {
                 break;
             }
@@ -58,31 +57,9 @@ public class GameData : SingletonMonobehaviour<GameData>
     
         Equipment p = new Equipment();
         p = equipmentData[i];
+
         return p;
     }
-    public PlayerInventory findEquipmentAsPlayerInventoryItem(string itemname)
-    {
-        int i;
-        for (i = 0;i < equipmentData.Count; i++)
-        {
-            if (equipmentData[i].Name.Equals(itemname))
-            {
-                break;
-            }        
-        }
-        if (i >= equipmentData.Count)
-            return null;
-
-        PlayerInventory p = new PlayerInventory();
-        p.ID = equipmentData[i].ID;
-        p.name = equipmentData[i].Name;
-        p.scriptName = equipmentData[i].itemScriptID;
-        p.itemGrade = equipmentData[i].itemGrade;
-        p.itemCategory = ITEMCATEGORY.EQUIPMENT;
-        p.count = 1;
-        return p;
-    }
-
     //===================================================================
     //게임 끝날때 저장
     private void OnDestroy()

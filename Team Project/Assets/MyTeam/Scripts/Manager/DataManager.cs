@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : Singleton<DataManager>
+public class DataManager : SingletonMonobehaviour<DataManager>
 {
     public PlayerInven AllInvenData { get; set; }
 
@@ -14,42 +14,53 @@ public class DataManager : Singleton<DataManager>
     }
     void ParsingInvenList()
     {
-        AllInvenData = JsonInstance.LoadJsonFile<PlayerInven>(Application.dataPath, "playerInvenData");
+        AllInvenData = JsonInstance.LoadJsonFile<PlayerInven>(Application.dataPath, "/MyTeam/Resources/PlayerInvenData");
         if (AllInvenData != null)
         {
-            for (int i = 0; i < AllInvenData.ListData.Count; ++i)
+            for (int i = 0; i < AllInvenData.EquipmentList.Count; ++i)
             {
-                PlayerInventory data = AllInvenData.ListData[i];
+                Equipment data = AllInvenData.EquipmentList[i];
                 if (data == null)
-                    Debug.Log(string.Format("{0} 번째 인벤토리 정보가 널값임", i));
+                    Debug.Log(string.Format("{0} 번째 장비 정보가 널값임", i));
+            }
+            for (int i = 0; i < AllInvenData.IngredientList.Count; ++i)
+            {
+                Ingredient data = AllInvenData.IngredientList[i];
+                if (data == null)
+                    Debug.Log(string.Format("{0} 번째 재료 정보가 널값임", i));
+            }
+            for (int i = 0; i < AllInvenData.MiscList.Count; ++i)
+            {
+                Misc data = AllInvenData.MiscList[i];
+                if (data == null)
+                    Debug.Log(string.Format("{0} 번째 기타 정보가 널값임", i));
             }
         }
     }
-    public void AddItemData(PlayerInventory _pInven)
+    public void AddEquipmentData(Equipment _pInven)
     {
-        if (CheakDuplicateTranineeData(_pInven))
+        if (!CheakDuplicateEquipmentData(_pInven))
         {
-            AllInvenData.ListData.Add(_pInven);
+            AllInvenData.EquipmentList.Add(_pInven);
         }
 
-        JsonInstance.CreateJsonFile(Application.dataPath, "playerInvenData", AllInvenData);
+        JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
-    bool CheakDuplicateTranineeData(PlayerInventory _pInven)
+    bool CheakDuplicateEquipmentData(Equipment _pInven)
     {
-        for (int i = 0; i < AllInvenData.ListData.Count; ++i)
+        for (int i = 0; i < AllInvenData.EquipmentList.Count; ++i)
         {
-            PlayerInventory temp;
-            temp = AllInvenData.ListData[i];
+            Equipment temp;
+            temp = AllInvenData.EquipmentList[i];
             if (temp == null)
                 continue;
 
             if (temp.ID == _pInven.ID)
             {
-                AllInvenData.ListData[i].count++;
+                AllInvenData.EquipmentList[i].count++;
                 return true;
             }
         }
-
         return false;
     }
 }
