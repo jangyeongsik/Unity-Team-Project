@@ -1,7 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
+public class PlayerDataList
+{
+    public List<PlayerData> datas = new List<PlayerData>();
+}
+
+[Serializable]
 public class PlayerData
 {
     public int slotID;
@@ -16,8 +24,9 @@ public class PlayerData
     public int defence;
     public float counterJudgement;
     public int presetID;
+    public int cylinderCounter;
 
-    public Player WriteData(Player player)
+    public Player WriteData(in Player player)
     {
         player.id = slotID;
         player.p_name = name;
@@ -70,9 +79,9 @@ public class PlayerData
     }
 }
 
-
 public class Player : character
 {
+    public int cylinderCounter;         //실린더 개수
     public float stamina;               //스태미너
     public float counter_judgement;     //카운터 판결
     public string p_name;               //이름

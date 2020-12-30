@@ -6,33 +6,12 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
 
-    public AnimationClip clips;
-
     bool Attack_Success = false; 
 
     private void Start()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
         stateEventManager.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
-
-        //AnimatorOverrideController con = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        //var list = new List<KeyValuePair<AnimationClip, AnimationClip>>();
-        //foreach(AnimationClip a in con.animationClips)
-        //{
-        //    if(a.name.Contains("Attack1"))
-        //    list.Add(new KeyValuePair<AnimationClip, AnimationClip>(a,clips));
-        //    else
-        //    list.Add(new KeyValuePair<AnimationClip, AnimationClip>(a,a));
-        //}
-        //con.ApplyOverrides(list);
-        //animator.runtimeAnimatorController = con;
-
-
-        //AnimatorOverrideController c = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        //foreach (AnimationClip a in c.animationClips)
-        //{
-        //    Debug.Log(a.name);
-        //}
 
     }
 
@@ -57,6 +36,30 @@ public class PlayerAttack : MonoBehaviour
 
     void playerAttack(float time, COLORZONE color)
     {
+        switch (GameData.Instance.player.m_state)
+        {
+            case State.PlayerState.P_Idle:
+            case State.PlayerState.P_Run:
+                if (stateEventManager.Instance.OnPlayer_AttackEvent())
+                    animator.Play("First_Skill");
+                else
+                animator.SetTrigger("Guard");
+                break;
+            case State.PlayerState.P_Dash:
+                break;
+            case State.PlayerState.P_Guard:
+                break;
+            case State.PlayerState.P_1st_Skill:
+                break;
+            case State.PlayerState.P_2nd_Skill:
+                break;
+            case State.PlayerState.P_3rd_Skill:
+                break;
+            case State.PlayerState.P_Delay:
+                break;
+            default:
+                break;
+        }
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_1st_Skill:
@@ -93,7 +96,7 @@ public class PlayerAttack : MonoBehaviour
             case State.PlayerState.P_Delay:
                 break;
             default:
-                animator.SetTrigger("Guard");
+                
                 break;
         }
     }
