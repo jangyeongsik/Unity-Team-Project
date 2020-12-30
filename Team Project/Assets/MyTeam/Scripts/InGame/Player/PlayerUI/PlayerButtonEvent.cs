@@ -31,11 +31,6 @@ public class PlayerButtonEvent : MonoBehaviour
         }
     }
 
-    public void OpenMiniMap()
-    {
-        GameEventToUI.Instance.OnEventMinimapOnOff(true);
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.F))

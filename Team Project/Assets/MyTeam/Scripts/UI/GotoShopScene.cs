@@ -23,7 +23,6 @@ public class GotoShopScene : MonoBehaviour
     private void Awake()
     {
         GameEventToUI.Instance.onOff += ShopOn;
-        GameEventToUI.Instance.miniOnOff += MiniMapOn; ;
         GameEventToUI.Instance.talk += TalkOn;
     }
 

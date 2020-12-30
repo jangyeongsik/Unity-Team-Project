@@ -10,7 +10,7 @@ namespace Slot
         [SerializeField]
         private Image countImage;
         private Text countText;
-
+        
         private void Start()
         {
             countText = countImage.transform.GetChild(0).GetComponent<Text>();
