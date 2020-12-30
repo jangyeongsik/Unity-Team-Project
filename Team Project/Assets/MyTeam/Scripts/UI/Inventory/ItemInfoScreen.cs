@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemInfoScreen : MonoBehaviour
 {
     public int slotNum;
+    public Image itemInfoImage;
     public GameObject EquipUI;
     
     public void CloseTab()
@@ -13,6 +15,6 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void EquipItem()
     {
-        EquipUI.GetComponent<PlayerEquipment>().EquipItem(Inventory.Instance.pInven.EquipmentList[slotNum]);
+        EquipUI.GetComponent<EquipItem>().Equip(Inventory.Instance.pInven.EquipmentList[slotNum]);
     }
 }
