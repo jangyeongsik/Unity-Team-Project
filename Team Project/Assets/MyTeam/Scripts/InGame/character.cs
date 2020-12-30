@@ -31,8 +31,9 @@ namespace State
         M_Move,
         M_Dead,
         M_Groar,
-        M_Attack
-            
+        M_Attack,
+        M_Return,
+        M_Damage
     }
 
 }

@@ -37,6 +37,8 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public event System.Action<bool> onOff;
     public event System.Action<bool> miniOnOff;
+    public event System.Action<bool> badgeOnOff;
+    public event System.Action<bool> encyclopediaOnOff;
     public event System.Action<bool, int, string> talk;
 
 
@@ -48,14 +50,20 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventMinimapOnOff(bool isOn)
     {
         miniOnOff(isOn);
+    }
 
+    public void OnEncyclopediaOnOff(bool isOn)
+    {
+        encyclopediaOnOff(isOn);
+    }
+
+    public void OnBadgeOnOff(bool isOn)
+    {
+        badgeOnOff(isOn);
     }
 
     public void OnEventTalkOnOff(bool isOn, int id, string npcName)
     {
         talk(isOn, id, npcName);
     }
-
-   
-    
 }

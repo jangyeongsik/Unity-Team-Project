@@ -8,6 +8,7 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool shopOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
+    private bool encyclopediaOnOff = false;
     private void Awake()
     {
         SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive); 
@@ -31,16 +32,21 @@ public class PlayerButtonEvent : MonoBehaviour
         }
     }
 
-    public void OpenMiniMap()
+    //public void OpenMiniMap()
+    //{
+    //    GameEventToUI.Instance.OnEventMinimapOnOff(true);
+    //}
+    //
+    public void OpenEncyclopedia()
     {
-        GameEventToUI.Instance.OnEventMinimapOnOff(true);
+        encyclopediaOnOff = !encyclopediaOnOff;
+        GameEventToUI.Instance.OnEncyclopediaOnOff(encyclopediaOnOff);
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-
             talkOnOff = !talkOnOff;
             GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
         }

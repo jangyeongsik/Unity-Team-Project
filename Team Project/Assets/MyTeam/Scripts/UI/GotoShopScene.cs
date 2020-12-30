@@ -12,10 +12,14 @@ public class GotoShopScene : MonoBehaviour
     public GameObject miniMapCanvas;
     public GameObject inventory;
     public GameObject equipment;
+    public GameObject encyclopediaPanel;
+    public GameObject badgeCanvas;
+
 
     private bool startTalking = false;
     private bool inventoryOnOff = false;
     private bool equipmentOnOff = false;
+    private bool encyclopediaOnOff = false;
     Text talk;
 
     int count;
@@ -25,7 +29,9 @@ public class GotoShopScene : MonoBehaviour
     {
         GameEventToUI.Instance.onOff += ShopOn;
         GameEventToUI.Instance.miniOnOff += MiniMapOn; ;
+        GameEventToUI.Instance.badgeOnOff += BadgeOn; ;
         GameEventToUI.Instance.talk += TalkOn;
+        GameEventToUI.Instance.encyclopediaOnOff += EncyclopediaOn;
     }
 
     private void Start()
@@ -62,6 +68,16 @@ public class GotoShopScene : MonoBehaviour
     public void MiniMapOn(bool isOn)
     {
         miniMapCanvas.SetActive(isOn);
+    }
+
+    public void BadgeOn(bool isOn)
+    {
+        badgeCanvas.SetActive(isOn);
+    }
+
+    public void EncyclopediaOn(bool isOn)
+    {
+        encyclopediaPanel.SetActive(isOn);
     }
 
     public void FindNpc(int id, string NpcName)
