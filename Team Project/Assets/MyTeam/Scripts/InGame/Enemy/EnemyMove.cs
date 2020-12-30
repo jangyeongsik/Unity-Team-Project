@@ -173,7 +173,6 @@ public class EnemyMove : MonoBehaviour
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
             counterjudgement = true;
-
         }
         else
         {
