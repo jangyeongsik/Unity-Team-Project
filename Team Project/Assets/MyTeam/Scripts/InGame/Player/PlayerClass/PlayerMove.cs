@@ -22,8 +22,8 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -33,21 +33,20 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         //방향키 wasd이동
-        Move();
+        //Move();
     }
 
     private void Update()
     {
-        Dash();
-        Guard();
-
+        //Dash();
+        //Guard();
     }
 
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
@@ -116,14 +115,5 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isGuard", true);
         else if (Input.GetKeyUp(KeyCode.Z))
             animator.SetBool("isGuard", false);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //에너미 방향으로 움직이고 회전
-        //Transform tr = other.GetComponent<EnemyTestBullet>().enemyTR;
-        //Vector3 dir = tr.position - transform.position;
-        //controller.Move(dir);
-        //transform.LookAt(transform.position + dir);
     }
 }

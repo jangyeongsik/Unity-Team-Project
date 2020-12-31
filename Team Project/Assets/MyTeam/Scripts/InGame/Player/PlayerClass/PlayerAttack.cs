@@ -9,6 +9,9 @@ public class PlayerAttack : MonoBehaviour
     CharacterController controller;
 
     bool Attack_Success = false;
+    bool isReadyToCounter = false;
+
+    Transform ArcherEnemy = null;
 
     private void Awake()
     {
@@ -32,7 +35,6 @@ public class PlayerAttack : MonoBehaviour
         //    GameEventToUI.Instance.OnSkillGaugeActive(true);
         //    Attack_Success = true;
         //}
-
         if (Attack_Success)
             Attack_Success = false;
     }
@@ -48,17 +50,26 @@ public class PlayerAttack : MonoBehaviour
         {
             case State.PlayerState.P_Idle:
             case State.PlayerState.P_Run:
-                //if (stateEventManager.Instance.OnPlayer_AttackEvent())
-                //{
-                //    animator.Play("First_Skill");
-                //    GameEventToUI.Instance.OnSkillGaugeActive(true);
-                //}
-                //else
-                //animator.SetTrigger("Guard");
-                animator.Play("First_Skill");
-                GameEventToUI.Instance.OnSkillGaugeActive(true);
-                Attack_Success = true;
-                //StartCoroutine(MoveToEnemy(CheckEnemys()));
+                if (stateEventManager.Instance.OnPlayer_AttackEvent())
+                {
+                    animator.Play("First_Skill");
+                    GameEventToUI.Instance.OnSkillGaugeActive(true);
+                    Attack_Success = true;
+                }
+                else if(isReadyToCounter)
+                {
+                    if (ArcherEnemy != null)
+                    {
+                        animator.Play("First_Skill");
+                        GameEventToUI.Instance.OnSkillGaugeActive(true);
+                        Attack_Success = true;
+                        StartCoroutine(MoveToEnemy(ArcherEnemy));
+                    }
+                    else
+                        animator.SetTrigger("Guard");
+                }
+                else
+                animator.SetTrigger("Guard");
                 break;
             case State.PlayerState.P_Dash:
                 break;
@@ -77,6 +88,7 @@ public class PlayerAttack : MonoBehaviour
                         animator.SetTrigger("NextSkill");
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
                         GameEventToUI.Instance.OnSkillGaugeActive(true);
+                        StartCoroutine(MoveToEnemy(ArcherEnemy));
                         break;
                 }
                 break;
@@ -92,6 +104,7 @@ public class PlayerAttack : MonoBehaviour
                         Attack_Success = true;
                         animator.SetTrigger("NextSkill");
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
+                        StartCoroutine(MoveToEnemy(ArcherEnemy));
                         break;
                 }
                 break;
@@ -114,17 +127,16 @@ public class PlayerAttack : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
         float dist = 0f;
         Transform T = null;
-        foreach(var col in colliders)
+        for(int i = 0; i < colliders.Length; ++i)
         {
-            float d = Vector3.Distance(transform.position, col.transform.position);
+            float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {
                 dist = d;
-                T = col.transform;
+                T = colliders[i].transform;
             }
         }
 
-        Debug.Log(dist);
         return T;
     }
 
@@ -152,5 +164,15 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 8);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            isReadyToCounter = true;
+            if(ArcherEnemy == null)
+            ArcherEnemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
+        }
     }
 }

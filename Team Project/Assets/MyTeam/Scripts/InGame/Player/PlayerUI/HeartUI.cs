@@ -14,6 +14,7 @@ public class HeartUI : MonoBehaviour
     {
         hearts = new Image[maxHeartSize];
         int idx = 0;
+
         foreach(Transform child in transform)
         {
             Vector3 pos = Vector3.zero;
