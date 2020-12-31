@@ -179,6 +179,7 @@ public class GotoShopScene : MonoBehaviour
         {
             UIMenuButtons.transform.GetChild(i).GetComponent<Button>().animator.ResetTrigger("Selected");
         }
+        Menu.transform.GetChild(0).GetComponent<TMP_Dropdown>().value = 0;
         UIMenuButtons.SetActive(false);
         SetAllInactive();
     }
