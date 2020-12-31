@@ -29,7 +29,4 @@ public class stateEventManager : Singleton<stateEventManager>
             playerHP_Decrease(damage);
     }
 
-
-
-
 }

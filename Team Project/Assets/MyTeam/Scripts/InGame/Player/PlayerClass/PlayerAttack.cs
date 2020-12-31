@@ -35,6 +35,9 @@ public class PlayerAttack : MonoBehaviour
 
         if (GameData.Instance.player.m_state == State.PlayerState.P_Delay)
             Attack_Success = false;
+
+        if (Attack_Success)
+            Attack_Success = false;
     }
 
     private void OnDestroy()

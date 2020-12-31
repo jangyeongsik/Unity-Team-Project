@@ -43,4 +43,24 @@ public class CylinderGauge : MonoBehaviour
         targetGauge += percent;
     }
 
+    IEnumerator FillCylinderGauge()
+    {
+        while(isAdd)
+        {
+            yield return null;
+            curGauge += 1;
+            if (curGauge >= maxGauge)
+            {
+                curGauge -= maxGauge;
+                targetGauge -= maxGauge;
+            }
+            if (curGauge >= targetGauge)
+            {
+                curGauge = targetGauge;
+                isAdd = false;
+            }
+            slider.value = curGauge;
+        }
+    }
+
 }
