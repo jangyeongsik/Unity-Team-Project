@@ -12,10 +12,21 @@ public class EnemyWarrior : MonoBehaviour
     Vector3 offset;
 
 
+    public GameObject AttackNocice;
+
+
+    public bool counterjudgement;
+
+    float attackTime;
+
+    float attckCountMin = 0.4f;
+    float attckCountMax = 0.9f;
+
+    private int count;
     private void Start()
     {
-       
-        e_Warrior = new Monster();
+        stateEventManager.Instance.Player_Attack += Player_AttackEvent;
+         e_Warrior = new Monster();
         setting();
     }
 
@@ -29,16 +40,22 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (stateEventManager.Instance.Attack_SuccessEvent())
         {
+            count++;
             e_Warrior.monsterState = State.MonsterState.M_Damage;
             e_Warrior.animator.SetBool("IsRun", false);
             e_Warrior.animator.SetBool("IsAttack", false);
             e_Warrior.animator.SetTrigger("Hit");
         }
+        if(count >= 3)
+        {
+            e_Warrior.monsterState = State.MonsterState.M_Dead;
+            e_Warrior.animator.SetBool("IsRun", false);
+            e_Warrior.animator.SetBool("IsAttack", false);
+            e_Warrior.animator.SetTrigger("isDead");
+        }
 
-
-    
         switch (e_Warrior.monsterState)
         {
             case State.MonsterState.M_Idle:
@@ -53,6 +70,7 @@ public class EnemyWarrior : MonoBehaviour
                 break;
             case State.MonsterState.M_Attack:
                 M_Attack();
+                attackCount();
                 break;
             case State.MonsterState.M_Return:
                 break;
@@ -124,5 +142,30 @@ public class EnemyWarrior : MonoBehaviour
     public void ExitHit()
     {
         e_Warrior.monsterState = State.MonsterState.M_Idle;
+    }
+    void attackCount()
+    {
+        attackTime += Time.deltaTime;
+
+        if (attackTime > attckCountMin && attackTime < attckCountMax)
+        {
+            counterjudgement = true;
+        }
+        else
+        {
+            counterjudgement = false;
+        }
+        AttackNocice.SetActive(counterjudgement);
+    }
+
+
+    private bool Player_AttackEvent()
+    {
+        return counterjudgement;
+    }
+
+    public void AttackSetting()
+    {
+        attackTime = 0;
     }
 }

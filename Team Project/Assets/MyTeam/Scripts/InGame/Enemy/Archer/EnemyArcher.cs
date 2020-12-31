@@ -18,6 +18,8 @@ public class EnemyArcher : MonoBehaviour
 
     Vector3 tPos;
 
+    private int count;
+
     private void Start()
     {
         monster = new Monster();
