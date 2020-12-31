@@ -16,6 +16,8 @@ public class EnemyArcher : MonoBehaviour
 
     public GameObject arrowPrefab;
 
+    Vector3 tPos;
+
     private void Start()
     {
         monster = new Monster();
@@ -114,12 +116,24 @@ public class EnemyArcher : MonoBehaviour
 
     public void ArrowFire()
     {
-        GameObject arrow = Instantiate(arrowPrefab, arrowFirePoint.position, Quaternion.identity);                                       
-        arrow.GetComponent<Arrow>().Fire(arrowTarget);
+        //GameObject arrow = Instantiate(arrowPrefab, arrowFirePoint.position, Quaternion.identity);                                       
+        //arrow.GetComponent<Arrow>().Fire(arrowTarget);
+        GameObject arrow = Instantiate(arrowPrefab);
+        Vector3 dir = tPos - arrowFirePoint.position;
+        dir.y = 0;
+        arrow.transform.position = arrowFirePoint.position;
+        arrow.transform.LookAt(arrow.transform.position + dir);
+
+        arrow.GetComponent<Arrow>().EnemyTranform = transform;
     }
 
     public void PlayerLookAt()
     {
         transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+    }
+
+    public void SavePos()
+    {
+        tPos = target.transform.position;
     }
 }
