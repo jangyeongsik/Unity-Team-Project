@@ -23,6 +23,8 @@ public class EnemyWarrior : MonoBehaviour
     float attckCountMax = 0.9f;
 
     private int count;
+
+    private bool dead;
     private void Start()
     {
         stateEventManager.Instance.Player_Attack += Player_AttackEvent;
@@ -40,49 +42,51 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
-        if (stateEventManager.Instance.Attack_SuccessEvent())
+        if (!dead)
         {
-            Debug.Log("a");
-            count++;
-            
-            e_Warrior.animator.SetBool("IsRun", false);
-            e_Warrior.animator.SetBool("IsAttack", false);
-            e_Warrior.animator.SetTrigger("Hit");
-            e_Warrior.monsterState = State.MonsterState.M_Damage;
-        }
-        if(count >= 3)
-        {
-            e_Warrior.navigation.enabled = false;
-            count = 0;
-           
-            e_Warrior.animator.SetBool("IsRun", false);
-            e_Warrior.animator.SetBool("IsAttack", false);
-            e_Warrior.animator.SetTrigger("isDead");
-            e_Warrior.monsterState = State.MonsterState.M_Dead;
-        }
-        Debug.Log(e_Warrior.monsterState);
-        switch (e_Warrior.monsterState)
-        {
-            case State.MonsterState.M_Idle:
-                M_Idle();
-                break;
-            case State.MonsterState.M_Move:
-                M_Move();
-                break;
-            case State.MonsterState.M_Dead:
+            if (stateEventManager.Instance.Attack_SuccessEvent())
+            {
+                Debug.Log("a");
+                count++;
 
-                break;
-            case State.MonsterState.M_Groar:
-                break;
-            case State.MonsterState.M_Attack:
-                M_Attack();
-                attackCount();
-                break;
-            case State.MonsterState.M_Return:
-                break;
-            case State.MonsterState.M_Damage:
-                M_Damage();
-                break;
+                e_Warrior.animator.SetBool("IsRun", false);
+                e_Warrior.animator.SetBool("IsAttack", false);
+                e_Warrior.animator.SetTrigger("Hit");
+                e_Warrior.monsterState = State.MonsterState.M_Damage;
+            }
+            if (count >= 3)
+            {
+                dead = true;
+                e_Warrior.navigation.enabled = false;
+                e_Warrior.animator.SetBool("IsRun", false);
+                e_Warrior.animator.SetBool("IsAttack", false);
+                e_Warrior.animator.SetTrigger("isDead");
+                e_Warrior.monsterState = State.MonsterState.M_Dead;
+            }
+            Debug.Log(e_Warrior.monsterState);
+            switch (e_Warrior.monsterState)
+            {
+                case State.MonsterState.M_Idle:
+                    M_Idle();
+                    break;
+                case State.MonsterState.M_Move:
+                    M_Move();
+                    break;
+                case State.MonsterState.M_Dead:
+
+                    break;
+                case State.MonsterState.M_Groar:
+                    break;
+                case State.MonsterState.M_Attack:
+                    M_Attack();
+                    attackCount();
+                    break;
+                case State.MonsterState.M_Return:
+                    break;
+                case State.MonsterState.M_Damage:
+                    M_Damage();
+                    break;
+            }
         }
     }
 

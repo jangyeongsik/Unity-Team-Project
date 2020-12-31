@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
-using UnityEngine.SceneManagement;
+
 public class GameData : SingletonMonobehaviour<GameData>
 {
     private PlayerDataList playerDataList;
@@ -29,7 +29,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerData[0].WriteData(in player);
         player.hp = 4;
 
-        SceneManager.LoadScene("MainGameScene", LoadSceneMode.Additive);
+        
     }
 
     public void Print()

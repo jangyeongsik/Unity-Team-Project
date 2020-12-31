@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerButtonEvent : MonoBehaviour
 {
 
@@ -9,6 +9,10 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
 
+    private void Awake()
+    {
+        SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
+    }
 
 
     private void Update()
