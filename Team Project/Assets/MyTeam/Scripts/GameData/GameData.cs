@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
-
+using UnityEngine.SceneManagement;
 public class GameData : SingletonMonobehaviour<GameData>
 {
     private PlayerDataList playerDataList;
@@ -11,8 +11,10 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
 
+
     private void Start()
     {
+        
         //data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
         equipmentData = table.TableToList<Equipment>();
@@ -24,6 +26,10 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
         playerData = playerDataList.datas;
+        playerData[0].WriteData(in player);
+        player.hp = 4;
+
+        SceneManager.LoadScene("MainGameScene", LoadSceneMode.Additive);
     }
 
     public void Print()

@@ -42,20 +42,25 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (stateEventManager.Instance.Attack_SuccessEvent())
         {
+            Debug.Log("a");
             count++;
-            e_Warrior.monsterState = State.MonsterState.M_Damage;
+            
             e_Warrior.animator.SetBool("IsRun", false);
             e_Warrior.animator.SetBool("IsAttack", false);
             e_Warrior.animator.SetTrigger("Hit");
+            e_Warrior.monsterState = State.MonsterState.M_Damage;
         }
         if(count >= 3)
         {
-            e_Warrior.monsterState = State.MonsterState.M_Dead;
+            e_Warrior.navigation.enabled = false;
+            count = 0;
+           
             e_Warrior.animator.SetBool("IsRun", false);
             e_Warrior.animator.SetBool("IsAttack", false);
             e_Warrior.animator.SetTrigger("isDead");
+            e_Warrior.monsterState = State.MonsterState.M_Dead;
         }
-
+        Debug.Log(e_Warrior.monsterState);
         switch (e_Warrior.monsterState)
         {
             case State.MonsterState.M_Idle:
@@ -65,6 +70,7 @@ public class EnemyWarrior : MonoBehaviour
                 M_Move();
                 break;
             case State.MonsterState.M_Dead:
+
                 break;
             case State.MonsterState.M_Groar:
                 break;

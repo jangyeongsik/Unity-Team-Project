@@ -16,11 +16,9 @@ public class EnemyArcher : MonoBehaviour
 
     public GameObject arrowPrefab;
 
-
-    private bool attcking;
     Vector3 tPos;
 
-    private int count;
+    private bool attacking;
 
     private void Start()
     {
@@ -74,12 +72,12 @@ public class EnemyArcher : MonoBehaviour
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("isAttack", false);
-            
         }
     }
 
     private void Idle()
     {
+        
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (distanceToTarget < monster.attack_aware_distance)
         {
@@ -94,31 +92,22 @@ public class EnemyArcher : MonoBehaviour
 
     private void Move()
     {
-        if(!attcking)
-        {
-            monster.navigation.SetDestination(target.transform.position);
-        }
+        monster.navigation.SetDestination(target.transform.position);
 
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (distanceToTarget < monster.navigation.stoppingDistance)
         {
             transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
             monster.monsterState = State.MonsterState.M_Attack;
+
             monster.animator.SetBool("isAttack", true);
         }
     }
 
     public void OnDeadEvent()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            if(monster.monsterState != State.MonsterState.M_Idle)
-            {
-                monster.animator.SetBool("isRun", false);
-                monster.animator.SetBool("isAttack", false);
-            }
-            monster.animator.SetTrigger("isDead");
-        }
+        //if(Input.GetKeyDown(KeyCode.T))
+        //monster.animator.SetBool("isDead", true);
     }
 
     public void OnTargetingEvent()
@@ -151,6 +140,6 @@ public class EnemyArcher : MonoBehaviour
 
     public void Attacking()
     {
-        attcking = !attcking;
+        attacking = !attacking;
     }
 }
