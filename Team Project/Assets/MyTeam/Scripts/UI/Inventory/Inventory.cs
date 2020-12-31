@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
@@ -20,20 +21,29 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public bool isVisible;
     //0 = 장비, 1 = 재료, 2 = 기타
     public int InvenTabNum;
+    //드롭다운 메뉴 (정렬)
+    public GameObject menu;
+    private TMP_Dropdown dropDown;
     private void Start()
     {
         //플레이어 인벤토리 초기화
-        //pInven = JsonManager.Instance.LoadJsonFile<PlayerInven>(Application.dataPath, "/MyTeam/Resources/PlayerInvenData");
-
+        pInven = DataManager.Instance.AllInvenData;
+        //인벤토리 탭 번호 (0 = 장비, 1 = 재료, 2 = 기타)
+        InvenTabNum = 0;
+        //인벤토리 드롭다운 메뉴 초기화
+        dropDown = menu.GetComponent<TMP_Dropdown>();
         //슬롯초기화
         slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
         slotCount = pInven.EquipmentList.Count;
         SetSlotNumber();
         SlotChange(slotCount);
+
+        //시작할 때 높은 등급 순으로 정렬
+        DataManager.Instance.SortByIDDecending(InvenTabNum);
+        pInven = DataManager.Instance.AllInvenData;
         SetImage();
 
         isVisible = gameObject.activeSelf;
-        InvenTabNum = 0;
     }
     private void Update()
     {
@@ -60,7 +70,11 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < val) slots[i].GetComponent<Button>().interactable = true;
-            else slots[i].GetComponent<Button>().interactable = false;
+            else
+            {
+                slots[i].GetComponent<Button>().interactable = false;
+                slots[i].transform.GetChild(2).gameObject.SetActive(false);
+            }
         }
     }
     //슬롯버튼 한개 잠금해제
@@ -83,7 +97,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //각 슬롯에 번호 붙여주기
     public void SetSlotNumber()
     {
-        Debug.Log(slots.Length);
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].GetComponent<ItemInfo>().SetSlotNum(i);
@@ -117,6 +130,19 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
                     slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.EquipmentList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                    slots[i].transform.GetChild(2).gameObject.SetActive(true);
+                    switch (pInven.EquipmentList[i].itemGrade)
+                    {
+                        case 1:
+                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.green;
+                            break;
+                        case 2:
+                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.blue;
+                            break;
+                        case 3:
+                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.red;
+                            break;
+                    }
                 }
                 #endregion
                 break;
@@ -171,7 +197,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public void AddEquipment(string itemName)
     {
         DataManager.Instance.AddEquipmentData(GameData.Instance.findEquipment(itemName));
-        pInven = DataManager.Instance.AllInvenData;
         for (int i = 0; i < pInven.EquipmentList.Count; i++)
         {
             slots[i].GetComponent<ItemInfo>().RefreshCount(true);
@@ -203,6 +228,26 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public void ChangeTab()
     {
         AddSlot();
+        SetImage();
+    }
+    //=====================================
+    //정렬 탭에 따라 정렬
+    //=====================================
+    public void Sort()
+    {
+        switch (dropDown.value)
+        {
+            case 0:
+                DataManager.Instance.SortByIDDecending(InvenTabNum);
+                break;
+            case 1:
+                DataManager.Instance.SortByIDAscending(InvenTabNum);
+                break;
+            case 2:
+                DataManager.Instance.SortByName(InvenTabNum);
+                break;
+        }
+        pInven = DataManager.Instance.AllInvenData;
         SetImage();
     }
 }

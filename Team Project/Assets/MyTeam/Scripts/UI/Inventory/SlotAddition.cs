@@ -7,20 +7,12 @@ namespace Slot
 {
     public class SlotAddition : MonoBehaviour
     {
-        [SerializeField]
-        private Image countImage;
-        private Text countText;
+        public Image countImage;
+        public Text countText;
         
-        private void Start()
-        {
-            countText = countImage.transform.GetChild(0).GetComponent<Text>();
-        }
         public void SetCountText(string txt)
         {
-            if (!countImage.gameObject.activeSelf)
-            {
-                countImage.gameObject.SetActive(true);
-            }
+            countImage.gameObject.SetActive(true);
             countText.text = txt;
         }
     }

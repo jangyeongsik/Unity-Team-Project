@@ -10,6 +10,7 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool miniMapOnOff = false;
 
 
+
     private void Update()
     {
         if (Input.anyKey)

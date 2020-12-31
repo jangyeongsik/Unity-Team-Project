@@ -56,9 +56,9 @@ public class ItemInfo : MonoBehaviour
                     //아이템 이미지 받아와 넣기
                     TName.text = Inventory.Instance.pInven.EquipmentList[slotNum].name;
                     TCategory.text = Inventory.Instance.pInven.EquipmentList[slotNum].equipmentType.ToString();
-                    image.sprite = Inventory.Instance.slots[slotNum].GetComponent<Image>().sprite;
+                    image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                     //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                    TStat.text = Inventory.Instance.pInven.EquipmentList[slotNum].itemGrade;
+                    TStat.text = "Grade :  " + Inventory.Instance.pInven.EquipmentList[slotNum].itemGrade;
                     TSubStat.text = "ID : " + Inventory.Instance.pInven.EquipmentList[slotNum].ID;
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
@@ -73,9 +73,9 @@ public class ItemInfo : MonoBehaviour
                   //아이템 이미지 받아와 넣기
                   TName.text = Inventory.Instance.pInven.IngredientList[slotNum].name;
                   TCategory.text = Inventory.Instance.pInven.IngredientList[slotNum].itemCategory.ToString();
-                  image.sprite = Inventory.Instance.slots[slotNum].GetComponent<Image>().sprite;
+                  image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                   //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                  TStat.text = Inventory.Instance.pInven.IngredientList[slotNum].itemGrade;
+                  TStat.text = "Grade :  " + Inventory.Instance.pInven.IngredientList[slotNum].itemGrade;
                   TSubStat.text = "ID : " + Inventory.Instance.pInven.IngredientList[slotNum].ID;
                   //슬롯넘버 넘기기
                   infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
@@ -90,17 +90,16 @@ public class ItemInfo : MonoBehaviour
                   //아이템 이미지 받아와 넣기
                   TName.text = Inventory.Instance.pInven.MiscList[slotNum].name;
                   TCategory.text = Inventory.Instance.pInven.MiscList[slotNum].itemCategory.ToString();
-                  image.sprite = Inventory.Instance.slots[slotNum].GetComponent<Image>().sprite;
+                  image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                   //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                  TStat.text = Inventory.Instance.pInven.MiscList[slotNum].itemGrade;
+                  TStat.text = "Grade :  "+ Inventory.Instance.pInven.MiscList[slotNum].itemGrade;
                   TSubStat.text = "ID : " + Inventory.Instance.pInven.MiscList[slotNum].ID;
                   //슬롯넘버 넘기기
                   infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
               }
               #endregion
                 break;
-        }
-        
+        } 
     }
     public void RefreshCount(bool isAdded)
     {

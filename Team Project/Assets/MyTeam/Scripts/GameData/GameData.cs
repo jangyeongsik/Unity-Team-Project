@@ -67,7 +67,24 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         return p;
     }
-    //===================================================================
+    public Equipment findEquipmentByID(int _ID)
+    {
+        int i;
+        for (i = 0; i < equipmentData.Count; i++)
+        {
+            if (equipmentData[i].ID.Equals(_ID))
+            {
+                break;
+            }
+        }
+        if (i >= equipmentData.Count)
+            return null;
+
+        Equipment p = new Equipment();
+        p = equipmentData[i];
+
+        return p;
+    }    //===================================================================
     //게임 끝날때 저장
     private void OnDestroy()
     {

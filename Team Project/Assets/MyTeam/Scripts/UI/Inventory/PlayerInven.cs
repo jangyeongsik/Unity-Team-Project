@@ -16,4 +16,3 @@ public class PlayerInven
     public List<Ingredient> IngredientList = new List<Ingredient>();
     public List<Misc> MiscList = new List<Misc>();
 }
-

@@ -8,7 +8,7 @@ public enum EQUIPMENTTYPE
     ARMOR,
     HELM,
     GLOVE,
-    SHOES
+    BOOTS
 }
 public class Items {}
 [Serializable]
@@ -17,8 +17,8 @@ public class Equipment
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
-    public int  equipmentType;
-    public string itemGrade;
+    public EQUIPMENTTYPE  equipmentType;
+    public int itemGrade;
     public int itemScriptID;
     public float damage;
     public float moveSpeed;
@@ -38,7 +38,7 @@ public class Ingredient
     public string name;
     public ITEMCATEGORY itemCategory;
     public int scriptName;
-    public string itemGrade;
+    public int itemGrade;
     public int itemScriptID;
     [NonSerialized]
     public Sprite image;
@@ -51,7 +51,7 @@ public class Misc
     public string name;
     public ITEMCATEGORY itemCategory;
     public int scriptName;
-    public string itemGrade;
+    public int itemGrade;
     public int itemScriptID;
     [NonSerialized]
     public Sprite image;
