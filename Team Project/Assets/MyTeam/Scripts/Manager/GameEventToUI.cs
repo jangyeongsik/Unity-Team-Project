@@ -33,6 +33,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
 
     #endregion
+    public delegate bool AttackEnvent();
+    public AttackEnvent Player_Attack;
+
+    public delegate bool Attack_success();
+    public Attack_success Attack_SuccessEvent;
+
+    public delegate void PlayerHP_Decrease(int damage);
+    public PlayerHP_Decrease playerHP_Decrease;
 
 
     public event System.Action<bool> onOff;
@@ -50,6 +58,21 @@ public class GameEventToUI : Singleton<GameEventToUI>
         talk(isOn, id, npcName);
     }
 
-   
-    
+
+    public bool OnPlayer_AttackEvent()
+    {
+        return Player_Attack.Invoke();
+    }
+
+    public bool OnAttack_SuccessEvent()
+    {
+        return Attack_SuccessEvent.Invoke();
+    }
+
+    public void OnPlayerHp_Decrease(int damage)
+    {
+        if (playerHP_Decrease != null)
+            playerHP_Decrease(damage);
+    }
+
 }

@@ -27,7 +27,7 @@ public class EnemyWarrior : MonoBehaviour
     private bool dead;
     private void Start()
     {
-        stateEventManager.Instance.Player_Attack += Player_AttackEvent;
+        GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
          e_Warrior = new Monster();
         setting();
     }
@@ -44,9 +44,8 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (!dead)
         {
-            if (stateEventManager.Instance.Attack_SuccessEvent())
+            if (GameEventToUI.Instance.Attack_SuccessEvent())
             {
-                Debug.Log("a");
                 count++;
 
                 e_Warrior.animator.SetBool("IsRun", false);
@@ -63,7 +62,6 @@ public class EnemyWarrior : MonoBehaviour
                 e_Warrior.animator.SetTrigger("isDead");
                 e_Warrior.monsterState = State.MonsterState.M_Dead;
             }
-            Debug.Log(e_Warrior.monsterState);
             switch (e_Warrior.monsterState)
             {
                 case State.MonsterState.M_Idle:

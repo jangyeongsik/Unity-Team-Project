@@ -37,7 +37,7 @@ public class HeartUI : MonoBehaviour
         }
         currentHeart--;
 
-        stateEventManager.Instance.playerHP_Decrease += CutHeart;
+        GameEventToUI.Instance.playerHP_Decrease += CutHeart;
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class HeartUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        stateEventManager.Instance.playerHP_Decrease -= CutHeart;
+        GameEventToUI.Instance.playerHP_Decrease -= CutHeart;
     }
 
     public void CutHeart(int damage)

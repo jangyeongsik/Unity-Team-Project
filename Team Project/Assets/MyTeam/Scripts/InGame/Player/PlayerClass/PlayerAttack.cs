@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
-        stateEventManager.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
+        GameEventToUI.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
     }
 
     private void Update()
