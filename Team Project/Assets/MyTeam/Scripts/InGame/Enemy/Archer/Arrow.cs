@@ -12,7 +12,9 @@ public class Arrow : MonoBehaviour
 
     private void Update()
     {
-        if (isFire)
+
+        transform.Translate(Vector3.forward * 15f * Time.deltaTime);
+        /*if (isFire)
         {
             isFire = true;
 
@@ -31,7 +33,7 @@ public class Arrow : MonoBehaviour
                 Destroy(gameObject);
                 isFire = false;
             }
-        }
+        }*/
 
     }
 
