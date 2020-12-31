@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 186447331761152082}
   - component: {fileID: 6540929143270585435}
-  m_Layer: 0
+  - component: {fileID: 3329990956547101715}
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyTranform: {fileID: 0}
+--- !u!136 &3329990956547101715
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186447331761152080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 1.49
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.53}
 --- !u!1 &4734723677420197208
 GameObject:
   m_ObjectHideFlags: 0

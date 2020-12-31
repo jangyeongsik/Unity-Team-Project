@@ -55,8 +55,9 @@ public class EnemyWarrior : MonoBehaviour
             }
             if (count >= 3)
             {
-                dead = true;
                 e_Warrior.navigation.enabled = false;
+                count = 0;
+                dead = false;
                 e_Warrior.animator.SetBool("IsRun", false);
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("isDead");
@@ -86,6 +87,7 @@ public class EnemyWarrior : MonoBehaviour
                     break;
             }
         }
+
     }
 
     private void M_Damage()
