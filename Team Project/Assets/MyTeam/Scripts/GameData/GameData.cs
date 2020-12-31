@@ -24,6 +24,8 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
         playerData = playerDataList.datas;
+        playerData[0].WriteData(in player);
+        player.hp = 4;
     }
 
     public void Print()

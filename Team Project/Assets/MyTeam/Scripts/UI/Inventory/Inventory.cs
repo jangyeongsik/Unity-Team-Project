@@ -86,7 +86,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         Debug.Log(slots.Length);
         for (int i = 0; i < slots.Length; i++)
         {
-            Debug.Log(slots[i]);
             slots[i].GetComponent<ItemInfo>().SetSlotNum(i);
         }
     }

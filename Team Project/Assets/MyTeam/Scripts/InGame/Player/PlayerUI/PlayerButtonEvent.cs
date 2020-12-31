@@ -8,6 +8,12 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool shopOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
+
+    private void Awake()
+    {
+        SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
+    }
+
     private void Update()
     {
         if (Input.anyKey)

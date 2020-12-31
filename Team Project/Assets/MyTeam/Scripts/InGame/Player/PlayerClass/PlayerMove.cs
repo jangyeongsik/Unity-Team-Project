@@ -21,8 +21,6 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
-       
-
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
         //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
@@ -120,11 +118,12 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isGuard", false);
     }
 
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-
+        //에너미 방향으로 움직이고 회전
+        //Transform tr = other.GetComponent<EnemyTestBullet>().enemyTR;
+        //Vector3 dir = tr.position - transform.position;
+        //controller.Move(dir);
+        //transform.LookAt(transform.position + dir);
     }
-
 }

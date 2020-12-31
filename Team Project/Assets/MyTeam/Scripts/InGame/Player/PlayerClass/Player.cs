@@ -49,15 +49,15 @@ public class PlayerData
     {
         slotID = slot;
         this.name = name;
-        damage = 0;
-        moveSpeed = 0;
-        criticalPercent = 0;
-        criticalDamage = 0;
-        attackSpeed = 0;
-        hp = 0;
-        stamina = 0;
+        damage = 1;
+        moveSpeed = 1;
+        criticalPercent = 1;
+        criticalDamage = 1;
+        attackSpeed = 1;
+        hp = 8;
+        stamina = 40;
         defence = 0;
-        counterJudgement = 0;
+        counterJudgement = 1;
         presetID = 0;
         return this;
     }

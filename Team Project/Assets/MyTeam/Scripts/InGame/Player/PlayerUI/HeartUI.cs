@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class HeartUI : MonoBehaviour
 {
-    public int heartSize;
     int maxHeartSize = 10;
     Image[] hearts;
 
@@ -26,44 +25,49 @@ public class HeartUI : MonoBehaviour
             ++idx;
             child.gameObject.SetActive(false);
         }
+    }
 
-        for (currentHeart = 0; currentHeart < heartSize && currentHeart < hearts.Length; ++currentHeart)
+    private void Start()
+    {
+        for (currentHeart = 0; currentHeart < GameData.Instance.player.hp && 
+            currentHeart < hearts.Length; ++currentHeart)
         {
             hearts[currentHeart].gameObject.SetActive(true);
             hearts[currentHeart].fillAmount = 1;
         }
         currentHeart--;
 
-        
-
-    }
-
-    private void Start()
-    {
-       
+        stateEventManager.Instance.playerHP_Decrease += CutHeart;
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
-            CutHeart();
+            CutHeart(3);
         else if (Input.GetMouseButtonDown(1))
             AddHeart(true);
     }
 
-    public void CutHeart()
+    private void OnDestroy()
     {
-        if (hearts[currentHeart].fillAmount <= 0 && currentHeart > 0)
+        stateEventManager.Instance.playerHP_Decrease -= CutHeart;
+    }
+
+    public void CutHeart(int damage)
+    {
+        for(int i = 0; i < damage; ++i)
         {
-            currentHeart--;
+            if (hearts[currentHeart].fillAmount <= 0 && currentHeart > 0)
+            {
+                currentHeart--;
+            }
+            if (currentHeart == 0 && hearts[currentHeart].fillAmount == 0)
+            {
+                currentHeart = 0;
+                return;
+            }
+            hearts[currentHeart].fillAmount -= 0.5f;
         }
-        if (currentHeart == 0 && hearts[currentHeart].fillAmount == 0)
-        {
-            currentHeart = 0;
-            return;
-        }
-        hearts[currentHeart].fillAmount -= 0.5f;
-       
     }
 
     public void AddHeart(bool isHalf)
