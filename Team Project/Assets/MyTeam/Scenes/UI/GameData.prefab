@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3166826967480451609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3166826967480451608}
+  - component: {fileID: 3166826967480451611}
+  - component: {fileID: 3166826967480451613}
+  - component: {fileID: 3166826967480451610}
+  m_Layer: 0
+  m_Name: GameData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3166826967480451608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166826967480451609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.460241, y: 0.68113756, z: -2.3358994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3166826967480451611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166826967480451609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f9f0c688922e54182b45e8dadd48b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: []
+  player: {fileID: 0}
+  equipmentData: []
+--- !u!114 &3166826967480451613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166826967480451609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8e9b6a466bdb24c837190143c0f85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3166826967480451610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166826967480451609}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd94dcb588a1944384fd0779024809e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots: []
+  slotHolder: {fileID: 0}
+  slotCount: 0
+  pInven:
+    EquipmentList: []
+    IngredientList: []
+    MiscList: []
+  itemImages:
+  - {fileID: 21300000, guid: 02998d8db83ec8a4398640cecae295d6, type: 3}
+  - {fileID: 21300000, guid: 10d44b4f8327aed4eb92cf8d482ae99c, type: 3}
+  - {fileID: 21300000, guid: 02998d8db83ec8a4398640cecae295d6, type: 3}
+  - {fileID: 21300000, guid: 10d44b4f8327aed4eb92cf8d482ae99c, type: 3}
+  isVisible: 0
+  InvenTabNum: 0
