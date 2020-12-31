@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a44beed2ecd6d3341870d7c3d7aba21b
+guid: 1f0a094aa842a344aa29f38333dd861a
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
@@ -131,28 +131,16 @@ ModelImporter:
     second: Cloth_RB_bone01
   - first:
       1: 100084
-    second: Dummy001
+    second: Dummy003
   - first:
       1: 100086
-    second: Dummy002
+    second: Dummy004
   - first:
       1: 100088
     second: kuloubing
   - first:
       1: 100090
-    second: kuloubing 1
-  - first:
-      1: 100092
-    second: shield
-  - first:
-      1: 100094
     second: //RootNode
-  - first:
-      1: 100096
-    second: sword
-  - first:
-      1: 100098
-    second: wepon03
   - first:
       4: 400000
     second: Bip001
@@ -281,81 +269,30 @@ ModelImporter:
     second: Cloth_RB_bone01
   - first:
       4: 400084
-    second: Dummy001
+    second: Dummy003
   - first:
       4: 400086
-    second: Dummy002
+    second: Dummy004
   - first:
       4: 400088
     second: kuloubing
   - first:
       4: 400090
-    second: kuloubing 1
-  - first:
-      4: 400092
-    second: shield
-  - first:
-      4: 400094
     second: //RootNode
   - first:
-      4: 400096
-    second: sword
-  - first:
-      4: 400098
-    second: wepon03
-  - first:
-      23: 2300000
-    second: shield
-  - first:
-      23: 2300002
-    second: sword
-  - first:
-      23: 2300004
-    second: wepon03
-  - first:
-      23: 2300006
-    second: kuloubing 1
-  - first:
-      33: 3300000
-    second: shield
-  - first:
-      33: 3300002
-    second: sword
-  - first:
-      33: 3300004
-    second: wepon03
-  - first:
-      33: 3300006
-    second: kuloubing 1
-  - first:
-      43: 4300000
-    second: kuloubing
-  - first:
-      43: 4300002
-    second: wepon03
-  - first:
-      43: 4300004
-    second: shield
-  - first:
-      43: 4300006
-    second: sword
-  - first:
       74: 7400000
-    second: hit01
+    second: run01
   - first:
       95: 9500000
     second: //RootNode
   - first:
       111: 11100000
     second: //RootNode
-  - first:
-      137: 13700000
-    second: kuloubing 1
   externalObjects: {}
   materials:
     materialImportMode: 0
     materialName: 0
-    materialSearch: 2
+    materialSearch: 1
     materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
@@ -375,23 +312,23 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 0
+    animationWrapMode: 2
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: hit01
+      name: run01
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -403,14 +340,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 1
-        functionName: ExitHit
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -474,7 +404,7 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
-  additionalBone: 0
+  additionalBone: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
