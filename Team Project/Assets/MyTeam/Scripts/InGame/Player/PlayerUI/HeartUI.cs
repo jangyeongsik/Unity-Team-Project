@@ -43,9 +43,7 @@ public class HeartUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            CutHeart(3);
-        else if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
             AddHeart(true);
     }
 

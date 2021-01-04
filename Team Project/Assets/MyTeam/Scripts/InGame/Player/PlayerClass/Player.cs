@@ -54,7 +54,7 @@ public class PlayerData
         criticalPercent = 1;
         criticalDamage = 1;
         attackSpeed = 1;
-        hp = 8;
+        hp = 4;
         stamina = 40;
         defence = 0;
         counterJudgement = 1;
@@ -106,7 +106,7 @@ public class Player
         movespeed = 0;
         criticalpercent = 0;
         criticaldamage = 0;
-        hp = 8;
+        hp = 4;
         stamina = 0;
         defence = 0;
         counter_judgement = 0;

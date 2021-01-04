@@ -6,6 +6,12 @@ using System;
 /*
  *  InGame스크립트 함수를 이벤트에 넣어야 하는것들을 여기다 추가합니다 (영식이 이해용)
  *  UI에서 이벤트를 호출!
+ *  
+ *   if (playerAttack != null)
+            playerAttack(time, color);
+      이거랑
+      playerAttack?.Invoke(); 
+      이거랑 같은거래요
  */
 
 public class UIEventToGame : Singleton<UIEventToGame>
@@ -35,10 +41,16 @@ public class UIEventToGame : Singleton<UIEventToGame>
 
     public void OnPlayerAttack(float time, COLORZONE color)
     {
-        if (playerAttack != null)
-            playerAttack(time, color);
+        playerAttack?.Invoke(time, color);
     }
-    
+
     #endregion
 
+    #region "플레이어 딜레이"
+    public System.Action Player_Delay;
+    public void OnPlayerDelay()
+    {
+        Player_Delay?.Invoke();
+    }
+    #endregion
 }

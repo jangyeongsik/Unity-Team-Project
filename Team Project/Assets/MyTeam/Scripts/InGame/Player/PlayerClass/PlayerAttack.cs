@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     bool Attack_Success = false;
     bool isReadyToCounter = false;
 
-    Transform ArcherEnemy = null;
+    Transform Enemy = null;
 
     private void Awake()
     {
@@ -25,16 +25,13 @@ public class PlayerAttack : MonoBehaviour
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
         GameEventToUI.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
+
+        GameEventToUI.Instance.Player_Hit += PlayerHit;
+        UIEventToGame.Instance.Player_Delay += PlayerDelay;
     }
 
     private void Update()
     {
-        //if (GameData.Instance.player.m_state == State.PlayerState.P_Guard)
-        //{
-        //    animator.SetTrigger("NextSkill");
-        //    GameEventToUI.Instance.OnSkillGaugeActive(true);
-        //    Attack_Success = true;
-        //}
         if (Attack_Success)
             Attack_Success = false;
     }
@@ -42,6 +39,9 @@ public class PlayerAttack : MonoBehaviour
     private void OnDestroy()
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
+        GameEventToUI.Instance.Attack_SuccessEvent -= Attack_SuccessEvent;
+        GameEventToUI.Instance.Player_Hit -= PlayerHit;
+        UIEventToGame.Instance.Player_Delay -= PlayerDelay;
     }
 
     void playerAttack(float time, COLORZONE color)
@@ -55,15 +55,16 @@ public class PlayerAttack : MonoBehaviour
                     animator.Play("First_Skill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
+                    StartCoroutine(MoveToEnemy(CheckEnemys()));
                 }
                 else if(isReadyToCounter)
                 {
-                    if (ArcherEnemy != null)
+                    if (Enemy != null)
                     {
                         animator.Play("First_Skill");
                         GameEventToUI.Instance.OnSkillGaugeActive(true);
                         Attack_Success = true;
-                        StartCoroutine(MoveToEnemy(ArcherEnemy));
+                        StartCoroutine(MoveToEnemy(Enemy));
                     }
                     else
                         animator.SetTrigger("Guard");
@@ -76,39 +77,28 @@ public class PlayerAttack : MonoBehaviour
             case State.PlayerState.P_Guard:
                 break;
             case State.PlayerState.P_1st_Skill:
+            case State.PlayerState.P_2nd_Skill:
+            case State.PlayerState.P_3rd_Skill:
                 switch (color)
                 {
-                    case COLORZONE.NONE:
+                    case COLORZONE.NONE://검은색 맞추면 딜레이로 돌입
+                        PlayerDelay();
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
+                        PlayerDelay();
+                        //들어가 있는 에너미 위치 초기화
+                        if (Enemy != null)
+                            Enemy = null;
                         break;
                     case COLORZONE.GREEN:
                     case COLORZONE.YELLOW:
-                    case COLORZONE.RED:
+                    case COLORZONE.RED:// 색깔 맞추면 다음스킬 가까운적 이동
                         Attack_Success = true;
                         animator.SetTrigger("NextSkill");
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
                         GameEventToUI.Instance.OnSkillGaugeActive(true);
-                        StartCoroutine(MoveToEnemy(ArcherEnemy));
+                        StartCoroutine(MoveToEnemy(CheckEnemys()));
                         break;
                 }
-                break;
-            case State.PlayerState.P_2nd_Skill:
-                switch (color)
-                {
-                    case COLORZONE.NONE:
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        break;
-                    case COLORZONE.GREEN:
-                    case COLORZONE.YELLOW:
-                    case COLORZONE.RED:
-                        Attack_Success = true;
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        StartCoroutine(MoveToEnemy(ArcherEnemy));
-                        break;
-                }
-                break;
-            case State.PlayerState.P_3rd_Skill:
                 break;
             case State.PlayerState.P_Delay:
                 break;
@@ -122,6 +112,7 @@ public class PlayerAttack : MonoBehaviour
         return Attack_Success;
     }
 
+    //가까운 에너미를 찾자
     Transform CheckEnemys()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
@@ -140,6 +131,7 @@ public class PlayerAttack : MonoBehaviour
         return T;
     }
 
+    // 적한테 이동하자구
     IEnumerator MoveToEnemy(Transform T)
     {
         //트레일 이펙트 켜기
@@ -153,6 +145,7 @@ public class PlayerAttack : MonoBehaviour
         transform.LookAt(transform.position + dir);
     }
 
+    //트레일 켰다가 1초뒤에 삭제
     IEnumerator SetTrail()
     {
         trail.SetActive(true);
@@ -160,19 +153,63 @@ public class PlayerAttack : MonoBehaviour
         trail.SetActive(false);
     }
 
+    //적 인식범위 디버깅
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 8);
     }
 
+    //화살 충돌상태면 화살카운터 가능으로
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             isReadyToCounter = true;
-            if(ArcherEnemy == null)
-            ArcherEnemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
+            if(Enemy == null)
+                Enemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
         }
+    }
+
+    //맞음
+    void PlayerHit(Transform t, int damage)
+    {
+        if(GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
+            GameData.Instance.player.m_state == State.PlayerState.P_Run)
+        {
+            Vector3 dir = t.position - transform.position;
+            dir.y = 0;
+            dir.Normalize();
+            transform.LookAt(transform.position + dir);
+
+            animator.CrossFade("Hit", 0.1f);
+
+            GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
+        }
+        else if(GameData.Instance.player.m_state == State.PlayerState.P_Guard)
+        {
+            Vector3 dir = t.position - transform.position;
+            dir.y = 0;
+            dir.Normalize();
+            transform.LookAt(transform.position + dir);
+
+            animator.CrossFade("Hit", 0.1f);
+        }
+       
+    }
+
+    //딜레이
+    void PlayerDelay()
+    {
+        animator.CrossFade("Delay", 0.17f);
+    }
+
+    //트랜스폼 방향으로 바라봐랑
+    void LookEnemy(Transform t)
+    {
+        Vector3 dir = t.position - transform.position;
+        dir.y = 0;
+        dir.Normalize();
+        transform.LookAt(transform.position + dir);
     }
 }
