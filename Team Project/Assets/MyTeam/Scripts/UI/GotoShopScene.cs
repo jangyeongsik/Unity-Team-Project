@@ -22,7 +22,6 @@ public class GotoShopScene : MonoBehaviour
     public GameObject UIMenuButtons;
     public GameObject Menu;
 
-
     List<GameObject> CanvasList = new List<GameObject>();
 
     private bool isUIOn = false;
@@ -54,6 +53,7 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(InventoryCanvas);
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
+
     }
 
     void Update()
@@ -91,7 +91,7 @@ public class GotoShopScene : MonoBehaviour
     {
         for (int i = 0; i < GameData.Instance.data.Count; i++)
         {
-            if(GameData.Instance.data[i].id == id && GameData.Instance.data[i].name.Equals(NpcName))
+            if (GameData.Instance.data[i].id == id && GameData.Instance.data[i].name.Equals(NpcName))
             {
                 firstTxt = i;
                 startTalking = true;
@@ -101,9 +101,10 @@ public class GotoShopScene : MonoBehaviour
         }
         talk.text = GameData.Instance.data[firstTxt].talk[count++];
     }
+
     void NextDialouge()
     {
-        if(startTalking)
+        if (startTalking)
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
@@ -119,6 +120,7 @@ public class GotoShopScene : MonoBehaviour
             }
         }
     }
+
     //장비창(캐릭터 창) 켜기
     public void EquipmentScreenOn()
     {
@@ -134,7 +136,7 @@ public class GotoShopScene : MonoBehaviour
     //모든 UI창 끄기
     public void SetAllInactive()
     {
-        foreach(GameObject a in CanvasList)
+        foreach (GameObject a in CanvasList)
         {
             if (a.activeSelf)
             {
@@ -163,6 +165,7 @@ public class GotoShopScene : MonoBehaviour
                 InvenScreenOn();
                 break;
             case 3:
+
                 break;
             case 4:
                 break;

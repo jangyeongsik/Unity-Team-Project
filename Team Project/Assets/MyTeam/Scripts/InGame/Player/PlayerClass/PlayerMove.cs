@@ -41,7 +41,6 @@ public class PlayerMove : MonoBehaviour
     {
         Dash();
         Guard();
-
     }
 
     private void OnDestroy()
@@ -121,10 +120,17 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //에너미 방향으로 움직이고 회전
-        //Transform tr = other.GetComponent<EnemyTestBullet>().enemyTR;
-        //Vector3 dir = tr.position - transform.position;
-        //controller.Move(dir);
-        //transform.LookAt(transform.position + dir);
+        if(LayerMask.NameToLayer("Temple") == other.gameObject.layer)
+        {
+            GameEventToUI.Instance.OnEventInterActionOnOff(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (LayerMask.NameToLayer("Temple") == other.gameObject.layer)
+        {
+            GameEventToUI.Instance.OnEventInterActionOnOff(false);
+        }
     }
 }

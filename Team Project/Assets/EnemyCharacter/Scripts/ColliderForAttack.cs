@@ -8,7 +8,6 @@ public class ColliderForAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if(other.gameObject.CompareTag("Player"))
         {
             isNoticed = true;

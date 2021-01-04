@@ -10,7 +10,6 @@ using UnityEngine;
 
 public class GameEventToUI : Singleton<GameEventToUI>
 {
-
     #region "스테미나 게이지"
     public event System.Action<STAMINAGAUGE, float> staminaRestore;
 
@@ -37,19 +36,23 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public event System.Action<bool> onOff;
     public event System.Action<bool, int, string> talk;
-
+    public event System.Action<bool> interOnOff; 
 
     public void OnEventShopOnOff(bool isOn)
     {
         onOff(isOn);
     }
-
-
+    
     public void OnEventTalkOnOff(bool isOn, int id, string npcName)
     {
         talk(isOn, id, npcName);
     }
 
-   
+    public void OnEventInterActionOnOff(bool isOn)
+    {
+        interOnOff(isOn);
+    }
+
     
+
 }
