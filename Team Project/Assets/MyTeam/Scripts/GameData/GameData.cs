@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
+using System.IO;
 
 public class GameData : SingletonMonobehaviour<GameData>
 {
@@ -12,6 +13,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
 
+    string playerFilePath;
 
     private void Start()
     {
@@ -20,34 +22,10 @@ public class GameData : SingletonMonobehaviour<GameData>
         equipmentData = table.TableToList<Equipment>();
         //System.GC.Collect();
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
+
+        playerFilePath = Application.persistentDataPath + "/PlayerData.json";
+        PlayerLoad();
         System.GC.Collect();
-
-        Debug.Log(Application.platform);
-        
-        if(Application.platform == RuntimePlatform.Android)
-        {
-            playerDataList = JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData");
-            playerData = playerDataList.datas;
-            player = new Player();
-            if (playerDataList == null)
-            {
-                playerDataList = new PlayerDataList();
-                playerDataList.datas.Add(new PlayerData(0));
-                playerDataList.datas.Add(new PlayerData(1));
-                playerDataList.datas.Add(new PlayerData(2));
-                Debug.Log("새로 3개 만들었다");
-            }
-            Debug.Log("playerDataList " +playerDataList.datas.Count);
-        }
-        else
-        {
-            playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
-            playerData = playerDataList.datas;
-            player = new Player();
-            Debug.Log("좆망");
-        }
-
-        
     }
 
     public void Print()
@@ -63,6 +41,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         //{
         //    Print();
         //}
+
     }
 
     //아이템 매니저 함수들
@@ -107,10 +86,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     private void OnDestroy()
     {
         playerDataList.datas = playerData;
-        if (Application.platform == RuntimePlatform.Android)
-            JsonManageAndroid.Instance.CreateJsonFile("PlayerData", playerDataList);
-        else
-            JsonManager.Instance.CreateJsonFile(Application.persistentDataPath, "/MyTeam/Resources/PlayerData", playerDataList);
+        PlayerSave();
     }
 
     //플레이어 슬롯에서 데이터 읽기
@@ -124,6 +100,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void CreateNewPlayerSlot(int slot, string name)
     {
         playerData[slot].CreateNewPlayer(slot, name);
+        PlayerSave();
     }
 
     public void DeletePlayerData(int slot)
@@ -131,13 +108,31 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerData[slot].DeleteData(slot);
     }
 
-    //로딩 끝나고 플레이어 데이터 읽기
-    public void LoadingPlayerData()
+    void CreateAllPlayerData()
     {
-        if(player == null)
+        playerDataList = new PlayerDataList();
+        playerDataList.datas.Add(new PlayerData(0));
+        playerDataList.datas.Add(new PlayerData(1));
+        playerDataList.datas.Add(new PlayerData(2));
+        PlayerSave();
+        PlayerLoad();
+    }
+
+    void PlayerSave()
+    {
+        File.WriteAllText(playerFilePath, JsonUtility.ToJson(playerDataList));
+    }
+
+    void PlayerLoad()
+    {
+        if(!File.Exists(playerFilePath ))
         {
-            player = new Player();
-            playerData[playerIdx].WriteData(player);
+            CreateAllPlayerData();
+            return;
         }
+
+        string jData = File.ReadAllText(playerFilePath);
+        playerDataList = JsonUtility.FromJson<PlayerDataList>(jData);
+        playerData = playerDataList.datas;
     }
 }
