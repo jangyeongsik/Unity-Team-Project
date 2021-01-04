@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class GotoShopScene : MonoBehaviour
 {
     public GameObject shopCanvas;
@@ -15,11 +14,13 @@ public class GotoShopScene : MonoBehaviour
     public GameObject BadgeCanvas;
     public GameObject EncyclopediaCanvas;
     public GameObject MinimapCanvas;
+    public GameObject SettingCanvas;
 
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
     public GameObject EquipUI;
     public GameObject UIMenuButtons;
+    public Toggle[] Toggles;
     public GameObject Menu;
 
 
@@ -27,8 +28,6 @@ public class GotoShopScene : MonoBehaviour
 
     private bool isUIOn = false;
     private bool startTalking = false;
-    private bool inventoryOnOff = false;
-    private bool equipmentOnOff = false;
     private bool BadgeCanvastOnOff = false;
     private bool EncyclopediaCanvasOnOff = false;
     private bool MinimapCanvasOnOff = false;
@@ -52,8 +51,10 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);
         CanvasList.Add(InventoryCanvas);
+        CanvasList.Add(SettingCanvas);
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
+        Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
     }
 
     void Update()
@@ -62,7 +63,6 @@ public class GotoShopScene : MonoBehaviour
 
         DropdownOnOff();
     }
-
     private void DropdownOnOff()
     {
         if (isUIOn)
@@ -70,23 +70,19 @@ public class GotoShopScene : MonoBehaviour
         else
             Menu.SetActive(true);
     }
-
     public void ShopOn(bool isOn)
     {
         shopCanvas.SetActive(isOn);
     }
-
     public void TalkOn(bool isOn, int id, string NpcName)
     {
         FindNpc(id, NpcName);
         TalkCanvas.SetActive(isOn);
     }
-
     public void MiniMapOn(bool isOn)
     {
         miniMapCanvas.SetActive(isOn);
     }
-
     public void FindNpc(int id, string NpcName)
     {
         for (int i = 0; i < GameData.Instance.data.Count; i++)
@@ -124,12 +120,20 @@ public class GotoShopScene : MonoBehaviour
     {
         InventoryCanvas.SetActive(true);
         EquipUI.SetActive(true);
+        Toggles[0].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //가방 창 켜기
     public void InvenScreenOn()
     {
         InventoryCanvas.SetActive(true);
         InvenUI.SetActive(true);
+        Toggles[1].GetComponent<MenuButtonsController>().SetIsOn();
+        Inventory.Instance.ChangeTabToEquipment();
+    }
+    //설정 창 켜기
+    public void SettingScreenOn()
+    {
+        SettingCanvas.SetActive(true);
     }
     //모든 UI창 끄기
     public void SetAllInactive()
@@ -148,7 +152,7 @@ public class GotoShopScene : MonoBehaviour
     {
         ChangeScreen(Menu.transform.GetChild(0).GetComponent<TMP_Dropdown>().value);
     }
-    //화면 전환 캡슐화
+    //화면 전환
     public void ChangeScreen(int screenNum)
     {
         if (!UIMenuButtons.activeSelf)
@@ -167,21 +171,27 @@ public class GotoShopScene : MonoBehaviour
             case 4:
                 break;
             case 5:
+                SettingScreenOn();
                 break;
         }
     }
     //모든 창 끄고 나가기
     public void CloseUI()
     {
+        StartCoroutine(CloseUICoroutine());
+    }
+    public IEnumerator CloseUICoroutine()
+    {
         isUIOn = false;
         //트리거 리셋
         for (int i = 0; i < 5; i++)
         {
-            UIMenuButtons.transform.GetChild(i).GetComponent<Button>().animator.ResetTrigger("Selected");
+            Toggles[i].animator.SetTrigger("Deselected");
         }
+        yield return new WaitForSeconds(0.5f);
         Menu.transform.GetChild(0).GetComponent<TMP_Dropdown>().value = 0;
-        UIMenuButtons.SetActive(false);
         SetAllInactive();
+        UIMenuButtons.SetActive(false);
     }
 
     public void OnOffbadgeCabvas()
