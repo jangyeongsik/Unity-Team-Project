@@ -20,7 +20,7 @@ public class P_Dash : StateMachineBehaviour
         startPos = animator.transform.parent.position;
         dashSpeed = 30f;
 
-        GameEventToUI.Instance.OnEventStaminaRestore(STAMINAGAUGE.DECREASE, 20);
+        GameEventToUI.Instance.OnEventStaminaRestore(STAMINAGAUGE.DECREASE, 15);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

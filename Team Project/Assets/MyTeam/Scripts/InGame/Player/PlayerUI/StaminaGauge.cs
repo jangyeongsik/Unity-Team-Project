@@ -10,18 +10,21 @@ public enum STAMINAGAUGE
 
 public class StaminaGauge : MonoBehaviour
 {
-    [SerializeField]
-    Slider slider;
+    private Slider slider;
 
     float curStamina;
     float targetStamina;
-    float staminaGap = 20;
     bool isRestore;
     STAMINAGAUGE state;
 
+    private void Awake()
+    {
+        slider = transform.GetChild(0).GetComponent<Slider>();
+    }
+
     private void Start()
     {
-        curStamina = slider.value;
+        curStamina = GameData.Instance.player.stamina;
         targetStamina = curStamina;
 
         GameEventToUI.Instance.staminaRestore += setIsRestore;
@@ -39,7 +42,7 @@ public class StaminaGauge : MonoBehaviour
                     state = STAMINAGAUGE.NONE;
                 }
                 targetStamina = curStamina;
-                slider.value = curStamina;
+                slider.value = curStamina/GameData.Instance.player.stamina;
                 break;
             case STAMINAGAUGE.DECREASE:
                 --curStamina;
@@ -48,12 +51,16 @@ public class StaminaGauge : MonoBehaviour
                     curStamina = targetStamina;
                     state = STAMINAGAUGE.NONE;
                 }
-                slider.value = curStamina;
+                slider.value = curStamina / GameData.Instance.player.stamina;
                 break;
             case STAMINAGAUGE.NONE:
-                slider.value = curStamina;
+                slider.value = curStamina / GameData.Instance.player.stamina;
                 break;
         }
+
+        if (Input.GetMouseButtonDown(0))
+            AddPlayerMaxStamina(10);
+
     }
 
     private void OnDestroy()
@@ -89,4 +96,11 @@ public class StaminaGauge : MonoBehaviour
         state = _state;
     }
 
+    void AddPlayerMaxStamina(int add)
+    {
+        GameData.Instance.player.stamina += add;
+        Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
+        size.x += add * 3;
+        slider.GetComponent<RectTransform>().sizeDelta = size;
+    }
 }

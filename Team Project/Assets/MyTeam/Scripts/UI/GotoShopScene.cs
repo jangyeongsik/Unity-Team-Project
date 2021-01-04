@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class GotoShopScene : MonoBehaviour
@@ -41,6 +42,7 @@ public class GotoShopScene : MonoBehaviour
     {
         GameEventToUI.Instance.onOff += ShopOn;
         GameEventToUI.Instance.talk += TalkOn;
+        SceneManager.LoadScene("MainGameScene", LoadSceneMode.Additive);
     }
 
     private void Start()

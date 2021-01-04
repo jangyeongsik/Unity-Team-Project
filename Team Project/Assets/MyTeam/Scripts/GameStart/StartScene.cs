@@ -45,7 +45,7 @@ public class StartScene : MonoBehaviour
     //씬 로드
     public void GoToMainGameScene()
     {
-        LoadingProgress.LoadScene("MainGameScene");
+        LoadingProgress.LoadScene("UI Scene");
     }
 
     //슬롯 선택
@@ -118,6 +118,9 @@ public class StartScene : MonoBehaviour
         //슬롯이름 변경
         Slots[slotIdx].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[slotIdx].name;
         isSlotEmpty[slotIdx] = false;
+
+        //스탯 텍스트 설정
+        setPlayerStat(slotIdx);
     }
 
     //슬롯 데이터 삭제

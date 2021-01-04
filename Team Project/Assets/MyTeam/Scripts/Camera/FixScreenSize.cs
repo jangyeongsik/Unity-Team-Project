@@ -7,7 +7,7 @@ public class FixScreenSize : MonoBehaviour
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.SetResolution(1600, 900, true);
+        Screen.SetResolution(Screen.width,Screen.width*9/16,true);
         
     }
 

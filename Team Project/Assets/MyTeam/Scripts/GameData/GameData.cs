@@ -26,10 +26,6 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
         playerData = playerDataList.datas;
-        playerData[0].WriteData(in player);
-        player.hp = 4;
-
-        
     }
 
     public void Print()
@@ -95,7 +91,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     //플레이어 슬롯에서 데이터 읽기
     public void LoadFromPlayerSlot(int slot)
     {
-        playerData[slot].WriteData(in player);
+        player = playerData[slot].WriteData(in player);
     }
 
     //플레이어 슬롯 새로만들기

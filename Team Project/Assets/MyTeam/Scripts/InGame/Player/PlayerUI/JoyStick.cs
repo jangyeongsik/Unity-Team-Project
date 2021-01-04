@@ -7,6 +7,8 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
 {
     RectTransform lever;
     RectTransform back;
+    [SerializeField]
+    RectTransform test;
 
     Vector3 direction;
     Vector3 center;
@@ -15,20 +17,16 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
     float maxDistance = 100f;
     float amount = 0f;
 
-    void Awake()
+    void Start()
     {
         lever = transform.Find("Lever").GetComponent<RectTransform>();
         back = transform.Find("Background").GetComponent<RectTransform>();
-    }
-
-    void Start()
-    {
         center = back.position;
     }
 
     void Update()
     {
-        UIEventToGame.Instance.OnPlayerMove(direction, amount);
+        test.position = center;
     }
 
     //드래그 시작
@@ -49,6 +47,7 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         lever.position = center;
         direction = Vector3.zero;
         amount = 0f;
+        UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 
     void UpdateJoystick(PointerEventData eventData = null)
@@ -67,5 +66,6 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         }
 
         amount = distance / maxDistance;
+        UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 }

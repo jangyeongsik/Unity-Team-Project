@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &20164443 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7659040590510420608, guid: 3e9e3e3c3fed7a24b9207d0a6323f8e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7659040590416475919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &34923185 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4851792445761907990, guid: 14f21949d55cde94f9e3bf17936bd19d,
@@ -5214,7 +5220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2084608225
 Transform:
   m_ObjectHideFlags: 0
@@ -5629,6 +5635,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stamina Gauge
       objectReference: {fileID: 0}
+    - target: {fileID: 4277614942350916609, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277614942350916609, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277614942350916609, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4840738082840749308, guid: 9536fad2d1aa4a648bc431cafd8c5407,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -5653,6 +5674,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221511366617297174, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -79.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221511366617297174, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221511366617297174, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221511366617297174, guid: 9536fad2d1aa4a648bc431cafd8c5407,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 270
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9536fad2d1aa4a648bc431cafd8c5407, type: 3}
@@ -5921,6 +5962,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7659040589852928158, guid: 3e9e3e3c3fed7a24b9207d0a6323f8e0,
+        type: 3}
+      propertyPath: test
+      value: 
+      objectReference: {fileID: 20164443}
     - target: {fileID: 7659040589852928159, guid: 3e9e3e3c3fed7a24b9207d0a6323f8e0,
         type: 3}
       propertyPath: m_LocalPosition.x

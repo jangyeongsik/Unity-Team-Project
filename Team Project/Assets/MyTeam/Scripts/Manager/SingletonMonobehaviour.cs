@@ -25,11 +25,12 @@ public class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if(_instance == null)
+        var objs = FindObjectsOfType<T>();
+        if (objs.Length != 1)
         {
-            _instance = this as T;
+            Destroy(gameObject);
+            return;
         }
-
         DontDestroyOnLoad(gameObject);
     }
 }

@@ -11,7 +11,7 @@ public class PlayerButtonEvent : MonoBehaviour
 
     private void Awake()
     {
-        SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
     }
 
 
