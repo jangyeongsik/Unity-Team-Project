@@ -7,8 +7,6 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
 {
     RectTransform lever;
     RectTransform back;
-    [SerializeField]
-    RectTransform test;
 
     Vector3 direction;
     Vector3 center;
@@ -26,7 +24,6 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
 
     void Update()
     {
-        test.position = center;
         UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 

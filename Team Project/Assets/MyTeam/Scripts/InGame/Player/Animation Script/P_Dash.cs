@@ -28,7 +28,6 @@ public class P_Dash : StateMachineBehaviour
     {
         //if(Vector3.Distance(startPos,animator.transform.parent.position) < dashDistance)
         controller.Move(animator.transform.parent.forward * dashSpeed * Time.deltaTime);
-        Debug.Log(dashSpeed);
         if (dashSpeed > 0)
             dashSpeed -= 0.5f;
     }

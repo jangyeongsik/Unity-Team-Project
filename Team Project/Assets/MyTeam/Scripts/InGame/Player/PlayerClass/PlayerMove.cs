@@ -23,8 +23,8 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -46,8 +46,8 @@ public class PlayerMove : MonoBehaviour
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
