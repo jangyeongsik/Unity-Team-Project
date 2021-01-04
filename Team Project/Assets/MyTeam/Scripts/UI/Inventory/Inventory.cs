@@ -21,6 +21,8 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public bool isVisible;
     //0 = 장비, 1 = 재료, 2 = 기타
     public int InvenTabNum;
+    public GameObject InvenUI;
+    public Toggle[] InvenTabs;
     //드롭다운 메뉴 (정렬)
     public GameObject menu;
     private TMP_Dropdown dropDown;
@@ -30,6 +32,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         pInven = DataManager.Instance.AllInvenData;
         //인벤토리 탭 번호 (0 = 장비, 1 = 재료, 2 = 기타)
         InvenTabNum = 0;
+        InvenTabs = InvenUI.GetComponentsInChildren<Toggle>();
         //인벤토리 드롭다운 메뉴 초기화
         dropDown = menu.GetComponent<TMP_Dropdown>();
         //슬롯초기화
@@ -210,17 +213,33 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public void ChangeTabToEquipment()
     {
         InvenTabNum = 0;
+        CheckIsSelected();
         ChangeTab();
     }
     public void ChangeTabToIngredient()
     {
-        InvenTabNum = 1;
+        InvenTabNum = 1; 
+        CheckIsSelected();
         ChangeTab();
     }
     public void ChangeTabToMisc()
     {
         InvenTabNum = 2;
+        CheckIsSelected();
         ChangeTab();
+    }
+    public void CheckIsSelected()
+    {
+        if (InvenTabs[InvenTabNum].isOn)
+        {
+            InvenTabs[InvenTabNum].animator.ResetTrigger("Deselected");
+            InvenTabs[InvenTabNum].animator.SetTrigger("Selected");
+        }
+        else
+        {
+            InvenTabs[InvenTabNum].animator.ResetTrigger("Selected");
+            InvenTabs[InvenTabNum].animator.SetTrigger("Deselected");
+        }
     }
     //=====================================
     //아이템 탭에 따라 슬롯 아이템 교체
