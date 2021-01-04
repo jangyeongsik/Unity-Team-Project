@@ -79,23 +79,43 @@ public class PlayerData
     }
 }
 
-public class Player : character
+[Serializable]
+public class Player
 {
+    public int id;                        //아이디 값
+    public int hp;                        //채력
+    public float movespeed;                 //움직임 속도 
+    public float criticalpercent;           //크리티컬 확률
+    public float criticaldamage;            //크리티컬 대미지
+    public float damage;                    //공격력
+    public float attackspeed;               //공격속도
+    public float defence;                   //방어
+    public Transform position;                  //위치       
     public int cylinderCounter;         //실린더 개수
     public float stamina;               //스태미너
     public float counter_judgement;     //카운터 판결
     public string p_name;               //이름
     public State.PlayerState m_state;  //상태
     public int presetID;
-
     public float counterTime;           //카운터 판정 타임
 
-    public Player() { }
+    public Player() {
+        id = 0;
+        p_name = "";
+        damage = 0;
+        movespeed = 0;
+        criticalpercent = 0;
+        criticaldamage = 0;
+        hp = 8;
+        stamina = 0;
+        defence = 0;
+        counter_judgement = 0;
+        presetID = 0;
+        m_state = State.PlayerState.P_Idle;
+        counterTime = 0;
+    }
     Player(Transform t)                 //생성자
     {
         position = t;
     }
-
-    
-
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
@@ -35,6 +36,8 @@ public class StartScene : MonoBehaviour
                 isSlotEmpty[i] = false;
             }
         }
+
+        SlotSelect(Slots[0].gameObject);
     }
 
     private void Update()
@@ -46,6 +49,8 @@ public class StartScene : MonoBehaviour
     public void GoToMainGameScene()
     {
         LoadingProgress.LoadScene("UI Scene");
+        //Debug.Log(GameData.Instance.player.stamina);
+        //SceneManager.LoadScene("UI Scene");
     }
 
     //슬롯 선택

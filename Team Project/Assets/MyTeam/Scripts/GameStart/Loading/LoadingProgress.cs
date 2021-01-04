@@ -18,7 +18,6 @@ public class LoadingProgress : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LoadSceneProgress());
-        
     }
 
     IEnumerator LoadSceneProgress()
@@ -49,7 +48,7 @@ public class LoadingProgress : MonoBehaviour
                 {
                     op.allowSceneActivation = true;
                     yield break;
-                }
+                }  
             }
         }
     }

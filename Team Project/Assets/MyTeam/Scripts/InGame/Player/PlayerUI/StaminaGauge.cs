@@ -28,6 +28,11 @@ public class StaminaGauge : MonoBehaviour
         targetStamina = curStamina;
 
         GameEventToUI.Instance.staminaRestore += setIsRestore;
+
+        //시작 스테미나 슬라이더 크기 설정
+        Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
+        size.x = GameData.Instance.player.stamina * 3;
+        slider.GetComponent<RectTransform>().sizeDelta = size;
     }
 
     private void Update()
@@ -57,9 +62,6 @@ public class StaminaGauge : MonoBehaviour
                 slider.value = curStamina / GameData.Instance.player.stamina;
                 break;
         }
-
-        if (Input.GetMouseButtonDown(0))
-            AddPlayerMaxStamina(10);
 
     }
 

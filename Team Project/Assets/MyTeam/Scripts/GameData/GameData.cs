@@ -6,6 +6,7 @@ using CSVReader;
 public class GameData : SingletonMonobehaviour<GameData>
 {
     private PlayerDataList playerDataList;
+    int playerIdx = 0;
     public List<PlayerData> playerData;
     public Player player;
     public List<NPCReader.NPCTalk> data;
@@ -22,10 +23,9 @@ public class GameData : SingletonMonobehaviour<GameData>
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         System.GC.Collect();
 
-        player = new Player();
-
         playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
         playerData = playerDataList.datas;
+        player = new Player();
     }
 
     public void Print()
@@ -91,7 +91,8 @@ public class GameData : SingletonMonobehaviour<GameData>
     //플레이어 슬롯에서 데이터 읽기
     public void LoadFromPlayerSlot(int slot)
     {
-        player = playerData[slot].WriteData(in player);
+        playerIdx = slot;
+        playerData[slot].WriteData(player);
     }
 
     //플레이어 슬롯 새로만들기
@@ -103,5 +104,15 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void DeletePlayerData(int slot)
     {
         playerData[slot].DeleteData(slot);
+    }
+
+    //로딩 끝나고 플레이어 데이터 읽기
+    public void LoadingPlayerData()
+    {
+        if(player == null)
+        {
+            player = new Player();
+            playerData[playerIdx].WriteData(player);
+        }
     }
 }
