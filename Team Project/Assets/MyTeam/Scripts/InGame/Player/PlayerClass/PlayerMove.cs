@@ -79,10 +79,10 @@ public class PlayerMove : MonoBehaviour
 
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && GameData.Instance.player.m_state != State.PlayerState.P_Dash)
+        if (Input.GetKeyDown(KeyCode.Space) && GameData.Instance.player.m_state != State.PlayerState.P_Dash && GameData.Instance.player.isDashPossible)
         {
             animator.SetTrigger("Dash");
-            dashSpeed = GameData.Instance.player.dashSpeed = 20f;
+            dashSpeed = 20f;
         }
     }
 

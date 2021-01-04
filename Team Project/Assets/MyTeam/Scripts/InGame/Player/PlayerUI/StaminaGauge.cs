@@ -33,10 +33,24 @@ public class StaminaGauge : MonoBehaviour
         Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
         size.x = GameData.Instance.player.stamina * 3;
         slider.GetComponent<RectTransform>().sizeDelta = size;
+        slider.maxValue = GameData.Instance.player.stamina;
+
+        GameData.Instance.player.isDashPossible = true;
     }
 
     private void Update()
     {
+        //대쉬 가능상태 변경
+        if(!GameData.Instance.player.isDashPossible && curStamina >= 15)
+            GameData.Instance.player.isDashPossible = true;
+        else if(GameData.Instance.player.isDashPossible && curStamina < 15)
+            GameData.Instance.player.isDashPossible = false;
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            AddPlayerMaxStamina(10);
+        }
+
         switch (state)
         {
             case STAMINAGAUGE.RESTORE:
@@ -47,7 +61,7 @@ public class StaminaGauge : MonoBehaviour
                     state = STAMINAGAUGE.NONE;
                 }
                 targetStamina = curStamina;
-                slider.value = curStamina/GameData.Instance.player.stamina;
+                slider.value = curStamina;
                 break;
             case STAMINAGAUGE.DECREASE:
                 --curStamina;
@@ -56,10 +70,10 @@ public class StaminaGauge : MonoBehaviour
                     curStamina = targetStamina;
                     state = STAMINAGAUGE.NONE;
                 }
-                slider.value = curStamina / GameData.Instance.player.stamina;
+                slider.value = curStamina;
                 break;
             case STAMINAGAUGE.NONE:
-                slider.value = curStamina / GameData.Instance.player.stamina;
+                slider.value = curStamina;
                 break;
         }
 
@@ -100,9 +114,14 @@ public class StaminaGauge : MonoBehaviour
 
     void AddPlayerMaxStamina(int add)
     {
+        if (GameData.Instance.player.stamina >= 90) return;
         GameData.Instance.player.stamina += add;
         Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
         size.x += add * 3;
         slider.GetComponent<RectTransform>().sizeDelta = size;
+        slider.maxValue += add;
+
+        curStamina += add;
+        targetStamina = curStamina;
     }
 }

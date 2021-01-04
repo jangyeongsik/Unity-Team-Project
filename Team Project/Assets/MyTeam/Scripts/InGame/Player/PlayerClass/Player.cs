@@ -26,6 +26,11 @@ public class PlayerData
     public int presetID;
     public int cylinderCounter;
 
+    public PlayerData(int slot)
+    {
+        CreateNewPlayer(slot,"");
+    }
+
     public Player WriteData(in Player player)
     {
         player.id = slotID;
@@ -98,7 +103,7 @@ public class Player
     public State.PlayerState m_state;  //상태
     public int presetID;
     public float counterTime;           //카운터 판정 타임
-    public float dashSpeed;
+    public bool isDashPossible;
     public Player() {
         id = 0;
         p_name = "";
