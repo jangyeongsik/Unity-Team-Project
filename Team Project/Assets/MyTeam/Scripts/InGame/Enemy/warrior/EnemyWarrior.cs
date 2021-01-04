@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyWarrior : MonoBehaviour
 {
-    private Monster e_Warrior;              //몬스터 클래스
+    private Monster e_Warrior;          //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public Transform target;
@@ -43,7 +43,6 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(target.position);
         if (!dead)
         {
 
@@ -61,7 +60,7 @@ public class EnemyWarrior : MonoBehaviour
             if (count >= 3)
             {
                 e_Warrior.navigation.enabled = false;
-               
+
                 dead = true;
                 e_Warrior.animator.SetBool("IsRun", false);
                 e_Warrior.animator.SetBool("IsAttack", false);
@@ -103,12 +102,12 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Damage()
     {
-        
+
     }
 
     private void M_Attack()
     {
-        
+
         if (P_distance() > e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Move;
@@ -122,8 +121,8 @@ public class EnemyWarrior : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
-        
-        e_Warrior.navigation.SetDestination(target.transform.position);
+
+        e_Warrior.navigation.SetDestination(target.position);
         if (P_distance() < e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Attack;
@@ -140,7 +139,7 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Idle()
     {
-        
+
         if (P_distance() > e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Move;
@@ -200,16 +199,5 @@ public class EnemyWarrior : MonoBehaviour
     public void AttackSetting()
     {
         attackTime = 0;
-
-        GameEventToUI.Instance.OnPlayerHit(transform, 3);
-
-        ////플레이어 에너미 방향 바라보게 하기
-        //if(GameData.Instance.player.m_state != State.PlayerState.P_Hit)
-        //{
-        //    Vector3 dir = transform.position - target.position;
-        //    dir.y = 0;
-        //    dir.Normalize();
-        //    target.LookAt(target.position + dir);
-        //}
     }
 }
