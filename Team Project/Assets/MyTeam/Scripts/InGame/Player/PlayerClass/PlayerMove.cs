@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     float speed = 10f;
 
     [SerializeField]
-    float dashSpeed = 30f;
+    float dashSpeed = 20f;
 
     float x;
     float z;
@@ -23,8 +23,8 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
-        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
     private void Start()
@@ -35,6 +35,7 @@ public class PlayerMove : MonoBehaviour
     {
         //방향키 wasd이동
         Move();
+        PlayerDash();
     }
 
     private void Update()
@@ -46,8 +47,8 @@ public class PlayerMove : MonoBehaviour
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
@@ -81,7 +82,16 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && GameData.Instance.player.m_state != State.PlayerState.P_Dash)
         {
             animator.SetTrigger("Dash");
+            dashSpeed = GameData.Instance.player.dashSpeed = 20f;
         }
+    }
+
+    void PlayerDash()
+    {
+        if (GameData.Instance.player.m_state != State.PlayerState.P_Dash) return;
+        controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+        if (dashSpeed > 0)
+            dashSpeed -= 0.5f;
     }
 
     void PlayerJoyMove(Vector2 direction, float amount)
@@ -116,5 +126,20 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isGuard", true);
         else if (Input.GetKeyUp(KeyCode.Z))
             animator.SetBool("isGuard", false);
+    }
+        private void OnTriggerEnter(Collider other)
+    {
+        if(LayerMask.NameToLayer("Temple") == other.gameObject.layer)
+        {
+            GameEventToUI.Instance.OnEventInterActionOnOff(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (LayerMask.NameToLayer("Temple") == other.gameObject.layer)
+        {
+            GameEventToUI.Instance.OnEventInterActionOnOff(false);
+        }
     }
 }

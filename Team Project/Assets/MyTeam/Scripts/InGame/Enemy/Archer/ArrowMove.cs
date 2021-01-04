@@ -28,7 +28,5 @@ public class ArrowMove : MonoBehaviour
     {
         //float step = 15.0f * Time.deltaTime;
         //transform.position = Vector3.MoveTowards(curPos, endPos, step);
-
-
     }
 }

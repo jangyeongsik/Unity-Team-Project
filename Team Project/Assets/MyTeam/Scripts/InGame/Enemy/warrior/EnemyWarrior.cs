@@ -67,7 +67,7 @@ public class EnemyWarrior : MonoBehaviour
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("isDead");
                 e_Warrior.monsterState = State.MonsterState.M_Dead;
-                count = 0;
+                GameEventToUI.Instance.OnAttactReset();
             }
             switch (e_Warrior.monsterState)
             {

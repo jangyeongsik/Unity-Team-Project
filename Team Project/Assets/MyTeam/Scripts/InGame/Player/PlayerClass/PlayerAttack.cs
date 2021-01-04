@@ -15,9 +15,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
-        if(controller == null)
+        if (controller == null)
             controller = GetComponent<CharacterController>();
-        if(animator == null)
+        if (animator == null)
             animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
@@ -32,12 +32,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        //if (GameData.Instance.player.m_state == State.PlayerState.P_Guard)
-        //{
-        //    animator.SetTrigger("NextSkill");
-        //    GameEventToUI.Instance.OnSkillGaugeActive(true);
-        //    Attack_Success = true;
-        //}
 
     }
 
@@ -63,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
                     Attack_Success = true;
                     StartCoroutine(MoveToEnemy(CheckEnemys()));
                 }
-                else if(isReadyToCounter)
+                else if (isReadyToCounter)
                 {
                     if (Enemy != null)
                     {
@@ -76,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
                         animator.SetTrigger("Guard");
                 }
                 else
-                animator.SetTrigger("Guard");
+                    animator.SetTrigger("Guard");
                 break;
             case State.PlayerState.P_Dash:
                 break;
@@ -124,8 +118,9 @@ public class PlayerAttack : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
         float dist = 0f;
         Transform T = null;
-        for(int i = 0; i < colliders.Length; ++i)
+        for (int i = 0; i < colliders.Length; ++i)
         {
+            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
             float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {
@@ -169,10 +164,10 @@ public class PlayerAttack : MonoBehaviour
     //화살 충돌상태면 화살카운터 가능으로
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             isReadyToCounter = true;
-            if(Enemy == null)
+            if (Enemy == null)
                 Enemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
         }
     }
@@ -184,7 +179,7 @@ public class PlayerAttack : MonoBehaviour
     //맞음
     void PlayerHit(Transform t, int damage)
     {
-        if(GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
+        if (GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
             GameData.Instance.player.m_state == State.PlayerState.P_Run)
         {
             Vector3 dir = t.position - transform.position;
@@ -196,16 +191,16 @@ public class PlayerAttack : MonoBehaviour
 
             GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
         }
-        else if(GameData.Instance.player.m_state == State.PlayerState.P_Guard)
+        else if (GameData.Instance.player.m_state == State.PlayerState.P_Guard)
         {
             Vector3 dir = t.position - transform.position;
             dir.y = 0;
             dir.Normalize();
             transform.LookAt(transform.position + dir);
 
-            animator.CrossFade("Hit", 0.1f);
+            animator.CrossFade("Guard Hit", 0.1f);
         }
-       
+
     }
 
     //딜레이

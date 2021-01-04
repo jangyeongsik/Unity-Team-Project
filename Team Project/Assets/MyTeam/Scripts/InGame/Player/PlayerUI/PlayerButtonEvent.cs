@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerButtonEvent : MonoBehaviour
 {
-
     private bool shopOnOff = false;
+    private bool templeOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
 
@@ -14,17 +14,17 @@ public class PlayerButtonEvent : MonoBehaviour
         //SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
     }
 
-
     private void Update()
     {
-        if (Input.anyKey)
-        {
-            if (!talkOnOff)
-            {
-                GotoShopScene();
-            }
-        }
+       if (Input.anyKey)
+       {
+           if (!talkOnOff)
+           {
+               GotoShopScene();
+           }
+       }
     }
+
     void GotoShopScene()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -38,9 +38,10 @@ public class PlayerButtonEvent : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-
             talkOnOff = !talkOnOff;
             GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
         }
     }
+
+
 }

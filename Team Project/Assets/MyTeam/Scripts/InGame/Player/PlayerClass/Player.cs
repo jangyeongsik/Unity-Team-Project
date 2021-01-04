@@ -98,7 +98,7 @@ public class Player
     public State.PlayerState m_state;  //상태
     public int presetID;
     public float counterTime;           //카운터 판정 타임
-
+    public float dashSpeed;
     public Player() {
         id = 0;
         p_name = "";
@@ -113,6 +113,7 @@ public class Player
         presetID = 0;
         m_state = State.PlayerState.P_Idle;
         counterTime = 0;
+
     }
     Player(Transform t)                 //생성자
     {
