@@ -26,8 +26,9 @@ public class P_Dash : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Vector3.Distance(startPos,animator.transform.parent.position) < dashDistance)
+        //if(Vector3.Distance(startPos,animator.transform.parent.position) < dashDistance)
         controller.Move(animator.transform.parent.forward * dashSpeed * Time.deltaTime);
+        Debug.Log(dashSpeed);
         if (dashSpeed > 0)
             dashSpeed -= 0.5f;
     }
