@@ -19,16 +19,17 @@ public class EnemyWarrior : MonoBehaviour
 
     float attackTime;
 
-    float attckCountMin = 0.4f;
-    float attckCountMax = 0.9f;
+    float attckCountMin = 0.2f;
+    float attckCountMax = 0.6f;
 
     private int count;
+    bool running = false;
 
     private bool dead;
     private void Start()
     {
         GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
-         e_Warrior = new Monster();
+        e_Warrior = GetComponent<Monster>();
         setting();
     }
 
@@ -44,6 +45,7 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (!dead)
         {
+
             if (GameEventToUI.Instance.Attack_SuccessEvent())
             {
                 count++;
@@ -52,16 +54,19 @@ public class EnemyWarrior : MonoBehaviour
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("Hit");
                 e_Warrior.monsterState = State.MonsterState.M_Damage;
+
+                GameEventToUI.Instance.OnAttactReset();
             }
             if (count >= 3)
             {
                 e_Warrior.navigation.enabled = false;
-                count = 0;
-                dead = false;
+               
+                dead = true;
                 e_Warrior.animator.SetBool("IsRun", false);
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("isDead");
                 e_Warrior.monsterState = State.MonsterState.M_Dead;
+                count = 0;
             }
             switch (e_Warrior.monsterState)
             {
@@ -87,6 +92,11 @@ public class EnemyWarrior : MonoBehaviour
                     break;
             }
         }
+        if (e_Warrior.monsterState != State.MonsterState.M_Attack)
+        {
+            AttackNocice.SetActive(false);
+            attackTime = 0;
+        }
 
     }
 
@@ -107,12 +117,24 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Move()
     {
+        if (!running)
+        {
+            StartCoroutine(navigationSet());
+        }
+        
         e_Warrior.navigation.SetDestination(target.transform.position);
         if (P_distance() < e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Attack;
             e_Warrior.animator.SetBool("IsAttack", true);
         }
+    }
+    IEnumerator navigationSet()
+    {
+        running = true;
+        yield return new WaitForSecondsRealtime(0.25f);
+        e_Warrior.navigation.SetDestination(target.transform.position);
+        running = false;
     }
 
     private void M_Idle()

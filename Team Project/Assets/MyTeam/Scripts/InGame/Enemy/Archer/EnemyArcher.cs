@@ -16,13 +16,15 @@ public class EnemyArcher : MonoBehaviour
 
     public GameObject arrowPrefab;
 
+    bool running = false;
+
     Vector3 tPos;
 
     private bool attacking;
 
     private void Start()
     {
-        monster = new Monster();
+        monster = GetComponent<Monster>();
         setting();
     }
 
@@ -91,8 +93,38 @@ public class EnemyArcher : MonoBehaviour
     }
 
     private void Move()
+    {/* bool my_coroutine_is_running = false;
+ 
+    void Start_coroutine()
     {
-        monster.navigation.SetDestination(target.transform.position);
+        // 코루틴 시작.
+        StartCoroutine("My_coroutine");
+    }
+ 
+    IEnumerator My_coroutine()
+    {
+        my_coroutine_is_running = true;
+ 
+        yield return
+ 
+        my_coroutine_is_running = false;
+    }
+ 
+    void Use_another_funcion()
+    {
+        if (my_coroutine_is_running)
+        {
+            // My_coroutine 이 실행중인지 
+            // 확인 후 수행할 것들.
+        }
+    }
+
+        
+         */
+        if (!running)
+        { 
+            StartCoroutine(navigationSet());
+        }
 
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (distanceToTarget < monster.navigation.stoppingDistance)
@@ -104,6 +136,13 @@ public class EnemyArcher : MonoBehaviour
         }
     }
 
+    IEnumerator navigationSet()
+    {
+        running = true;
+        yield return new WaitForSecondsRealtime(0.25f);
+        monster.navigation.SetDestination(target.transform.position);
+        running = false;
+    }
     public void OnDeadEvent()
     {
         //if(Input.GetKeyDown(KeyCode.T))
@@ -119,7 +158,9 @@ public class EnemyArcher : MonoBehaviour
     {
         //GameObject arrow = Instantiate(arrowPrefab, arrowFirePoint.position, Quaternion.identity);                                       
         //arrow.GetComponent<Arrow>().Fire(arrowTarget);
-        GameObject arrow = Instantiate(arrowPrefab);
+        //GameObject arrow = Instantiate(arrowPrefab);
+        GameObject arrow = ObjectPoolManager.GetInstance().objectPool.PopObject();
+      
         Vector3 dir = tPos - arrowFirePoint.position;
         dir.y = 0;
         arrow.transform.position = arrowFirePoint.position;

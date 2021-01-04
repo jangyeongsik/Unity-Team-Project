@@ -1,35 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectPoolManager : SingletonMonobehaviour<ObjectPoolManager>
+public class ObjectPoolManager : MonoBehaviour
 {
-   //private static ObjectPoolManager singleton;
-   //public static ObjectPoolManager GetInstance() { return singleton; }
-   //
-   //public ObjectPool<PoolableObject> bulletPool = new ObjectPool<PoolableObject>();
+    private static ObjectPoolManager singleton;
+    public static ObjectPoolManager GetInstance() { return singleton; }
 
-    //public Bullet bulletPrefab;
+    public GameObject PreFap;
 
-    /*void Start()
+    public Pool objectPool;
+    void Awake()
     {
-        bulletPool = new ObjectPool<PoolableObject>(5, () =>
+        if (singleton != null && singleton != this)
         {
-            Bullet bullet = Instantiate(bulletPrefab);
-            bullet.Create(bulletPool);
-            return bullet;
-        });
+            Destroy(gameObject);
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
 
-        bulletPool.Allocate();
-    }*/
-
-    /*void OnDestroy()
+    private void Start()
     {
-        bulletPool.Dispose();
+        
+        objectPool = new Pool(5, PreFap);
+
+        objectPool.Allocate();
+
+    }
+
+    void OnDestroy()
+    {
+        objectPool.Dispose();
         singleton = null;
-    }*/
-
-
-
-
+    }
 
 }

@@ -25,6 +25,7 @@ public class PlayerAttack : MonoBehaviour
     {
         UIEventToGame.Instance.playerAttack += playerAttack;
         GameEventToUI.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
+        GameEventToUI.Instance.AttactReset += AttackReset;
     }
 
     private void Update()
@@ -35,8 +36,6 @@ public class PlayerAttack : MonoBehaviour
         //    GameEventToUI.Instance.OnSkillGaugeActive(true);
         //    Attack_Success = true;
         //}
-        if (Attack_Success)
-            Attack_Success = false;
     }
 
     private void OnDestroy()
@@ -174,5 +173,10 @@ public class PlayerAttack : MonoBehaviour
             if(ArcherEnemy == null)
             ArcherEnemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
         }
+    }
+
+    public void AttackReset()
+    {
+        Attack_Success = false;
     }
 }

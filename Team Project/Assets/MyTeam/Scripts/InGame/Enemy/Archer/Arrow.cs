@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Arrow : PoolableObject
 {
     public Transform EnemyTranform;
+
+    private void Start()
+    {
+        StartCoroutine(RoMove());
+    }
     private void Update()
     {
 
@@ -13,4 +18,14 @@ public class Arrow : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
+    }
+
+    IEnumerator RoMove()
+    {
+        yield return new WaitForSecondsRealtime(5.0f);
+        ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
+    }
 }

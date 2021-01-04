@@ -1356,7 +1356,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: []
-  player: {fileID: 0}
+  player:
+    id: 0
+    hp: 8
+    movespeed: 0
+    criticalpercent: 0
+    criticaldamage: 0
+    damage: 0
+    attackspeed: 0
+    defence: 0
+    position: {fileID: 0}
+    cylinderCounter: 0
+    stamina: 0
+    counter_judgement: 0
+    p_name: 
+    m_state: 0
+    presetID: 0
+    counterTime: 0
   equipmentData: []
 --- !u!4 &793646548
 Transform:
@@ -1381,20 +1397,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 793646546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd94dcb588a1944384fd0779024809e, type: 3}
+  m_Script: {fileID: 11500000, guid: aa8e9b6a466bdb24c837190143c0f85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
-  slotHolder: {fileID: 0}
-  slotCount: 0
-  pInven:
-    EquipmentList: []
-    IngredientList: []
-    MiscList: []
-  itemImages: []
-  isVisible: 0
-  InvenTabNum: 0
-  menu: {fileID: 0}
 --- !u!1 &802012711
 GameObject:
   m_ObjectHideFlags: 0

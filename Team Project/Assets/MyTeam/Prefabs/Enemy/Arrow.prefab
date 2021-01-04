@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6540929143270585435}
   - component: {fileID: 3329990956547101715}
   m_Layer: 10
-  m_Name: GameObject
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4742fe569f5185c429f66ad0dbd2b8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyTranform: {fileID: 0}
+  EnemyTranform: {fileID: 6607292702365411795, guid: 0a293ced27caf904d8a1003de57e8761,
+    type: 3}
+  ArrowPF: {fileID: 186447331761152082}
 --- !u!136 &3329990956547101715
 CapsuleCollider:
   m_ObjectHideFlags: 0

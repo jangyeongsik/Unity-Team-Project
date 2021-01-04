@@ -1,48 +1,42 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class ObjectPool<T> where T : PoolableObject
+public class Pool : MonoBehaviour
 {
     private int allocateCount;
+    private Stack<GameObject> objStack;
+    public List<GameObject> objList;
+    private GameObject pre;
 
-    public delegate T Initializer();
-    private Initializer initializer;
 
-    private Stack<T> objStack;
-    public List<T> objList;
-
-    public ObjectPool()
+    public Pool(int count,GameObject pref)
     {
-        // default constructor
-    }
-
-
-    public ObjectPool(int ac, Initializer fn)
-    {
-        this.allocateCount = ac;
-        this.initializer = fn;
-        this.objStack = new Stack<T>();
-        this.objList = new List<T>();
+        this.allocateCount = count;
+        this.pre = pref;
+        this.objStack = new Stack<GameObject>();
+        this.objList = new List<GameObject>();
     }
 
     public void Allocate()
     {
-        for (int index = 0; index < this.allocateCount; ++index)
+        for (int index = 0; index < allocateCount; ++index)
         {
-            Debug.Log("A");
-            this.objStack.Push(this.initializer());
+            GameObject pool = Instantiate(pre);
+            pool.SetActive(false);
+            this.objStack.Push(pool);
         }
     }
 
-    public T PopObject()
+    public GameObject PopObject()
     {
+        Debug.Log(objStack.Count);
         if (this.objStack.Count <= 0)
         {
             Allocate();
         }
 
-        T obj = this.objStack.Pop();
+        GameObject obj = this.objStack.Pop();
         this.objList.Add(obj);
 
         obj.gameObject.SetActive(true);
@@ -50,7 +44,7 @@ public class ObjectPool<T> where T : PoolableObject
         return obj;
     }
 
-    public void PushObject(T obj)
+    public void PushObject(GameObject obj)
     {
         obj.gameObject.SetActive(false);
 

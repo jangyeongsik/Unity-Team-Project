@@ -42,8 +42,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public delegate void PlayerHP_Decrease(int damage);
     public PlayerHP_Decrease playerHP_Decrease;
 
+    public event System.Action AttactReset;
 
     public event System.Action<bool> onOff;
+
     public event System.Action<bool, int, string> talk;
 
 
@@ -69,6 +71,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
         return Attack_SuccessEvent.Invoke();
     }
 
+    public void OnAttactReset()
+    {
+        AttactReset.Invoke();
+    }
     public void OnPlayerHp_Decrease(int damage)
     {
         if (playerHP_Decrease != null)
