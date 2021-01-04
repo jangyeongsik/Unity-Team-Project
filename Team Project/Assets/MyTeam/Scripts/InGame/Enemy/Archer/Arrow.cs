@@ -6,7 +6,7 @@ public class Arrow : PoolableObject
 {
     public Transform EnemyTranform;
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(RoMove());
     }

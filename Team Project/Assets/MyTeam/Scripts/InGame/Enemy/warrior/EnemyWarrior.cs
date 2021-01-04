@@ -8,7 +8,7 @@ public class EnemyWarrior : MonoBehaviour
     private Monster e_Warrior;          //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
-    public Transform target;
+    public GameObject target;
     Vector3 offset;
 
 
@@ -40,6 +40,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.animator = GetComponent<Animator>();
         e_Warrior.movespeed = 8.0f;
         e_Warrior.attack_aware_distance = 1.5f;
+        e_Warrior.navigation.enabled = true;
     }
     private void Update()
     {
@@ -131,6 +132,7 @@ public class EnemyWarrior : MonoBehaviour
     {
         running = true;
         yield return new WaitForSecondsRealtime(0.25f);
+        
         e_Warrior.navigation.SetDestination(target.transform.position);
         running = false;
     }
@@ -163,7 +165,7 @@ public class EnemyWarrior : MonoBehaviour
     #region 플레이어와 거리 구하는 함수
     private float P_distance()
     {
-        offset = transform.position - target.position;
+        offset = transform.position - target.transform.position;
         float distance = offset.magnitude;
         return distance;
     }
