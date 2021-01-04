@@ -27,6 +27,7 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
     void Update()
     {
         test.position = center;
+        UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 
     //드래그 시작
@@ -47,7 +48,6 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         lever.position = center;
         direction = Vector3.zero;
         amount = 0f;
-        UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 
     void UpdateJoystick(PointerEventData eventData = null)
@@ -66,6 +66,5 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         }
 
         amount = distance / maxDistance;
-        UIEventToGame.Instance.OnPlayerMove(direction, amount);
     }
 }

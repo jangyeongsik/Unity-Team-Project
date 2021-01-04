@@ -96,7 +96,7 @@ public class PlayerMove : MonoBehaviour
         controller.Move(dir * amount * speed * Time.deltaTime);
         transform.LookAt(transform.position + dir);
 
-        if (direction.sqrMagnitude > 0)
+        if (amount > 0)
         {
             animator.SetBool("isInput", true);
         }

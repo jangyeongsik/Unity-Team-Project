@@ -388,6 +388,8 @@ GameObject:
   - component: {fileID: 5755412005502736405}
   - component: {fileID: 7021748295986318868}
   - component: {fileID: 7021748295986318870}
+  - component: {fileID: 3363369127965828506}
+  - component: {fileID: 3363369127965828507}
   m_Layer: 9
   m_Name: Skeletonwarrior
   m_TagString: Untagged
@@ -469,6 +471,46 @@ MonoBehaviour:
   target: {fileID: 0}
   AttackNocice: {fileID: 8739989548411070412}
   counterjudgement: 0
+--- !u!65 &3363369127965828506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5755412005512227723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3363369127965828507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5755412005512227723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452dc4486ff18594c936eb22955df691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  hp: 0
+  movespeed: 0
+  criticalpercent: 0
+  criticaldamage: 0
+  damage: 0
+  attackspeed: 0
+  defence: 0
+  position: {fileID: 0}
+  skillid: 0
+  counter_reslstance: 0
+  attack_aware_distance: 0
+  monsterState: 0
+  navigation: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &5755412005512227725
 GameObject:
   m_ObjectHideFlags: 0

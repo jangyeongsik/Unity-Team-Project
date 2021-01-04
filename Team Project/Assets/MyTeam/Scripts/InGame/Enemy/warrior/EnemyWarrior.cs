@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyWarrior : MonoBehaviour
 {
-    private Monster e_Warrior;          //몬스터 클래스
+    private Monster e_Warrior;              //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public Transform target;
@@ -199,5 +199,16 @@ public class EnemyWarrior : MonoBehaviour
     public void AttackSetting()
     {
         attackTime = 0;
+
+        GameEventToUI.Instance.OnPlayerHit(transform, 3);
+
+        ////플레이어 에너미 방향 바라보게 하기
+        //if(GameData.Instance.player.m_state != State.PlayerState.P_Hit)
+        //{
+        //    Vector3 dir = transform.position - target.position;
+        //    dir.y = 0;
+        //    dir.Normalize();
+        //    target.LookAt(target.position + dir);
+        //}
     }
 }

@@ -33,6 +33,16 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
 
     #endregion
+
+    #region "플레이어 에너미한테 피격"
+    public event System.Action<Transform, int> Player_Hit;
+
+    public void OnPlayerHit(Transform t,int damage)
+    {
+        if (Player_Hit != null)
+            Player_Hit(t, damage);
+    }
+    #endregion
     public delegate bool AttackEnvent();
     public AttackEnvent Player_Attack;
 

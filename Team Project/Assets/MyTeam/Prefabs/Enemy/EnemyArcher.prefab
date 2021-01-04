@@ -1455,6 +1455,8 @@ GameObject:
   - component: {fileID: 6607292702357948013}
   - component: {fileID: 8641110281224440191}
   - component: {fileID: 8641110281224440188}
+  - component: {fileID: 1654095920}
+  - component: {fileID: 1654095921}
   m_Layer: 9
   m_Name: EnemyArcher
   m_TagString: Untagged
@@ -1511,8 +1513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  arrowTarget: {fileID: 3522275232604752680, guid: fba8bb4b3eab0064886ceea598c517ec,
-    type: 3}
+  arrowTarget: {fileID: 0}
   arrowFirePoint: {fileID: 8641110282272252151}
   arrowPrefab: {fileID: 186447331761152080, guid: 15e7fc5d13203454fbc8cc1cb376febb,
     type: 3}
@@ -1538,6 +1539,46 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &1654095920
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607292702365251059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1654095921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607292702365251059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452dc4486ff18594c936eb22955df691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  hp: 0
+  movespeed: 0
+  criticalpercent: 0
+  criticaldamage: 0
+  damage: 0
+  attackspeed: 0
+  defence: 0
+  position: {fileID: 0}
+  skillid: 0
+  counter_reslstance: 0
+  attack_aware_distance: 0
+  monsterState: 0
+  navigation: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &6607292702365251061
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,8 @@ public class P_Dash : StateMachineBehaviour
 {
     CharacterController controller;
     float dashSpeed = 30f;
-    [SerializeField]
-    float dashDistance = 5f;
+    [Range(1,10)]
+    public float dashDistance = 5f;
     Vector3 startPos;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

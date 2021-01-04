@@ -85,7 +85,10 @@ public class SkillGauge : MonoBehaviour
         pos.x += ticktokSpeed * Time.deltaTime;
         Ticktok.localPosition = pos;
         if (pos.x > endPos)
+        {
             gameObject.SetActive(false);
+            UIEventToGame.Instance.OnPlayerDelay();
+        }
     }
 
     void CheckZone()
