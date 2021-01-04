@@ -120,7 +120,7 @@ public class PlayerAttack : MonoBehaviour
         Transform T = null;
         for (int i = 0; i < colliders.Length; ++i)
         {
-            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
+            Debug.Log(colliders[i].name);
             float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {

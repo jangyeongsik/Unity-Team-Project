@@ -15,7 +15,6 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     private void Start()
     {
-        
         //data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
         equipmentData = table.TableToList<Equipment>();
@@ -23,9 +22,32 @@ public class GameData : SingletonMonobehaviour<GameData>
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         System.GC.Collect();
 
-        playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
-        playerData = playerDataList.datas;
-        player = new Player();
+        Debug.Log(Application.platform);
+        
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            playerDataList = JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData");
+            playerData = playerDataList.datas;
+            player = new Player();
+            if (playerDataList == null)
+            {
+                playerDataList = new PlayerDataList();
+                playerDataList.datas.Add(new PlayerData(0));
+                playerDataList.datas.Add(new PlayerData(1));
+                playerDataList.datas.Add(new PlayerData(2));
+                Debug.Log("새로 3개 만들었다");
+            }
+            Debug.Log("playerDataList " +playerDataList.datas.Count);
+        }
+        else
+        {
+            playerDataList = JsonManager.Instance.LoadJsonFile<PlayerDataList>(Application.dataPath, "/MyTeam/Resources/PlayerData");
+            playerData = playerDataList.datas;
+            player = new Player();
+            Debug.Log("좆망");
+        }
+
+        
     }
 
     public void Print()
@@ -85,7 +107,10 @@ public class GameData : SingletonMonobehaviour<GameData>
     private void OnDestroy()
     {
         playerDataList.datas = playerData;
-        JsonManager.Instance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerData", playerDataList);
+        if (Application.platform == RuntimePlatform.Android)
+            JsonManageAndroid.Instance.CreateJsonFile("PlayerData", playerDataList);
+        else
+            JsonManager.Instance.CreateJsonFile(Application.persistentDataPath, "/MyTeam/Resources/PlayerData", playerDataList);
     }
 
     //플레이어 슬롯에서 데이터 읽기
