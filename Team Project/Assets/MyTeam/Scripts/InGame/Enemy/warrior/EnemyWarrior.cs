@@ -121,8 +121,6 @@ public class EnemyWarrior : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
-
-        e_Warrior.navigation.SetDestination(target.position);
         if (P_distance() < e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Attack;
