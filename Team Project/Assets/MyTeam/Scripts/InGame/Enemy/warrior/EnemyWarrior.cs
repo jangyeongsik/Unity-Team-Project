@@ -43,6 +43,7 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(target.position);
         if (!dead)
         {
 
