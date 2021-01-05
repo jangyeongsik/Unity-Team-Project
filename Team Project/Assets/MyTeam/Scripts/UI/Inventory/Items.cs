@@ -32,21 +32,25 @@ public class Equipment
     public int count;
 }
 [Serializable]
-public class Ingredient
+public class Ingredient //아이템 재료 db
 {
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
+    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
+    [NonSerialized]
+    public Sprite image;
     public int count;
 }
 [Serializable]
-public class Misc
+public class Misc // 기타 
 {
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
+    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
     [NonSerialized]

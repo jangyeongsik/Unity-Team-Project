@@ -66,9 +66,9 @@ public class PlayerMove : MonoBehaviour
 
         dir = new Vector3(x, 0, z).normalized;
         //카메라 방향으로 변환
-        Transform cmT = Camera.main.transform;
-        dir = cmT.TransformDirection(dir);
-        dir.y -= 0.9f; 
+        //Transform cmT = Camera.main.transform;
+        //dir = cmT.TransformDirection(dir);
+        //dir.y -= GameData.Instance.player.gravity; 
         dir.Normalize();
 
         controller.Move(dir * speed * Time.deltaTime);
