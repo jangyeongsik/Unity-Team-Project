@@ -5,13 +5,14 @@ using System.IO;
 
 public class JsonManageAndroid : Singleton<JsonManageAndroid>
 {
-    public void CreateJsonFile(string fileName,object obj )
+    public void SaveJsonFile(string fileName,object obj )
     {
-        File.WriteAllText(Application.persistentDataPath + "/Datas/" + fileName + ".json", JsonUtility.ToJson(obj,true));
+        File.WriteAllText(Application.persistentDataPath + "/" + fileName + ".json", JsonUtility.ToJson(obj,true));
     }
 
     public T LoadJsonFile<T>(string fileName)
     {
-        return JsonUtility.FromJson<T>(File.ReadAllText(Application.persistentDataPath + "/Datas/" + fileName + ".json"));
+        if (!File.Exists(Application.persistentDataPath + "/" + fileName + ".json")) return default(T);
+        return JsonUtility.FromJson<T>(File.ReadAllText(Application.persistentDataPath + "/" + fileName + ".json"));
     }
 }

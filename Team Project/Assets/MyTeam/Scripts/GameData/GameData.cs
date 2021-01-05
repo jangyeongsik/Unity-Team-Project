@@ -26,6 +26,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerFilePath = Application.persistentDataPath + "/PlayerData.json";
         PlayerLoad();
         System.GC.Collect();
+
     }
 
     public void Print()
@@ -114,25 +115,25 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerDataList.datas.Add(new PlayerData(0));
         playerDataList.datas.Add(new PlayerData(1));
         playerDataList.datas.Add(new PlayerData(2));
+        playerData = playerDataList.datas;
         PlayerSave();
         PlayerLoad();
     }
 
     void PlayerSave()
     {
-        File.WriteAllText(playerFilePath, JsonUtility.ToJson(playerDataList));
+        playerDataList.datas = playerData;
+        JsonManageAndroid.Instance.SaveJsonFile("PlayerData", playerDataList);
     }
 
     void PlayerLoad()
     {
-        if(!File.Exists(playerFilePath ))
+        if(JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData") == null)
         {
             CreateAllPlayerData();
             return;
         }
-
-        string jData = File.ReadAllText(playerFilePath);
-        playerDataList = JsonUtility.FromJson<PlayerDataList>(jData);
+        playerDataList = JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData");
         playerData = playerDataList.datas;
     }
 }

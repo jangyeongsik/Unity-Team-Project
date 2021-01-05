@@ -191,9 +191,9 @@ public class EnemyWarrior : MonoBehaviour
     }
 
 
-    private bool Player_AttackEvent()
+    private KeyValuePair<bool, Transform> Player_AttackEvent()
     {
-        return counterjudgement;
+        return new KeyValuePair<bool, Transform>(counterjudgement,transform);
     }
 
     public void AttackSetting()

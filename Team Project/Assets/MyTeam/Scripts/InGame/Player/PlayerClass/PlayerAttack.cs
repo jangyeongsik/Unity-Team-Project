@@ -11,7 +11,9 @@ public class PlayerAttack : MonoBehaviour
     bool Attack_Success = false;
     bool isReadyToCounter = false;
 
-    Transform Enemy = null;
+    Transform curAttackEnemy = null;
+
+    public float ArrowRadius = 1.5f;
 
     private void Awake()
     {
@@ -30,11 +32,6 @@ public class PlayerAttack : MonoBehaviour
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void OnDestroy()
     {
         UIEventToGame.Instance.playerAttack -= playerAttack;
@@ -50,24 +47,23 @@ public class PlayerAttack : MonoBehaviour
         {
             case State.PlayerState.P_Idle:
             case State.PlayerState.P_Run:
-                if (GameEventToUI.Instance.OnPlayer_AttackEvent())
+
+                if(CheckArrow() != null)    //화살쏜애한테 이동
                 {
+                    Debug.Log("원거리");
+                    StartCoroutine(MoveToEnemy(CheckArrow()));
                     animator.Play("First_Skill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
-                    StartCoroutine(MoveToEnemy(CheckEnemys()));
                 }
-                else if (isReadyToCounter)
+                else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
                 {
-                    if (Enemy != null)
-                    {
-                        animator.Play("First_Skill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(true);
-                        Attack_Success = true;
-                        StartCoroutine(MoveToEnemy(Enemy));
-                    }
-                    else
-                        animator.SetTrigger("Guard");
+                    Debug.Log("근접");
+                    curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
+                    animator.Play("First_Skill");
+                    GameEventToUI.Instance.OnSkillGaugeActive(true);
+                    Attack_Success = true;
+                    StartCoroutine(MoveToEnemy(curAttackEnemy));
                 }
                 else
                     animator.SetTrigger("Guard");
@@ -82,21 +78,22 @@ public class PlayerAttack : MonoBehaviour
                 switch (color)
                 {
                     case COLORZONE.NONE://검은색 맞추면 딜레이로 돌입
-                        PlayerDelay();
                         GameEventToUI.Instance.OnSkillGaugeActive(false);
                         PlayerDelay();
-                        //들어가 있는 에너미 위치 초기화
-                        if (Enemy != null)
-                            Enemy = null;
+                       
                         break;
                     case COLORZONE.GREEN:
                     case COLORZONE.YELLOW:
                     case COLORZONE.RED:// 색깔 맞추면 다음스킬 가까운적 이동
-                        Attack_Success = true;
-                        animator.SetTrigger("NextSkill");
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        GameEventToUI.Instance.OnSkillGaugeActive(true);
-                        StartCoroutine(MoveToEnemy(CheckEnemys()));
+                        if(curAttackEnemy.GetComponent<Monster>().monsterState == State.MonsterState.M_Dead)
+                        {
+                            Attack_Success = true;
+                            animator.SetTrigger("NextSkill");
+                            GameEventToUI.Instance.OnSkillGaugeActive(false);
+                            GameEventToUI.Instance.OnSkillGaugeActive(true);
+                            curAttackEnemy = CheckEnemys();
+                        }
+                        
                         break;
                 }
                 break;
@@ -116,17 +113,37 @@ public class PlayerAttack : MonoBehaviour
     Transform CheckEnemys()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
+        if (colliders.Length == 0) return null;
         float dist = 0f;
         Transform T = null;
         for (int i = 0; i < colliders.Length; ++i)
         {
-            Debug.Log(colliders[i].name);
+            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
             float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {
                 dist = d;
                 T = colliders[i].transform;
             }
+        }
+
+        return T;
+    }
+
+    //화살이 있는지 찾아보자
+    Transform CheckArrow()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.up, ArrowRadius, LayerMask.GetMask("Bullet"));
+        if (colliders.Length == 0) return null;
+
+        Transform T = colliders[0].gameObject.GetComponent<Arrow>().EnemyTranform;
+        float dist = Vector3.Distance(transform.position,T.position);
+
+        for(int i = 1; i < colliders.Length; ++i)
+        {
+            float d = Vector3.Distance(transform.position, colliders[i].transform.position);
+            if (d < dist)
+                T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
         }
 
         return T;
@@ -154,23 +171,27 @@ public class PlayerAttack : MonoBehaviour
         trail.SetActive(false);
     }
 
-    //적 인식범위 디버깅
+    //디버깅
     private void OnDrawGizmos()
     {
+        //적인식범위
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 8);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, ArrowRadius);
     }
 
-    //화살 충돌상태면 화살카운터 가능으로
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
-        {
-            isReadyToCounter = true;
-            if (Enemy == null)
-                Enemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
-        }
-    }
+    ////화살 충돌상태면 화살카운터 가능으로
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+    //    {
+    //        isReadyToCounter = true;
+    //        if (Enemy == null)
+    //            Enemy = other.gameObject.GetComponent<Arrow>().EnemyTranform;
+    //    }
+    //}
 
     public void AttackReset()
     {

@@ -42,7 +42,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
             Player_Hit(t, damage);
     }
     #endregion
-    public delegate bool AttackEnvent();
+    public delegate KeyValuePair<bool,Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 
     public delegate bool Attack_success();
@@ -68,7 +68,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
         talk(isOn, id, npcName);
     }
 
-    public bool OnPlayer_AttackEvent()
+    public KeyValuePair<bool, Transform> OnPlayer_AttackEvent()
     {
         return Player_Attack.Invoke();
     }
