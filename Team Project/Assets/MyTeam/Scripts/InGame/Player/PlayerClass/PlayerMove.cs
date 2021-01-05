@@ -29,6 +29,12 @@ public class PlayerMove : MonoBehaviour
         //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
 
+    private void Start()
+    {
+        GameData.Instance.player.position = transform;
+        GameData.Instance.player.controller = controller;
+    }
+
     private void FixedUpdate()
     {
         //방향키 wasd이동

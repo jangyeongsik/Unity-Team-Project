@@ -105,6 +105,7 @@ public class Player
     public float counterTime;           //카운터 판정 타임
     public bool isDashPossible;
     public PlayerSkill skill;
+    public CharacterController controller;
 
     public Player() {
         id = 0;
