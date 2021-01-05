@@ -44,6 +44,7 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(e_Warrior.monsterState);
         if (!dead)
         {
 
@@ -63,6 +64,8 @@ public class EnemyWarrior : MonoBehaviour
                 e_Warrior.navigation.enabled = false;
 
                 dead = true;
+                running = false;
+                counterjudgement = false;
                 e_Warrior.animator.SetBool("IsRun", false);
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("isDead");
@@ -173,6 +176,7 @@ public class EnemyWarrior : MonoBehaviour
 
     public void ExitHit()
     {
+        if (e_Warrior.monsterState == State.MonsterState.M_Damage)
         e_Warrior.monsterState = State.MonsterState.M_Idle;
     }
     void attackCount()

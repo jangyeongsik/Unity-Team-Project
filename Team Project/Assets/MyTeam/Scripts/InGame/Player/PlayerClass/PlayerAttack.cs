@@ -85,13 +85,32 @@ public class PlayerAttack : MonoBehaviour
                     case COLORZONE.GREEN:
                     case COLORZONE.YELLOW:
                     case COLORZONE.RED:// 색깔 맞추면 다음스킬 가까운적 이동
+                        //현재 때리던거 죽으면
                         if(curAttackEnemy.GetComponent<Monster>().monsterState == State.MonsterState.M_Dead)
+                        {
+                            Debug.Log("여기들왔음");
+                            curAttackEnemy = CheckEnemys();
+                            if(curAttackEnemy == null) // 공격할거 없으면
+                            {
+                                animator.CrossFade("Idle", 0.1f);
+                                Attack_Success = false;
+                                GameEventToUI.Instance.OnSkillGaugeActive(false);
+                            }
+                            else //다른 공격할게 있다면
+                            {
+                                Attack_Success = true;
+                                animator.SetTrigger("NextSkill");
+                                GameEventToUI.Instance.OnSkillGaugeActive(false);
+                                GameEventToUI.Instance.OnSkillGaugeActive(true);
+                                StartCoroutine(MoveToEnemy(curAttackEnemy));
+                            }
+                        }
+                        else
                         {
                             Attack_Success = true;
                             animator.SetTrigger("NextSkill");
                             GameEventToUI.Instance.OnSkillGaugeActive(false);
                             GameEventToUI.Instance.OnSkillGaugeActive(true);
-                            curAttackEnemy = CheckEnemys();
                         }
                         
                         break;
@@ -118,7 +137,11 @@ public class PlayerAttack : MonoBehaviour
         Transform T = null;
         for (int i = 0; i < colliders.Length; ++i)
         {
-            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
+            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead)
+            {
+                Debug.Log("스킵함");
+                continue;
+            }
             float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {
