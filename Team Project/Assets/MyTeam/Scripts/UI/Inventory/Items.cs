@@ -37,11 +37,8 @@ public class Ingredient
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
-    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
-    [NonSerialized]
-    public Sprite image;
     public int count;
 }
 [Serializable]
@@ -50,7 +47,6 @@ public class Misc
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
-    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
     [NonSerialized]

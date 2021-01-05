@@ -137,7 +137,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     switch (pInven.EquipmentList[i].itemGrade)
                     {
                         case 1:
-                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.green;
+                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.gray;
                             break;
                         case 2:
                             slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.blue;

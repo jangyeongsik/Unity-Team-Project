@@ -104,6 +104,7 @@ public class Player
     public int presetID;
     public float counterTime;           //카운터 판정 타임
     public bool isDashPossible;
+    public CharacterController controller;
     public Player() {
         id = 0;
         p_name = "";

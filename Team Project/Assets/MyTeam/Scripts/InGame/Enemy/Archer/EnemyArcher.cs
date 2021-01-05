@@ -8,7 +8,7 @@ public class EnemyArcher : MonoBehaviour
 {
     private Monster monster;
 
-    public GameObject target;
+    private GameObject target;
     public Transform arrowTarget;
 
     public Transform arrowFirePoint;
@@ -25,6 +25,7 @@ public class EnemyArcher : MonoBehaviour
     private void Start()
     {
         monster = GetComponent<Monster>();
+        target = GameData.Instance.player.position.gameObject;
         setting();
     }
 

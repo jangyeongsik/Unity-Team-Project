@@ -16,19 +16,18 @@ public class PlayerMove : MonoBehaviour
     float x;
     float z;
     Vector3 dir;
-
     private void Awake()
     {
-        
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
         //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
     }
-
     private void Start()
     {
+        GameData.Instance.player.position = transform;
+        GameData.Instance.player.controller = controller;
     }
 
     private void FixedUpdate()
