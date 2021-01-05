@@ -44,21 +44,9 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(e_Warrior.monsterState);
+        Debug.Log(counterjudgement);
         if (!dead)
         {
-
-            if (GameEventToUI.Instance.Attack_SuccessEvent())
-            {
-                count++;
-
-                e_Warrior.animator.SetBool("IsRun", false);
-                e_Warrior.animator.SetBool("IsAttack", false);
-                e_Warrior.animator.SetTrigger("Hit");
-                e_Warrior.monsterState = State.MonsterState.M_Damage;
-
-                GameEventToUI.Instance.OnAttactReset();
-            }
             if (count >= 3)
             {
                 e_Warrior.navigation.enabled = false;
@@ -100,6 +88,7 @@ public class EnemyWarrior : MonoBehaviour
         {
             AttackNocice.SetActive(false);
             attackTime = 0;
+            counterjudgement = false;
         }
 
     }
@@ -203,5 +192,19 @@ public class EnemyWarrior : MonoBehaviour
     public void AttackSetting()
     {
         attackTime = 0;
+    }
+
+    public void AttackHit()
+    {
+        count++;
+
+        e_Warrior.animator.SetBool("IsRun", false);
+        e_Warrior.animator.SetBool("IsAttack", false);
+        e_Warrior.animator.SetTrigger("Hit");
+        e_Warrior.monsterState = State.MonsterState.M_Damage;
+        if (GameEventToUI.Instance.Attack_SuccessEvent())
+        {
+            GameEventToUI.Instance.OnAttactReset();
+        }
     }
 }

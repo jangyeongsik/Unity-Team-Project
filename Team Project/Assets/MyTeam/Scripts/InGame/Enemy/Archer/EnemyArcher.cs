@@ -63,7 +63,6 @@ public class EnemyArcher : MonoBehaviour
             default:
                 break;
         }
-        OnDeadEvent();
     }
 
     private void Attack()
@@ -145,8 +144,8 @@ public class EnemyArcher : MonoBehaviour
     }
     public void OnDeadEvent()
     {
-        //if(Input.GetKeyDown(KeyCode.T))
-        //monster.animator.SetBool("isDead", true);
+        monster.animator.SetBool("isDead", true);
+        monster.monsterState = State.MonsterState.M_Dead;
     }
 
     public void OnTargetingEvent()

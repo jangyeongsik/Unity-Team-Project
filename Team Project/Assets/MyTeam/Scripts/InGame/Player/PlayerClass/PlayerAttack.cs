@@ -50,20 +50,24 @@ public class PlayerAttack : MonoBehaviour
 
                 if(CheckArrow() != null)    //화살쏜애한테 이동
                 {
-                    Debug.Log("원거리");
-                    StartCoroutine(MoveToEnemy(CheckArrow()));
+                    curAttackEnemy = CheckArrow();
+                    StartCoroutine(MoveToEnemy(curAttackEnemy));
                     animator.Play("First_Skill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
+                    //에너미 히트 이벤트
+                    EnemyHitEvent();
+                    Debug.Log("원거리");
                 }
                 else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
                 {
-                    Debug.Log("근접");
                     curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
                     animator.Play("First_Skill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
                     StartCoroutine(MoveToEnemy(curAttackEnemy));
+                    //에너미 히트 이벤트
+                    EnemyHitEvent();
                 }
                 else
                     animator.SetTrigger("Guard");
@@ -103,6 +107,8 @@ public class PlayerAttack : MonoBehaviour
                                 GameEventToUI.Instance.OnSkillGaugeActive(false);
                                 GameEventToUI.Instance.OnSkillGaugeActive(true);
                                 StartCoroutine(MoveToEnemy(curAttackEnemy));
+                                //에너미 히트 이벤트
+                                EnemyHitEvent();
                             }
                         }
                         else
@@ -111,6 +117,8 @@ public class PlayerAttack : MonoBehaviour
                             animator.SetTrigger("NextSkill");
                             GameEventToUI.Instance.OnSkillGaugeActive(false);
                             GameEventToUI.Instance.OnSkillGaugeActive(true);
+                            //에너미 히트 이벤트
+                            EnemyHitEvent();
                         }
                         
                         break;
@@ -137,11 +145,8 @@ public class PlayerAttack : MonoBehaviour
         Transform T = null;
         for (int i = 0; i < colliders.Length; ++i)
         {
-            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead)
-            {
-                Debug.Log("스킵함");
-                continue;
-            }
+            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
+
             float d = Vector3.Distance(transform.position, colliders[i].transform.position);
             if (dist == 0 || d < dist)
             {
@@ -260,5 +265,20 @@ public class PlayerAttack : MonoBehaviour
         dir.y = 0;
         dir.Normalize();
         transform.LookAt(transform.position + dir);
+    }
+
+    //현재 공격중인 거 체력 깎아버리기
+    void EnemyHitEvent()
+    {
+        if (curAttackEnemy == null) return;
+        switch (curAttackEnemy.tag)
+        {
+            case "EnemyWarrior":
+                curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
+                break;
+            case "EnemyArcher":
+                curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
+                break;
+        }
     }
 }
