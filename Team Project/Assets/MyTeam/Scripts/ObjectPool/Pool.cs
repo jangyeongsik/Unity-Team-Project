@@ -30,7 +30,6 @@ public class Pool : MonoBehaviour
 
     public GameObject PopObject()
     {
-        Debug.Log(objStack.Count);
         if (this.objStack.Count <= 0)
         {
             Allocate();

@@ -8,6 +8,7 @@ public class P_2ndSkill : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         GameData.Instance.player.m_state = State.PlayerState.P_2nd_Skill;
+        GameData.Instance.player.skill.SkillEffectActive(animator.GetNextAnimatorClipInfo(layerIndex)[0].clip);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

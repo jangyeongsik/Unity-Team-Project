@@ -17,18 +17,16 @@ public class PlayerMove : MonoBehaviour
     float z;
     Vector3 dir;
 
+    Outline outline;
+
     private void Awake()
     {
-        
+        outline = GetComponent<Outline>();
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
         //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
         //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
-    }
-
-    private void Start()
-    {
     }
 
     private void FixedUpdate()
@@ -42,6 +40,7 @@ public class PlayerMove : MonoBehaviour
     {
         Dash();
         Guard();
+        WallCheck();
     }
 
     private void OnDestroy()
@@ -63,11 +62,11 @@ public class PlayerMove : MonoBehaviour
         //카메라 방향으로 변환
         Transform cmT = Camera.main.transform;
         dir = cmT.TransformDirection(dir);
-        dir.y = 0;
+        dir.y -= 0.9f; 
         dir.Normalize();
 
         controller.Move(dir * speed * Time.deltaTime);
-
+        dir.y = 0;
         transform.LookAt(transform.position + dir);
         if (x != 0 || z != 0)
         {
@@ -142,4 +141,20 @@ public class PlayerMove : MonoBehaviour
             GameEventToUI.Instance.OnEventInterActionOnOff(false);
         }
     }
+
+
+    void WallCheck()
+    {
+        RaycastHit hit;
+        Vector3 dir = (transform.position+ Vector3.up) - Camera.main.transform.position;
+        Debug.DrawRay(Camera.main.transform.position, dir);
+        if(Physics.Raycast(Camera.main.transform.position,dir,out hit,dir.magnitude))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Object"))
+                outline.enabled = true;
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                outline.enabled = false;   
+        }
+    }
+
 }

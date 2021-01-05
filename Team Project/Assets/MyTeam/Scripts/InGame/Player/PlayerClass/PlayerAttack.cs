@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject trail;
     Animator animator;
     CharacterController controller;
+    PlayerSkill playerSkill;
 
     bool Attack_Success = false;
     bool isReadyToCounter = false;
@@ -52,17 +53,16 @@ public class PlayerAttack : MonoBehaviour
                 {
                     curAttackEnemy = CheckArrow();
                     StartCoroutine(MoveToEnemy(curAttackEnemy));
-                    animator.Play("First_Skill");
+                    animator.SetTrigger("NextSkill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
                     //에너미 히트 이벤트
                     EnemyHitEvent();
-                    Debug.Log("원거리");
                 }
                 else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
                 {
                     curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
-                    animator.Play("First_Skill");
+                    animator.SetTrigger("NextSkill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
                     StartCoroutine(MoveToEnemy(curAttackEnemy));
@@ -92,7 +92,6 @@ public class PlayerAttack : MonoBehaviour
                         //현재 때리던거 죽으면
                         if(curAttackEnemy.GetComponent<Monster>().monsterState == State.MonsterState.M_Dead)
                         {
-                            Debug.Log("여기들왔음");
                             curAttackEnemy = CheckEnemys();
                             if(curAttackEnemy == null) // 공격할거 없으면
                             {

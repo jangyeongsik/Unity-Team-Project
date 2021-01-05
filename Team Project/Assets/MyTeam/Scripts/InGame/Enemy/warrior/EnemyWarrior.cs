@@ -44,7 +44,6 @@ public class EnemyWarrior : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(counterjudgement);
         if (!dead)
         {
             if (count >= 3)
