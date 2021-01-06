@@ -12,10 +12,7 @@ public class Arrow : PoolableObject
     }
     private void Update()
     {
-
         transform.Translate(Vector3.forward * 15f * Time.deltaTime);
-       
-
     }
 
     private void OnTriggerEnter(Collider other)

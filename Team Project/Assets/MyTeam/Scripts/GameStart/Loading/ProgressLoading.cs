@@ -16,7 +16,7 @@ public class ProgressLoading : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync("UI Scene");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("MainGameScene");
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)

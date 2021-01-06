@@ -34,7 +34,13 @@ namespace State
         M_Groar,
         M_Attack,
         M_Return,
-        M_Damage
+        M_Damage,
+        M_Dash
+    }
+
+    public enum NpcState
+    {
+        N_Idle
     }
 
 }

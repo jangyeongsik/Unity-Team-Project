@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyWarrior : MonoBehaviour
 {
-    private Monster e_Warrior;          //몬스터 클래스
+    private Monster e_Warrior;                  //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     private GameObject target;
@@ -131,7 +131,6 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Idle()
     {
-
         if (P_distance() > e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Move;
@@ -168,6 +167,7 @@ public class EnemyWarrior : MonoBehaviour
         if (e_Warrior.monsterState == State.MonsterState.M_Damage)
         e_Warrior.monsterState = State.MonsterState.M_Idle;
     }
+
     void attackCount()
     {
         attackTime += Time.deltaTime;
@@ -182,7 +182,6 @@ public class EnemyWarrior : MonoBehaviour
         }
         AttackNocice.SetActive(counterjudgement);
     }
-
 
     private KeyValuePair<bool, Transform> Player_AttackEvent()
     {

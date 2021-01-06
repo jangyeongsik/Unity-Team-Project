@@ -278,6 +278,9 @@ public class PlayerAttack : MonoBehaviour
             case "EnemyArcher":
                 curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
                 break;
+            case "EnemyViper":
+                curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
+                break;
         }
     }
 }

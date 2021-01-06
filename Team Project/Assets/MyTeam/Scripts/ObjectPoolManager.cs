@@ -23,11 +23,9 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Start()
     {
-        
         objectPool = new Pool(5, PreFap);
 
         objectPool.Allocate();
-
     }
 
 

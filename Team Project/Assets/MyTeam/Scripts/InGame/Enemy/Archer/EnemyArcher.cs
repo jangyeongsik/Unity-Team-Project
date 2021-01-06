@@ -68,7 +68,6 @@ public class EnemyArcher : MonoBehaviour
 
     private void Attack()
     {
-
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (distanceToTarget > monster.navigation.stoppingDistance)
         {
@@ -79,7 +78,6 @@ public class EnemyArcher : MonoBehaviour
 
     private void Idle()
     {
-        
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (distanceToTarget < monster.attack_aware_distance)
         {
@@ -156,9 +154,6 @@ public class EnemyArcher : MonoBehaviour
 
     public void ArrowFire()
     {
-        //GameObject arrow = Instantiate(arrowPrefab, arrowFirePoint.position, Quaternion.identity);                                       
-        //arrow.GetComponent<Arrow>().Fire(arrowTarget);
-        //GameObject arrow = Instantiate(arrowPrefab);
         GameObject arrow = ObjectPoolManager.GetInstance().objectPool.PopObject();
       
         Vector3 dir = tPos - arrowFirePoint.position;
