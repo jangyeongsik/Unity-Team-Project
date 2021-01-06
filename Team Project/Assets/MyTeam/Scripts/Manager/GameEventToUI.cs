@@ -101,6 +101,4 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         TPCanvasOnOff(isOn);
     }
-    
-
 }

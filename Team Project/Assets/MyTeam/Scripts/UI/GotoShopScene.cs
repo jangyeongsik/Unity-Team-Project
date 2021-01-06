@@ -18,6 +18,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject SettingCanvas;
     public GameObject TPCanvas;
     public GameObject TPOperateCanvas;
+    public GameObject CraftCanvas;
 
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
@@ -45,19 +46,20 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         SceneManager.LoadScene("MainGameScene", LoadSceneMode.Additive);
-        GameData.Instance.player.SetGravity(0.9f);
+        GameData.Instance.player.SetGravity(0.9f); 
     }
 
     private void Start()
     {
         GameObject text = TalkCanvas.transform.Find("sorse").gameObject;
-        talk = text.GetComponent<Text>() as Text;
+        talk = text.GetComponent<Text>();
 
         CanvasList.Add(shopCanvas);
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);
         CanvasList.Add(InventoryCanvas);
         CanvasList.Add(SettingCanvas);
+        CanvasList.Add(CraftCanvas);
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
@@ -126,17 +128,37 @@ public class GotoShopScene : MonoBehaviour
     //장비창(캐릭터 창) 켜기
     public void EquipmentScreenOn()
     {
-        InventoryCanvas.SetActive(true);
-        EquipUI.SetActive(true);
+        if (!InventoryCanvas.activeSelf)
+        {
+            InventoryCanvas.SetActive(true);
+        }
+        if (!EquipUI.activeSelf)
+        {
+            EquipUI.SetActive(true);
+        }
         Toggles[0].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //가방 창 켜기
     public void InvenScreenOn()
     {
-        InventoryCanvas.SetActive(true);
-        InvenUI.SetActive(true);
+        if (!InventoryCanvas.activeSelf)
+        {
+            InventoryCanvas.SetActive(true);
+        }
+        if (!InvenUI.activeSelf)
+        {
+            InvenUI.SetActive(true);
+        }
         Toggles[1].GetComponent<MenuButtonsController>().SetIsOn();
-        Inventory.Instance.ChangeTabToEquipment();
+    }
+    //제작 창 켜기
+    public void CraftScreenOn()
+    {
+        if (!CraftCanvas.activeSelf)
+        {
+            CraftCanvas.SetActive(true);
+        }
+        Toggles[2].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //설정 창 켜기
     public void SettingScreenOn()
@@ -146,12 +168,9 @@ public class GotoShopScene : MonoBehaviour
     //모든 UI창 끄기
     public void SetAllInactive()
     {
-        foreach (GameObject a in CanvasList)
+        for (int i = 0; i < CanvasList.Count; i++)
         {
-            if (a.activeSelf)
-            {
-                a.SetActive(false);
-            }
+            CanvasList[i].SetActive(false);
         }
     }
     //UI 스크린 변경
@@ -175,7 +194,7 @@ public class GotoShopScene : MonoBehaviour
                 InvenScreenOn();
                 break;
             case 3:
-
+                CraftScreenOn();
                 break;
             case 4:
                 break;
@@ -195,7 +214,7 @@ public class GotoShopScene : MonoBehaviour
         //트리거 리셋
         for (int i = 0; i < 5; i++)
         {
-            Toggles[i].animator.SetTrigger("Deselected");
+            Toggles[i].GetComponent<MenuButtonsController>().ResetTrigger();
         }
         yield return new WaitForSeconds(0.5f);
         Menu.transform.GetChild(0).GetComponent<TMP_Dropdown>().value = 0;
@@ -203,7 +222,7 @@ public class GotoShopScene : MonoBehaviour
         UIMenuButtons.SetActive(false);
     }
 
-    public void OnOffbadgeCabvas()
+    public void OnOffBadgeCanvas()
     {
         BadgeCanvastOnOff = !BadgeCanvastOnOff;
         BadgeCanvas.SetActive(BadgeCanvastOnOff);

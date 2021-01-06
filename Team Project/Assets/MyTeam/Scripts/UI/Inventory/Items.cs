@@ -10,6 +10,12 @@ public enum EQUIPMENTTYPE
     GLOVE,
     BOOTS
 }
+public enum ITEMCATEGORY
+{
+    EQUIPMENT = 1,
+    INGREDIENT,
+    MISC
+}
 public class Items {}
 [Serializable]
 public class Equipment
@@ -30,6 +36,7 @@ public class Equipment
     public float def;
     public int counterJudgement;
     public int count;
+    public int productionID;
 }
 [Serializable]
 public class Ingredient //아이템 재료 db
@@ -37,11 +44,8 @@ public class Ingredient //아이템 재료 db
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
-    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
-    [NonSerialized]
-    public Sprite image;
     public int count;
 }
 [Serializable]
@@ -50,10 +54,7 @@ public class Misc // 기타
     public int ID;
     public string name;
     public ITEMCATEGORY itemCategory;
-    public int scriptName;
     public int itemGrade;
     public int itemScriptID;
-    [NonSerialized]
-    public Sprite image;
     public int count;
 }

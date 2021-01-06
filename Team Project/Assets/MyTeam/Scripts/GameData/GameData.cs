@@ -12,6 +12,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public Player player;
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
+    public List<Ingredient> ingredientData;
 
     string playerFilePath;
 
@@ -20,6 +21,8 @@ public class GameData : SingletonMonobehaviour<GameData>
         //data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
         Table table = CSVReader.Reader.ReadCSVToTable("EquipmentData");
         equipmentData = table.TableToList<Equipment>();
+        Table ingred = CSVReader.Reader.ReadCSVToTable("IngredientData");
+        ingredientData = ingred.TableToList<Ingredient>();
         //System.GC.Collect();
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 
@@ -47,7 +50,7 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     //아이템 매니저 함수들
     //===================================================================
-    public Equipment findEquipment(string itemname)
+    public Equipment FindEquipment(string itemname)
     {
         int i;
         for (i = 0; i < equipmentData.Count; i++)
@@ -65,7 +68,7 @@ public class GameData : SingletonMonobehaviour<GameData>
 
         return p;
     }
-    public Equipment findEquipmentByID(int _ID)
+    public Equipment FindEquipmentByID(int _ID)
     {
         int i;
         for (i = 0; i < equipmentData.Count; i++)
@@ -82,8 +85,28 @@ public class GameData : SingletonMonobehaviour<GameData>
         p = equipmentData[i];
 
         return p;
-    }    //===================================================================
+    }
+    public Ingredient FindIngredientByID(int _ID)
+    {
+        int i;
+        for (i = 0; i < ingredientData.Count; i++)
+        {
+            if (ingredientData[i].ID.Equals(_ID))
+            {
+                break;
+            }
+        }
+        if (i >= ingredientData.Count)
+            return null;
+
+        Ingredient p = new Ingredient();
+        p = ingredientData[i];
+
+        return p;
+    }
+    //===================================================================
     //게임 끝날때 저장
+    #region 플레이어 데이터 관련
     private void OnDestroy()
     {
         playerDataList.datas = playerData;
@@ -136,4 +159,5 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerDataList = JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData");
         playerData = playerDataList.datas;
     }
+    #endregion
 }

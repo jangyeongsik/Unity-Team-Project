@@ -54,9 +54,15 @@ public class UIEventToGame : Singleton<UIEventToGame>
     #endregion
 
     //텔레포터 isActivated로 변경
-    public event System.Action TPActivate;
-    public void OnEventTPActivate()
+    public event System.Action<bool> TPActivate;
+    //텔레포터 작동 안함 메시지 보냄
+    public event System.Action<bool> CancelActivate;
+    public void OnTPActivate(bool isOn)
     {
-        TPActivate();
+        TPActivate(isOn);
+    }
+    public void OnCancel(bool isOn)
+    {
+        CancelActivate(isOn);
     }
 }
