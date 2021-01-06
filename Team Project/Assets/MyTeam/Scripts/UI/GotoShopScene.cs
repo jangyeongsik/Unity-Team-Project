@@ -16,6 +16,8 @@ public class GotoShopScene : MonoBehaviour
     public GameObject EncyclopediaCanvas;
     public GameObject MinimapCanvas;
     public GameObject SettingCanvas;
+    public GameObject TPCanvas;
+    public GameObject TPOperateCanvas;
 
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
@@ -40,7 +42,10 @@ public class GotoShopScene : MonoBehaviour
     {
         GameEventToUI.Instance.onOff += ShopOn;
         GameEventToUI.Instance.talk += TalkOn;
+        GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
+        GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         SceneManager.LoadScene("MainGameScene", LoadSceneMode.Additive);
+        GameData.Instance.player.SetGravity(0.9f);
     }
 
     private void Start()
@@ -214,6 +219,14 @@ public class GotoShopScene : MonoBehaviour
     {
         MinimapCanvasOnOff = !MinimapCanvasOnOff;
         MinimapCanvas.SetActive(MinimapCanvasOnOff);
+    }
+    public void OnOffTPOperateCanvas(bool isOn)
+    {
+        TPOperateCanvas.SetActive(isOn);
+    }
+    public void OnOffTPCanvas(bool isOn)
+    {
+        TPCanvas.SetActive(isOn);
     }
 
 }

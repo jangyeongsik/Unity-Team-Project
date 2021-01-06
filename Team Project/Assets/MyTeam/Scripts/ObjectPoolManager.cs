@@ -30,7 +30,8 @@ public class ObjectPoolManager : MonoBehaviour
 
     }
 
-    void OnDestroy()
+
+    void Destroy()
     {
         objectPool.Dispose();
         singleton = null;

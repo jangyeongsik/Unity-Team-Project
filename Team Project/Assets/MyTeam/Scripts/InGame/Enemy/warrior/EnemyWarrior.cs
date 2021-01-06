@@ -8,7 +8,7 @@ public class EnemyWarrior : MonoBehaviour
     private Monster e_Warrior;          //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
-    public GameObject target;
+    private GameObject target;
     Vector3 offset;
 
 
@@ -30,6 +30,7 @@ public class EnemyWarrior : MonoBehaviour
     {
         GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
         e_Warrior = GetComponent<Monster>();
+        target = GameData.Instance.player.position.gameObject;
         setting();
     }
 
@@ -123,8 +124,8 @@ public class EnemyWarrior : MonoBehaviour
     {
         running = true;
         yield return new WaitForSecondsRealtime(0.25f);
-        
-        e_Warrior.navigation.SetDestination(target.transform.position);
+        if(!dead)
+            e_Warrior.navigation.SetDestination(target.transform.position);
         running = false;
     }
 

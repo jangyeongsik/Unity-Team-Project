@@ -34,7 +34,6 @@ public class UIEventToGame : Singleton<UIEventToGame>
     }
     #endregion
 
-
     #region "플레이어 스킬버튼"
 
     public System.Action<float, COLORZONE> playerAttack;
@@ -53,4 +52,11 @@ public class UIEventToGame : Singleton<UIEventToGame>
         Player_Delay?.Invoke();
     }
     #endregion
+
+    //텔레포터 isActivated로 변경
+    public event System.Action TPActivate;
+    public void OnEventTPActivate()
+    {
+        TPActivate();
+    }
 }

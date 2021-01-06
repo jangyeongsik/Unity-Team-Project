@@ -36,13 +36,13 @@ public class GameEventToUI : Singleton<GameEventToUI>
     #region "플레이어 에너미한테 피격"
     public event System.Action<Transform, int> Player_Hit;
 
-    public void OnPlayerHit(Transform t,int damage)
+    public void OnPlayerHit(Transform t, int damage)
     {
         if (Player_Hit != null)
             Player_Hit(t, damage);
     }
     #endregion
-    public delegate KeyValuePair<bool,Transform> AttackEnvent();
+    public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 
     public delegate bool Attack_success();
@@ -56,13 +56,15 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> onOff;
 
     public event System.Action<bool, int, string> talk;
-    public event System.Action<bool> interOnOff; 
+    public event System.Action<bool> interOnOff;
+    public event System.Action<bool> TPOpearteOnOff;
+    public event System.Action<bool> TPCanvasOnOff;
 
     public void OnEventShopOnOff(bool isOn)
     {
         onOff(isOn);
     }
-    
+
     public void OnEventTalkOnOff(bool isOn, int id, string npcName)
     {
         talk(isOn, id, npcName);
@@ -91,7 +93,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         interOnOff(isOn);
     }
-
+    public void OnEventTPOpearteOnOff(bool isOn)
+    {
+        TPOpearteOnOff(isOn);
+    }
+    public void OnEventTPCanvasOnOff(bool isOn)
+    {
+        TPCanvasOnOff(isOn);
+    }
     
 
 }

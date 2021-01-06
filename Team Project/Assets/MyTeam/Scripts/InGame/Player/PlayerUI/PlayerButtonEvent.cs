@@ -8,12 +8,22 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool templeOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
-
+    [SerializeField]
+    GameObject vCam;
+    GameObject _instance;
     private void Awake()
     {
-        //SceneManager.LoadScene("UI Scene", LoadSceneMode.Additive);
+        if (_instance == null)
+        {
+            _instance = gameObject;
+            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(vCam.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
-
     private void Update()
     {
        if (Input.anyKey)

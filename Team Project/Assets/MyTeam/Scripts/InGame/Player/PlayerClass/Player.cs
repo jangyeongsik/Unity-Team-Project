@@ -103,8 +103,10 @@ public class Player
     public State.PlayerState m_state;  //상태
     public int presetID;
     public float counterTime;           //카운터 판정 타임
+    public float gravity;
     public bool isDashPossible;
     public PlayerSkill skill;
+    public CharacterController controller;
 
     public Player() {
         id = 0;
@@ -125,5 +127,9 @@ public class Player
     Player(Transform t)                 //생성자
     {
         position = t;
+    }
+    public void SetGravity(float gr)
+    {
+        gravity = gr;
     }
 }
