@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
 
     Outline outline;
 
+    public AnimationClip[] ciol;
+
     private void Awake()
     {
         outline = GetComponent<Outline>();
@@ -31,8 +33,24 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        GameData.Instance.player.position = transform;
-        GameData.Instance.player.controller = controller;
+        if(GameData.Instance.player.position == null)
+            GameData.Instance.player.position = transform;
+        if (GameData.Instance.player.controller == null)
+            GameData.Instance.player.controller = controller;
+        if (GameData.Instance.player.animator == null)
+            GameData.Instance.player.animator = animator;
+        if (GameData.Instance.player.overrideController == null)
+            GameData.Instance.player.overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+
+        AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
+        for(int i = clips.Length-1; i >= 0; --i)
+        {
+            if(clips[i].name.Contains("Base"))
+            {
+                GameData.Instance.player.orgList.Add(clips[i]);
+                GameData.Instance.player.aniList.Add(clips[i]);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -46,7 +64,7 @@ public class PlayerMove : MonoBehaviour
     {
         Dash();
         Guard();
-        WallCheck();
+        //WallCheck();
     }
 
     private void OnDestroy()
@@ -104,9 +122,9 @@ public class PlayerMove : MonoBehaviour
         if (GameData.Instance.player.m_state != State.PlayerState.P_Run &&
             GameData.Instance.player.m_state != State.PlayerState.P_Idle) return;
         Vector3 dir = new Vector3(direction.x, 0f, direction.y);
-        Transform cmT = Camera.main.transform;
-        dir = cmT.TransformDirection(dir);
-        dir.y = 0;
+        //Transform cmT = Camera.main.transform;
+        //dir = cmT.TransformDirection(dir);
+        //dir.y = 0;
         dir.Normalize();
         controller.Move(dir * amount * speed * Time.deltaTime);
         transform.LookAt(transform.position + dir);

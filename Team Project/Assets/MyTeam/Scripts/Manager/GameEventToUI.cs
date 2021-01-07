@@ -42,6 +42,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
             Player_Hit(t, damage);
     }
     #endregion
+
+    #region "실린더 게이지"
+    public event System.Action<int> PlayerCylinderGauge;
+    public void OnPlayerCylinderGauge(int value)
+    {
+        PlayerCylinderGauge?.Invoke(value);
+    }
+    #endregion
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 

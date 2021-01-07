@@ -43,4 +43,9 @@ namespace State
         N_Idle
     }
 
+    public enum NpcState
+    {
+        N_Idle
+    }
+
 }

@@ -21,6 +21,7 @@ public class PlayerSkill : MonoBehaviour
         animator = transform.GetChild(0).GetComponent<Animator>();
 
         GameData.Instance.player.skill = this;
+        Debug.Log(GameData.Instance.player.skill.skillClips.Length);
     }
 
     public void SkillEffectActive(AnimationClip clip)
@@ -29,6 +30,8 @@ public class PlayerSkill : MonoBehaviour
         {
             if(skills[i].Key.name == clip.name)
             {
+                if (skills[i].Value.activeSelf == true)
+                    skills[i].Value.SetActive(false);
                 skills[i].Value.SetActive(true);
             }
         }

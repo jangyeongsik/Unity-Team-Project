@@ -7,34 +7,36 @@ public class HeartUI : MonoBehaviour
 {
     int maxHeartSize = 10;
     Image[] hearts;
+    Image[] disabled;
 
     int currentHeart;
 
     private void Awake()
     {
-        hearts = new Image[maxHeartSize];
+        hearts = transform.Find("Active").GetComponentsInChildren<Image>();
+        disabled = transform.Find("Disabled").GetComponentsInChildren<Image>();
         int idx = 0;
 
-        foreach(Transform child in transform)
+        for(int i = 0; i < hearts.Length; ++i)
         {
             Vector3 pos = Vector3.zero;
-            pos.x = (idx % 5) * 50;
-            pos.y = (idx / 5) * -50;
-            child.localPosition = pos;
-            hearts[idx] = child.GetComponent<Image>();
-            hearts[idx].fillAmount = 0;
-            ++idx;
-            child.gameObject.SetActive(false);
+            pos.x = (i % 5) * 50;
+            pos.y = (i / 5) * -50;
+            hearts[i].transform.localPosition = pos;
+            disabled[i].transform.localPosition = pos;
+            hearts[i].fillAmount = 0;
+            hearts[i].gameObject.SetActive(false);
+            disabled[i].gameObject.SetActive(false);
         }
     }
 
     private void Start()
     {
-        for (currentHeart = 0; currentHeart < GameData.Instance.player.hp && 
-            currentHeart < hearts.Length; ++currentHeart)
+        for (currentHeart = 0; currentHeart < GameData.Instance.player.hp; ++currentHeart)
         {
             hearts[currentHeart].gameObject.SetActive(true);
             hearts[currentHeart].fillAmount = 1;
+            disabled[currentHeart].gameObject.SetActive(true);
         }
         currentHeart--;
 
@@ -74,7 +76,7 @@ public class HeartUI : MonoBehaviour
         int i = isHalf ? 1 : 0;
         for(int j = i; j < 2; j++)
         {
-            if (hearts[currentHeart].fillAmount == 1 && currentHeart < maxHeartSize -1)
+            if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
             {
                 SetNewHeart(++currentHeart, 0.5f);
             }

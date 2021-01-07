@@ -25,6 +25,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject UIMenuButtons;
     public Toggle[] Toggles;
     public GameObject Menu;
+    public GameObject SkillMenu;
 
     List<GameObject> CanvasList = new List<GameObject>();
 
@@ -60,6 +61,7 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(SettingCanvas);
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
+        CanvasList.Add(SkillMenu);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
     }
 
@@ -138,6 +140,12 @@ public class GotoShopScene : MonoBehaviour
         Toggles[1].GetComponent<MenuButtonsController>().SetIsOn();
         Inventory.Instance.ChangeTabToEquipment();
     }
+    //스킬 창 켜기
+    public void SkillScreenOn()
+    {
+        SkillMenu.SetActive(true);
+        Toggles[3].GetComponent<MenuButtonsController>().SetIsOn();
+    }
     //설정 창 켜기
     public void SettingScreenOn()
     {
@@ -178,6 +186,7 @@ public class GotoShopScene : MonoBehaviour
 
                 break;
             case 4:
+                SkillScreenOn();
                 break;
             case 5:
                 SettingScreenOn();

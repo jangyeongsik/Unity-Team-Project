@@ -1367,6 +1367,7 @@ MonoBehaviour:
     defence: 0
     position: {fileID: 0}
     cylinderCounter: 0
+    cylinderPercent: 0
     stamina: 0
     counter_judgement: 0
     p_name: 
@@ -1376,7 +1377,15 @@ MonoBehaviour:
     gravity: 0
     isDashPossible: 0
     skill: {fileID: 0}
+    playerSkillset:
+    - 
+    - 
+    - 
     controller: {fileID: 0}
+    animator: {fileID: 0}
+    overrideController: {fileID: 0}
+    orgList: []
+    aniList: []
   equipmentData: []
 --- !u!4 &793646548
 Transform:
@@ -1585,6 +1594,21 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1816810132}
+    - target: {fileID: 5948767844717650115, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_XDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948767844717650115, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_YDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948767844717650115, guid: 4cf26a4fff95b9243b0492ed423d5162,
+        type: 3}
+      propertyPath: m_ZDamping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf26a4fff95b9243b0492ed423d5162, type: 3}
 --- !u!1 &813191576
