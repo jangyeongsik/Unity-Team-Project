@@ -31,7 +31,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.monsterKind = State.MonsterKind.M_Warrier;
         target = GameData.Instance.player.position.gameObject;
         setting();
-
+        e_Warrior.navigation.enabled = true;
         e_Warrior.EnemyHitEvent += AttackHit;
     }
 

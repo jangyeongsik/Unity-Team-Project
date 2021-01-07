@@ -22,7 +22,6 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         while (GameObject.Find(portalName) == null)
         {
-            Debug.Log("대기");
             yield return new WaitForEndOfFrame();
         }
         Debug.Log(GameObject.Find(portalName).name);
