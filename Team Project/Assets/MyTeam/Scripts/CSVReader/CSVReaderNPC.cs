@@ -16,7 +16,6 @@ namespace NPCReader
 
 namespace CSVReaderNPC
 {
-
     public class CSVReaderNPC
     {
         static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
