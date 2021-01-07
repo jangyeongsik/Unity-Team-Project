@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 4653893001328706998}
   - component: {fileID: 4653893001328706997}
   - component: {fileID: 4653893001328706995}
+  - component: {fileID: -3995836442739659713}
   m_Layer: 9
   m_Name: EnemyWolf
   m_TagString: EnemyWolf
@@ -172,7 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNocice: {fileID: 4653892999781215557}
-  counterjudgement: 0
 --- !u!195 &4653893001328706997
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -220,9 +220,24 @@ MonoBehaviour:
   counter_reslstance: 0
   attack_aware_distance: 0
   target_notice_distance: 0
+  monsterKind: 0
+  counterjudgement: 0
   monsterState: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
+--- !u!65 &-3995836442739659713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400596144904433169}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3400596144904433171
 GameObject:
   m_ObjectHideFlags: 0

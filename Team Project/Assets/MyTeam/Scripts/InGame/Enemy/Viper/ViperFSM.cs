@@ -13,7 +13,6 @@ public class ViperFSM : MonoBehaviour
     bool running = false;
     private bool attacking;
     private bool dead = false;
-    public bool counterjudgement;
     private bool targeting = false;             
 
     private int count;
@@ -24,8 +23,10 @@ public class ViperFSM : MonoBehaviour
 
     private void Start()
     {
-        GameEventToUI.Instance.Player_Attack += Player_AttackViperEvent;
         viper = GetComponent<Monster>();
+        viper.position = transform;
+        viper.monsterKind = State.MonsterKind.M_Viper;
+        viper.EnemyHitEvent += AttackHit;
         setting();
         target = GameData.Instance.player.position.gameObject;
     }
@@ -39,6 +40,11 @@ public class ViperFSM : MonoBehaviour
         viper.attack_aware_distance = 10.0f;
     }
 
+    private void OnDestroy()
+    {
+        viper.EnemyHitEvent -= AttackHit;
+    }
+
     private void Update()
     {
         if(!dead)
@@ -49,14 +55,14 @@ public class ViperFSM : MonoBehaviour
 
                 dead = true;
                 running = false;
-                counterjudgement = false;
+                viper.counterjudgement = false;
                 viper.animator.SetBool("viperWalk", false);
                 viper.animator.SetBool("viperAttack", false);
                 viper.animator.SetBool("viperDead", true);
                 viper.monsterState = State.MonsterState.M_Dead;
             
-            GameEventToUI.Instance.OnAttactReset();
-                GameEventToUI.Instance.Player_Attack -= Player_AttackViperEvent;
+                GameEventToUI.Instance.OnAttactReset();
+                GameEventToUI.Instance.OnPlayerCylinderGauge(50);
             }
             switch (viper.monsterState)
             {
@@ -84,14 +90,14 @@ public class ViperFSM : MonoBehaviour
         {
             AttackNocice.SetActive(false);
             attackTime = 0;
-            counterjudgement = false;
+            viper.counterjudgement = false;
         }
     }
 
-    private KeyValuePair<bool, Transform> Player_AttackViperEvent()
-    {
-        return new KeyValuePair<bool, Transform>(counterjudgement, transform);
-    }
+    //private KeyValuePair<bool, Transform> Player_AttackViperEvent()
+    //{
+    //    return new KeyValuePair<bool, Transform>(viper.counterjudgement, transform);
+    //}
 
     private void Attack()
     {
@@ -108,13 +114,13 @@ public class ViperFSM : MonoBehaviour
 
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
-            counterjudgement = true;
+            viper.counterjudgement = true;
         }
         else
         {
-            counterjudgement = false;
+            viper.counterjudgement = false;
         }
-        AttackNocice.SetActive(counterjudgement);
+        AttackNocice.SetActive(viper.counterjudgement);
     }
 
     private void Idle()

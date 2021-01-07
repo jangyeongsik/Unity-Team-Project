@@ -43,9 +43,10 @@ namespace State
         N_Idle
     }
 
-    public enum NpcState
+    public enum MonsterKind
     {
-        N_Idle
+        M_Warrier,M_Archer,M_Viper,M_Wolf
     }
+
 
 }

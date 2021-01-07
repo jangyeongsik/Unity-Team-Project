@@ -52,12 +52,11 @@ public class PlayerAttack : MonoBehaviour
 
     void playerAttack(float time, COLORZONE color)
     {
-        Debug.Log(GameEventToUI.Instance.OnPlayer_AttackEvent().Key);
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Idle:
             case State.PlayerState.P_Run:
-                curAttackEnemy = CheckWarrier();
+                curAttackEnemy = CheckCounterEnemy();
                 if (CheckArrow() != null)    //화살쏜애한테 이동
                 {
                     curAttackEnemy = CheckArrow();
@@ -68,34 +67,8 @@ public class PlayerAttack : MonoBehaviour
                     //에너미 히트 이벤트
                     EnemyHitEvent();
                 }
-<<<<<<< HEAD
-               
-                else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
-=======
                 else if (curAttackEnemy != null) //근접카운터
->>>>>>> origin/Player
                 {
-                    //워리어 스크립트가 없다면 == 근접은 없고 원거리만 남았으면 가드
-                    //if (curAttackEnemy.GetComponent<EnemyWarrior>() == null)
-                    //    animator.SetTrigger("Guard");
-                    //태그가 워리어 라면
-                    //else if (curAttackEnemy.gameObject.CompareTag("EnemyWarrior"))
-                    //{
-                    //    if (curAttackEnemy.gameObject.GetComponent<EnemyWarrior>().Player_AttackEvent().Key)
-                    //    {
-                    //        //curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
-                    //        animator.SetTrigger("NextSkill");
-                    //        GameEventToUI.Instance.OnSkillGaugeActive(true);
-                    //        Attack_Success = true;
-                    //        StartCoroutine(MoveToEnemy(curAttackEnemy));
-                    //        //에너미 히트 이벤트
-                    //        EnemyHitEvent();
-                    //    }
-                    //    else
-                    //        animator.SetTrigger("Guard");
-                    //}
-                    //else
-                    //    animator.SetTrigger("Guard");
                     animator.SetTrigger("NextSkill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
@@ -200,21 +173,21 @@ public class PlayerAttack : MonoBehaviour
         return T;
     }
 
-    //카운터 근접 워리어 검사
-    Transform CheckWarrier()
+    //카운터 근접 검사
+    Transform CheckCounterEnemy()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Enemy"));
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
         if (colliders.Length == 0) return null;
         Transform T = null;
-        EnemyWarrior warrior;
+        Monster mon = null;
         for(int i = 0; i < colliders.Length; ++i)
         {
-            warrior = colliders[i].GetComponent<EnemyWarrior>();
-            if (warrior == null) continue;
-            if (warrior.Player_AttackEvent().Key == false) continue;
-            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
-
-            T = colliders[i].transform;
+            mon = colliders[i].GetComponent<Monster>();
+            Debug.Log(mon.monsterKind);
+            if (mon.monsterKind == State.MonsterKind.M_Archer) continue;
+            if (mon.counterjudgement == false) continue;
+            if (mon.monsterState == State.MonsterState.M_Dead) continue;
+            T = mon.position;
             break;
         }
         return T;
@@ -341,20 +314,21 @@ public class PlayerAttack : MonoBehaviour
     void EnemyHitEvent()
     {
         if (curAttackEnemy == null) return;
-        switch (curAttackEnemy.tag)
-        {
-            case "EnemyWarrior":
-                curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
-                break;
-            case "EnemyArcher":
-                curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
-                break;
-            case "EnemyViper":
-                curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
-                break;
-            case "EnemyWolf":
-                curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
-                break;
-        }
+        //switch (curAttackEnemy.tag)
+        //{
+        //    case "EnemyWarrior":
+        //        curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
+        //        break;
+        //    case "EnemyArcher":
+        //        curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
+        //        break;
+        //    case "EnemyViper":
+        //        curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
+        //        break;
+        //    case "EnemyWolf":
+        //        curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
+        //        break;
+        //}
+        curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
     }
 }

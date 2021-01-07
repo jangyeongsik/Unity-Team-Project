@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5685590909484096954}
   - component: {fileID: 5685590909484096953}
   - component: {fileID: 2471431000906137835}
+  - component: {fileID: 5498178309970552108}
   m_Layer: 9
   m_Name: EnemyViper
   m_TagString: EnemyWarrior
@@ -111,6 +112,8 @@ MonoBehaviour:
   counter_reslstance: 0
   attack_aware_distance: 0
   target_notice_distance: 0
+  monsterKind: 0
+  counterjudgement: 0
   monsterState: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
@@ -127,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNocice: {fileID: 5685590910529579543}
-  counterjudgement: 0
 --- !u!195 &2471431000906137835
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -150,6 +152,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &5498178309970552108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921514039086086227}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4921514039086086229
 GameObject:
   m_ObjectHideFlags: 0

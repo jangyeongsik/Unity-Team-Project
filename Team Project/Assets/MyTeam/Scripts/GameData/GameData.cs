@@ -123,9 +123,6 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         playerData[playerIdx].CopyPlayer(player);
         playerDataList.datas = playerData;
-        Debug.Log(player.cylinderPercent);
-        Debug.Log(playerData[playerIdx].cylinderPercent);
-        Debug.Log(playerDataList.datas[playerIdx].cylinderPercent);
         JsonManageAndroid.Instance.SaveJsonFile("PlayerData", playerDataList);
     }
 

@@ -26,6 +26,9 @@ public class EnemyArcher : MonoBehaviour
     private void Start()
     {
         monster = GetComponent<Monster>();
+        monster.position = transform;
+        monster.monsterKind = State.MonsterKind.M_Archer;
+        monster.EnemyHitEvent += OnDeadEvent;
         target = GameData.Instance.player.position.gameObject;
         setting();
       }
@@ -37,6 +40,11 @@ public class EnemyArcher : MonoBehaviour
         monster.animator = GetComponent<Animator>();
         monster.movespeed = 8.0f;
         monster.attack_aware_distance = 10.0f;
+    }
+
+    private void OnDestroy()
+    {
+        monster.EnemyHitEvent -= OnDeadEvent;
     }
     private void Update()
     {

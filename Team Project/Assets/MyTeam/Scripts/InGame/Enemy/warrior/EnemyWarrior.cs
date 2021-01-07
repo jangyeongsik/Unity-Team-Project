@@ -14,9 +14,6 @@ public class EnemyWarrior : MonoBehaviour
 
     public GameObject AttackNocice;
 
-
-    public bool counterjudgement;
-
     float attackTime;
 
     float attckCountMin = 0.2f;
@@ -30,8 +27,12 @@ public class EnemyWarrior : MonoBehaviour
     private void Start()
     {
         e_Warrior = GetComponent<Monster>();
+        e_Warrior.position = transform;
+        e_Warrior.monsterKind = State.MonsterKind.M_Warrier;
         target = GameData.Instance.player.position.gameObject;
         setting();
+
+        e_Warrior.EnemyHitEvent += AttackHit;
     }
 
     private void setting()
@@ -46,7 +47,7 @@ public class EnemyWarrior : MonoBehaviour
 
     private void OnDestroy()
     {
-           
+        e_Warrior.EnemyHitEvent -= AttackHit;
     }
 
     private void Update()
@@ -59,13 +60,13 @@ public class EnemyWarrior : MonoBehaviour
 
                 dead = true;
                 running = false;
-                counterjudgement = false;
+                e_Warrior.counterjudgement = false;
                 e_Warrior.animator.SetBool("IsRun", false);
                 e_Warrior.animator.SetBool("IsAttack", false);
                 e_Warrior.animator.SetTrigger("isDead");
                 e_Warrior.monsterState = State.MonsterState.M_Dead;
                 GameEventToUI.Instance.OnAttactReset();
-                GameEventToUI.Instance.OnPlayerCylinderGauge(10);
+                GameEventToUI.Instance.OnPlayerCylinderGauge(20);
             }
             switch (e_Warrior.monsterState)
             {
@@ -95,7 +96,7 @@ public class EnemyWarrior : MonoBehaviour
         {
             AttackNocice.SetActive(false);
             attackTime = 0;
-            counterjudgement = false;
+            e_Warrior.counterjudgement = false;
         }
 
     }
@@ -181,19 +182,19 @@ public class EnemyWarrior : MonoBehaviour
 
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
-            counterjudgement = true;
+            e_Warrior.counterjudgement = true;
         }
         else
         {
-            counterjudgement = false;
+            e_Warrior.counterjudgement = false;
         }
-        AttackNocice.SetActive(counterjudgement);
+        AttackNocice.SetActive(e_Warrior.counterjudgement);
     }
 
-    public KeyValuePair<bool, Transform> Player_AttackEvent()
-    {
-        return new KeyValuePair<bool, Transform>(counterjudgement,transform);
-    }
+    //public KeyValuePair<bool, Transform> Player_AttackEvent()
+    //{
+    //    return new KeyValuePair<bool, Transform>(e_Warrior.counterjudgement, transform);
+    //}
 
     public void AttackSetting()
     {
@@ -214,8 +215,5 @@ public class EnemyWarrior : MonoBehaviour
         }
     }
 
-    public void OnPlayerHit()
-    {
-        GameEventToUI.Instance.OnPlayerHit(transform, 1);
-    }
+  
 }

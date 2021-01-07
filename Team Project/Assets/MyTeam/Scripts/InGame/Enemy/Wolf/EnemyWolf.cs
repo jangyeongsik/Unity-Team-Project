@@ -14,7 +14,6 @@ public class EnemyWolf : MonoBehaviour
     private bool targeting = false;
     private bool attacking;
     private bool dead = false;
-    public bool counterjudgement;
 
     private Vector3 lookDirection;
     Vector3 offset;
@@ -29,14 +28,17 @@ public class EnemyWolf : MonoBehaviour
     {
         GameEventToUI.Instance.Player_Attack += Player_AttackWolfEvent;
         monster = GetComponent<Monster>();
+        monster.position = transform;
+        monster.monsterKind = State.MonsterKind.M_Wolf;
+        monster.EnemyHitEvent += AttackHit;
         WolfSetting();
         target = GameData.Instance.player.position.gameObject; 
     }
 
-    //private void OnDisable()
-    //{
-    //    GameEventToUI.Instance.Player_Attack -= Player_AttackEvent;
-    //}
+    private void OnDestroy()
+    {
+        monster.EnemyHitEvent -= AttackHit;
+    }
 
     private void WolfSetting()
     {
@@ -58,13 +60,13 @@ public class EnemyWolf : MonoBehaviour
                 monster.navigation.enabled = false;
                 dead = true;
                 wolfRunning = false;
-                counterjudgement = false;
+                monster.counterjudgement = false;
                 monster.animator.SetBool("wolfDash", false);
                 monster.animator.SetBool("wolfAttack", false);
                 monster.animator.SetTrigger("wolfDead");
                 monster.monsterState = State.MonsterState.M_Dead;
                 GameEventToUI.Instance.OnAttactReset();
-                GameEventToUI.Instance.Player_Attack -= Player_AttackWolfEvent;
+                GameEventToUI.Instance.OnPlayerCylinderGauge(35);
             }
             switch (monster.monsterState)
             {
@@ -94,13 +96,13 @@ public class EnemyWolf : MonoBehaviour
         {
             AttackNocice.SetActive(false);
             attackTime = 0;
-            counterjudgement = false;
+            monster.counterjudgement = false;
         }
     }
 
     private KeyValuePair<bool, Transform> Player_AttackWolfEvent()
     {
-        return new KeyValuePair<bool, Transform>(counterjudgement, transform);
+        return new KeyValuePair<bool, Transform>(monster.counterjudgement, transform);
     }
 
     private void Idle()
@@ -173,13 +175,13 @@ public class EnemyWolf : MonoBehaviour
 
         if (attackTime > attckCountMin && attackTime < attckCountMax)
         {
-            counterjudgement = true;
+            monster.counterjudgement = true;
         }
         else
         {
-            counterjudgement = false;
+            monster.counterjudgement = false;
         }
-        AttackNocice.SetActive(counterjudgement);
+        AttackNocice.SetActive(monster.counterjudgement);
     }
 
     public void AttackSetting()
