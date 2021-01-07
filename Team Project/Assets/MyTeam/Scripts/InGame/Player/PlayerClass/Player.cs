@@ -21,10 +21,12 @@ public class PlayerData
     public float attackSpeed;
     public int hp;
     public int stamina;
-    public int defence;
+    public float defence;
     public float counterJudgement;
     public int presetID;
     public int cylinderCounter;
+    public int cylinderPercent;
+    public string[] playerSkillset = new string[3];
 
     public PlayerData(int slot)
     {
@@ -47,6 +49,9 @@ public class PlayerData
         player.presetID = presetID;
         player.m_state = State.PlayerState.P_Idle;
         player.counterTime = 0f;
+        player.cylinderCounter = cylinderCounter;
+        player.cylinderPercent = cylinderPercent;
+        player.playerSkillset = playerSkillset;
         return player;
     }
 
@@ -64,6 +69,8 @@ public class PlayerData
         defence = 0;
         counterJudgement = 1;
         presetID = 0;
+        cylinderCounter = 0;
+        cylinderPercent = 0;
         return this;
     }
     public PlayerData DeleteData(int slot)
@@ -80,33 +87,60 @@ public class PlayerData
         defence = 0;
         counterJudgement = 0;
         presetID = 0;
+        cylinderCounter = 0;
+        cylinderPercent = 0;
         return this;
+    }
+    public void CopyPlayer(Player player)
+    {
+        slotID = player.id;
+        name = player.p_name;
+        damage = player.damage;
+        moveSpeed = player.movespeed;
+        criticalPercent = player.criticalpercent;
+        criticalDamage = player.criticaldamage;
+        attackSpeed = player.attackspeed;
+        hp = player.hp;
+        stamina = player.stamina;
+        defence = player.defence;
+        counterJudgement = player.counter_judgement;
+        presetID = player.presetID;
+        cylinderCounter = player.cylinderCounter;
+        cylinderPercent = player.cylinderPercent;
+        playerSkillset = player.playerSkillset;
     }
 }
 
 [Serializable]
 public class Player
 {
-    public int id;                        //아이디 값
-    public int hp;                        //채력
+    public int id;                          //아이디 값
+    public int hp;                          //채력
     public float movespeed;                 //움직임 속도 
     public float criticalpercent;           //크리티컬 확률
     public float criticaldamage;            //크리티컬 대미지
-    public float damage;                    //공격력
+    public int damage;                      //공격력
     public float attackspeed;               //공격속도
     public float defence;                   //방어
-    public Transform position;                  //위치       
-    public int cylinderCounter;         //실린더 개수
-    public float stamina;               //스태미너
-    public float counter_judgement;     //카운터 판결
-    public string p_name;               //이름
-    public State.PlayerState m_state;  //상태
+    public Transform position;              //위치       
+    public int cylinderCounter;             //실린더 개수
+    public int cylinderPercent;             //실린더 게이지 저장
+    public int stamina;                     //스태미너
+    public float counter_judgement;         //카운터 판결
+    public string p_name;                   //이름
+    public State.PlayerState m_state;       //상태
     public int presetID;
-    public float counterTime;           //카운터 판정 타임
+    public float counterTime;               //카운터 판정 타임
     public float gravity;
     public bool isDashPossible;
     public PlayerSkill skill;
+    public string[] playerSkillset = new string[3];
     public CharacterController controller;
+    public Animator animator;
+    public AnimatorOverrideController overrideController;
+    public List<AnimationClip> orgList = new List<AnimationClip>();
+    public List<AnimationClip> aniList = new List<AnimationClip>();
+    public List<KeyValuePair<AnimationClip, AnimationClip>> applyList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
 
     public Player() {
         id = 0;

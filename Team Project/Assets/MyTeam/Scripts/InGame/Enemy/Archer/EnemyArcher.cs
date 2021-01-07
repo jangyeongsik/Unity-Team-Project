@@ -147,6 +147,8 @@ public class EnemyArcher : MonoBehaviour
     {
         monster.animator.SetBool("isDead", true);
         monster.monsterState = State.MonsterState.M_Dead;
+        //플레이어 실린더 게이지 추가
+        GameEventToUI.Instance.OnPlayerCylinderGauge(10);
     }
 
     public void OnTargetingEvent()

@@ -42,14 +42,22 @@ public class PlayerAttack : MonoBehaviour
         UIEventToGame.Instance.Player_Delay -= PlayerDelay;
     }
 
+    //private void Update()
+    //{
+    //    if(curAttackEnemy != null)
+    //    {
+            
+    //    }
+    //}
+
     void playerAttack(float time, COLORZONE color)
     {
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Idle:
             case State.PlayerState.P_Run:
-
-                if(CheckArrow() != null)    //화살쏜애한테 이동
+                curAttackEnemy = CheckWarrier();
+                if (CheckArrow() != null)    //화살쏜애한테 이동
                 {
                     curAttackEnemy = CheckArrow();
                     StartCoroutine(MoveToEnemy(curAttackEnemy));
@@ -59,9 +67,29 @@ public class PlayerAttack : MonoBehaviour
                     //에너미 히트 이벤트
                     EnemyHitEvent();
                 }
-                else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
+                else if (curAttackEnemy != null) //근접카운터
                 {
-                    curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
+                    //워리어 스크립트가 없다면 == 근접은 없고 원거리만 남았으면 가드
+                    //if (curAttackEnemy.GetComponent<EnemyWarrior>() == null)
+                    //    animator.SetTrigger("Guard");
+                    //태그가 워리어 라면
+                    //else if (curAttackEnemy.gameObject.CompareTag("EnemyWarrior"))
+                    //{
+                    //    if (curAttackEnemy.gameObject.GetComponent<EnemyWarrior>().Player_AttackEvent().Key)
+                    //    {
+                    //        //curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
+                    //        animator.SetTrigger("NextSkill");
+                    //        GameEventToUI.Instance.OnSkillGaugeActive(true);
+                    //        Attack_Success = true;
+                    //        StartCoroutine(MoveToEnemy(curAttackEnemy));
+                    //        //에너미 히트 이벤트
+                    //        EnemyHitEvent();
+                    //    }
+                    //    else
+                    //        animator.SetTrigger("Guard");
+                    //}
+                    //else
+                    //    animator.SetTrigger("Guard");
                     animator.SetTrigger("NextSkill");
                     GameEventToUI.Instance.OnSkillGaugeActive(true);
                     Attack_Success = true;
@@ -71,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                     animator.SetTrigger("Guard");
+                
                 break;
             case State.PlayerState.P_Dash:
                 break;
@@ -82,9 +111,18 @@ public class PlayerAttack : MonoBehaviour
                 switch (color)
                 {
                     case COLORZONE.NONE://검은색 맞추면 딜레이로 돌입
-                        GameEventToUI.Instance.OnSkillGaugeActive(false);
-                        PlayerDelay();
-                       
+                        if(CheckEnemys() == null)
+                        {
+                            animator.CrossFade("Idle", 0.1f);
+                            Attack_Success = false;
+                            GameEventToUI.Instance.OnSkillGaugeActive(false);
+                        }
+                        else
+                        {
+                            GameEventToUI.Instance.OnSkillGaugeActive(false);
+                            Attack_Success = false;
+                            PlayerDelay();
+                        }
                         break;
                     case COLORZONE.GREEN:
                     case COLORZONE.YELLOW:
@@ -153,7 +191,26 @@ public class PlayerAttack : MonoBehaviour
                 T = colliders[i].transform;
             }
         }
+        return T;
+    }
 
+    //카운터 근접 워리어 검사
+    Transform CheckWarrier()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 3f, LayerMask.GetMask("Enemy"));
+        if (colliders.Length == 0) return null;
+        Transform T = null;
+        EnemyWarrior warrior;
+        for(int i = 0; i < colliders.Length; ++i)
+        {
+            warrior = colliders[i].GetComponent<EnemyWarrior>();
+            if (warrior == null) continue;
+            if (warrior.Player_AttackEvent().Key == false) continue;
+            if (colliders[i].GetComponent<Monster>().monsterState == State.MonsterState.M_Dead) continue;
+
+            T = colliders[i].transform;
+            break;
+        }
         return T;
     }
 
@@ -228,7 +285,8 @@ public class PlayerAttack : MonoBehaviour
     void PlayerHit(Transform t, int damage)
     {
         if (GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
-            GameData.Instance.player.m_state == State.PlayerState.P_Run)
+            GameData.Instance.player.m_state == State.PlayerState.P_Run ||
+            GameData.Instance.player.m_state == State.PlayerState.P_Delay)
         {
             Vector3 dir = t.position - transform.position;
             dir.y = 0;
@@ -254,6 +312,13 @@ public class PlayerAttack : MonoBehaviour
     //딜레이
     void PlayerDelay()
     {
+        if (CheckEnemys() == null)
+        {
+            animator.CrossFade("Idle", 0.1f);
+            GameEventToUI.Instance.OnSkillGaugeActive(false);
+            Attack_Success = false;
+            return;
+        }
         animator.CrossFade("Delay", 0.17f);
     }
 

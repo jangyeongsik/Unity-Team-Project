@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class CylinderGauge : MonoBehaviour
 {
-    float maxGauge = 100;
-    float curGauge;
-    float targetGauge;
+    int maxGauge = 100;
+    int curGauge;
+    int targetGauge;
     bool isAdd;
 
     [SerializeField]
@@ -15,11 +15,22 @@ public class CylinderGauge : MonoBehaviour
     [SerializeField]
     Text countTxt;
 
+    private void Start()
+    {
+        GameEventToUI.Instance.PlayerCylinderGauge += AddCylinderGauge;
+        countTxt.text = GameData.Instance.player.cylinderCounter.ToString();
+        curGauge = GameData.Instance.player.cylinderPercent;
+        targetGauge = curGauge;
+        slider.value = curGauge;
+    }
+
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.PlayerCylinderGauge -= AddCylinderGauge;
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            AddCylinderGauge(15);
-
         if(isAdd)
         {
             curGauge += 1;
@@ -27,40 +38,23 @@ public class CylinderGauge : MonoBehaviour
             {
                 curGauge -= maxGauge;
                 targetGauge -= maxGauge;
+                ++GameData.Instance.player.cylinderCounter;
             }
             if (curGauge >= targetGauge)
             {
                 curGauge = targetGauge;
                 isAdd = false;
             }
-            slider.value = curGauge;
         }
+        slider.value = curGauge;
+        GameData.Instance.player.cylinderPercent = curGauge;
+        countTxt.text = GameData.Instance.player.cylinderCounter.ToString();
     }
 
-    public void AddCylinderGauge(float percent)
+    public void AddCylinderGauge(int percent)
     {
         isAdd = true;
         targetGauge += percent;
-    }
-
-    IEnumerator FillCylinderGauge()
-    {
-        while(isAdd)
-        {
-            yield return null;
-            curGauge += 1;
-            if (curGauge >= maxGauge)
-            {
-                curGauge -= maxGauge;
-                targetGauge -= maxGauge;
-            }
-            if (curGauge >= targetGauge)
-            {
-                curGauge = targetGauge;
-                isAdd = false;
-            }
-            slider.value = curGauge;
-        }
     }
 
 }

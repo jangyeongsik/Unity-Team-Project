@@ -86,7 +86,6 @@ public class GameData : SingletonMonobehaviour<GameData>
     //게임 끝날때 저장
     private void OnDestroy()
     {
-        playerDataList.datas = playerData;
         PlayerSave();
     }
 
@@ -122,7 +121,11 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     void PlayerSave()
     {
+        playerData[playerIdx].CopyPlayer(player);
         playerDataList.datas = playerData;
+        Debug.Log(player.cylinderPercent);
+        Debug.Log(playerData[playerIdx].cylinderPercent);
+        Debug.Log(playerDataList.datas[playerIdx].cylinderPercent);
         JsonManageAndroid.Instance.SaveJsonFile("PlayerData", playerDataList);
     }
 

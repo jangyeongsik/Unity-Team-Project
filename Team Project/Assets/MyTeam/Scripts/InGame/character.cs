@@ -37,4 +37,9 @@ namespace State
         M_Damage
     }
 
+    public enum NpcState
+    {
+        N_Idle
+    }
+
 }

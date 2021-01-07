@@ -21,6 +21,7 @@ public class Arrow : PoolableObject
     private void OnTriggerEnter(Collider other)
     {
         ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
+        GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
     }
 
     IEnumerator RoMove()
