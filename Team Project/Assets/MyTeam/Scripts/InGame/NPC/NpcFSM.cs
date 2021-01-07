@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NpcFSM : MonoBehaviour
 {
     private Npc npc;
-    public GameObject target;
-    Vector3 originRotation;
-    
+    Vector3 originPos;
+
     void Start()
     {
         npc = GetComponent<Npc>();
@@ -20,14 +20,20 @@ public class NpcFSM : MonoBehaviour
         npc.animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if(other.gameObject.CompareTag("Player"))
+        switch (npc.npcState)
         {
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                transform.LookAt(target.transform);
-            }
+            case State.NpcState.N_Idle:
+                Idle();
+                break;
         }
     }
+
+    private void Idle()
+    {
+
+    }
+
+    
 }

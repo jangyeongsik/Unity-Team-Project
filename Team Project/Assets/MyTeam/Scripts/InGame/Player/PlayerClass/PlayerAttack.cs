@@ -313,21 +313,27 @@ public class PlayerAttack : MonoBehaviour
     void EnemyHitEvent()
     {
         if (curAttackEnemy == null) return;
-        //switch (curAttackEnemy.tag)
-        //{
-        //    case "EnemyWarrior":
-        //        curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
-        //        break;
-        //    case "EnemyArcher":
-        //        curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
-        //        break;
-        //    case "EnemyViper":
-        //        curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
-        //        break;
-        //    case "EnemyWolf":
-        //        curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
-        //        break;
-        //}
-        curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
+        {
+
+
+            //switch (curAttackEnemy.tag)
+            //{
+            //    case "EnemyWarrior":
+            //        curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
+            //        break;
+            //    case "EnemyArcher":
+            //        curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
+            //        break;
+            //    case "EnemyViper":
+            //        curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
+            //        break;
+            //    case "EnemyWolf":
+            //        curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
+            //        break;
+            //}
+            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
+            
+
+        }
     }
 }

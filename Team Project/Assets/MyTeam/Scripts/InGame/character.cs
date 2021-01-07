@@ -40,7 +40,7 @@ namespace State
 
     public enum NpcState
     {
-        N_Idle
+        N_Idle,
     }
 
     public enum MonsterKind
