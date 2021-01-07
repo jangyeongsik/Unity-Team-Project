@@ -23,35 +23,46 @@ public class EnemyWarrior : MonoBehaviour
     bool running = false;
 
     private bool dead;
-
     private void Start()
     {
         e_Warrior = GetComponent<Monster>();
-        e_Warrior.position = transform;
-        e_Warrior.monsterKind = State.MonsterKind.M_Warrier;
-        target = GameData.Instance.player.position.gameObject;
+
         setting();
-        e_Warrior.navigation.enabled = true;
+        target = GameData.Instance.player.position.gameObject;
         e_Warrior.EnemyHitEvent += AttackHit;
+       
     }
 
     private void setting()
     {
+        e_Warrior.position = transform;
+        e_Warrior.monsterKind = State.MonsterKind.M_Warrier;
         e_Warrior.monsterState = State.MonsterState.M_Idle;
+
         e_Warrior.navigation = GetComponent<NavMeshAgent>();
+        e_Warrior.navigation.enabled = false;
         e_Warrior.animator = GetComponent<Animator>();
         e_Warrior.movespeed = 8.0f;
         e_Warrior.attack_aware_distance = 1.5f;
         e_Warrior.navigation.enabled = true;
+
     }
 
     private void OnDestroy()
     {
         e_Warrior.EnemyHitEvent -= AttackHit;
+        
     }
 
     private void Update()
     {
+        if (!targeting)
+        {
+            if (P_distance() > 20)
+            {
+                targeting = true;
+            }
+        }
         if (!dead)
         {
             if (count >= 3)
@@ -139,16 +150,19 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Idle()
     {
-        if (P_distance() > e_Warrior.attack_aware_distance)
+        if (targeting)
         {
-            e_Warrior.monsterState = State.MonsterState.M_Move;
-            e_Warrior.animator.SetBool("IsRun", true);
-        }
-        else
-        {
-            e_Warrior.monsterState = State.MonsterState.M_Attack;
-            e_Warrior.animator.SetBool("IsRun", true);
-            e_Warrior.animator.SetBool("IsAttack", true);
+            if (P_distance() > e_Warrior.attack_aware_distance)
+            {
+                e_Warrior.monsterState = State.MonsterState.M_Move;
+                e_Warrior.animator.SetBool("IsRun", true);
+            }
+            else
+            {
+                e_Warrior.monsterState = State.MonsterState.M_Attack;
+                e_Warrior.animator.SetBool("IsRun", true);
+                e_Warrior.animator.SetBool("IsAttack", true);
+            }
         }
         if (targeting)
         {

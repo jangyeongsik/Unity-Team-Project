@@ -467,8 +467,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 80, z: 0}
 --- !u!114 &3363369127965828507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,9 +493,12 @@ MonoBehaviour:
   skillid: 0
   counter_reslstance: 0
   attack_aware_distance: 0
+  target_notice_distance: 0
+  monsterKind: 0
   monsterState: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
+  counterjudgement: 0
 --- !u!114 &8738316841184949921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,9 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd21d7fcd47b79479fa798544d88f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   AttackNocice: {fileID: 8739989548411070412}
-  counterjudgement: 0
 --- !u!1 &5755412005512227725
 GameObject:
   m_ObjectHideFlags: 0
