@@ -49,7 +49,7 @@ public class PlayerButtonEvent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             talkOnOff = !talkOnOff;
-            GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1001, other.gameObject.name);
+            GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1000, other.gameObject.name);
         }
     }
 

@@ -147,19 +147,24 @@ public class EnemyWolf : MonoBehaviour
     {
         wolfRunning = true;
         yield return new WaitForSecondsRealtime(0.3f);
-
-        monster.navigation.SetDestination(target.transform.position);
+        if(!dead)
+            monster.navigation.SetDestination(target.transform.position);
         wolfRunning = false;
     }
 
     private void StartAttack()
     {
-        
         if (targetDistance() > monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfAttack", false);
         }
+    }
+
+    public void PlayerLookAt()
+    {
+        if (!dead)
+            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
     }
 
     private float targetDistance()
