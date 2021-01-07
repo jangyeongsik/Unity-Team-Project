@@ -28,7 +28,7 @@ public class EnemyWarrior : MonoBehaviour
     private bool dead;
     private void Start()
     {
-        GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
+        GameEventToUI.Instance.Player_Attack += Player_AttackWarriorEvent;
         e_Warrior = GetComponent<Monster>();
         target = GameData.Instance.player.position.gameObject;
         setting();
@@ -59,6 +59,7 @@ public class EnemyWarrior : MonoBehaviour
                 e_Warrior.animator.SetTrigger("isDead");
                 e_Warrior.monsterState = State.MonsterState.M_Dead;
                 GameEventToUI.Instance.OnAttactReset();
+                GameEventToUI.Instance.Player_Attack -= Player_AttackWarriorEvent;
             }
             switch (e_Warrior.monsterState)
             {
@@ -183,7 +184,7 @@ public class EnemyWarrior : MonoBehaviour
         AttackNocice.SetActive(counterjudgement);
     }
 
-    private KeyValuePair<bool, Transform> Player_AttackEvent()
+    private KeyValuePair<bool, Transform> Player_AttackWarriorEvent()
     {
         return new KeyValuePair<bool, Transform>(counterjudgement,transform);
     }

@@ -116,9 +116,9 @@ GameObject:
   - component: {fileID: 4653893001328706998}
   - component: {fileID: 4653893001328706997}
   - component: {fileID: 4653893001328706995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyWolf
-  m_TagString: Untagged
+  m_TagString: EnemyWolf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,7 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e411ff5c9e5971b40b83d0171b2c6e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3335105917166867135, guid: fba8bb4b3eab0064886ceea598c517ec, type: 3}
   AttackNocice: {fileID: 4653892999781215557}
   counterjudgement: 0
 --- !u!195 &4653893001328706997
@@ -220,6 +219,7 @@ MonoBehaviour:
   skillid: 0
   counter_reslstance: 0
   attack_aware_distance: 0
+  target_notice_distance: 0
   monsterState: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}

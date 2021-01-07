@@ -44,6 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
     void playerAttack(float time, COLORZONE color)
     {
+        Debug.Log(GameEventToUI.Instance.OnPlayer_AttackEvent().Key);
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Idle:
@@ -59,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
                     //에너미 히트 이벤트
                     EnemyHitEvent();
                 }
+               
                 else if (GameEventToUI.Instance.OnPlayer_AttackEvent().Key) //근접한테 이동
                 {
                     curAttackEnemy = GameEventToUI.Instance.OnPlayer_AttackEvent().Value;
@@ -280,6 +282,9 @@ public class PlayerAttack : MonoBehaviour
                 break;
             case "EnemyViper":
                 curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
+                break;
+            case "EnemyWolf":
+                curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
                 break;
         }
     }

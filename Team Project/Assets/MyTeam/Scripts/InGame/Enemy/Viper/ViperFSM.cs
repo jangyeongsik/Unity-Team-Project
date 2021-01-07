@@ -24,7 +24,7 @@ public class ViperFSM : MonoBehaviour
 
     private void Start()
     {
-        GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
+        GameEventToUI.Instance.Player_Attack += Player_AttackViperEvent;
         viper = GetComponent<Monster>();
         setting();
         target = GameData.Instance.player.position.gameObject;
@@ -52,9 +52,11 @@ public class ViperFSM : MonoBehaviour
                 counterjudgement = false;
                 viper.animator.SetBool("viperWalk", false);
                 viper.animator.SetBool("viperAttack", false);
-                viper.animator.SetTrigger("viperDead");
+                viper.animator.SetBool("viperDead", true);
                 viper.monsterState = State.MonsterState.M_Dead;
-                GameEventToUI.Instance.OnAttactReset();
+            
+            GameEventToUI.Instance.OnAttactReset();
+                GameEventToUI.Instance.Player_Attack -= Player_AttackViperEvent;
             }
             switch (viper.monsterState)
             {
@@ -86,7 +88,7 @@ public class ViperFSM : MonoBehaviour
         }
     }
 
-    private KeyValuePair<bool, Transform> Player_AttackEvent()
+    private KeyValuePair<bool, Transform> Player_AttackViperEvent()
     {
         return new KeyValuePair<bool, Transform>(counterjudgement, transform);
     }
@@ -161,12 +163,6 @@ public class ViperFSM : MonoBehaviour
         running = false;
     }
 
-    public void OnDeadEvent()
-    {
-        viper.animator.SetBool("viperDead", true);
-        viper.monsterState = State.MonsterState.M_Dead;
-    }
-
     public void PlayerLookAt()
     {   
         if(!dead)
@@ -175,22 +171,29 @@ public class ViperFSM : MonoBehaviour
 
     public void AttackHit()
     {
-        count++;
-
-        viper.animator.SetBool("viperWalk", false);
-        viper.animator.SetBool("viperAttack", false);
-        viper.animator.SetTrigger("viperHit");
-        viper.monsterState = State.MonsterState.M_Damage;
-        if (GameEventToUI.Instance.Attack_SuccessEvent())
+        if (!dead)
         {
-            GameEventToUI.Instance.OnAttactReset();
+            count++;
+
+            viper.animator.SetBool("viperWalk", false);
+            viper.animator.SetBool("viperAttack", false);
+            viper.animator.SetTrigger("viperHit");
+            viper.monsterState = State.MonsterState.M_Damage;
+            if (GameEventToUI.Instance.Attack_SuccessEvent())
+            {
+                GameEventToUI.Instance.OnAttactReset();
+            }
         }
-    }
+}
 
     public void ExitHit()
     {
-        if (viper.monsterState == State.MonsterState.M_Damage)
-            viper.monsterState = State.MonsterState.M_Idle;
+        if (!dead)
+        {
+            if (viper.monsterState == State.MonsterState.M_Damage)
+                viper.monsterState = State.MonsterState.M_Move;
+            viper.animator.SetBool("viperWalk", true);
+        }
     }
 
     public void AttackSetting()
@@ -203,4 +206,6 @@ public class ViperFSM : MonoBehaviour
         float distance = (transform.position - target.transform.position).magnitude;
         return distance;
     }
+
+
 }

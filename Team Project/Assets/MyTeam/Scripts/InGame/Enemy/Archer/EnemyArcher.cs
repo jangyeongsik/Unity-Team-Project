@@ -20,6 +20,7 @@ public class EnemyArcher : MonoBehaviour
 
     Vector3 tPos;
 
+    bool counterjudgement;
     private bool attacking;
 
     private void Start()
@@ -27,7 +28,7 @@ public class EnemyArcher : MonoBehaviour
         monster = GetComponent<Monster>();
         target = GameData.Instance.player.position.gameObject;
         setting();
-    }
+      }
 
     private void setting()
     {
@@ -37,7 +38,6 @@ public class EnemyArcher : MonoBehaviour
         monster.movespeed = 8.0f;
         monster.attack_aware_distance = 10.0f;
     }
-
     private void Update()
     {
         switch (monster.monsterState)

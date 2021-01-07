@@ -27,7 +27,7 @@ public class EnemyWolf : MonoBehaviour
 
     private void Start()
     {
-        GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
+        GameEventToUI.Instance.Player_Attack += Player_AttackWolfEvent;
         monster = GetComponent<Monster>();
         WolfSetting();
         target = GameData.Instance.player.position.gameObject; 
@@ -53,15 +53,6 @@ public class EnemyWolf : MonoBehaviour
     {
         if(!dead)
         {
-            //if(GameEventToUI.Instance.Attack_SuccessEvent())
-            //{
-            //    count++;
-            //    monster.animator.SetBool("wolfDash", false);
-            //    monster.animator.SetBool("wolfAttack", false);
-            //    monster.animator.SetTrigger("wolfHit");
-            //    monster.monsterState = State.MonsterState.M_Damage;
-            //    GameEventToUI.Instance.OnAttactReset();
-            //}
             if(count >= 5)
             {
                 monster.navigation.enabled = false;
@@ -73,6 +64,7 @@ public class EnemyWolf : MonoBehaviour
                 monster.animator.SetTrigger("wolfDead");
                 monster.monsterState = State.MonsterState.M_Dead;
                 GameEventToUI.Instance.OnAttactReset();
+                GameEventToUI.Instance.Player_Attack -= Player_AttackWolfEvent;
             }
             switch (monster.monsterState)
             {
@@ -106,7 +98,7 @@ public class EnemyWolf : MonoBehaviour
         }
     }
 
-    private KeyValuePair<bool, Transform> Player_AttackEvent()
+    private KeyValuePair<bool, Transform> Player_AttackWolfEvent()
     {
         return new KeyValuePair<bool, Transform>(counterjudgement, transform);
     }
@@ -194,4 +186,25 @@ public class EnemyWolf : MonoBehaviour
     {
         attackTime = 0;
     }
+
+    public void AttackHit()
+    {
+        count++;
+
+        monster.animator.SetBool("wolfDash", false);
+        monster.animator.SetBool("wolfAttack", false);
+        monster.animator.SetTrigger("wolfHit");
+        monster.monsterState = State.MonsterState.M_Damage;
+        if (GameEventToUI.Instance.Attack_SuccessEvent())
+        {
+            GameEventToUI.Instance.OnAttactReset();
+        }
+    }
+    public void ExitHit()
+    {
+        if (monster.monsterState == State.MonsterState.M_Damage)
+            monster.monsterState = State.MonsterState.M_Idle;
+    }
+
+
 }
