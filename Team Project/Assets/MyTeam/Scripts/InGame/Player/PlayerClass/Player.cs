@@ -170,7 +170,9 @@ public class Player
     public void PlayerMovePosition(Vector3 pos)
     {
         Vector3 dir = pos - position.position;
+        Debug.Log(dir + position.position);
         controller.Move(dir);
+        Debug.Log(position.position);
         gravity = 0.9f;
     }
 }
