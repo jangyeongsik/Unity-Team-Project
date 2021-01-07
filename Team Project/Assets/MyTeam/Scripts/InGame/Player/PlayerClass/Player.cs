@@ -167,9 +167,10 @@ public class Player
         gravity = gr;
     }
 
-    public void PlayerMovePosition(Vector3 position)
+    public void PlayerMovePosition(Vector3 pos)
     {
-        Vector3 dir = position - this.position.position;
+        Vector3 dir = pos - position.position;
         controller.Move(dir);
+        gravity = 0.9f;
     }
 }

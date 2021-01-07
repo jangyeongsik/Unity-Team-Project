@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CustomTeleporterPad : MonoBehaviour
 {
+    #region "재현이형 코드"
     int padNum;
     bool isChecking = false;
     bool isCancelActivate = false;
@@ -87,4 +88,7 @@ public class CustomTeleporterPad : MonoBehaviour
     {
         UIEventToGame.Instance.TPActivate -= Activate;
     }
+    #endregion
+
+    public string ConnectPortalName;
 }

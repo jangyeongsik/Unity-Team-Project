@@ -86,7 +86,7 @@ public class PlayerMove : MonoBehaviour
         //카메라 방향으로 변환
         //Transform cmT = Camera.main.transform;
         //dir = cmT.TransformDirection(dir);
-        //dir.y -= GameData.Instance.player.gravity; 
+        dir.y -= GameData.Instance.player.gravity; 
         dir.Normalize();
 
         controller.Move(dir * speed * Time.deltaTime);

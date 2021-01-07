@@ -851,7 +851,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_Name
-      value: Bloom02
+      value: ToMap1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,7 +863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.624
+      value: 9.94
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_LocalRotation.x
@@ -899,6 +899,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
+--- !u!1 &124684538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500,
+    type: 3}
+  m_PrefabInstance: {fileID: 124684537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &124684539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124684538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e590c1c4b5e83d44ab65dff634ddab73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextPortalName: ToMap2
+  NextSceneName: MAP001
+  isPossibleMove: 0
 --- !u!1001 &130810044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13136,6 +13157,7 @@ GameObject:
   - component: {fileID: 1972657133}
   - component: {fileID: 1972657132}
   - component: {fileID: 1972657131}
+  - component: {fileID: 1972657134}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13201,13 +13223,47 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972657130}
-  m_LocalRotation: {x: 0.6858676, y: -0, z: -0, w: 0.72772634}
-  m_LocalPosition: {x: 0.56, y: 9.24, z: 16.67}
+  m_LocalRotation: {x: 0.33618313, y: 0, z: 0, w: 0.94179666}
+  m_LocalPosition: {x: 0, y: 5.0858583, z: -6.1916947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 86.608, y: 0, z: 0}
+--- !u!114 &1972657134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972657130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1983435796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13819,7 +13875,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
-      value: Bloom01
+      value: ToMap3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13872,6 +13928,16 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalScale.z
       value: 2.6793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980688406191706707, guid: 43c9cb2d40638da4d90a7303eeef2520,
+        type: 3}
+      propertyPath: NextPortalName
+      value: ToMap2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980688406191706707, guid: 43c9cb2d40638da4d90a7303eeef2520,
+        type: 3}
+      propertyPath: NextSceneName
+      value: MAP003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
