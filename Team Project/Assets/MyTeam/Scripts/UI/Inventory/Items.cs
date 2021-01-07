@@ -58,3 +58,27 @@ public class Misc // 기타
     public int itemScriptID;
     public int count;
 }
+[Serializable]
+public class Production //제작도 묶음
+{
+    public int productionID;
+    public int normal_ItemID;
+    public int normal_Ingredient_1_ID;
+    public int normal_Ingredient_1_Count;
+    public int normal_Ingredient_2_ID;
+    public int normal_Ingredient_2_Count;
+    public int rare_Item_ID;
+    public int rare_Ingredient_1_ID;
+    public int rare_Ingredient_1_Count;
+    public int rare_Ingredient_2_ID;
+    public int rare_Ingredient_2_Count;
+    public int unique_Item_1_ID;
+    public int unique_Item_2_ID;
+    public int unique_Item_3_ID;
+    public int unique_Ingredient_1_ID;
+    public int unique_Ingredient_1_Count;
+    public int unique_Ingredient_2_ID;
+    public int unique_Ingredient_2_Count;
+    public int unique_Ingredient_3_ID;
+    public int unique_Ingredient_3_Count;
+}
