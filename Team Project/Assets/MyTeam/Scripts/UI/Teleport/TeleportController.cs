@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Text;
 
-public class TeleportController : SingletonMonobehaviour<TeleportController>
+public class TeleportController : MonoBehaviour
 {
     public static GameObject player;
     StringBuilder sb = new StringBuilder();
@@ -17,7 +17,13 @@ public class TeleportController : SingletonMonobehaviour<TeleportController>
         destTPIdx = 0;
         sb.Append("MainGameScene");
         currentSceneName = sb.ToString();
-        player = GameData.Instance.player.position.gameObject;
+    }
+    private void LateUpdate()
+    {
+        if (player == null)
+        {
+            player = GameData.Instance.player.position.gameObject;
+        }
     }
     public void Teleport()
     {

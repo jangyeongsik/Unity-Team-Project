@@ -29,6 +29,9 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void MoveToCraftScreen()
     {
+        Equipment temp = Inventory.Instance.pInven.EquipmentList[slotNum];
+        GameObject craftCanvas = goToShop.CraftCanvas;
+        craftCanvas.GetComponent<CraftController>().SetCraftTree(temp);
         goToShop.ChangeScreen(3);
         gameObject.SetActive(false);
     }

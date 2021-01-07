@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public enum ITEMCATEGORY
-{
-    EQUIPMENT,
-    INGREDIENT,
-    CONSUMABLE,
-    MISC
-}
 [Serializable]
 public class PlayerInven
 {

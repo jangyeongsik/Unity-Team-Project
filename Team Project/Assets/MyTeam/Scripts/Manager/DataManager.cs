@@ -63,7 +63,16 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             AllInvenData.EquipmentList.Add(_pItem);
         }
 
-        JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
+    }
+    public void AddIngredientData(Ingredient _pItem)
+    {
+        if (!CheakDuplicateEquipmentData(_pItem))
+        {
+            AllInvenData.IngredientList.Add(_pItem);
+        }
+        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
     }
     public void RemoveEquipmentData(Equipment _pItem)
     {
@@ -114,6 +123,23 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             if (temp.ID == _pInven.ID)
             {
                 AllInvenData.EquipmentList[i].count++;
+                return true;
+            }
+        }
+        return false;
+    }
+    bool CheakDuplicateEquipmentData(Ingredient _pInven)
+    {
+        for (int i = 0; i < AllInvenData.IngredientList.Count; i++)
+        {
+            Ingredient temp;
+            temp = AllInvenData.IngredientList[i];
+            if (temp == null)
+                continue;
+
+            if (temp.ID == _pInven.ID)
+            {
+                AllInvenData.IngredientList[i].count++;
                 return true;
             }
         }

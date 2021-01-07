@@ -2,24 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class MenuButtonsController : MonoBehaviour
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+public class MenuButtonsController : MonoBehaviour, IPointerClickHandler
 {
-    Toggle toggle;
+    Toggle instance;
+    public GotoShopScene gtSS;
+    int ToggleNum;
     private void Awake()
     {
-        toggle = gameObject.GetComponent<Toggle>();
+        instance = gameObject.GetComponent<Toggle>();
+        for (int i = 0; i < gtSS.Toggles.Length; i++)
+        {
+            if (gtSS.Toggles[i] == instance)
+            {
+                ToggleNum = i;
+            }
+        }
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        gtSS.ChangeScreen(ToggleNum + 1);
     }
     public void SetIsOn()
     {
-        if (toggle.isOn)
+        for (int i = 0; i < gtSS.Toggles.Length; i++)
         {
-            gameObject.GetComponent<Animator>().ResetTrigger("Deselected");
-            gameObject.GetComponent<Animator>().SetTrigger("Selected");
+            if (gtSS.Toggles[i] != instance)
+            {
+                gtSS.Toggles[i].gameObject.GetComponent<Animator>().ResetTrigger("Selected");
+                gtSS.Toggles[i].gameObject.GetComponent<Animator>().SetTrigger("Deselected");
+            }
         }
-        else
-        {
-            gameObject.GetComponent<Animator>().ResetTrigger("Selected");
-            gameObject.GetComponent<Animator>().SetTrigger("Deselected");
-        }
+        instance.isOn = true;
+        gameObject.GetComponent<Animator>().ResetTrigger("Deselected");
+        gameObject.GetComponent<Animator>().SetTrigger("Selected");
+        Debug.Log(instance + " 's Trigger Selected");
+    }
+    public void ResetTrigger()
+    {
+        gameObject.GetComponent<Animator>().ResetTrigger("Selected");
+        gameObject.GetComponent<Animator>().SetTrigger("Deselected");
+        Debug.Log(instance + " 's Trigger Deselected");
     }
 }

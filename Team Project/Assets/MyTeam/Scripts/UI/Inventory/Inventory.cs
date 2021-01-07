@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+[Serializable]
+public class IntSprite : SerializableDictionary<int, Sprite>
+{ }
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
     public static bool inventoryActivated = false;
@@ -16,7 +18,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //플레이어 인벤토리
     public PlayerInven pInven = new PlayerInven();
     //아이템 이미지 리스트
-    public List<Sprite> itemImages;
+    public IntSprite itemImages;
 
     public bool isVisible;
     //0 = 장비, 1 = 재료, 2 = 기타
@@ -53,15 +55,23 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         //인벤에 아이템 추가
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            AddEquipment("검");
+            AddEquipment(1000);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            AddEquipment("활");
+            AddEquipment(1004);
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            AddEquipment("창");
+            AddEquipment(1002);
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            AddIngredient(101);
+            AddIngredient(102);
+            AddIngredient(103);
+            AddIngredient(104);
+            AddIngredient(105);
         }
         isVisible = gameObject.activeSelf;
     }
@@ -134,18 +144,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.EquipmentList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                     slots[i].transform.GetChild(2).gameObject.SetActive(true);
-                    switch (pInven.EquipmentList[i].itemGrade)
-                    {
-                        case 1:
-                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.gray;
-                            break;
-                        case 2:
-                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.blue;
-                            break;
-                        case 3:
-                            slots[i].transform.GetChild(2).GetComponent<Image>().color = Color.red;
-                            break;
-                    }
+                    SetGradeColor(pInven.EquipmentList[i].itemGrade, i);
                 }
                 #endregion
                 break;
@@ -168,6 +167,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
                     slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.IngredientList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                    SetGradeColor(pInven.IngredientList[i].itemGrade, i);
                 }
                 #endregion
                 break;
@@ -190,6 +190,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
                     slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.MiscList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                    SetGradeColor(pInven.MiscList[i].itemGrade, i);
                 }
                 #endregion
                 break;
@@ -197,15 +198,41 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         
     }
     //아이템 추가
-    public void AddEquipment(string itemName)
+    public void AddEquipment(int itemID)
     {
-        DataManager.Instance.AddEquipmentData(GameData.Instance.findEquipment(itemName));
+        DataManager.Instance.AddEquipmentData(GameData.Instance.FindEquipmentByID(itemID));
         for (int i = 0; i < pInven.EquipmentList.Count; i++)
         {
             slots[i].GetComponent<ItemInfo>().RefreshCount(true);
         }
         AddSlot();
         SetImage();
+    }
+    public void AddIngredient(int itemID)
+    {
+        DataManager.Instance.AddIngredientData(GameData.Instance.FindIngredientByID(itemID)); 
+        for (int i = 0; i < pInven.IngredientList.Count; i++)
+        {
+            slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+        }
+        AddSlot();
+        SetImage();
+    }
+    //등급 이미지(색상) 교체
+    public void SetGradeColor(int itemGrade, int index)
+    {
+        switch (itemGrade)
+        {
+            case 1:
+                slots[index].transform.GetChild(2).GetComponent<Image>().color = Color.gray;
+                break;
+            case 2:
+                slots[index].transform.GetChild(2).GetComponent<Image>().color = Color.blue;
+                break;
+            case 3:
+                slots[index].transform.GetChild(2).GetComponent<Image>().color = Color.red;
+                break;
+        }
     }
     //=====================================
     //아이템탭 교체

@@ -183,7 +183,6 @@ public class PlayerAttack : MonoBehaviour
         for(int i = 0; i < colliders.Length; ++i)
         {
             mon = colliders[i].GetComponent<Monster>();
-            Debug.Log(mon.monsterKind);
             if (mon.monsterKind == State.MonsterKind.M_Archer) continue;
             if (mon.counterjudgement == false) continue;
             if (mon.monsterState == State.MonsterState.M_Dead) continue;

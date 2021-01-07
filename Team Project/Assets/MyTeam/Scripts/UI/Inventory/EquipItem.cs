@@ -14,7 +14,6 @@ public class EquipItem : MonoBehaviour
     public Button GloveBtn;
     public Button BootsBtn;
 
-
     public Canvas infoScreen;
     public Image image;
     public Transform infoUI;
