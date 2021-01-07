@@ -2176,7 +2176,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
-      value: Bloom01
+      value: ToMap2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3819,6 +3819,7 @@ GameObject:
   - component: {fileID: 954387892}
   - component: {fileID: 954387891}
   - component: {fileID: 954387890}
+  - component: {fileID: 954387893}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3884,13 +3885,47 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954387889}
-  m_LocalRotation: {x: 0.68386686, y: -0, z: -0, w: 0.72960687}
-  m_LocalPosition: {x: 6.07, y: 17.32, z: -2.14}
+  m_LocalRotation: {x: 0.33618313, y: 0, z: 0, w: 0.94179666}
+  m_LocalPosition: {x: 0, y: 5.0858583, z: -6.1916947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 86.29301, y: 0, z: 0}
+--- !u!114 &954387893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954387889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &966344326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6149,7 +6184,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_Name
-      value: Bloom02
+      value: StartingPortal
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_LocalPosition.x
