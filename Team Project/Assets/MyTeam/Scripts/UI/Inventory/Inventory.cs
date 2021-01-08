@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-[Serializable]
-public class IntSprite : SerializableDictionary<int, Sprite>
-{ }
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
     public static bool inventoryActivated = false;
@@ -31,6 +28,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     bool CoroutineIsRunning = false;
     private void Start()
     {
+        itemImages = GameData.Instance.itemImages;
         //플레이어 인벤토리 초기화
         pInven = DataManager.Instance.AllInvenData;
         //인벤토리 탭 번호 (0 = 장비, 1 = 재료, 2 = 기타)
@@ -39,16 +37,19 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         //인벤토리 드롭다운 메뉴 초기화
         dropDown = menu.GetComponent<TMP_Dropdown>();
         //슬롯초기화
-        slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
-        slotCount = pInven.EquipmentList.Count;
+        slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>(); 
+        if (pInven == null){ slotCount = 0; }
+        else { slotCount = pInven.EquipmentList.Count; }
         SetSlotNumber();
         SlotChange(slotCount);
 
         //시작할 때 높은 등급 순으로 정렬
-        DataManager.Instance.SortByIDDecending(InvenTabNum);
-        pInven = DataManager.Instance.AllInvenData;
-        SetImage();
-
+        if (pInven != null)
+        {
+            DataManager.Instance.SortByIDDecending(InvenTabNum);
+            pInven = DataManager.Instance.AllInvenData;
+            SetImage();
+        }
         isVisible = InvenUI.activeSelf;
     }
     private void Update()
@@ -81,8 +82,11 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         {
             if (!CoroutineIsRunning)
             {
-                CoroutineIsRunning = true;
-                StartCoroutine(RefreshCoroutine());
+                if (pInven != null)
+                {
+                    CoroutineIsRunning = true;
+                    StartCoroutine(RefreshCoroutine());
+                }
             }
         }
     }
@@ -132,6 +136,12 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //슬롯버튼 한개 잠금해제
     public void AddSlot()
     {
+        if (pInven == null)
+        {
+            slotCount = 0;
+            SlotChange(slotCount);
+            return;
+        }
         switch (InvenTabNum)
         {
             case 0:

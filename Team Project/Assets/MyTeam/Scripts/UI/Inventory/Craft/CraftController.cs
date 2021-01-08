@@ -34,6 +34,7 @@ public class CraftController : MonoBehaviour
 
     //현재 떠있는 production
     Production currentProd = null;
+
     //현재 선택되어 있는 특수재료
     int currentUniqueIngID = 0;
     int currentUniqueIngCount = 0;
@@ -341,30 +342,27 @@ public class CraftController : MonoBehaviour
                 break;
             case EQUIPMENTTYPE.ARMOR:
                 sb.Clear();
-                sb.AppendFormat("방어력 : {0}\n", e.def);
-                sb.AppendFormat("생명력 : {0}\n", e.HPAdd);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.HELM:
                 sb.Clear();
-                sb.AppendFormat("방어력 : {0}\n", e.def);
-                sb.AppendFormat("생명력 : {0}\n", e.HPAdd);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.GLOVE:
                 sb.Clear();
-                sb.AppendFormat("방어력 : {0}\n", e.def);
-                sb.AppendFormat("생명력 : {0}\n", e.HPAdd);
                 sb.AppendFormat("공격속도 : {0}\n", e.attackSpeed);
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.BOOTS:
                 sb.Clear();
-                sb.AppendFormat("방어력 : {0}\n", e.def);
-                sb.AppendFormat("기력 : {0}\n", e.staminaAdd);
                 sb.AppendFormat("이동속도 : {0}\n", e.moveSpeed);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 eqInfo.description.text = sb.ToString();
                 break;
         }

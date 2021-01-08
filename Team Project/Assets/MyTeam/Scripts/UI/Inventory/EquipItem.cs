@@ -65,9 +65,12 @@ public class EquipItem : MonoBehaviour
     public void RefreshAllImages()
     {
         pE = DataManager.Instance.EquipInvenData;
-        foreach (Equipment a in pE.CurrentEquipmentList)
+        if (pE != null)
         {
-            SetButtonImage(a);
+            foreach (Equipment a in pE.CurrentEquipmentList)
+            {
+                SetButtonImage(a);
+            }
         }
     }
     public void SetButtonImage(Equipment _item)
