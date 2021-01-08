@@ -30,4 +30,9 @@ public class Monster : character
         if(monsterState == State.MonsterState.M_Attack)
             GameEventToUI.Instance.OnPlayerHit(transform, 1);
     }
+
+    public void SetGameObjectFale()
+    {
+        gameObject.SetActive(false);
+    }
 }

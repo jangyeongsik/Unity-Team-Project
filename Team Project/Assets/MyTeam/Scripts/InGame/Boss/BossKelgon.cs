@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class BossKelgon : MonoBehaviour
 {
-    private BossData b_Kelgon;          //몬스터 클래스
+    private BossData b_Kelgon ;         //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public GameObject target;
@@ -100,7 +100,7 @@ public class BossKelgon : MonoBehaviour
                     B_Move();
                     break;
                 case State.BossState.B_Attack:
-                    B_Attack();
+                    //B_Attack();
                     break;
                 case State.BossState.B_SkillChargeOne:
                     B_SkillChargeOne();
@@ -124,7 +124,7 @@ public class BossKelgon : MonoBehaviour
                 case State.BossState.B_Dead:
                     break;
                 case State.BossState.B_AttackTwo:
-                    B_AttackTwo();
+                    //B_AttackTwo();
                     break;
             }
         }
@@ -180,7 +180,7 @@ public class BossKelgon : MonoBehaviour
     }
 
 
-    private void B_Attack()
+    public void B_Attack()
     {
 
         if (P_distance() > b_Kelgon.attack_aware_distance)
@@ -196,7 +196,7 @@ public class BossKelgon : MonoBehaviour
         }
 
     }
-    private void B_AttackTwo()
+    public void B_AttackTwo()
     {
 
         if (P_distance() > b_Kelgon.attack_aware_distance)

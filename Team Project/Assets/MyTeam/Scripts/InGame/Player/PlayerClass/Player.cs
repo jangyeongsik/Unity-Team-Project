@@ -172,5 +172,6 @@ public class Player
         controller.enabled = false;
         position.position = pos;
         controller.enabled = true;
+        gravity = 0.9f;
     }
 }

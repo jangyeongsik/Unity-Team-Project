@@ -24,8 +24,6 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
         {
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log(GameObject.Find(portalName).name);
-        Debug.Log(GameObject.Find(portalName).transform.position);
         GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position);
     }
 }
