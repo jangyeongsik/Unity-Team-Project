@@ -87,6 +87,7 @@ public class PlayerAttack : MonoBehaviour
             case State.PlayerState.P_1st_Skill:
             case State.PlayerState.P_2nd_Skill:
             case State.PlayerState.P_3rd_Skill:
+
                 switch (color)
                 {
                     case COLORZONE.NONE://검은색 맞추면 딜레이로 돌입
@@ -129,6 +130,7 @@ public class PlayerAttack : MonoBehaviour
                         }
                         else
                         {
+                            StartCoroutine(MoveToEnemy(curAttackEnemy));
                             Attack_Success = true;
                             animator.SetTrigger("NextSkill");
                             GameEventToUI.Instance.OnSkillGaugeActive(false);
@@ -146,6 +148,8 @@ public class PlayerAttack : MonoBehaviour
                 break;
         }
     }
+
+  
 
     public bool Attack_SuccessEvent()
     {
@@ -218,6 +222,8 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(SetTrail());
         yield return new WaitForEndOfFrame();
         Vector3 dir = T.position - transform.position;
+        dir.x += Random.Range(-2, 2);
+        dir.z += Random.Range(-2, 2);
         dir.y = 0;
         float d = dir.magnitude - 1.5f;
         dir.Normalize();

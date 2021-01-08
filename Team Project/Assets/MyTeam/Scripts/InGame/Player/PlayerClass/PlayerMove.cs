@@ -143,6 +143,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
         animator.SetTrigger("Dash");
+        dashSpeed = 20.0f;
     }
 
     void Guard()
