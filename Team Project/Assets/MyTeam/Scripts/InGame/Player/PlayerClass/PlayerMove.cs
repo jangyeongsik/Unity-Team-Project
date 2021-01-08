@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
         controller.Move(Vector3.down * GameData.Instance.player.gravity * Time.deltaTime);
         Dash();
         Guard();
-        //WallCheck();
+        //WallCheck();3.09 + 23.48721
     }
 
     private void OnDestroy()

@@ -48,5 +48,10 @@ namespace State
         M_Warrier,M_Archer,M_Viper,M_Wolf
     }
 
+    public enum BossState
+    {
+        B_Idle, B_Move, B_Attack, B_SkillChargeOne, B_SkillChargeTwo, B_SkillChargeThree, B_SkillOne, B_SkillTwo, B_SkillThree, B_Hit, B_Dead, B_AttackTwo
+    }
+
 
 }
