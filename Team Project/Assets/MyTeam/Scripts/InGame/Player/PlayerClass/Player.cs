@@ -141,6 +141,7 @@ public class Player
     public List<AnimationClip> orgList = new List<AnimationClip>();
     public List<AnimationClip> aniList = new List<AnimationClip>();
     public List<KeyValuePair<AnimationClip, AnimationClip>> applyList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+    public bool isSceneMove = false;
 
     public Player() {
         id = 0;
@@ -167,10 +168,12 @@ public class Player
         gravity = gr;
     }
 
-    public void PlayerMovePosition(Vector3 pos)
+    public IEnumerator PlayerMovePosition(Vector3 pos)
     {
         controller.enabled = false;
         position.position = pos;
+        isSceneMove = true;
+        yield return new WaitForSeconds(0.2f);
         controller.enabled = true;
         gravity = 0.9f;
     }

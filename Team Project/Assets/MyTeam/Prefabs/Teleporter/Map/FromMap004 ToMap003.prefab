@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 942618451385532452}
   - component: {fileID: 942618451384533732}
   - component: {fileID: 8332246367646219661}
-  - component: {fileID: 5818161579365715795}
   - component: {fileID: 2614711411431737559}
   m_Layer: 0
   m_Name: FromMap004 ToMap003
@@ -28,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942618451386801188}
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 24.2, z: -1.7576008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -96,21 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 5, z: 2}
   m_Center: {x: 0, y: -2.762783, z: 0}
---- !u!114 &5818161579365715795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942618451386801188}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81217360c12ffd469f52222d8c449ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportationHeightOffset: 0
-  isActivated: 0
-  ConnectPortalName: 
 --- !u!114 &2614711411431737559
 MonoBehaviour:
   m_ObjectHideFlags: 0
