@@ -62,7 +62,6 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        controller.Move(Vector3.down * GameData.Instance.player.gravity * Time.deltaTime);
         Dash();
         Guard();
         //WallCheck();3.09 + 23.48721
@@ -113,7 +112,9 @@ public class PlayerMove : MonoBehaviour
     void PlayerDash()
     {
         if (GameData.Instance.player.m_state != State.PlayerState.P_Dash) return;
-        controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+        Vector3 dir = transform.forward;
+        dir.y -= GameData.Instance.player.gravity;
+        controller.Move(dir * dashSpeed * Time.deltaTime);
         if (dashSpeed > 0)
             dashSpeed -= 0.5f;
     }
