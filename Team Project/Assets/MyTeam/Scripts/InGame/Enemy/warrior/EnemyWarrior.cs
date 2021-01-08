@@ -143,7 +143,6 @@ public class EnemyWarrior : MonoBehaviour
     {
         running = true;
         yield return new WaitForSecondsRealtime(0.25f);
-        Debug.Log(e_Warrior.navigation);
         if(!dead)
             e_Warrior.navigation.SetDestination(target.transform.position);
         running = false;

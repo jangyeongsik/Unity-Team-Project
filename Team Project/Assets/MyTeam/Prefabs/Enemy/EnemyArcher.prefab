@@ -289,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607292702365250989}
   m_LocalRotation: {x: -0.3401108, y: 0.61993927, z: 0.61993927, w: 0.3401108}
-  m_LocalPosition: {x: -0, y: 77.62565, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 9.999999, y: 9.999999, z: 10}
   m_Children:
   - {fileID: 6607292702365411727}
@@ -1353,7 +1353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607292702365251057}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.99744976, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 47.338665, y: 47.338665, z: 47.338665}
   m_Children: []
   m_Father: {fileID: 6607292702365411795}
@@ -1512,7 +1512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751cfaeeb86eb724f8aef23c5b125967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   arrowTarget: {fileID: 0}
   arrowFirePoint: {fileID: 8641110282272252151}
   arrowPrefab: {fileID: 186447331761152080, guid: 15e7fc5d13203454fbc8cc1cb376febb,
@@ -1576,9 +1575,12 @@ MonoBehaviour:
   skillid: 0
   counter_reslstance: 0
   attack_aware_distance: 0
+  target_notice_distance: 0
+  monsterKind: 0
   monsterState: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
+  counterjudgement: 0
 --- !u!1 &6607292702365251061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,7 +1684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607292702365251063}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 92.86254, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 47.338665, y: 47.338665, z: 47.338665}
   m_Children: []
   m_Father: {fileID: 6607292702365411795}

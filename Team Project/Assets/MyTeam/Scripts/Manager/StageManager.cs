@@ -16,6 +16,5 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        Debug.Log(isClear);
     }
 }

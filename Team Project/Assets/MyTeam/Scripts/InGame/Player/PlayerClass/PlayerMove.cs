@@ -62,6 +62,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        controller.Move(Vector3.down * GameData.Instance.player.gravity * Time.deltaTime);
         Dash();
         Guard();
         //WallCheck();

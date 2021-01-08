@@ -23,7 +23,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Start()
     {
-        objectPool = new Pool(5, PreFap);
+        objectPool = new Pool(10, PreFap);
 
         objectPool.Allocate();
     }
