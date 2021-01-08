@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
 using System.IO;
 
+//아이템 이미지 딕셔너리
+[Serializable]
+public class IntSprite : SerializableDictionary<int, Sprite>
+{ }
 public class GameData : SingletonMonobehaviour<GameData>
 {
+    //아이템 이미지 딕셔너리
+    public IntSprite itemImages;
+
     private PlayerDataList playerDataList;
     int playerIdx = 0;
     public List<PlayerData> playerData;
@@ -13,7 +21,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
     public List<Ingredient> ingredientData;
-    public List<Production> producitonData;
+    public List<Production> productionData;
     string playerFilePath;
 
     private void Start()
@@ -24,7 +32,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         Table ingred = CSVReader.Reader.ReadCSVToTable("IngredientData");
         ingredientData = ingred.TableToList<Ingredient>();
         Table prod = CSVReader.Reader.ReadCSVToTable("ProductionDB");
-        producitonData = prod.TableToList<Production>();
+        productionData = prod.TableToList<Production>();
         //System.GC.Collect();
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 
@@ -40,14 +48,6 @@ public class GameData : SingletonMonobehaviour<GameData>
         {
             Debug.Log(a.ID + " " + a.name + " " + a.itemGrade);
         }
-    }
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.F2))
-        //{
-        //    Print();
-        //}
-
     }
 
     //아이템 매니저 함수들
