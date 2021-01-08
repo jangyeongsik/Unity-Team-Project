@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class BossKelgon : MonoBehaviour
 {
-    private character b_Kelgon = new BossData();         //몬스터 클래스
+    private BossData b_Kelgon ;         //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public GameObject target;
