@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3aaf9f40a3d4a3240ad1da1736f3015a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0d935e5143c1e8740ab4c1e0864a9eab, type: 2}
 --- !u!1001 &2173878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29864,7 +29864,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!195 &3853319724630334479
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -29886,7 +29886,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!195 &3853319725346522940
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -29908,7 +29908,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!195 &3853319725458429921
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -29930,7 +29930,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!195 &3853319725758394466
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -29952,7 +29952,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!4 &4735224400566040113
 Transform:
   m_ObjectHideFlags: 0
@@ -30169,6 +30169,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853319724354186614, guid: 4daa757e8393dcf468794b28dd1f0775,
+        type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3853319724354186614, guid: 4daa757e8393dcf468794b28dd1f0775,
+        type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4daa757e8393dcf468794b28dd1f0775, type: 3}
