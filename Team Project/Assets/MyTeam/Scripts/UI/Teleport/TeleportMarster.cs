@@ -12,8 +12,6 @@ public class TeleportMarster : MonoBehaviour
     {
         if (!isPossibleMove) return;
         if (!other.CompareTag("Player")) return;
-        Debug.Log(NextPortalName);
-        Debug.Log(NextSceneName);
         SceneMgr.Instance.LoadScene(NextSceneName, NextPortalName);
     }
 }

@@ -4,7 +4,29 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    public static bool isClear = false;
+    public bool isClear = false;
+    public bool isRegen = true;
+
+    static Monster[] enemys;
+
+    TeleportMarster[] potars;
+
+    private void Start()
+    {
+        if(enemys == null)
+            enemys = GameObject.FindObjectsOfType<Monster>();
+        if (potars == null)
+            potars = GameObject.FindObjectsOfType<TeleportMarster>();
+        Debug.Log(enemys.Length);
+        if(!isRegen && isClear)
+        {
+            for(int i = 0; i < enemys.Length; ++i)
+            {
+                enemys[i].gameObject.SetActive(true);
+            }
+        }
+
+    }
 
     private void Update()
     {
@@ -13,8 +35,18 @@ public class StageManager : MonoBehaviour
             if(GameObject.FindObjectOfType<Monster>() == null)
             {
                 isClear = true;
+                isRegen = true;
             }
         }
+        else
+        {
+            for (int i = 0; i < potars.Length; ++i)
+            {
+                potars[i].isPossibleMove = true;
+            }
+        }
+        Debug.Log(isRegen);
 
     }
+
 }
