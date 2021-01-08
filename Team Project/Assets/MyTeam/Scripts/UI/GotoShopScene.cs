@@ -227,7 +227,7 @@ public class GotoShopScene : MonoBehaviour
         StartCoroutine(CloseUICoroutine());
 
         //무기 체인지
-        UIEventToGame.Instance.OnSwordChangeEvent(2);
+        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
     public IEnumerator CloseUICoroutine()
     {
