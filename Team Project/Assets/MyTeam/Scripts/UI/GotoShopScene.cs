@@ -218,6 +218,9 @@ public class GotoShopScene : MonoBehaviour
     public void CloseUI()
     {
         StartCoroutine(CloseUICoroutine());
+
+        //무기 체인지
+        UIEventToGame.Instance.OnSwordChangeEvent(2);
     }
     public IEnumerator CloseUICoroutine()
     {
