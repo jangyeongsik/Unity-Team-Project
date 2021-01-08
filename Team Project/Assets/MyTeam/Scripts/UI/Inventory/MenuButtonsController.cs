@@ -37,12 +37,10 @@ public class MenuButtonsController : MonoBehaviour, IPointerClickHandler
         instance.isOn = true;
         gameObject.GetComponent<Animator>().ResetTrigger("Deselected");
         gameObject.GetComponent<Animator>().SetTrigger("Selected");
-        Debug.Log(instance + " 's Trigger Selected");
     }
     public void ResetTrigger()
     {
         gameObject.GetComponent<Animator>().ResetTrigger("Selected");
         gameObject.GetComponent<Animator>().SetTrigger("Deselected");
-        Debug.Log(instance + " 's Trigger Deselected");
     }
 }

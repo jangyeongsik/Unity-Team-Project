@@ -13,7 +13,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
     public List<Ingredient> ingredientData;
-    public List<Production> producitonData;
+    public List<Production> productionData;
     string playerFilePath;
 
     private void Start()
@@ -24,7 +24,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         Table ingred = CSVReader.Reader.ReadCSVToTable("IngredientData");
         ingredientData = ingred.TableToList<Ingredient>();
         Table prod = CSVReader.Reader.ReadCSVToTable("ProductionDB");
-        producitonData = prod.TableToList<Production>();
+        productionData = prod.TableToList<Production>();
         //System.GC.Collect();
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 

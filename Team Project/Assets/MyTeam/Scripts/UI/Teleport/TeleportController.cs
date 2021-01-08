@@ -17,6 +17,7 @@ public class TeleportController : MonoBehaviour
         destTPIdx = 0;
         sb.Append("MainGameScene");
         currentSceneName = sb.ToString();
+        DontDestroyOnLoad(gameObject);
     }
     private void LateUpdate()
     {

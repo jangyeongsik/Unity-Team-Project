@@ -56,23 +56,26 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             }
         }
     }
-    public void AddEquipmentData(Equipment _pItem)
+    public void AddEquipmentData(Equipment _pItem, int count)
     {
-        if (!CheakDuplicateEquipmentData(_pItem))
+        if (!CheakDuplicateEquipmentData(_pItem, count))
         {
             AllInvenData.EquipmentList.Add(_pItem);
+            AddEquipmentData(_pItem, count - 1);
         }
 
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
-        //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
+        //JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
-    public void AddIngredientData(Ingredient _pItem)
+    public void AddIngredientData(Ingredient _pItem, int count)
     {
-        if (!CheakDuplicateEquipmentData(_pItem))
+        if (!CheakDuplicateIngredientData(_pItem, count))
         {
             AllInvenData.IngredientList.Add(_pItem);
+            AddIngredientData(_pItem, count - 1);
         }
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        //JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void RemoveEquipmentData(Equipment _pItem)
     {
@@ -97,6 +100,29 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         }
         JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
+    public void RemoveIngredientData(Ingredient _pItem, int count = 1)
+    {
+        for (int i = 0; i < AllInvenData.IngredientList.Count; i++)
+        {
+            Ingredient temp;
+            temp = AllInvenData.IngredientList[i];
+            if (temp == null) continue;
+            if (temp.ID == _pItem.ID)
+            {
+                if (AllInvenData.IngredientList[i].count > 1)
+                {
+                    AllInvenData.IngredientList[i].count -= count;
+                    break;
+                }
+                else
+                {
+                    AllInvenData.IngredientList.Remove(AllInvenData.IngredientList[i]);
+                    break;
+                }
+            }
+        }
+        JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
+    }
     //장비리스트
     public void AddEquipInvenData(Equipment _pItem)
     {
@@ -105,13 +131,28 @@ public class DataManager : SingletonMonobehaviour<DataManager>
     }
     public void RemoveEquipInvenData(Equipment _pItem)
     {
-        if (EquipInvenData.CurrentEquipmentList.Contains(_pItem))
+        for (int i = 0; i < EquipInvenData.CurrentEquipmentList.Count; i++)
         {
-            EquipInvenData.CurrentEquipmentList.Remove(_pItem);
+            if (EquipInvenData.CurrentEquipmentList[i].equipmentType == _pItem.equipmentType)
+            {
+                EquipInvenData.CurrentEquipmentList.Remove(EquipInvenData.CurrentEquipmentList[i]);
+            }
         }
         JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerEquipData", EquipInvenData);
     }
-    bool CheakDuplicateEquipmentData(Equipment _pInven)
+    public bool IsEquipmentExist(int itemID)
+    {
+        Equipment _pItem = GameData.Instance.FindEquipmentByID(itemID);
+        for (int i = 0; i < EquipInvenData.CurrentEquipmentList.Count; i++)
+        {
+            if (EquipInvenData.CurrentEquipmentList[i].ID == _pItem.ID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool CheakDuplicateEquipmentData(Equipment _pInven, int count)
     {
         for (int i = 0; i < AllInvenData.EquipmentList.Count; i++)
         {
@@ -122,13 +163,13 @@ public class DataManager : SingletonMonobehaviour<DataManager>
 
             if (temp.ID == _pInven.ID)
             {
-                AllInvenData.EquipmentList[i].count++;
+                AllInvenData.EquipmentList[i].count += count;
                 return true;
             }
         }
         return false;
     }
-    bool CheakDuplicateEquipmentData(Ingredient _pInven)
+    bool CheakDuplicateIngredientData(Ingredient _pInven, int count)
     {
         for (int i = 0; i < AllInvenData.IngredientList.Count; i++)
         {
@@ -139,7 +180,7 @@ public class DataManager : SingletonMonobehaviour<DataManager>
 
             if (temp.ID == _pInven.ID)
             {
-                AllInvenData.IngredientList[i].count++;
+                AllInvenData.IngredientList[i].count += count;
                 return true;
             }
         }

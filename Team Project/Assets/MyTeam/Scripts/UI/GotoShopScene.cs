@@ -20,6 +20,9 @@ public class GotoShopScene : MonoBehaviour
     public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
 
+    public GameObject ItemInfoScreen;
+    public GameObject EquipInfoScreen;
+
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
     public GameObject EquipUI;
@@ -65,6 +68,8 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
         CanvasList.Add(SkillMenu);
+        CanvasList.Add(ItemInfoScreen);
+        CanvasList.Add(EquipInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
     }
 
@@ -139,6 +144,7 @@ public class GotoShopScene : MonoBehaviour
         {
             EquipUI.SetActive(true);
         }
+        EquipUI.GetComponent<EquipItem>().RefreshAllImages();
         Toggles[0].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //가방 창 켜기
@@ -161,6 +167,7 @@ public class GotoShopScene : MonoBehaviour
         {
             CraftCanvas.SetActive(true);
         }
+        CraftCanvas.GetComponent<CraftController>().SetEquipItem();
         Toggles[2].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //스킬 창 켜기
