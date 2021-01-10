@@ -6,11 +6,12 @@ using UnityEngine.AI;
 
 public class BossKelgon : MonoBehaviour
 {
-    private BossData b_Kelgon ;         //몬스터 클래스
+    private BossData b_Kelgon;         //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public GameObject target;
     Vector3 offset;
+    Vector3 pattonoffset;
 
     public bool counterjudgement;
 
@@ -59,11 +60,9 @@ public class BossKelgon : MonoBehaviour
     #endregion
 
     #region 패턴3
+    PattonThreeDummy pattonThree;
 
-    public GameObject pattonThreeCharge;
-    public GameObject pattonThree;
-
-    bool isPattonThreeCharge = false;
+    public bool isPattonThreeCharge = false;
     private bool isThreeAttack = false;
     private bool checkingPlayerThree = false;
 
@@ -72,9 +71,10 @@ public class BossKelgon : MonoBehaviour
     #endregion
     private bool dead;
     private void Start()
-    {
+    {      
         GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
         b_Kelgon = GetComponent<BossData>();
+        pattonThree = GetComponent<PattonThreeDummy>();
         setting();
     }
 
@@ -92,7 +92,6 @@ public class BossKelgon : MonoBehaviour
         {
             if (count >= 6)
             {
-                b_Kelgon.navigation.enabled = false;
 
                 dead = true;
                 running = false;
@@ -130,6 +129,7 @@ public class BossKelgon : MonoBehaviour
                     B_SkillTwo();
                     break;
                 case State.BossState.B_SkillThree:
+                    B_SkillThree();
                     break;
                 case State.BossState.B_Hit:
                     break;
@@ -165,8 +165,13 @@ public class BossKelgon : MonoBehaviour
 
     private void B_Move()
     {
-        Vector3 velo = Vector3.zero;
-
+       
+        if (Pattondistance() > 15)
+        {
+            isPattonThreeCharge = true;
+            b_Kelgon.bossState = State.BossState.B_SkillChargeThree;
+            b_Kelgon.animator.SetInteger("SetAnim", 5);
+        }
 
         if (P_distance() < b_Kelgon.attack_aware_distance)
         {
@@ -237,7 +242,15 @@ public class BossKelgon : MonoBehaviour
         float distance = offset.magnitude;
         return distance;
     }
-    #endregion 
+    #endregion
+    #region 패턴3 거리 구하는 함수
+    private float Pattondistance()
+    {
+        pattonoffset = target.transform.position - gameObject.transform.position;
+        float distance = pattonoffset.magnitude;
+        return distance;
+    }
+    #endregion
 
     public void ExitHit()
     {
@@ -372,11 +385,30 @@ public class BossKelgon : MonoBehaviour
         b_Kelgon.bossState = State.BossState.B_Attack;
     }
 
-    public void B_SkillChargeThree()
+    void B_SkillChargeThree()
     {
-
+        if (pattonThree.chargeOn)
+        {
+            b_Kelgon.animator.SetInteger("SetAnim", 8);
+            b_Kelgon.bossState = State.BossState.B_SkillChargeThree;
+        }
     }
 
+    public void B_SkillThree()
+    {
+        if (P_distance() < b_Kelgon.attack_aware_distance)
+        {
+            pattonSet();
+            isPattonThreeCharge = false;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 0.05f);
+            Vector3 dir = target.transform.position - gameObject.transform.position;
+            gameObject.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
+        }
+
+    }
     public void pattonSet()
     {
 
