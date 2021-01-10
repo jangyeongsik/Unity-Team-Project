@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
 
     public float ArrowRadius = 1.5f;
 
+    public GameObject prefab;
+
     private void Awake()
     {
         if (controller == null)
@@ -216,13 +218,17 @@ public class PlayerAttack : MonoBehaviour
     {
         //트레일 이펙트 켜기
         StartCoroutine(SetTrail());
-        yield return new WaitForEndOfFrame();
         Vector3 dir = T.position - transform.position;
         dir.y = 0;
         float d = dir.magnitude - 1.5f;
         dir.Normalize();
+        GameObject obj = Instantiate(prefab);
+        obj.transform.position = transform.position + Vector3.up;
+        obj.transform.LookAt(obj.transform.position + dir);
+        yield return new WaitForEndOfFrame();
         controller.Move(dir * d);
         transform.LookAt(transform.position + dir);
+
     }
 
     //트레일 켰다가 1초뒤에 삭제
