@@ -238,6 +238,7 @@ public class BossKelgon : MonoBehaviour
     #region 플레이어와 거리 구하는 함수
     private float P_distance()
     {
+        if (target == null) return 0;
         offset = transform.position - target.transform.position;
         float distance = offset.magnitude;
         return distance;

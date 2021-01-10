@@ -18,6 +18,12 @@ public class PlayerAttack : MonoBehaviour
 
     public GameObject prefab;
 
+    COLORZONE colorZone;
+
+    Color red = new Color(1, 0, 0);
+    Color green = new Color(0, 1, 0);
+    Color blue = new Color(0, 0, 1);
+
     private void Awake()
     {
         if (controller == null)
@@ -33,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.AttactReset += AttackReset;
         GameEventToUI.Instance.Player_Hit += PlayerHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
+
     }
 
     private void OnDestroy()
@@ -54,6 +61,7 @@ public class PlayerAttack : MonoBehaviour
 
     void playerAttack(float time, COLORZONE color)
     {
+        colorZone = color;
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Idle:
@@ -225,6 +233,22 @@ public class PlayerAttack : MonoBehaviour
         GameObject obj = Instantiate(prefab);
         obj.transform.position = transform.position + Vector3.up;
         obj.transform.LookAt(obj.transform.position + dir);
+        foreach(Transform tr in obj.transform)
+        {
+            var main = tr.GetComponent<ParticleSystem>().main;
+            switch (colorZone)
+            {
+                case COLORZONE.GREEN:
+                    main.startColor = green;
+                    break;
+                case COLORZONE.YELLOW:
+                    main.startColor = blue;
+                    break;
+                case COLORZONE.RED:
+                    main.startColor = red;
+                    break;
+            }
+        }
         yield return new WaitForEndOfFrame();
         controller.Move(dir * d);
         transform.LookAt(transform.position + dir);
