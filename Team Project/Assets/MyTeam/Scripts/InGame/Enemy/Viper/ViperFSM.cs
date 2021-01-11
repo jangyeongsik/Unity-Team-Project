@@ -27,17 +27,30 @@ public class ViperFSM : MonoBehaviour
         viper.position = transform;
         viper.monsterKind = State.MonsterKind.M_Viper;
         viper.EnemyHitEvent += AttackHit;
-        setting();
+        VipersSetting();
         target = GameData.Instance.player.position.gameObject;
     }
 
-    private void setting()
+    private void EnemyVipersSet(int attack)
     {
         viper.monsterState = State.MonsterState.M_Idle;
         viper.navigation = GetComponent<NavMeshAgent>();
         viper.animator = GetComponent<Animator>();
         viper.movespeed = 8.0f;
         viper.attack_aware_distance = 10.0f;
+        viper.damage = attack;
+    }
+
+    private void VipersSetting()
+    {
+        if (gameObject.name == "EnemyViper")
+        {
+            EnemyVipersSet(1);
+        }
+        else
+        {
+            EnemyVipersSet(2);
+        }
     }
 
     private void OnDestroy()

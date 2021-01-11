@@ -42,6 +42,22 @@ public class EnemyWolf : MonoBehaviour
 
     private void WolfSetting()
     {
+        if (gameObject.name == "EnemyWolf")
+        {
+            EnemyWolvesSet(1);
+        }
+        else if(gameObject.name == "EnemyWolf(Red)")
+        {
+            EnemyWolvesSet(3);
+        }
+        else
+        {
+            EnemyWolvesSet(2);
+        }
+    }
+
+    private void EnemyWolvesSet(int attack)
+    {
         monster.monsterState = State.MonsterState.M_Idle;
         monster.navigation = GetComponent<NavMeshAgent>();
         monster.animator = GetComponent<Animator>();
@@ -49,8 +65,9 @@ public class EnemyWolf : MonoBehaviour
         monster.attack_aware_distance = 3.0f;
         monster.target_notice_distance = 10.0f;
         monster.navigation.enabled = true;
-    }
+        monster.damage = attack;
 
+    }
     private void Update()
     {
         if(!dead)
@@ -211,6 +228,12 @@ public class EnemyWolf : MonoBehaviour
     {
         if (monster.monsterState == State.MonsterState.M_Damage)
             monster.monsterState = State.MonsterState.M_Idle;
+    }
+
+    public void TargetLook()
+    {
+        if (!dead)
+            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
     }
 
 

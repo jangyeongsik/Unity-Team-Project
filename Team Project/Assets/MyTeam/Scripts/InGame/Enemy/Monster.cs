@@ -13,6 +13,10 @@ public class Monster : character
     public State.MonsterKind monsterKind;   //몬스터 종류
     public State.MonsterState monsterState;
 
+
+    private GameObject target;              //타겟 (플레이어)
+
+
     public NavMeshAgent navigation;
     public Animator animator;
 
@@ -20,6 +24,11 @@ public class Monster : character
 
     public event System.Action EnemyHitEvent;
 
+
+    private void Start()
+    {
+        target = GameData.Instance.player.position.gameObject;
+    }
     public void OnEnemyHitEvent()
     {
         EnemyHitEvent?.Invoke();
@@ -28,11 +37,12 @@ public class Monster : character
     public void OnPlayerHit()
     {
         if(monsterState == State.MonsterState.M_Attack)
-            GameEventToUI.Instance.OnPlayerHit(transform, 1);
+            GameEventToUI.Instance.OnPlayerHit(transform, damage);
     }
 
-    public void SetGameObjectFale()
+    public float DistacneWithTarget()
     {
-        gameObject.SetActive(false);
+        float distance = (transform.position - target.transform.position).magnitude;
+        return distance;
     }
 }
