@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossKelgon : MonoBehaviour
+public class BossTartos : MonoBehaviour
 {
-    private BossData b_Kelgon;         //몬스터 클래스
+
+    private BossData b_tartos;         //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public GameObject target;
@@ -70,19 +71,18 @@ public class BossKelgon : MonoBehaviour
     #endregion
     private bool dead;
     private void Start()
-    {      
+    {
         GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
-        b_Kelgon = GetComponent<BossData>();
-        pattonThree = GetComponent<PattonThreeDummy>();
+        b_tartos = GetComponent<BossData>();
         setting();
     }
 
     private void setting()
     {
-        b_Kelgon.bossState = State.BossState.B_Idle;
-        b_Kelgon.animator = GetComponent<Animator>();
-        b_Kelgon.movespeed = 11.0f;
-        b_Kelgon.attack_aware_distance = 3;
+        b_tartos.bossState = State.BossState.B_Idle;
+        b_tartos.animator = GetComponent<Animator>();
+        b_tartos.movespeed = 13.0f;
+        b_tartos.attack_aware_distance = 3;
     }
     private void Update()
     {
@@ -94,11 +94,11 @@ public class BossKelgon : MonoBehaviour
                 dead = true;
                 running = false;
                 counterjudgement = false;
-                b_Kelgon.animator.SetInteger("SetAnim", 10);
-                b_Kelgon.bossState = State.BossState.B_Dead;
+                b_tartos.animator.SetInteger("SetAnim", 10);
+                b_tartos.bossState = State.BossState.B_Dead;
                 GameEventToUI.Instance.OnAttactReset();
             }
-            switch (b_Kelgon.bossState)
+            switch (b_tartos.bossState)
             {
                 case State.BossState.B_Idle:
                     B_Idle();
@@ -138,7 +138,7 @@ public class BossKelgon : MonoBehaviour
                     break;
             }
         }
-        if (b_Kelgon.bossState != State.BossState.B_Attack)
+        if (b_tartos.bossState != State.BossState.B_Attack)
         {
             attackTime = 0;
             counterjudgement = false;
@@ -149,29 +149,29 @@ public class BossKelgon : MonoBehaviour
     private void B_Idle()
     {
         targeting = false;
-        if (P_distance() > b_Kelgon.attack_aware_distance)
+        if (P_distance() > b_tartos.attack_aware_distance)
         {
-            b_Kelgon.bossState = State.BossState.B_Move;
-            b_Kelgon.animator.SetInteger("SetAnim", 1);
+            b_tartos.bossState = State.BossState.B_Move;
+            b_tartos.animator.SetInteger("SetAnim", 1);
         }
         if (targeting)
         {
-            b_Kelgon.bossState = State.BossState.B_Move;
-            b_Kelgon.animator.SetInteger("SetAnim", 1);
+            b_tartos.bossState = State.BossState.B_Move;
+            b_tartos.animator.SetInteger("SetAnim", 1);
         }
     }
 
     private void B_Move()
     {
-       
+
         if (Pattondistance() > 15)
         {
             isPattonThreeCharge = true;
-            b_Kelgon.bossState = State.BossState.B_SkillChargeThree;
-            b_Kelgon.animator.SetInteger("SetAnim", 5);
+            b_tartos.bossState = State.BossState.B_SkillChargeThree;
+            b_tartos.animator.SetInteger("SetAnim", 5);
         }
 
-        if (P_distance() < b_Kelgon.attack_aware_distance)
+        if (P_distance() < b_tartos.attack_aware_distance)
         {
             pattonSet();
         }
@@ -181,45 +181,45 @@ public class BossKelgon : MonoBehaviour
             Vector3 dir = target.transform.position - gameObject.transform.position;
             gameObject.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
         }
-       
+
     }
 
 
     public void B_Attack()
     {
-        
-        if (P_distance() > b_Kelgon.attack_aware_distance)
+
+        if (P_distance() > b_tartos.attack_aware_distance)
         {
-            b_Kelgon.bossState = State.BossState.B_Move;
-            b_Kelgon.animator.SetInteger("SetAnim", 1);
+            b_tartos.bossState = State.BossState.B_Move;
+            b_tartos.animator.SetInteger("SetAnim", 1);
         }
         else
         {
-            b_Kelgon.bossState = State.BossState.B_AttackTwo;
-            b_Kelgon.animator.SetInteger("SetAnim", 11);
+            b_tartos.bossState = State.BossState.B_AttackTwo;
+            b_tartos.animator.SetInteger("SetAnim", 11);
         }
         animCount = 1;
     }
     public void B_AttackTwo()
     {
 
-        if (P_distance() > b_Kelgon.attack_aware_distance)
+        if (P_distance() > b_tartos.attack_aware_distance)
         {
-            b_Kelgon.bossState = State.BossState.B_Move;
-            b_Kelgon.animator.SetInteger("SetAnim", 1);
+            b_tartos.bossState = State.BossState.B_Move;
+            b_tartos.animator.SetInteger("SetAnim", 1);
         }
         else
         {
             if (pattonCount == 0)
             {
-                b_Kelgon.bossState = State.BossState.B_SkillChargeTwo;
-                b_Kelgon.animator.SetInteger("SetAnim", 4);
+                b_tartos.bossState = State.BossState.B_SkillChargeTwo;
+                b_tartos.animator.SetInteger("SetAnim", 4);
                 isTwoCharge = true;
             }
             else
             {
-                b_Kelgon.bossState = State.BossState.B_SkillChargeOne;
-                b_Kelgon.animator.SetInteger("SetAnim", 3);
+                b_tartos.bossState = State.BossState.B_SkillChargeOne;
+                b_tartos.animator.SetInteger("SetAnim", 3);
                 isCharge = true;
             }
 
@@ -227,7 +227,7 @@ public class BossKelgon : MonoBehaviour
         animCount = 2;
     }
 
-   
+
 
     public void OnTargetingEvent()
     {
@@ -236,7 +236,6 @@ public class BossKelgon : MonoBehaviour
     #region 플레이어와 거리 구하는 함수
     private float P_distance()
     {
-        if (target == null) return 0;
         offset = transform.position - target.transform.position;
         float distance = offset.magnitude;
         return distance;
@@ -253,8 +252,8 @@ public class BossKelgon : MonoBehaviour
 
     public void ExitHit()
     {
-        if (b_Kelgon.bossState == State.BossState.B_Hit)
-            b_Kelgon.bossState = State.BossState.B_Idle;
+        if (b_tartos.bossState == State.BossState.B_Hit)
+            b_tartos.bossState = State.BossState.B_Idle;
     }
     void attackCount()
     {
@@ -285,8 +284,8 @@ public class BossKelgon : MonoBehaviour
     {
         count++;
 
-        b_Kelgon.animator.SetInteger("SetAnim", 9);
-        b_Kelgon.bossState = State.BossState.B_Hit;
+        b_tartos.animator.SetInteger("SetAnim", 9);
+        b_tartos.bossState = State.BossState.B_Hit;
         if (GameEventToUI.Instance.Attack_SuccessEvent())
         {
             GameEventToUI.Instance.OnAttactReset();
@@ -302,8 +301,8 @@ public class BossKelgon : MonoBehaviour
         }
         if (!isCharge)
         {
-            b_Kelgon.animator.SetInteger("SetAnim", 6);
-            b_Kelgon.bossState = State.BossState.B_SkillOne;
+            b_tartos.animator.SetInteger("SetAnim", 6);
+            b_tartos.bossState = State.BossState.B_SkillOne;
             skillCharge.transform.localScale = new Vector3(0, 0, 0.1f);
             cyclePatton.SetActive(false);
             skillCharge.SetActive(false);
@@ -316,7 +315,7 @@ public class BossKelgon : MonoBehaviour
             saveTime += Time.deltaTime;
             if (skillCharge.transform.localScale.x < 1.0f)
             {
-                
+
                 skillCharge.transform.localScale = new Vector3(0.4f * saveTime, 0.4f * saveTime, 0.1f);
                 isAttack = true;
             }
@@ -326,7 +325,7 @@ public class BossKelgon : MonoBehaviour
 
     private void B_SkillOne()
     {
-       
+
         cols = Physics.OverlapSphere(gameObject.transform.position, 8.0f);
         for (int i = 0; i < cols.Length; i++)
         {
@@ -335,8 +334,8 @@ public class BossKelgon : MonoBehaviour
                 checkingPlayer = true;
             }
         }
-        b_Kelgon.animator.SetInteger("SetAnim", 2);
-        b_Kelgon.bossState = State.BossState.B_Attack;
+        b_tartos.animator.SetInteger("SetAnim", 2);
+        b_tartos.bossState = State.BossState.B_Attack;
         pattonCount = 0;
     }
 
@@ -349,8 +348,8 @@ public class BossKelgon : MonoBehaviour
         }
         if (!isTwoCharge)
         {
-            b_Kelgon.animator.SetInteger("SetAnim", 7);
-            b_Kelgon.bossState = State.BossState.B_SkillTwo;
+            b_tartos.animator.SetInteger("SetAnim", 7);
+            b_tartos.bossState = State.BossState.B_SkillTwo;
             skillChargeTwo.transform.localScale = new Vector3(0, 0, 0.1f);
             PattonTwo.SetActive(false);
             skillChargeTwo.SetActive(false);
@@ -380,22 +379,22 @@ public class BossKelgon : MonoBehaviour
             }
         }
         pattonCount = 1;
-        b_Kelgon.animator.SetInteger("SetAnim", 2);
-        b_Kelgon.bossState = State.BossState.B_Attack;
+        b_tartos.animator.SetInteger("SetAnim", 2);
+        b_tartos.bossState = State.BossState.B_Attack;
     }
 
     void B_SkillChargeThree()
     {
         if (pattonThree.chargeOn)
         {
-            b_Kelgon.animator.SetInteger("SetAnim", 8);
-            b_Kelgon.bossState = State.BossState.B_SkillChargeThree;
+            b_tartos.animator.SetInteger("SetAnim", 8);
+            b_tartos.bossState = State.BossState.B_SkillChargeThree;
         }
     }
 
     public void B_SkillThree()
     {
-        if (P_distance() < b_Kelgon.attack_aware_distance)
+        if (P_distance() < b_tartos.attack_aware_distance)
         {
             pattonSet();
             isPattonThreeCharge = false;
@@ -414,24 +413,25 @@ public class BossKelgon : MonoBehaviour
         if (animCount == 0)
         {
             isCharge = true;
-            b_Kelgon.bossState = State.BossState.B_SkillChargeOne;
-            b_Kelgon.animator.SetInteger("SetAnim", 3);
+            b_tartos.bossState = State.BossState.B_SkillChargeOne;
+            b_tartos.animator.SetInteger("SetAnim", 3);
         }
         else if (animCount == 1)
         {
-            b_Kelgon.bossState = State.BossState.B_Attack;
-            b_Kelgon.animator.SetInteger("SetAnim", 2);
+            b_tartos.bossState = State.BossState.B_Attack;
+            b_tartos.animator.SetInteger("SetAnim", 2);
         }
         else if (animCount == 2)
         {
-            b_Kelgon.bossState = State.BossState.B_AttackTwo;
-            b_Kelgon.animator.SetInteger("SetAnim", 11);
+            b_tartos.bossState = State.BossState.B_AttackTwo;
+            b_tartos.animator.SetInteger("SetAnim", 11);
         }
         else if (animCount == 3)
         {
             isTwoCharge = true;
-            b_Kelgon.bossState = State.BossState.B_SkillChargeTwo;
-            b_Kelgon.animator.SetInteger("SetAnim", 4);
+            b_tartos.bossState = State.BossState.B_SkillChargeTwo;
+            b_tartos.animator.SetInteger("SetAnim", 4);
         }
     }
 }
+
