@@ -6,7 +6,7 @@ using UnityEngine;
 public class BossTartos : MonoBehaviour
 {
 
-    private BossData b_tartos;         //몬스터 클래스
+    public BossData b_tartos;         //몬스터 클래스
     private bool targeting = false;             //타겟 조준
 
     public GameObject target;
@@ -43,13 +43,9 @@ public class BossTartos : MonoBehaviour
     public GameObject pattonCharge1_5;
     public GameObject patton1_5;
 
-
-    float timer1_1 = 0;
-    float timer1_2 = 0;
-    float timer1_3 = 0;
     int skillCount = 0;
 
-    private bool isCharge = false;
+    public bool isCharge;
     private bool isAttack = false;
     private bool checkingPlayer = false;
 
@@ -83,10 +79,11 @@ public class BossTartos : MonoBehaviour
         b_tartos.bossState = State.BossState.B_Idle;
         b_tartos.animator = GetComponent<Animator>();
         b_tartos.movespeed = 13.0f;
-        b_tartos.attack_aware_distance = 3;
+        b_tartos.attack_aware_distance = 2;
     }
     private void Update()
     {
+        Debug.Log(b_tartos.bossState);
         if (!dead)
         {
             if (count >= 8)
@@ -111,7 +108,8 @@ public class BossTartos : MonoBehaviour
                     break;
                 case State.BossState.B_SkillChargeOne:
                     animCount = 0;
-                    B_SkillCharge1_1();
+                    if (skillCount == 0)
+                        B_SkillCharge1_1();                
                     break;
                 case State.BossState.B_SkillChargeTwo:
                     animCount = 3;
@@ -207,7 +205,7 @@ public class BossTartos : MonoBehaviour
             {
                 b_tartos.bossState = State.BossState.B_SkillChargeOne;
                 b_tartos.animator.SetInteger("SetAnim", 3);
-                isCharge = true;
+                
             }
 
         }
@@ -282,140 +280,40 @@ public class BossTartos : MonoBehaviour
     public void B_SkillCharge1_1()
     {
         animCount = 0;
-
-        if (pattonCharge1_3.transform.localScale.x > 1)
-        {
-            isCharge = false;
-            b_tartos.animator.SetInteger("SetAnim", 3);
-            b_tartos.bossState = State.BossState.B_SkillChargeOne;
-            B_SkillCharge1_2();
-
-        }
-        if (!isCharge)
-        {
-            b_tartos.animator.SetInteger("SetAnim", 6);
-            b_tartos.bossState = State.BossState.B_SkillOne;
-            pattonCharge1_3.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_3.SetActive(false);
-            pattonCharge1_3.SetActive(false);
-            timer1_1 = 0;
-        }
-        else
-        {
-            patton1_3.SetActive(true);
-            pattonCharge1_3.SetActive(true);
-            timer1_1 += Time.deltaTime;
-            if (pattonCharge1_3.transform.localScale.x < 1.0f)
-            {
-                pattonCharge1_3.transform.localScale = new Vector3(0.4f * timer1_1, 0.4f * timer1_1, 1);
-                isAttack = true;
-            }
-        }
-
+        skillCount = 1;
+        patton1_3.SetActive(true);
+        isCharge = true;
     }
 
-    public void B_SkillCharge1_2()
-    {
-        bool isCharge1_2 = false;
-        animCount = 0;
+   public void B_SkillCharge1_2()
+   {
+        skillCount = 2;
 
-        if (pattonCharge1_2.transform.localScale.x > 1)
-        {
-            isCharge1_2 = false;
-            B_SkillCharge1_3();
+        patton1_4.SetActive(true);
+        patton1_5.SetActive(true);
 
-        }
-        if (!isCharge1_2)
-        {
-            b_tartos.animator.SetInteger("SetAnim", 6);
-            b_tartos.bossState = State.BossState.B_SkillOne;
+        patton1_3.SetActive(false);
 
-            pattonCharge1_2.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_2.SetActive(false);
-            pattonCharge1_2.SetActive(false);
-
-            pattonCharge1_4.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_4.SetActive(false);
-            pattonCharge1_4.SetActive(false);
-
-            timer1_2 = 0;
-        }
-        else
-        {
-            patton1_2.SetActive(true);
-            pattonCharge1_2.SetActive(true);
-
-            patton1_4.SetActive(true);
-            pattonCharge1_4.SetActive(true);
-
-            timer1_2 += Time.deltaTime;
-
-            if (pattonCharge1_2.transform.localScale.x < 1.0f)
-            {
-                pattonCharge1_2.transform.localScale = new Vector3(0.4f * timer1_2, 0.4f * timer1_2, 0.1f);
-                pattonCharge1_4.transform.localScale = new Vector3(0.4f * timer1_2, 0.4f * timer1_2, 0.1f);
-                isAttack = true;
-            }
-        }
+        b_tartos.animator.SetInteger("SetAnim", 6);
+        b_tartos.bossState = State.BossState.B_SkillOne;
     }
 
     public void B_SkillCharge1_3()
     {
-        bool isCharge1_3 = false;
-        animCount = 0;
+        skillCount = 3;
+        patton1_1.SetActive(true);
+        patton1_2.SetActive(true);
+        patton1_3.SetActive(true);
 
-        if (pattonCharge1_3.transform.localScale.x > 1)
-        {
-            isCharge1_3 = false;
-            b_tartos.animator.SetInteger("SetAnim", 2);
-            b_tartos.bossState = State.BossState.B_Attack;
+        patton1_4.SetActive(false);
+        patton1_5.SetActive(false);
 
-        }
-        if (!isCharge1_3)
-        {
-            b_tartos.animator.SetInteger("SetAnim", 6);
-            b_tartos.bossState = State.BossState.B_SkillOne;
-
-            pattonCharge1_1.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_1.SetActive(false);
-            pattonCharge1_1.SetActive(false);
-
-            pattonCharge1_3.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_3.SetActive(false);
-            pattonCharge1_3.SetActive(false);
-
-            pattonCharge1_5.transform.localScale = new Vector3(0, 0, 0.1f);
-            patton1_5.SetActive(false);
-            pattonCharge1_5.SetActive(false);
-
-            timer1_3 = 0;
-        }
-        else
-        {
-            patton1_1.SetActive(true);
-            pattonCharge1_1.SetActive(true);
-
-            patton1_3.SetActive(true);
-            pattonCharge1_3.SetActive(true);
-
-            patton1_5.SetActive(true);
-            pattonCharge1_5.SetActive(true);
-
-            timer1_3 += Time.deltaTime;
-
-            if (pattonCharge1_3.transform.localScale.x < 1.0f)
-            {
-                pattonCharge1_1.transform.localScale = new Vector3(0.4f * timer1_3, 0.4f * timer1_3, 0.1f);
-                pattonCharge1_3.transform.localScale = new Vector3(0.4f * timer1_3, 0.4f * timer1_3, 0.1f);
-                pattonCharge1_5.transform.localScale = new Vector3(0.4f * timer1_3, 0.4f * timer1_3, 0.1f);
-                isAttack = true;
-            }
-        }
+        b_tartos.animator.SetInteger("SetAnim", 6);
+        b_tartos.bossState = State.BossState.B_SkillOne;
     }
 
-    private void B_SkillOne()
+    public void B_SkillOne()
     {
-
         cols = Physics.OverlapSphere(gameObject.transform.position, 8.0f);
         for (int i = 0; i < cols.Length; i++)
         {
@@ -423,40 +321,39 @@ public class BossTartos : MonoBehaviour
             {
                 checkingPlayer = true;
             }
+        }     
+    }
+    public void TartosCheckPattonOne()
+    {
+        if (skillCount == 1)
+        {
+            b_tartos.animator.SetInteger("SetAnim", 3);
+            b_tartos.bossState = State.BossState.B_SkillChargeOne;
+            B_SkillCharge1_2();
         }
-        b_tartos.animator.SetInteger("SetAnim", 2);
-        b_tartos.bossState = State.BossState.B_Attack;
-        pattonCount = 0;
+        else if (skillCount == 2)
+        {
+            b_tartos.animator.SetInteger("SetAnim", 3);
+            b_tartos.bossState = State.BossState.B_SkillChargeOne;
+            B_SkillCharge1_3();
+        }
+        else if (skillCount == 3)
+        {
+
+            patton1_1.SetActive(false);
+            patton1_2.SetActive(false);
+            patton1_3.SetActive(false);
+
+            isCharge = false;
+
+            b_tartos.animator.SetInteger("SetAnim", 2);
+            b_tartos.bossState = State.BossState.B_Attack;
+        }
     }
 
     public void B_SkillChargetwo()
     {
 
-        if (skillChargeTwo.transform.localScale.x > 1)
-        {
-            isTwoCharge = false;
-        }
-        if (!isTwoCharge)
-        {
-            b_tartos.animator.SetInteger("SetAnim", 7);
-            b_tartos.bossState = State.BossState.B_SkillTwo;
-            skillChargeTwo.transform.localScale = new Vector3(0, 0, 0.1f);
-            PattonTwo.SetActive(false);
-            skillChargeTwo.SetActive(false);
-            coolTime = 0;
-        }
-        else
-        {
-            PattonTwo.SetActive(true);
-            skillChargeTwo.SetActive(true);
-            coolTime += Time.deltaTime;
-            if (skillChargeTwo.transform.localScale.x < 1.0f)
-            {
-
-                skillChargeTwo.transform.localScale = new Vector3(0.25f * coolTime, 0.25f * coolTime, 0.1f);
-                isTwoAttack = true;
-            }
-        }
     }
     public void B_SkillTwo()
     {
@@ -477,7 +374,6 @@ public class BossTartos : MonoBehaviour
     {
         if (animCount == 0)
         {
-            isCharge = true;
             b_tartos.bossState = State.BossState.B_SkillChargeOne;
             b_tartos.animator.SetInteger("SetAnim", 3);
         }
