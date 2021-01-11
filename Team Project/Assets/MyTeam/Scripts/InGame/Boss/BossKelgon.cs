@@ -59,7 +59,8 @@ public class BossKelgon : MonoBehaviour
     #endregion
 
     #region 패턴3
-    PattonThreeDummy pattonThree;
+    public GameObject skillChargeThree;
+    public GameObject skillThree;
 
     public bool isPattonThreeCharge = false;
     private bool isThreeAttack = false;
