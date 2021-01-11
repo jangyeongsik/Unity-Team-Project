@@ -59,8 +59,11 @@ public class BossKelgon : MonoBehaviour
     #endregion
 
     #region 패턴3
-    public GameObject skillChargeThree;
-    public GameObject skillThree;
+
+    public GameObject pattonThreeCharge;
+    public GameObject pattonThree;
+
+    float chargeThreeCool;
 
     public bool isPattonThreeCharge = false;
     private bool isThreeAttack = false;
@@ -74,7 +77,6 @@ public class BossKelgon : MonoBehaviour
     {      
         GameEventToUI.Instance.Player_Attack += Player_AttackEvent;
         b_Kelgon = GetComponent<BossData>();
-        pattonThree = GetComponent<PattonThreeDummy>();
         setting();
     }
 
@@ -387,10 +389,24 @@ public class BossKelgon : MonoBehaviour
 
     void B_SkillChargeThree()
     {
-        if (pattonThree.chargeOn)
+        pattonThree.transform.rotation = Quaternion.identity;
+        if (isPattonThreeCharge)
         {
-            b_Kelgon.animator.SetInteger("SetAnim", 8);
-            b_Kelgon.bossState = State.BossState.B_SkillChargeThree;
+            pattonThree.SetActive(true);
+            pattonThreeCharge.SetActive(true);
+            coolTime += Time.deltaTime;
+            if (pattonThreeCharge.transform.localScale.x < 1.0f)
+            {
+                pattonThreeCharge.transform.localScale = new Vector3(0.3f * coolTime,  1, 0.3f * coolTime);
+                Vector3 tPos = target.transform.position;
+                pattonThree.transform.position = tPos;
+            }
+            else if (pattonThreeCharge.transform.localScale.x >= 1)
+            {
+                b_Kelgon.animator.SetInteger("SetAnim", 8);
+                b_Kelgon.bossState = State.BossState.B_SkillThree;
+                pattonThree.SetActive(false);
+            }
         }
     }
 
@@ -398,7 +414,6 @@ public class BossKelgon : MonoBehaviour
     {
         if (P_distance() < b_Kelgon.attack_aware_distance)
         {
-            pattonSet();
             isPattonThreeCharge = false;
         }
         else
@@ -411,7 +426,6 @@ public class BossKelgon : MonoBehaviour
     }
     public void pattonSet()
     {
-
         if (animCount == 0)
         {
             isCharge = true;
