@@ -9,7 +9,7 @@ public class BossEntry : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            kelgon.target = other.gameObject;
+            //kelgon.target = other.gameObject;
         }
     }
 
