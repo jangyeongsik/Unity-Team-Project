@@ -5,14 +5,19 @@ using UnityEngine;
 public class KelgonAttack : MonoBehaviour
 {
     BossData kelgon;
+    Monster monster;
+
+    public GameObject attackNotice;
 
     private void Start()
     {
         kelgon = transform.parent.GetComponent<BossData>();
+        monster = transform.parent.GetComponent<Monster>();
     }
 
     public void playerAttack()
     {
+        kelgon.navigation.speed = 3.5f;
         switch (kelgon.bossState)
         {
             case State.BossState.B_Attack:
@@ -58,9 +63,14 @@ public class KelgonAttack : MonoBehaviour
                     break;
             }
         }
-        else if (dir.magnitude > 12)
+        else if (dir.magnitude > 9)
         {
+            kelgon.animator.SetInteger("Charge", 3);
+            kelgon.bossState = State.BossState.B_SkillChargeThree;
+            kelgon.navigation.SetDestination(kelgon.position.position);
 
+            kelgon.animator.SetTrigger("Walk");
+            kelgon.animator.SetInteger("Attack", 0);
         }
         else
         {
@@ -91,8 +101,30 @@ public class KelgonAttack : MonoBehaviour
         }
     }
 
+    void Charge3()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 8, LayerMask.GetMask("Player"));
+        if (colliders.Length >= 1)
+        {
+            //GameEventToUI.Instance.OnPlayerHit(transform, 1);
+        }
+    }
+
     void Attack1()
     {
 
+    }
+
+    void AttackNoticeActive()
+    {
+        attackNotice.SetActive(true);
+        monster.counterjudgement = true;
+        
+    }
+
+    void AttackNoticeDeActive()
+    {
+        attackNotice.SetActive(false);
+        monster.counterjudgement = false;
     }
 }

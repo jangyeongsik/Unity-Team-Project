@@ -191,6 +191,7 @@ public class PlayerAttack : MonoBehaviour
     Transform CheckCounterEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
+        Debug.Log(colliders.Length);
         if (colliders.Length == 0) return null;
         Transform T = null;
         Monster mon = null;

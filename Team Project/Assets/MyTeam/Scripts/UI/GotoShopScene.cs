@@ -51,7 +51,8 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
-        SceneMgr.Instance.LoadScene("MAP001", "MAP001");
+        //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
+        SceneMgr.Instance.LoadScene("MAP006", "FromMap006 ToMap005");
         GameData.Instance.player.SetGravity(0.9f); 
     }
 

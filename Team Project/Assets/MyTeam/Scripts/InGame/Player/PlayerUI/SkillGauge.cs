@@ -87,7 +87,6 @@ public class SkillGauge : MonoBehaviour
     {
         TicktokMove();
         CheckZone();
-        Debug.Log(zone);
     }
 
     void TicktokMove()
