@@ -35,11 +35,16 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "플레이어 에너미한테 피격"
     public event System.Action<Transform, int> Player_Hit;
+    public event System.Action<Transform, int, State.BossState> Player_Boss_Hit; 
 
     public void OnPlayerHit(Transform t, int damage)
     {
         if (Player_Hit != null)
             Player_Hit(t, damage);
+    }
+    public void OnPlayerBossHit(Transform t, int damage, State.BossState state)
+    {
+        Player_Boss_Hit?.Invoke(t, damage, state);
     }
     #endregion
 

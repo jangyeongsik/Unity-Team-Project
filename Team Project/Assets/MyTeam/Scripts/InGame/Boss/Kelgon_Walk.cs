@@ -27,7 +27,7 @@ public class Kelgon_Walk : StateMachineBehaviour
             if (kelgon.bossState != State.BossState.B_Move) return;
             //방향 타겟쪽으로
             Vector3 dir = kelgon.target.position - kelgon.position.position;
-            dir.y = kelgon.transform.position.y;
+            dir.y = 0;
             kelgon.position.LookAt(kelgon.position.position + dir);
             kelgon.navigation.SetDestination(kelgon.target.position);
 

@@ -21,15 +21,17 @@ public class KelgonAttack : MonoBehaviour
         switch (kelgon.bossState)
         {
             case State.BossState.B_Attack:
+            case State.BossState.B_AttackTwo:
+                Attack1();
                 break;
             case State.BossState.B_SkillChargeOne:
                 Charge1();
                 break;
             case State.BossState.B_SkillChargeTwo:
+                Charge2();
                 break;
             case State.BossState.B_SkillChargeThree:
-                break;
-            case State.BossState.B_AttackTwo:
+                Charge3();
                 break;
         }
 
@@ -85,34 +87,41 @@ public class KelgonAttack : MonoBehaviour
 
     void Charge1()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 8, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 4, LayerMask.GetMask("Player"));
         if(colliders.Length >= 1)
         {
-            //GameEventToUI.Instance.OnPlayerHit(transform, 1);
+            kelgon.PlayerHit();
         }
     }
 
+    Vector3 boxPos = new Vector3(0, 0, 1.2f);
+    Vector3 boxSize = new Vector3(9, 3, 5);
     void Charge2()
     {
-        Collider[] colliders = Physics.OverlapBox(transform.parent.position + new Vector3(0, 0, 1.2f), new Vector3(9, 3, 5), Quaternion.identity, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapBox(transform.parent.position - boxPos, boxSize, Quaternion.identity, LayerMask.GetMask("Player"));
         if (colliders.Length >= 1)
         {
-            //GameEventToUI.Instance.OnPlayerHit(transform, 1);
+            kelgon.PlayerHit();
         }
     }
 
     void Charge3()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 8, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 4, LayerMask.GetMask("Player"));
         if (colliders.Length >= 1)
         {
-            //GameEventToUI.Instance.OnPlayerHit(transform, 1);
+            kelgon.PlayerHit();
         }
     }
 
     void Attack1()
     {
-
+        Vector3 dir = transform.parent.position - kelgon.target.position;
+        float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        if(angle > -180 && angle < -0)
+        {
+            kelgon.PlayerHit();
+        }
     }
 
     void AttackNoticeActive()
@@ -126,5 +135,10 @@ public class KelgonAttack : MonoBehaviour
     {
         attackNotice.SetActive(false);
         monster.counterjudgement = false;
+    }
+
+    void OnPlayerHit()
+    {
+        kelgon.PlayerHit();
     }
 }

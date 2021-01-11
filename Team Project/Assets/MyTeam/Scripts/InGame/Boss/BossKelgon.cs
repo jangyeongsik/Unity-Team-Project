@@ -14,12 +14,12 @@ public class BossKelgon : MonoBehaviour
     public GameObject ChargeCircle1;
     public GameObject ChargeCircle2;
     public GameObject ChargeCircle3;
-    public GameObject AttackNotice;
 
     private void Start()
     {
         monster = GetComponent<Monster>();
         monster.EnemyHitEvent += KelgonHitEvent;
+        monster.position = transform;
         kelgon = GetComponent<BossData>();
         kelgon.navigation = GetComponent<NavMeshAgent>();
         kelgon.animator = transform.GetChild(0).GetComponent<Animator>();
@@ -34,14 +34,12 @@ public class BossKelgon : MonoBehaviour
 
     void KelgonHitEvent()
     {
-        AttackNotice.SetActive(false);
-        kelgon.animator.SetTrigger("Hit");
+        Debug.Log("damage");
     }
 
     public void SetTarget(Transform T)
     {
         target = T;
         kelgon.target = T;
-        monster.position = T;
     }
 }

@@ -11,6 +11,10 @@ public class Kelgon_Attack1 : StateMachineBehaviour
         if (kelgon == null)
             kelgon = animator.transform.parent.GetComponent<BossData>();
         kelgon.bossState = State.BossState.B_Attack;
+
+        Vector3 dir = kelgon.target.position - kelgon.position.position;
+        dir.y = 0;
+        kelgon.position.LookAt(kelgon.position.position + dir);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

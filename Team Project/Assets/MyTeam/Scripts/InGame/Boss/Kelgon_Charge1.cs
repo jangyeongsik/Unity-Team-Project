@@ -17,6 +17,10 @@ public class Kelgon_Charge1 : StateMachineBehaviour
             circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle1;
         circle.SetActive(true);
         circle.transform.position = kelgon.position.position;
+
+        Vector3 dir = kelgon.target.position - kelgon.position.position;
+        dir.y = 0;
+        kelgon.position.LookAt(kelgon.position.position + dir);
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine

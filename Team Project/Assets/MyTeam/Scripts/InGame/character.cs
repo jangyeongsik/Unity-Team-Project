@@ -10,7 +10,7 @@ public class character : MonoBehaviour
     public float      movespeed;                 //움직임 속도 
     public float      criticalpercent;           //크리티컬 확률
     public float      criticaldamage;            //크리티컬 대미지
-    public float      damage;                    //공격력
+    public int      damage;                    //공격력
     public float      attackspeed;               //공격속도
     public float      defence;                   //방어
 

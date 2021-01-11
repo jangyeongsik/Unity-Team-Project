@@ -13,6 +13,10 @@ public class Kelgon_Charge2 : StateMachineBehaviour
             kelgon = animator.transform.parent.GetComponent<BossData>();
         kelgon.bossState = State.BossState.B_SkillChargeTwo;
 
+        Vector3 dir = kelgon.target.position - kelgon.position.position;
+        dir.y = 0;
+        kelgon.position.LookAt(kelgon.position.position + dir);
+
         if (circle == null)
             circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle2;
         circle.SetActive(true);

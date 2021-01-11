@@ -18,4 +18,9 @@ public class BossData : character
     public NavMeshAgent navigation;
 
     public Animator animator;
+
+    public void PlayerHit()
+    {
+        GameEventToUI.Instance.OnPlayerBossHit(position, damage, bossState);
+    }
 }
