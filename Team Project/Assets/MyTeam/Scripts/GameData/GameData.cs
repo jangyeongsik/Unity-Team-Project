@@ -118,13 +118,14 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void LoadFromPlayerSlot(int slot)
     {
         playerIdx = slot;
-        playerData[slot].WriteData(player);
+        player = playerData[slot].WriteData(player);
     }
 
     //플레이어 슬롯 새로만들기
     public void CreateNewPlayerSlot(int slot, string name)
     {
         playerData[slot].CreateNewPlayer(slot, name);
+        player = playerData[slot].WriteData(player);
         PlayerSave();
     }
 

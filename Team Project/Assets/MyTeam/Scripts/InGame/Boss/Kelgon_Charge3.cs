@@ -24,18 +24,10 @@ public class Kelgon_Charge3 : StateMachineBehaviour
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //차지중에는 플레이어를 바라보고 밑에 원을 따라가게한다
-        if(kelgon.bossState == State.BossState.B_SkillChargeThree)
-        {
-            circle.transform.position = kelgon.target.position;
-            //방향 타겟쪽으로
-            Vector3 dir = kelgon.target.position - kelgon.position.position;
-            dir.y = 0;
-            kelgon.position.LookAt(kelgon.position.position + dir);
-        }
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
