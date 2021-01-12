@@ -251,8 +251,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2980688406191706707, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
 --- !u!4 &2130546386 stripped
 Transform:
@@ -260,6 +259,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2130546385}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2130546387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130546385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2130546388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130546387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e590c1c4b5e83d44ab65dff634ddab73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextPortalName: FromMap007 ToMap005
+  NextSceneName: MAP007
+  isPossibleMove: 0
 --- !u!1001 &4004186263115825227
 PrefabInstance:
   m_ObjectHideFlags: 0
