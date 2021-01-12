@@ -153,7 +153,7 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     void PlayerLoad()
     {
-        if(JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData") == null)
+        if(!File.Exists(playerFilePath))
         {
             CreateAllPlayerData();
             return;
