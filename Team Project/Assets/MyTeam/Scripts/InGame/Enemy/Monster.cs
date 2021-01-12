@@ -45,4 +45,10 @@ public class Monster : character
         float distance = (transform.position - target.transform.position).magnitude;
         return distance;
     }
+
+    public void SetGameObjectFale()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
