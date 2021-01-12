@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TeleportMarster : MonoBehaviour
+public class TeleportMaster : MonoBehaviour
 {
     public string NextPortalName;
     public string NextSceneName;
@@ -16,7 +16,6 @@ public class TeleportMarster : MonoBehaviour
         if (NextPortalName == "") return;
         SceneMgr.Instance.LoadScene(NextSceneName, NextPortalName);
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (GameData.Instance.player.isSceneMove)

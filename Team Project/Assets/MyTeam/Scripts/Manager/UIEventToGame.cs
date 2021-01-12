@@ -58,6 +58,7 @@ public class UIEventToGame : Singleton<UIEventToGame>
     //텔레포터 작동 안함 메시지 보냄
     public event System.Action<bool> CancelActivate;
     public event System.Action<int> SwordChangeEvent;
+    public event System.Action<bool> ActivateTemplePortal;
     public void OnTPActivate(bool isOn)
     {
         TPActivate(isOn);
@@ -69,5 +70,9 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnSwordChangeEvent(int index)
     {
         SwordChangeEvent(index);
+    }
+    public void OnActivateTemplePortal(bool isOn)
+    {
+        ActivateTemplePortal(isOn);
     }
 }
