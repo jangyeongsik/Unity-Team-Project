@@ -8,7 +8,7 @@ public class Arrow : PoolableObject
 
     private void OnEnable()
     {
-        StartCoroutine(RoMove());
+        StartCoroutine(ReMove());
     }
     private void Update()
     {
@@ -21,7 +21,7 @@ public class Arrow : PoolableObject
         GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
     }
 
-    IEnumerator RoMove()
+    IEnumerator ReMove()
     {
         yield return new WaitForSecondsRealtime(5.0f);
         ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);

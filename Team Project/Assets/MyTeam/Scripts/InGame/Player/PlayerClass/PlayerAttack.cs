@@ -212,15 +212,36 @@ public class PlayerAttack : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.up, ArrowRadius, LayerMask.GetMask("Bullet"));
         if (colliders.Length == 0) return null;
 
-        Transform T = colliders[0].gameObject.GetComponent<Arrow>().EnemyTranform;
-        float dist = Vector3.Distance(transform.position,T.position);
+        Transform T;
+        Debug.Log(colliders[0].gameObject.tag);
+        Debug.Log(colliders[0].gameObject.name);
 
-        for(int i = 1; i < colliders.Length; ++i)
+        if (colliders[0].CompareTag("VishopArrow"))
         {
-            float d = Vector3.Distance(transform.position, colliders[i].transform.position);
-            if (d < dist)
-                T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
+            T = colliders[0].gameObject.GetComponent<VishopArrow>().EnemyTranform;
+            float dist = Vector3.Distance(transform.position, T.position);
+
+            for (int i = 1; i < colliders.Length; ++i)
+            {
+                float d = Vector3.Distance(transform.position, colliders[i].transform.position);
+                if (d < dist)
+                    T = colliders[i].gameObject.GetComponent<VishopArrow>().EnemyTranform;
+            }
         }
+        else
+        {
+            T = colliders[0].gameObject.GetComponent<Arrow>().EnemyTranform;
+            float dist = Vector3.Distance(transform.position, T.position);
+
+            for (int i = 1; i < colliders.Length; ++i)
+            {
+                float d = Vector3.Distance(transform.position, colliders[i].transform.position);
+                if (d < dist)
+                    T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
+            }
+        }
+       
+        
 
         return T;
     }

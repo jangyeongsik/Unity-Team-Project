@@ -45,7 +45,7 @@ namespace State
 
     public enum MonsterKind
     {
-        M_Warrier,M_Archer,M_Viper,M_Wolf,M_SkullKing,M_Vishop
+        M_Warrier,M_Archer,M_Viper,M_Wolf,M_SkullKing,M_Vishop,M_Bat
     }
 
     public enum BossState

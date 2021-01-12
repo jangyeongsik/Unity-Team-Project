@@ -167,7 +167,6 @@ public class SkullKingFSM : MonoBehaviour
         {
             skullKing.monsterState = State.MonsterState.M_Attack;
             skullKing.animator.SetBool("isAttack", true);
-            
         }
     }
 
