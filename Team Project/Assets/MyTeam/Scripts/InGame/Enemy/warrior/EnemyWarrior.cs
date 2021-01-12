@@ -147,6 +147,8 @@ public class EnemyWarrior : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.25f);
         if(!dead)
             e_Warrior.navigation.SetDestination(target.transform.position);
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Warrior Move");
         running = false;
     }
 
@@ -220,7 +222,7 @@ public class EnemyWarrior : MonoBehaviour
     public void AttackHit()
     {
         count++;
-
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
         e_Warrior.animator.SetBool("IsRun", false);
         e_Warrior.animator.SetBool("IsAttack", false);
         e_Warrior.animator.SetTrigger("Hit");
@@ -231,5 +233,9 @@ public class EnemyWarrior : MonoBehaviour
         }
     }
 
-  
+    private void AttackSound()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Sword Attack");
+    }
+
 }
