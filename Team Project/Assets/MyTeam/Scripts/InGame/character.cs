@@ -11,6 +11,7 @@ public class character : MonoBehaviour
     public float      criticalpercent;           //크리티컬 확률
     public float      criticaldamage;            //크리티컬 대미지
     public int        damage = 1;                //공격력
+
     public float      attackspeed;               //공격속도
     public float      defence;                   //방어
 
@@ -45,7 +46,8 @@ namespace State
 
     public enum MonsterKind
     {
-        M_Warrier,M_Archer,M_Viper,M_Wolf,M_SkullKing,M_Vishop,M_Bat
+        M_Warrier,M_Archer,M_Viper,M_Wolf,M_SkullKing,M_Vishop,M_Bat,M_Boss
+
     }
 
     public enum BossState

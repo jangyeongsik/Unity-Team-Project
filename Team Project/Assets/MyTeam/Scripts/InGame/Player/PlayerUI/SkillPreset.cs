@@ -21,25 +21,37 @@ public class SkillPreset : MonoBehaviour
 
     //스킬 프리셋 이미지
     Image[] skillImages;
+    Text[] skillTexts;
 
     private void Start()
     {
         skills = GameData.Instance.player.skill.skillClips;
         curSkillIdx = 0;
         selectIdx = 0;
-        int i = 0;
-        foreach(Transform tr in transform.Find("Skill Presets"))
-        {
-            tr.GetChild(0).GetComponent<Text>().text = skills[i].name;
-            i++;
-        }
+        //int i = 0;
+        //foreach(Transform tr in transform.Find("Skill Presets"))
+        //{
+        //     tr.GetChild(0).GetComponent<Text>().text = skills[i].name;
+        //    i++;
+        //}
 
         btnImages[curSkillIdx].color = selectColor;
 
         skillImages = transform.Find("Skill Presets").GetComponentsInChildren<Image>();
         skillImages[selectIdx].color = selectColor;
 
-        
+        for(int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
+        {
+            for(int j = 0; j < GameData.Instance.player.skill.skillClips.Length; ++j)
+            {
+                if (GameData.Instance.player.aniList[i] == GameData.Instance.player.skill.skillClips[j])
+                {
+                    btnImages[i].sprite = skillImages[j].sprite;
+                    Debug.Log("i : " + i + " j : " + j);
+                }
+                else continue;
+            }
+        }
     }
 
     private void OnEnable()
@@ -52,14 +64,14 @@ public class SkillPreset : MonoBehaviour
             foreach (Transform tr in transform.Find("Skills"))
             {
                 btnImages[i] = tr.GetComponent<Image>();
-                btnText[i] = tr.GetChild(0).GetComponent<Text>();
+                //btnText[i] = tr.GetChild(0).GetComponent<Text>();
                 i++;
             }
         }
-        for (int i = 0; i < btnText.Length; ++i)
-        {
-            btnText[i].text = GameData.Instance.player.aniList[i].name;
-        }
+        //for (int i = 0; i < btnText.Length; ++i)
+        //{
+        //    btnText[i].text = GameData.Instance.player.aniList[i].name;
+        //}
     }
 
     //현재 무슨버튼 눌렀는지 바꿔줌
@@ -81,8 +93,14 @@ public class SkillPreset : MonoBehaviour
     //선택한 애니메이션 적용
     public void EquipSkill()
     {
+        //이미 장착한게 있는지 확인
+        for(int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
+        {
+            if (i == curSkillIdx) continue;
+            if (GameData.Instance.player.aniList[curSkillIdx] == skills[selectIdx]) return;
+        }
         GameData.Instance.player.aniList[curSkillIdx] = skills[selectIdx];
-        btnText[curSkillIdx].text = skills[selectIdx].name;
+        btnImages[curSkillIdx].sprite = skillImages[selectIdx].sprite;
     }
 
     public void Cancle()

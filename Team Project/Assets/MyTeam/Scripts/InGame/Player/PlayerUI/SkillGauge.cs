@@ -10,8 +10,9 @@ class ColorZone
 
     public ColorZone(RectTransform tr)
     {
-        startPos = tr.localPosition.x;
-        endPos = startPos + tr.sizeDelta.x;
+        float wid = tr.sizeDelta.x * 0.5f;
+        startPos = tr.localPosition.x  - wid;
+        endPos = tr.localPosition.x + wid;
     }
     
     public bool CheckInZone(float pos)

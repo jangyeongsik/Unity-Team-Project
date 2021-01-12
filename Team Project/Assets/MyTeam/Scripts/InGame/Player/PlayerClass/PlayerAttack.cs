@@ -38,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
         GameEventToUI.Instance.AttactReset += AttackReset;
         GameEventToUI.Instance.Player_Hit += PlayerHit;
+        GameEventToUI.Instance.Player_Boss_Hit += PlayerBossHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
 
     }
@@ -48,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Attack_SuccessEvent -= Attack_SuccessEvent;
         GameEventToUI.Instance.AttactReset -= AttackReset;
         GameEventToUI.Instance.Player_Hit -= PlayerHit;
+        GameEventToUI.Instance.Player_Boss_Hit -= PlayerBossHit;
         UIEventToGame.Instance.Player_Delay -= PlayerDelay;
     }
 
@@ -191,6 +193,7 @@ public class PlayerAttack : MonoBehaviour
     Transform CheckCounterEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
+        Debug.Log(colliders.Length);
         if (colliders.Length == 0) return null;
         Transform T = null;
         Monster mon = null;
@@ -342,6 +345,56 @@ public class PlayerAttack : MonoBehaviour
             animator.CrossFade("Guard Hit", 0.1f);
         }
 
+    }
+
+    void PlayerBossHit(Transform t, int damage, State.BossState state)
+    {
+        switch (state)
+        {
+            //방어와 가드가 가능
+            case State.BossState.B_Attack:
+            case State.BossState.B_AttackTwo:
+                {
+                    if (GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
+                   GameData.Instance.player.m_state == State.PlayerState.P_Run ||
+                   GameData.Instance.player.m_state == State.PlayerState.P_Delay)
+                    {
+                        Vector3 dir = t.position - transform.position;
+                        dir.y = 0;
+                        dir.Normalize();
+                        transform.LookAt(transform.position + dir);
+
+                        animator.CrossFade("Hit", 0.1f);
+
+                        GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
+                    }
+                    else if (GameData.Instance.player.m_state == State.PlayerState.P_Guard)
+                    {
+                        Vector3 dir = t.position - transform.position;
+                        dir.y = 0;
+                        dir.Normalize();
+                        transform.LookAt(transform.position + dir);
+
+                        animator.CrossFade("Guard Hit", 0.1f);
+                    }
+                }
+                break;
+                //방어가 불가능
+            case State.BossState.B_SkillChargeOne:
+            case State.BossState.B_SkillChargeTwo:
+            case State.BossState.B_SkillChargeThree:
+                {
+                    Vector3 dir = t.position - transform.position;
+                    dir.y = 0;
+                    dir.Normalize();
+                    transform.LookAt(transform.position + dir);
+
+                    animator.CrossFade("Hit", 0.1f);
+
+                    GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
+                }
+                break;
+        }
     }
 
     //딜레이
