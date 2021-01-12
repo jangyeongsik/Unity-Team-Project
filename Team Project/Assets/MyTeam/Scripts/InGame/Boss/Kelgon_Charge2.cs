@@ -21,6 +21,8 @@ public class Kelgon_Charge2 : StateMachineBehaviour
             circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle2;
         circle.SetActive(true);
         circle.transform.position = kelgon.position.position;
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern2");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

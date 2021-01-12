@@ -183,5 +183,5 @@ public class PlayerMove : MonoBehaviour
                 outline.enabled = false;   
         }
     }
-
+    
 }

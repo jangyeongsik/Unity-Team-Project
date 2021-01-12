@@ -21,6 +21,8 @@ public class Kelgon_Charge1 : StateMachineBehaviour
         Vector3 dir = kelgon.target.position - kelgon.position.position;
         dir.y = 0;
         kelgon.position.LookAt(kelgon.position.position + dir);
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern1");
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine

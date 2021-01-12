@@ -92,6 +92,8 @@ public class KelgonAttack : MonoBehaviour
         {
             kelgon.PlayerHit();
         }
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern3");
     }
 
     Vector3 boxPos = new Vector3(0, 0, 1.2f);
@@ -112,13 +114,15 @@ public class KelgonAttack : MonoBehaviour
         {
             kelgon.PlayerHit();
         }
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern3");
     }
 
     void Attack1()
     {
         Vector3 dir = transform.parent.position - kelgon.target.position;
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        if(angle > -180 && angle < -0)
+        if(angle > -180 && angle < -0 && dir.magnitude < 3.5f)
         {
             kelgon.PlayerHit();
         }
@@ -140,5 +144,15 @@ public class KelgonAttack : MonoBehaviour
     void OnPlayerHit()
     {
         kelgon.PlayerHit();
+    }
+
+    void Pattern2Voice()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "EnCounter");
+    }
+
+    void DeadVoice()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Dead");
     }
 }

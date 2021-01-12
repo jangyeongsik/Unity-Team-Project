@@ -479,6 +479,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193128993}
   m_CullTransparentMesh: 0
+--- !u!1 &230144485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3027177174911294740, guid: fba8bb4b3eab0064886ceea598c517ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 1816810130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &230144488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230144485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15266bd88d44f48b49bf463c0022a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &269899780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,15 +1557,12 @@ MonoBehaviour:
     gravity: 0
     isDashPossible: 0
     skill: {fileID: 0}
-    playerSkillset:
-    - 
-    - 
-    - 
     controller: {fileID: 0}
     animator: {fileID: 0}
     overrideController: {fileID: 0}
     orgList: []
     aniList: []
+    skillIdx: 010000000200000003000000
     isSceneMove: 0
   equipmentData: []
   ingredientData: []

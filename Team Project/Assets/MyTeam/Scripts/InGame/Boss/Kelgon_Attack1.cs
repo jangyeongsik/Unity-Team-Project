@@ -15,6 +15,8 @@ public class Kelgon_Attack1 : StateMachineBehaviour
         Vector3 dir = kelgon.target.position - kelgon.position.position;
         dir.y = 0;
         kelgon.position.LookAt(kelgon.position.position + dir);
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Attack1");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

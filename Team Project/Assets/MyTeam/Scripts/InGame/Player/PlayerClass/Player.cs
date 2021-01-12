@@ -27,6 +27,7 @@ public class PlayerData
     public int cylinderCounter;
     public int cylinderPercent;
     public string[] playerSkillset = new string[3];
+    public int[] SkillIdx = new int[3];
 
     public PlayerData(int slot)
     {
@@ -51,7 +52,7 @@ public class PlayerData
         player.counterTime = 0f;
         player.cylinderCounter = cylinderCounter;
         player.cylinderPercent = cylinderPercent;
-        player.playerSkillset = playerSkillset;
+        player.skillIdx = SkillIdx;
         return player;
     }
 
@@ -71,6 +72,8 @@ public class PlayerData
         presetID = 0;
         cylinderCounter = 0;
         cylinderPercent = 0;
+        for (int i = 0; i < SkillIdx.Length; ++i)
+            SkillIdx[i] = i + 1;
         return this;
     }
     public PlayerData DeleteData(int slot)
@@ -107,7 +110,7 @@ public class PlayerData
         presetID = player.presetID;
         cylinderCounter = player.cylinderCounter;
         cylinderPercent = player.cylinderPercent;
-        playerSkillset = player.playerSkillset;
+        SkillIdx = player.skillIdx;
     }
 }
 
@@ -134,13 +137,13 @@ public class Player
     public float gravity;
     public bool isDashPossible;
     public PlayerSkill skill;
-    public string[] playerSkillset = new string[3];
     public CharacterController controller;
     public Animator animator;
     public AnimatorOverrideController overrideController;
     public List<AnimationClip> orgList = new List<AnimationClip>();
     public List<AnimationClip> aniList = new List<AnimationClip>();
     public List<KeyValuePair<AnimationClip, AnimationClip>> applyList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+    public int[] skillIdx = new int[3];
     public bool isSceneMove = false;
 
     public Player() {

@@ -101,6 +101,7 @@ public class SkillPreset : MonoBehaviour
         }
         GameData.Instance.player.aniList[curSkillIdx] = skills[selectIdx];
         btnImages[curSkillIdx].sprite = skillImages[selectIdx].sprite;
+        GameData.Instance.player.skillIdx[curSkillIdx] = selectIdx+1;
     }
 
     public void Cancle()

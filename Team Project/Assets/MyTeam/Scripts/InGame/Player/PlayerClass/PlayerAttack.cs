@@ -280,6 +280,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         yield return new WaitForEndOfFrame();
+        PlayerSkillSound();
         controller.Move(dir * d);
         transform.LookAt(transform.position + dir);
 
@@ -444,6 +445,25 @@ public class PlayerAttack : MonoBehaviour
             curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
             
 
+        }
+    }
+
+    void PlayerSkillSound()
+    {
+        Debug.Log(GameData.Instance.player.skillIdx[0]);
+        Debug.Log(GameData.Instance.player.skillIdx[1]);
+        Debug.Log(GameData.Instance.player.skillIdx[2]);
+        switch (GameData.Instance.player.m_state)
+        {
+            case State.PlayerState.P_1st_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[0]);
+                break;
+            case State.PlayerState.P_2nd_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[1]);
+                break;
+            case State.PlayerState.P_3rd_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[2]);
+                break;
         }
     }
 }
