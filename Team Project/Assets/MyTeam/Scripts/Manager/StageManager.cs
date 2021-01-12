@@ -17,7 +17,6 @@ public class StageManager : MonoBehaviour
             enemys = GameObject.FindObjectsOfType<Monster>();
         if (potars == null)
             potars = GameObject.FindObjectsOfType<TeleportMarster>();
-        Debug.Log(enemys.Length);
         if(!isRegen && isClear)
         {
             for(int i = 0; i < enemys.Length; ++i)
@@ -45,7 +44,6 @@ public class StageManager : MonoBehaviour
                 potars[i].isPossibleMove = true;
             }
         }
-        Debug.Log(isRegen);
 
     }
 

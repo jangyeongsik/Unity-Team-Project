@@ -175,6 +175,6 @@ public class Player
         isSceneMove = true;
         yield return new WaitForSeconds(0.2f);
         controller.enabled = true;
-        gravity = 0.9f;
+        gravity = 1.5f;
     }
 }

@@ -99,6 +99,7 @@ public class StartScene : MonoBehaviour
 
     //obj 액티브 끄기
     public void Cancle(GameObject obj)
+
     {
         obj.SetActive(false);
     }
