@@ -58,58 +58,60 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (!targeting)
         {
-            if (P_distance() > 20)
+            if (P_distance() < 10)
             {
                 targeting = true;
             }
         }
-        if (!dead)
+        if (targeting)
         {
-            if (count >= 3)
+            if (!dead)
             {
-                e_Warrior.navigation.enabled = false;
+                if (count >= 3)
+                {
+                    e_Warrior.navigation.enabled = false;
 
-                dead = true;
-                running = false;
+                    dead = true;
+                    running = false;
+                    e_Warrior.counterjudgement = false;
+                    e_Warrior.animator.SetBool("IsRun", false);
+                    e_Warrior.animator.SetBool("IsAttack", false);
+                    e_Warrior.animator.SetTrigger("isDead");
+                    e_Warrior.monsterState = State.MonsterState.M_Dead;
+                    GameEventToUI.Instance.OnAttactReset();
+                    GameEventToUI.Instance.OnPlayerCylinderGauge(20);
+                }
+                switch (e_Warrior.monsterState)
+                {
+                    case State.MonsterState.M_Idle:
+                        M_Idle();
+                        break;
+                    case State.MonsterState.M_Move:
+                        M_Move();
+                        break;
+                    case State.MonsterState.M_Dead:
+
+                        break;
+                    case State.MonsterState.M_Groar:
+                        break;
+                    case State.MonsterState.M_Attack:
+                        M_Attack();
+                        attackCount();
+                        break;
+                    case State.MonsterState.M_Return:
+                        break;
+                    case State.MonsterState.M_Damage:
+                        M_Damage();
+                        break;
+                }
+            }
+            if (e_Warrior.monsterState != State.MonsterState.M_Attack)
+            {
+                AttackNocice.SetActive(false);
+                attackTime = 0;
                 e_Warrior.counterjudgement = false;
-                e_Warrior.animator.SetBool("IsRun", false);
-                e_Warrior.animator.SetBool("IsAttack", false);
-                e_Warrior.animator.SetTrigger("isDead");
-                e_Warrior.monsterState = State.MonsterState.M_Dead;
-                GameEventToUI.Instance.OnAttactReset();
-                GameEventToUI.Instance.OnPlayerCylinderGauge(20);
-            }
-            switch (e_Warrior.monsterState)
-            {
-                case State.MonsterState.M_Idle:
-                    M_Idle();
-                    break;
-                case State.MonsterState.M_Move:
-                    M_Move();
-                    break;
-                case State.MonsterState.M_Dead:
-
-                    break;
-                case State.MonsterState.M_Groar:
-                    break;
-                case State.MonsterState.M_Attack:
-                    M_Attack();
-                    attackCount();
-                    break;
-                case State.MonsterState.M_Return:
-                    break;
-                case State.MonsterState.M_Damage:
-                    M_Damage();
-                    break;
             }
         }
-        if (e_Warrior.monsterState != State.MonsterState.M_Attack)
-        {
-            AttackNocice.SetActive(false);
-            attackTime = 0;
-            e_Warrior.counterjudgement = false;
-        }
-
     }
 
     private void M_Damage()
