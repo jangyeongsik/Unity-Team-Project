@@ -262,16 +262,9 @@ public class CraftController : MonoBehaviour
         ingInfo.itemName.text = FindIngredientItem(itemID).name;
         ingInfo.countText.text = ingredientTexts[btnName].text;
         ingInfo.countText.color = ingredientTexts[btnName].color;
-        if (FindIngredientItem(itemID).itemGrade > 2)
-        {
-            sb.Clear();
-            sb.Append("백신 야영지에서\n구할 수 있습니다.");
-        }
-        else
-        {
-            sb.Clear();
-            sb.Append("신전에서\n구할 수 있습니다.");
-        }
+        
+        sb.Clear();
+        sb.Append("신전에서\n구할 수 있습니다.");
         ingInfo.description.text = sb.ToString();
     }
     //장비 정보 화면 출력
@@ -285,7 +278,7 @@ public class CraftController : MonoBehaviour
         SetEquipmentDescription(e);
         eqInfo.btnName = btnName;
         eqInfo.itemID = itemID;
-        Debug.Log(eqInfo.btnName + " " + eqInfo.itemID);
+
     }
     #region 장비아이템 제작가능 텍스트 판정
     public void SetIsAbleText(string btnName)
@@ -335,34 +328,46 @@ public class CraftController : MonoBehaviour
             case EQUIPMENTTYPE.WEAPON:
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
-                sb.AppendFormat("공격속도 : {0}\n", e.attackSpeed);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.ARMOR:
                 sb.Clear();
-                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.HELM:
                 sb.Clear();
-                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.GLOVE:
                 sb.Clear();
-                sb.AppendFormat("공격속도 : {0}\n", e.attackSpeed);
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 eqInfo.description.text = sb.ToString();
                 break;
             case EQUIPMENTTYPE.BOOTS:
                 sb.Clear();
-                sb.AppendFormat("이동속도 : {0}\n", e.moveSpeed);
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 eqInfo.description.text = sb.ToString();
                 break;
         }
@@ -531,7 +536,6 @@ public class CraftController : MonoBehaviour
         { 
             sb.AppendFormat("{0} / {1}", Inventory.Instance.FindIngredient(p.unique_Ingredient_1_ID).count, p.unique_Ingredient_1_Count); 
             SetSpecialIngCountColor(spIng.countText_1, Inventory.Instance.FindIngredient(p.unique_Ingredient_1_ID).count, p.unique_Ingredient_1_Count);
-            Debug.Log(Inventory.Instance.FindIngredient(p.unique_Ingredient_1_ID).count + " " + p.unique_Ingredient_1_Count);
         }
         else
         { 
@@ -546,7 +550,6 @@ public class CraftController : MonoBehaviour
         { 
             sb.AppendFormat("{0} / {1}", Inventory.Instance.FindIngredient(p.unique_Ingredient_2_ID).count, p.unique_Ingredient_2_Count);
             SetSpecialIngCountColor(spIng.countText_2, Inventory.Instance.FindIngredient(p.unique_Ingredient_2_ID).count, p.unique_Ingredient_2_Count);
-            Debug.Log(Inventory.Instance.FindIngredient(p.unique_Ingredient_2_ID).count + " " + p.unique_Ingredient_2_Count);
         }
         else 
         { 
@@ -561,7 +564,6 @@ public class CraftController : MonoBehaviour
         { 
             sb.AppendFormat("{0} / {1}", Inventory.Instance.FindIngredient(p.unique_Ingredient_3_ID).count, p.unique_Ingredient_3_Count);
             SetSpecialIngCountColor(spIng.countText_3, Inventory.Instance.FindIngredient(p.unique_Ingredient_3_ID).count, p.unique_Ingredient_3_Count);
-            Debug.Log(Inventory.Instance.FindIngredient(p.unique_Ingredient_1_ID).count + " " + p.unique_Ingredient_1_Count);
         }
         else 
         {

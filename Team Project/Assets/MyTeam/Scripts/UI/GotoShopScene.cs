@@ -16,6 +16,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject EncyclopediaCanvas;
     public GameObject MinimapCanvas;
     public GameObject SettingCanvas;
+    public GameObject QuitGameScreen;
     public GameObject TPCanvas;
     public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
@@ -72,6 +73,7 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(ItemInfoScreen);
         CanvasList.Add(EquipInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
+        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
 
     void Update()
@@ -159,6 +161,7 @@ public class GotoShopScene : MonoBehaviour
         {
             InvenUI.SetActive(true);
         }
+        Inventory.Instance.ChangeTab(0);
         Toggles[1].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //제작 창 켜기
@@ -181,6 +184,17 @@ public class GotoShopScene : MonoBehaviour
     public void SettingScreenOn()
     {
         SettingCanvas.SetActive(true);
+        Toggles[4].GetComponent<MenuButtonsController>().SetIsOn();
+    }
+    public void QuitGameScreenOn()
+    {
+        QuitGameScreen.SetActive(true);
+    }
+    public void LogOut()
+    {
+        GameData.Instance.PlayerSave();
+        Inventory.Instance.Destroy();
+        SceneManager.LoadScene("GameStartScene");
     }
     //모든 UI창 끄기
     public void SetAllInactive()
@@ -268,5 +282,4 @@ public class GotoShopScene : MonoBehaviour
     {
         TPCanvas.SetActive(isOn);
     }
-
 }
