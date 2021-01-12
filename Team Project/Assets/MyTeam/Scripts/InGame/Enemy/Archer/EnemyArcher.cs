@@ -44,7 +44,7 @@ public class EnemyArcher : MonoBehaviour
 
     private void RemoteEnemySetting()
     {
-        if(gameObject.name == "EnemyArcher")
+        if(gameObject.CompareTag("EnemyArcher"))
         {
             EnemySet(3);
             monster.attack_aware_distance = 6.0f;
@@ -143,15 +143,18 @@ public class EnemyArcher : MonoBehaviour
     {
         running = true;
         yield return new WaitForSecondsRealtime(0.25f);
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Archer Move");
         monster.navigation.SetDestination(target.transform.position);
         running = false;
     }
     public void OnDeadEvent()
     {
+
         monster.animator.SetBool("isDead", true);
         monster.monsterState = State.MonsterState.M_Dead;
         //플레이어 실린더 게이지 추가
         GameEventToUI.Instance.OnPlayerCylinderGauge(10);
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
     }
 
     public void OnTargetingEvent()
@@ -169,6 +172,7 @@ public class EnemyArcher : MonoBehaviour
             arrow.transform.position = arrowFirePoint.position;
             arrow.transform.LookAt(arrow.transform.position + dir);
             arrow.GetComponent<Arrow>().EnemyTranform = transform;
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Arrow");
         }
         else if (gameObject.CompareTag("EnemyVishop"))
         {
@@ -178,6 +182,7 @@ public class EnemyArcher : MonoBehaviour
             vishopArrow.transform.position = arrowFirePoint.position;
             vishopArrow.transform.LookAt(vishopArrow.transform.position + dir);
             vishopArrow.GetComponent<VishopArrow>().EnemyTranform = transform;
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Arrow");
         }
     }
 

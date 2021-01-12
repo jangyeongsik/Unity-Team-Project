@@ -166,6 +166,8 @@ public class EnemyWolf : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.3f);
         if(!dead)
             monster.navigation.SetDestination(target.transform.position);
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Move1");
         wolfRunning = false;
     }
 
@@ -214,7 +216,7 @@ public class EnemyWolf : MonoBehaviour
     public void AttackHit()
     {
         count++;
-
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Hit");
         monster.animator.SetBool("wolfDash", false);
         monster.animator.SetBool("wolfAttack", false);
         monster.animator.SetTrigger("wolfHit");
@@ -235,6 +237,9 @@ public class EnemyWolf : MonoBehaviour
         if (!dead)
             transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
     }
-
+    public void AttackSound()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Attack");
+    }
 
 }
