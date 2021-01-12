@@ -9,14 +9,14 @@ public class StageManager : MonoBehaviour
 
     static Monster[] enemys;
 
-    TeleportMarster[] potars;
+    TeleportMaster[] portals;
 
     private void Start()
     {
         if(enemys == null)
             enemys = GameObject.FindObjectsOfType<Monster>();
-        if (potars == null)
-            potars = GameObject.FindObjectsOfType<TeleportMarster>();
+        if (portals == null)
+            portals = GameObject.FindObjectsOfType<TeleportMaster>();
         Debug.Log(enemys.Length);
         if(!isRegen && isClear)
         {
@@ -40,9 +40,9 @@ public class StageManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < potars.Length; ++i)
+            for (int i = 0; i < portals.Length; ++i)
             {
-                potars[i].isPossibleMove = true;
+                portals[i].isPossibleMove = true;
             }
         }
         Debug.Log(isRegen);

@@ -20,6 +20,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject TPCanvas;
     public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
+    public GameObject LeverCanvas;
 
     public GameObject ItemInfoScreen;
     public GameObject EquipInfoScreen;
@@ -31,7 +32,6 @@ public class GotoShopScene : MonoBehaviour
     public Toggle[] Toggles;
     public GameObject Menu;
     public GameObject SkillMenu;
-
 
     List<GameObject> CanvasList = new List<GameObject>();
 
@@ -51,6 +51,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.talk += TalkOn;
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
+        GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         SceneMgr.Instance.LoadScene("MAP001", "MAP001");
         GameData.Instance.player.SetGravity(0.9f); 
@@ -281,5 +282,11 @@ public class GotoShopScene : MonoBehaviour
     public void OnOffTPCanvas(bool isOn)
     {
         TPCanvas.SetActive(isOn);
+    }
+    public void OnOffLeverPopup(bool isOn, string name, string description)
+    {
+        LeverCanvas.SetActive(isOn);
+        LeverCanvas.transform.GetChild(3).GetComponent<TMP_Text>().text = name;
+        LeverCanvas.transform.GetChild(4).GetComponent<TMP_Text>().text = description;
     }
 }

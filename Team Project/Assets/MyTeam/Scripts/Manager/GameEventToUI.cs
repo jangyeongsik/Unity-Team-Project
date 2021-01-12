@@ -67,6 +67,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> interOnOff;
     public event System.Action<bool> TPOpearteOnOff;
     public event System.Action<bool> TPCanvasOnOff;
+    public event System.Action<bool, string, string> leverOnOff;
 
     public void OnEventShopOnOff(bool isOn)
     {
@@ -109,4 +110,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         TPCanvasOnOff(isOn);
     }
+    #region 레버 충돌시 팝업창 출현
+    public void OnLeverPopup(bool isOn, string name = " ", string description = " ")
+    {
+        leverOnOff(isOn, name, description);
+    }
+    #endregion
 }
