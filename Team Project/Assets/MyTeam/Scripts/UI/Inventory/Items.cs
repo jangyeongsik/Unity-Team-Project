@@ -27,10 +27,9 @@ public class Equipment
     public int itemGrade;
     public int itemScriptID;
     public float damage;
-    public float moveSpeed;
+    public float speed;
     public float critPercent;
     public float critDamage;
-    public float attackSpeed;
     public int HPAdd;
     public int staminaAdd;
     public float def;

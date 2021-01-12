@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 //아이템 이미지 딕셔너리
 [Serializable]
@@ -39,7 +40,6 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerFilePath = Application.persistentDataPath + "/PlayerData.json";
         PlayerLoad();
         System.GC.Collect();
-
     }
 
     public void Print()
@@ -144,7 +144,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         PlayerLoad();
     }
 
-    void PlayerSave()
+    public void PlayerSave()
     {
         playerData[playerIdx].CopyPlayer(player);
         playerDataList.datas = playerData;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
     public static bool inventoryActivated = false;
@@ -117,6 +119,11 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         SetImage();
         yield return new WaitForSecondsRealtime(0.2f);
         CoroutineIsRunning = false;
+    }
+    //스타트 씬으로 돌아가면 파괴
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
     //=====================================
     //아이템 슬롯 관련
@@ -283,42 +290,27 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //=====================================
     //아이템탭 교체
     //=====================================
-    public void ChangeTabToEquipment()
+    public void CheckIsSelected(int val)
     {
-        InvenTabNum = 0;
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void ChangeTabToIngredient()
-    {
-        InvenTabNum = 1; 
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void ChangeTabToMisc()
-    {
-        InvenTabNum = 2;
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void CheckIsSelected()
-    {
-        if (InvenTabs[InvenTabNum].isOn)
+        for (int i = 0; i < InvenTabs.Length; i++)
         {
-            InvenTabs[InvenTabNum].animator.ResetTrigger("Deselected");
-            InvenTabs[InvenTabNum].animator.SetTrigger("Selected");
+            if (i != val)
+            {
+                InvenTabs[i].gameObject.GetComponent<Animator>().ResetTrigger("Selected");
+                InvenTabs[i].gameObject.GetComponent<Animator>().SetTrigger("Deselected");
+            }
         }
-        else
-        {
-            InvenTabs[InvenTabNum].animator.ResetTrigger("Selected");
-            InvenTabs[InvenTabNum].animator.SetTrigger("Deselected");
-        }
+        InvenTabs[val].isOn = true;
+        InvenTabs[val].gameObject.GetComponent<Animator>().ResetTrigger("Deselected");
+        InvenTabs[val].gameObject.GetComponent<Animator>().SetTrigger("Selected");
     }
     //=====================================
     //아이템 탭에 따라 슬롯 아이템 교체
     //=====================================
-    public void ChangeTab()
+    public void ChangeTab(int val)
     {
+        InvenTabNum = val;
+        CheckIsSelected(val);
         AddSlot();
         SetImage();
     }

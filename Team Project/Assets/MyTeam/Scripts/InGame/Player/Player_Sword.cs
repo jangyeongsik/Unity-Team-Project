@@ -13,9 +13,11 @@ public class Player_Sword : MonoBehaviour
         {
             Swords[i].SetActive(false);
         }
+        OnSwordChange(1);
     }
     public void OnSwordChange(int index)
     {
+
         index -= 1;
         for (int i = 0;i < Swords.Length; i++)
         {
