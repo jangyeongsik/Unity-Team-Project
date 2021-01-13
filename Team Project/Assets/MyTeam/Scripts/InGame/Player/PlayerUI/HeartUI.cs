@@ -56,7 +56,6 @@ public class HeartUI : MonoBehaviour
 
     public void CutHeart(int damage)
     {
-        Debug.Log(damage);
         for(int i = 0; i < damage; ++i)
         {
             if (hearts[currentHeart].fillAmount <= 0 && currentHeart > 0)

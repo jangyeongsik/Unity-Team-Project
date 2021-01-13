@@ -5,6 +5,7 @@ using UnityEngine;
 public class TartosPattom2_2 : StateMachineBehaviour
 {
     BossData tartos;
+    BossTartos bossTartos;
 
     GameObject patton2_1;
     GameObject patton2_2;
@@ -23,7 +24,11 @@ public class TartosPattom2_2 : StateMachineBehaviour
             tartos = animator.transform.parent.GetComponent<BossData>();
         tartos.bossState = State.BossState.B_SkillChargeTwo;
 
-        tartos.position.position = new Vector3(0, 0, 0);
+        if (bossTartos == null)
+            bossTartos = animator.transform.parent.GetComponent<BossTartos>();
+
+        tartos.position.position = bossTartos.pattern2Point.position;
+        tartos.navigation.SetDestination(bossTartos.pattern2Point.position);
 
         number2 = Random.Range(0, 3);
 
@@ -48,8 +53,8 @@ public class TartosPattom2_2 : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        tartos.position.position = new Vector3(0, 0, 0);
-        tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
+        tartos.position.position = bossTartos.pattern2Point.position;
+        tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
         if (number2 == 0)
         {
             patton2_1.SetActive(true);

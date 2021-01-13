@@ -5,12 +5,16 @@ using UnityEngine;
 public class BossEntry : MonoBehaviour
 {
     public BossKelgon kelgon;
+    public BossTartos tartos;
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
             //kelgon.target = other.gameObject;
-            kelgon.SetTarget(other.transform);
+            if(kelgon != null)
+                kelgon.SetTarget(other.transform);
+            if (tartos != null)
+                tartos.SetTarget(other.transform);
         }
     }
 

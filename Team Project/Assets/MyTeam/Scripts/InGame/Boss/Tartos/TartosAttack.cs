@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TartosAttack : MonoBehaviour
 {
+    BossTartos BossTartos;
     BossData tartos;
     Monster monster;
 
     // Start is called before the first frame update
     void Start()
     {
+        BossTartos = transform.parent.GetComponent<BossTartos>();
         tartos = transform.parent.GetComponent<BossData>();
         monster = transform.parent.GetComponent<Monster>();
     }
@@ -20,12 +22,11 @@ public class TartosAttack : MonoBehaviour
         switch (tartos.bossState)
         {
             case State.BossState.B_Attack:
+                Attack1();
                 break;
             case State.BossState.B_SkillChargeOne:
-                Charge1();
                 break;
             case State.BossState.B_SkillChargeTwo:
-                Charge2();
                 break;
             case State.BossState.B_AttackTwo:
                 Attack1();
@@ -39,7 +40,6 @@ public class TartosAttack : MonoBehaviour
             switch (tartos.bossState)
             {          
                 case State.BossState.B_Attack:
-                    Debug.Log("Asdasd");
                     tartos.animator.SetInteger("Attack", 2);
                     break;
                 case State.BossState.B_SkillChargeOne:
@@ -73,16 +73,19 @@ public class TartosAttack : MonoBehaviour
 
     void Attack1()
     {
-        
+        Vector3 dir = transform.parent.position - tartos.target.position;
+        float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+        if (angle < 180 && angle > 0 && dir.magnitude < 3.5f)
+        {
+            tartos.PlayerHit();
+        }
+        BossTartos.AttackNotice.SetActive(false);
+        monster.counterjudgement = false;
     }
 
-    void Charge1()
+    void AttackNoticeActive()
     {
-
-    }
-
-    void Charge2()
-    {
-
+        BossTartos.AttackNotice.SetActive(true);
+        monster.counterjudgement = true;
     }
 }
