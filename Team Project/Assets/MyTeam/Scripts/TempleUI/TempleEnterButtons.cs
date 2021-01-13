@@ -15,6 +15,17 @@ public class TempleEnterButtons : MonoBehaviour
         talk_btn.SetActive(isOn);
     }
 
+    public void onEventEnter()
+    {
+        UIEventToGame.Instance.OnActivateTemplePortal(true);
+        gameObject.SetActive(false);
+    }
+
+
+    public void offEventCancel()
+    {
+        gameObject.SetActive(false);
+    }
 
 
 

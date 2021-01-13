@@ -450,9 +450,6 @@ public class PlayerAttack : MonoBehaviour
 
     void PlayerSkillSound()
     {
-        Debug.Log(GameData.Instance.player.skillIdx[0]);
-        Debug.Log(GameData.Instance.player.skillIdx[1]);
-        Debug.Log(GameData.Instance.player.skillIdx[2]);
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_1st_Skill:

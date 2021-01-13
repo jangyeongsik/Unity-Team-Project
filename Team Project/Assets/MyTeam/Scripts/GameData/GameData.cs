@@ -38,7 +38,6 @@ public class GameData : SingletonMonobehaviour<GameData>
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 
         playerFilePath = Application.persistentDataPath + "/PlayerData.json";
-        Print();
         PlayerLoad();
         System.GC.Collect();
     }

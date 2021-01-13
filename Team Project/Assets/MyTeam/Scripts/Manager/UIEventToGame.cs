@@ -59,6 +59,8 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public event System.Action<bool> CancelActivate;
     public event System.Action<int> SwordChangeEvent;
     public event System.Action<bool> ActivateTemplePortal;
+
+    public event System.Action JoystickSetting;
     public void OnTPActivate(bool isOn)
     {
         TPActivate(isOn);
@@ -74,5 +76,10 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnActivateTemplePortal(bool isOn)
     {
         ActivateTemplePortal(isOn);
+    }
+
+    public void OnUiEventJoystickSetting()
+    {
+        JoystickSetting();
     }
 }

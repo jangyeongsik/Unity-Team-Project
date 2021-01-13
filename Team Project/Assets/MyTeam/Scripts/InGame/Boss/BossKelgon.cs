@@ -44,7 +44,7 @@ public class BossKelgon : MonoBehaviour
             kelgon.animator.SetTrigger("Dead");
             kelgon.bossState = State.BossState.B_Dead;
             monster.monsterState = State.MonsterState.M_Dead;
-
+            GameEventToUI.Instance.OnEvent_TalkBox(8005);
             if(ChargeCircle1.activeSelf)
                 ChargeCircle1.SetActive(false);
             if(ChargeCircle2.activeSelf)

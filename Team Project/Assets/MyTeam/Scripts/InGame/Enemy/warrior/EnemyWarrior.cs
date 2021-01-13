@@ -238,4 +238,11 @@ public class EnemyWarrior : MonoBehaviour
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Sword Attack");
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
+
+
+        }
+    }
 }
