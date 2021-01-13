@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class TempleEnterButtons : MonoBehaviour
 {
-    public void Enter()
+    public GameObject talk_btn;
+
+    private void Start()
     {
-        UIEventToGame.Instance.OnActivateTemplePortal(true);
-        gameObject.SetActive(false);
+        GameEventToUI.Instance.talkButOnOff += OnOffEvent;
     }
-    public void Revoke()
+    public void OnOffEvent(bool isOn)
     {
-        gameObject.SetActive(false);
+        talk_btn.SetActive(isOn);
+    }
+
+
+
+
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.talkButOnOff -= OnOffEvent;
     }
 }
+   
+
+

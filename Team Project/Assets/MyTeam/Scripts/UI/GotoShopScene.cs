@@ -97,18 +97,18 @@ public class GotoShopScene : MonoBehaviour
     }
     public void TalkOn(bool isOn, int id, string NpcName)
     {
-        FindNpc(id, NpcName);
+        FindNpc(id);
         TalkCanvas.SetActive(isOn);
     }
     public void MiniMapOn(bool isOn)
     {
         miniMapCanvas.SetActive(isOn);
     }
-    public void FindNpc(int id, string NpcName)
+    public void FindNpc(int id)
     {
         for (int i = 0; i < GameData.Instance.data.Count; i++)
         {
-            if (GameData.Instance.data[i].id == id && GameData.Instance.data[i].name.Equals(NpcName))
+            if (GameData.Instance.data[i].id == id)
             {
                 firstTxt = i;
                 startTalking = true;

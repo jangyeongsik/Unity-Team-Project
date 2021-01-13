@@ -45,14 +45,14 @@ public class PlayerButtonEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             talkOnOff = !talkOnOff;
             GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1000, other.gameObject.name);
         }
-    }
+    }*/
 
 
 }

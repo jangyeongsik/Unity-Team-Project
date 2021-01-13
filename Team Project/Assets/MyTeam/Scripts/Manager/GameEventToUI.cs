@@ -73,6 +73,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> TPOpearteOnOff;
     public event System.Action<bool> TPCanvasOnOff;
     public event System.Action<bool, string, string> leverOnOff;
+    public event System.Action<bool> talkButOnOff;
+
+    public event System.Action<string> npc_name_chage;
+    public event System.Action<string> npc_talk_chage;
 
     public void OnEventShopOnOff(bool isOn)
     {
@@ -82,6 +86,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventTalkOnOff(bool isOn, int id, string npcName)
     {
         talk(isOn, id, npcName);
+    }
+
+    public void OnEventTalkBtn(bool isOn)
+    {
+        talkButOnOff(isOn);
     }
 
     public KeyValuePair<bool, Transform> OnPlayer_AttackEvent()

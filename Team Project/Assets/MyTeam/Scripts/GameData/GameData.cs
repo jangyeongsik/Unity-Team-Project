@@ -38,15 +38,23 @@ public class GameData : SingletonMonobehaviour<GameData>
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 
         playerFilePath = Application.persistentDataPath + "/PlayerData.json";
+        Print();
         PlayerLoad();
         System.GC.Collect();
     }
 
     public void Print()
     {
-        foreach(Equipment a in equipmentData)
+        for(int i = 0; i < data.Count; i++)
         {
-            Debug.Log(a.ID + " " + a.name + " " + a.itemGrade);
+            for(int j = 0; j < data[i].talk_name.Count; j++)
+            {
+                Debug.Log(data[i].talk_name[j]);
+            }
+            for (int c = 0; c < data[i].talk.Count; c++)
+            {
+                Debug.Log(data[i].talk[c]);
+            }
         }
     }
 

@@ -34,6 +34,22 @@ public class NpcFSM : MonoBehaviour
     {
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("A");
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEventTalkBtn(true);
+        }
+    }
 
-    
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("B");
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEventTalkBtn(false);
+        }
+    }
+
 }

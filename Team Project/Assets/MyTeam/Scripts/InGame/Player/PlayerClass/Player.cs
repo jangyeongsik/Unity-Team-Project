@@ -29,6 +29,8 @@ public class PlayerData
     public string[] playerSkillset = new string[3];
     public int[] SkillIdx = new int[3];
 
+    public bool tutorial;
+
     public PlayerData(int slot)
     {
         CreateNewPlayer(slot,"");
@@ -53,6 +55,7 @@ public class PlayerData
         player.cylinderCounter = cylinderCounter;
         player.cylinderPercent = cylinderPercent;
         player.skillIdx = SkillIdx;
+        player.tutorial = tutorial;
         return player;
     }
 
@@ -72,6 +75,7 @@ public class PlayerData
         presetID = 0;
         cylinderCounter = 0;
         cylinderPercent = 0;
+        tutorial = false;
         for (int i = 0; i < SkillIdx.Length; ++i)
             SkillIdx[i] = i + 1;
         return this;
@@ -92,6 +96,7 @@ public class PlayerData
         presetID = 0;
         cylinderCounter = 0;
         cylinderPercent = 0;
+        tutorial = false;
         return this;
     }
     public void CopyPlayer(Player player)
@@ -111,6 +116,7 @@ public class PlayerData
         cylinderCounter = player.cylinderCounter;
         cylinderPercent = player.cylinderPercent;
         SkillIdx = player.skillIdx;
+        tutorial = player.tutorial;
     }
 }
 
@@ -135,6 +141,7 @@ public class Player
     public int presetID;
     public float counterTime;               //카운터 판정 타임
     public float gravity;
+    public bool tutorial;                   //튜토리얼 대사 출력 여부
     public bool isDashPossible;
     public PlayerSkill skill;
     public CharacterController controller;
