@@ -17,8 +17,11 @@ public class Arrow : PoolableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
-        GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
+            GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        }
     }
 
     IEnumerator ReMove()
