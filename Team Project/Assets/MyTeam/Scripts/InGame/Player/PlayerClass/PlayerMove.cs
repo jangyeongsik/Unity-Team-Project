@@ -17,13 +17,11 @@ public class PlayerMove : MonoBehaviour
     float z;
     Vector3 dir;
 
-    Outline outline;
 
     public AnimationClip[] ciol;
 
     private void Awake()
     {
-        outline = GetComponent<Outline>();
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
@@ -72,7 +70,6 @@ public class PlayerMove : MonoBehaviour
     {
         Dash();
         Guard();
-        //WallCheck();3.09 + 23.48721
     }
 
     private void OnDestroy()
@@ -175,21 +172,5 @@ public class PlayerMove : MonoBehaviour
         {
             GameEventToUI.Instance.OnEventInterActionOnOff(false);
         }
-    }
-
-
-    void WallCheck()
-    {
-        RaycastHit hit;
-        Vector3 dir = (transform.position+ Vector3.up) - Camera.main.transform.position;
-        Debug.DrawRay(Camera.main.transform.position, dir);
-        if(Physics.Raycast(Camera.main.transform.position,dir,out hit,dir.magnitude))
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Object"))
-                outline.enabled = true;
-            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-                outline.enabled = false;   
-        }
-    }
-    
+    }    
 }
