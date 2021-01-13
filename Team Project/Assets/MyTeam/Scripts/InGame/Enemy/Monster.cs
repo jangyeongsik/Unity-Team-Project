@@ -62,8 +62,6 @@ public class Monster : character
     {
         rigid.isKinematic = true;
 
-        rigid.useGravity = true;
-
         gameObject.SetActive(false);
 
         GameEventToUI.Instance.OnEventDropItemMentBoxOnOff();
