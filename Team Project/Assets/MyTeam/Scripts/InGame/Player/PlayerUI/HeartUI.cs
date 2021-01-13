@@ -71,8 +71,9 @@ public class HeartUI : MonoBehaviour
         }
     }
 
-    public void AddHeart(int value)
+    public void AddHeart(int value, int per)
     {
+        if (Random.Range(0, 100) > per) return;
         for(int j = 0; j < value; j++)
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)

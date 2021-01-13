@@ -70,5 +70,6 @@ public class Monster : character
 
         GameEventToUI.Instance.OnEventMonsterDrop(dropItem_Key);
 
+        GameEventToUI.Instance.OnPlayerHp_Increase(1, 15);
     }
 }
