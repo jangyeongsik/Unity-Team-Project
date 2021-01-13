@@ -53,14 +53,6 @@ public class PlayerAttack : MonoBehaviour
         UIEventToGame.Instance.Player_Delay -= PlayerDelay;
     }
 
-    //private void Update()
-    //{
-    //    if(curAttackEnemy != null)
-    //    {
-            
-    //    }
-    //}
-
     void playerAttack(float time, COLORZONE color)
     {
         colorZone = color;
@@ -243,9 +235,6 @@ public class PlayerAttack : MonoBehaviour
                     T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
             }
         }
-       
-        
-
         return T;
     }
 

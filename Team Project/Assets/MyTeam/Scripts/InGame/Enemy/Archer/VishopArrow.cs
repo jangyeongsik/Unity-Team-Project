@@ -12,14 +12,18 @@ public class VishopArrow : PoolableObject
     }
     private void Update()
     {
+        Debug.Log(gameObject.transform.position);
+        Debug.Log(EnemyTranform.position);
         transform.Translate(Vector3.forward * 15f * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(EnemyTranform.position);
-        ObjectPoolManager.GetInstance().objectPool2.PushObject(gameObject);
-        GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        if(other.CompareTag("Player"))
+        {
+            ObjectPoolManager.GetInstance().objectPool2.PushObject(gameObject);
+            GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        }
     }
 
     IEnumerator ReMove()

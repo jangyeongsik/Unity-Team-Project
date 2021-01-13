@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 5685590909484096954}
   - component: {fileID: 5685590909484096953}
   - component: {fileID: 2471431000906137835}
-  - component: {fileID: 5498178309970552108}
+  - component: {fileID: 1536918780360665343}
+  - component: {fileID: 4195880016514496451}
   m_Layer: 9
   m_Name: EnemyViper
   m_TagString: EnemyWarrior
@@ -113,10 +114,14 @@ MonoBehaviour:
   attack_aware_distance: 0
   target_notice_distance: 0
   monsterKind: 0
-  counterjudgement: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
+  counterjudgement: 0
+  rigid: {fileID: 0}
 --- !u!114 &5685590909484096953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,19 +157,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &5498178309970552108
-BoxCollider:
+--- !u!54 &1536918780360665343
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921514039086086227}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &4195880016514496451
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921514039086086227}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 80
+  m_Height: 300
+  m_Direction: 1
+  m_Center: {x: 0, y: 51.12, z: 0}
 --- !u!1 &4921514039086086229
 GameObject:
   m_ObjectHideFlags: 0

@@ -1229,7 +1229,7 @@ GameObject:
   - component: {fileID: 8838007943538411257}
   - component: {fileID: 3264902877272823235}
   - component: {fileID: 2005416546365081832}
-  - component: {fileID: 2194996058636539849}
+  - component: {fileID: 6891191059260630343}
   m_Layer: 9
   m_Name: enemy
   m_TagString: EnemyWarrior
@@ -1323,9 +1323,13 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
+  rigid: {fileID: 0}
 --- !u!114 &3264902877272823235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,7 +1357,7 @@ CapsuleCollider:
   m_Height: 200
   m_Direction: 1
   m_Center: {x: 0, y: 80, z: 20}
---- !u!54 &2194996058636539849
+--- !u!54 &6891191059260630343
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1364,7 +1368,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0

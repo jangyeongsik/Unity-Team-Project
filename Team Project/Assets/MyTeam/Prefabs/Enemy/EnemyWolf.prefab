@@ -116,7 +116,8 @@ GameObject:
   - component: {fileID: 4653893001328706998}
   - component: {fileID: 4653893001328706997}
   - component: {fileID: 4653893001328706995}
-  - component: {fileID: -3995836442739659713}
+  - component: {fileID: 4972071156619265077}
+  - component: {fileID: 2924730354756429779}
   m_Layer: 9
   m_Name: EnemyWolf
   m_TagString: EnemyWolf
@@ -222,22 +223,43 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
---- !u!65 &-3995836442739659713
-BoxCollider:
+  rigid: {fileID: 0}
+--- !u!54 &4972071156619265077
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400596144904433169}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &2924730354756429779
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400596144904433169}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 31.2
+  m_Height: 200
+  m_Direction: 2
+  m_Center: {x: 0, y: 52.42, z: 0}
 --- !u!1 &3400596144904433171
 GameObject:
   m_ObjectHideFlags: 0

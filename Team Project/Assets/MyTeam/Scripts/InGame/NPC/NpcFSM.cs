@@ -13,10 +13,10 @@ public class NpcFSM : MonoBehaviour
     void Start()
     {
         npc = GetComponent<Npc>();
-        NpcSetting();
+       // NpcSetting();
         GameEventToUI.Instance.player_Trigger += isTrigger;
     }
-
+/*
     private void NpcSetting()
     {
         npc.npcState = State.NpcState.N_Idle;
@@ -36,7 +36,7 @@ public class NpcFSM : MonoBehaviour
     private void Idle()
     {
 
-    }
+    }*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))

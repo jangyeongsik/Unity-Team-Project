@@ -1455,8 +1455,9 @@ GameObject:
   - component: {fileID: 6607292702357948013}
   - component: {fileID: 8641110281224440191}
   - component: {fileID: 8641110281224440188}
-  - component: {fileID: 1654095920}
   - component: {fileID: 1654095921}
+  - component: {fileID: 6063685066731702501}
+  - component: {fileID: 672566395541381896}
   m_Layer: 9
   m_Name: EnemyArcher
   m_TagString: EnemyArcher
@@ -1538,19 +1539,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &1654095920
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607292702365251059}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1654095921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1578,9 +1566,43 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
+  rigid: {fileID: 0}
+--- !u!54 &6063685066731702501
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607292702365251059}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &672566395541381896
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607292702365251059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 40
+  m_Height: 200
+  m_Direction: 1
+  m_Center: {x: 0, y: 69.45, z: 0}
 --- !u!1 &6607292702365251061
 GameObject:
   m_ObjectHideFlags: 0

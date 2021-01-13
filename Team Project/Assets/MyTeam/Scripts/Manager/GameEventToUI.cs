@@ -55,6 +55,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
         PlayerCylinderGauge?.Invoke(value);
     }
     #endregion
+
+    #region "몬스터 키 드랍"
+    public event System.Action<int> keyCount;
+    #endregion
+
+    #region "드롭아이템 멘트박스"
+    public event System.Action isGet;
+    #endregion
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 
@@ -180,10 +188,19 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         TPCanvasOnOff(isOn);
     }
-
     public bool onEventPlayer_Trigger()
     {
         return player_Trigger.Invoke();
+    }
+
+    public void OnEventMonsterDrop(int count)
+    {
+        keyCount(count);
+    }
+
+    public void OnEventDropItemMentBoxOnOff()
+    {
+        isGet();
     }
     #region 레버 충돌시 팝업창 출현
     public void OnLeverPopup(bool isOn, string name = " ", string description = " ")
