@@ -22,6 +22,7 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
             SceneManager.UnloadSceneAsync(CurrentSceneName);
         }
         CurrentSceneName = SceneName;
+        GameData.Instance.player.curSceneName = SceneName;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         while (GameObject.Find(portalName) == null)
         {

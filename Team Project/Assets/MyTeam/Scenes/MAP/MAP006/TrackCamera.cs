@@ -14,11 +14,14 @@ public class TrackCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraMovingCount += Time.deltaTime;
-        if (cameraMovingCount > cameraMovingDelay)
+        if (GameObject.FindObjectOfType<Monster>() == null)
         {
-            gameObject.SetActive(false);
-            cameraMovingCount = 0.0f;
+            cameraMovingCount += Time.deltaTime;
+            if (cameraMovingCount > cameraMovingDelay)
+            {
+                gameObject.SetActive(false);
+                cameraMovingCount = 0.0f;
+            }
         }
     }
 }

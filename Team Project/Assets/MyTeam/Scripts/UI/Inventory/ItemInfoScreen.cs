@@ -24,6 +24,7 @@ public class ItemInfoScreen : MonoBehaviour
     public void EquipItem()
     {
         EquipUI.GetComponent<EquipItem>().Equip(Inventory.Instance.pInven.EquipmentList[slotNum]);
+        gameObject.SetActive(false);
     }
     public void MoveToInventoryScreen()
     {

@@ -180,6 +180,7 @@ public class Player
     public float currentHp;
     public string SaveSceneName;
     public string SavePortalName;
+    public string curSceneName;
 
     public Player() {
         id = 0;
