@@ -185,7 +185,6 @@ public class PlayerAttack : MonoBehaviour
     Transform CheckCounterEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f, LayerMask.GetMask("Enemy"));
-        Debug.Log(colliders.Length);
         if (colliders.Length == 0) return null;
         Transform T = null;
         Monster mon = null;
@@ -369,10 +368,8 @@ public class PlayerAttack : MonoBehaviour
                     }
                 }
                 break;
-                //방어가 불가능
-            case State.BossState.B_SkillChargeOne:
-            case State.BossState.B_SkillChargeTwo:
-            case State.BossState.B_SkillChargeThree:
+            //방어가 불가능
+            default:
                 {
                     Vector3 dir = t.position - transform.position;
                     dir.y = 0;
@@ -380,6 +377,7 @@ public class PlayerAttack : MonoBehaviour
                     transform.LookAt(transform.position + dir);
 
                     animator.CrossFade("Hit", 0.1f);
+                    animator.SetTrigger("Hit");
 
                     GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
                 }
@@ -414,8 +412,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (curAttackEnemy == null) return;
         {
-
-
             //switch (curAttackEnemy.tag)
             //{
             //    case "EnemyWarrior":
@@ -432,8 +428,6 @@ public class PlayerAttack : MonoBehaviour
             //        break;
             //}
             curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
-            
-
         }
     }
 

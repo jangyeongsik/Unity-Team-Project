@@ -50,7 +50,7 @@ public class StartScene : MonoBehaviour
     {
         LoadingProgress.LoadScene("UI Scene");
         //Debug.Log(GameData.Instance.player.stamina);
-        //SceneManager.LoadScene("UI Scene");
+        //SceneManager.LoadScene("Loading");
     }
 
     //슬롯 선택
@@ -93,7 +93,7 @@ public class StartScene : MonoBehaviour
             values[2].text = GameData.Instance.player.movespeed.ToString();
             values[3].text = GameData.Instance.player.hp.ToString();
             values[4].text = GameData.Instance.player.stamina.ToString();
-            values[5].text = GameData.Instance.player.defence.ToString();
+            //values[5].text = GameData.Instance.player.defence.ToString();
         }
     }
 

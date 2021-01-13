@@ -404,6 +404,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590c1c4b5e83d44ab65dff634ddab73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disable: {fileID: 0}
+  Active: {fileID: 0}
+  mesh: {fileID: 0}
   NextPortalName: FromMap007 ToMap005
   NextSceneName: MAP007
   isPossibleMove: 1
@@ -603,6 +606,36 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5ddc00172d7f6ab4b951e9b057ad0477, type: 2}
+    - target: {fileID: 5117455209930452620, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_Name
+      value: SavePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117455209930452621, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -16.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117455209930452722, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117455209930452722, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117455209930452722, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_Size.z
+      value: -4.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117455209930452723, guid: 5646558088826284fa88b3fef00d0d31,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5117455210264077418, guid: 5646558088826284fa88b3fef00d0d31,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -615,6 +648,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 323330897615856546, guid: 5646558088826284fa88b3fef00d0d31, type: 3}
+    - {fileID: 5117455209930452723, guid: 5646558088826284fa88b3fef00d0d31, type: 3}
+    - {fileID: 5117455209930452720, guid: 5646558088826284fa88b3fef00d0d31, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5646558088826284fa88b3fef00d0d31, type: 3}
 --- !u!1 &5117455209888357299 stripped
 GameObject:
@@ -637,6 +672,26 @@ MonoBehaviour:
   leverName: FromMap007 ToMap005
   description: MAP007
   templePortal: {fileID: 2130546387}
+--- !u!1 &5117455209888357301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5117455209930452620, guid: 5646558088826284fa88b3fef00d0d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 5117455209888357298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5117455209888357302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117455209888357301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6bc2ebf3be507428a9bfc062a5c46d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentSceneName: MAP005
+  CurrentPortalName: FromMap005 ToMap004
 --- !u!1001 &8726343217700350136
 PrefabInstance:
   m_ObjectHideFlags: 0

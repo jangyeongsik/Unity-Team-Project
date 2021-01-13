@@ -45,6 +45,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.movespeed = 8.0f;
         e_Warrior.attack_aware_distance = 1.5f;
         e_Warrior.navigation.enabled = true;
+        e_Warrior.damage = 1;
 
     }
 

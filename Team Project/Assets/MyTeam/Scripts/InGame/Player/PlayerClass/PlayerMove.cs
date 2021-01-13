@@ -58,6 +58,11 @@ public class PlayerMove : MonoBehaviour
         //방향키 wasd이동
         Move();
         PlayerDash();
+        if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead)
+        {
+            animator.SetTrigger("Dead");
+            GameData.Instance.player.m_state = State.PlayerState.P_Dead;
+        }
     }
 
     private void Update()

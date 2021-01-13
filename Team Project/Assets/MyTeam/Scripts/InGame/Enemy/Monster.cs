@@ -36,6 +36,7 @@ public class Monster : character
 
         rigid = GetComponent<Rigidbody>();
     }
+
     public void OnEnemyHitEvent()
     {
         EnemyHitEvent?.Invoke();

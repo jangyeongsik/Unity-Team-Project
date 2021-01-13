@@ -42,6 +42,8 @@ public class StageManager : MonoBehaviour
             for (int i = 0; i < portals.Length; ++i)
             {
                 portals[i].isPossibleMove = true;
+                if (portals[i].Active != null)
+                    portals[i].mesh.mesh = portals[i].Active;
             }
         }
 

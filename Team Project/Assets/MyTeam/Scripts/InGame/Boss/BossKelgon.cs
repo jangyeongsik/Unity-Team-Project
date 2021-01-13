@@ -53,6 +53,7 @@ public class BossKelgon : MonoBehaviour
                 ChargeCircle3.SetActive(false);
             if(AttackNotice.activeSelf)
                 AttackNotice.SetActive(false);
+            GameData.Instance.player.bossClear = true;
         }
     }
 

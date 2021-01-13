@@ -14,7 +14,10 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
 
     IEnumerator MovePlayer(string SceneName, string portalName)
     {
-        if(CurrentSceneName != "")
+
+        ScreenFade.Instance.OnFadeIn(1);
+
+        if (CurrentSceneName != "")
         {
             SceneManager.UnloadSceneAsync(CurrentSceneName);
         }
