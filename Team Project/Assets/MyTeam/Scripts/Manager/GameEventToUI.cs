@@ -63,6 +63,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public delegate void PlayerHP_Decrease(int damage);
     public PlayerHP_Decrease playerHP_Decrease;
+    public PlayerHP_Decrease playerHP_Increase;
 
     public event System.Action AttactReset;
 
@@ -103,6 +104,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
         if (playerHP_Decrease != null)
             playerHP_Decrease(damage);
     }
+    public void OnPlayerHp_Increase(int value)
+    {
+        playerHP_Increase.Invoke(value);
+    }
     public void OnEventInterActionOnOff(bool isOn)
     {
         interOnOff(isOn);
@@ -121,4 +126,5 @@ public class GameEventToUI : Singleton<GameEventToUI>
         leverOnOff(isOn, name, description);
     }
     #endregion
+
 }

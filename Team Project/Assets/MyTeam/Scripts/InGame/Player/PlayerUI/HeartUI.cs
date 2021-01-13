@@ -15,7 +15,6 @@ public class HeartUI : MonoBehaviour
     {
         hearts = transform.Find("Active").GetComponentsInChildren<Image>();
         disabled = transform.Find("Disabled").GetComponentsInChildren<Image>();
-        int idx = 0;
 
         for(int i = 0; i < hearts.Length; ++i)
         {
@@ -41,21 +40,23 @@ public class HeartUI : MonoBehaviour
         currentHeart--;
 
         GameEventToUI.Instance.playerHP_Decrease += CutHeart;
+        GameEventToUI.Instance.playerHP_Increase += AddHeart;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-            AddHeart(true);
+        GameData.Instance.player.currentHp = hearts[currentHeart].fillAmount + currentHeart;
     }
 
     private void OnDestroy()
     {
         GameEventToUI.Instance.playerHP_Decrease -= CutHeart;
+        GameEventToUI.Instance.playerHP_Increase -= AddHeart;
     }
 
     public void CutHeart(int damage)
     {
+        Debug.Log(damage);
         for(int i = 0; i < damage; ++i)
         {
             if (hearts[currentHeart].fillAmount <= 0 && currentHeart > 0)
@@ -71,10 +72,9 @@ public class HeartUI : MonoBehaviour
         }
     }
 
-    public void AddHeart(bool isHalf)
+    public void AddHeart(int value)
     {
-        int i = isHalf ? 1 : 0;
-        for(int j = i; j < 2; j++)
+        for(int j = 0; j < value; j++)
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
             {

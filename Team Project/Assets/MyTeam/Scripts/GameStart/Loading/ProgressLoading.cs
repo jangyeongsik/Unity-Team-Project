@@ -11,12 +11,13 @@ public class ProgressLoading : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadScene());
+        //StartCoroutine(LoadScene());
     }
+
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync("MainGameScene");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("UI Scene");
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)

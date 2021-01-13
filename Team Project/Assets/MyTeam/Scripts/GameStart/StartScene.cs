@@ -50,7 +50,7 @@ public class StartScene : MonoBehaviour
     {
         LoadingProgress.LoadScene("UI Scene");
         //Debug.Log(GameData.Instance.player.stamina);
-        //SceneManager.LoadScene("UI Scene");
+        //SceneManager.LoadScene("Loading");
     }
 
     //슬롯 선택

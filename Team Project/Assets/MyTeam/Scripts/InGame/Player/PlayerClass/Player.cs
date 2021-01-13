@@ -28,6 +28,9 @@ public class PlayerData
     public int cylinderPercent;
     public string[] playerSkillset = new string[3];
     public int[] SkillIdx = new int[3];
+    public float currentHp;
+    public string SaveSceneName;
+    public string SavePortalName;
 
     public PlayerData(int slot)
     {
@@ -53,6 +56,9 @@ public class PlayerData
         player.cylinderCounter = cylinderCounter;
         player.cylinderPercent = cylinderPercent;
         player.skillIdx = SkillIdx;
+        player.currentHp = currentHp;
+        player.SaveSceneName = SaveSceneName;
+        player.SavePortalName = SavePortalName;
         return player;
     }
 
@@ -72,6 +78,9 @@ public class PlayerData
         presetID = 0;
         cylinderCounter = 0;
         cylinderPercent = 0;
+        currentHp = 4;
+        SaveSceneName = "MAP001";
+        SavePortalName = "MAP001";
         for (int i = 0; i < SkillIdx.Length; ++i)
             SkillIdx[i] = i + 1;
         return this;
@@ -92,6 +101,7 @@ public class PlayerData
         presetID = 0;
         cylinderCounter = 0;
         cylinderPercent = 0;
+        currentHp = 0;
         return this;
     }
     public void CopyPlayer(Player player)
@@ -111,6 +121,9 @@ public class PlayerData
         cylinderCounter = player.cylinderCounter;
         cylinderPercent = player.cylinderPercent;
         SkillIdx = player.skillIdx;
+        currentHp = player.currentHp;
+        SaveSceneName = player.SaveSceneName;
+        SavePortalName = player.SavePortalName;
     }
 }
 
@@ -145,6 +158,9 @@ public class Player
     public List<KeyValuePair<AnimationClip, AnimationClip>> applyList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
     public int[] skillIdx = new int[3];
     public bool isSceneMove = false;
+    public float currentHp;
+    public string SaveSceneName;
+    public string SavePortalName;
 
     public Player() {
         id = 0;
@@ -160,7 +176,7 @@ public class Player
         presetID = 0;
         m_state = State.PlayerState.P_Idle;
         counterTime = 0;
-
+        currentHp = 4;
     }
     Player(Transform t)                 //생성자
     {

@@ -29,6 +29,7 @@ public class Monster : character
     {
         target = GameData.Instance.player.position.gameObject;
     }
+
     public void OnEnemyHitEvent()
     {
         EnemyHitEvent?.Invoke();
