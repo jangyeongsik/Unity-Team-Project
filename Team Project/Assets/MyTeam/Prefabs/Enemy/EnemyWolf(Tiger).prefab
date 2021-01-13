@@ -1324,11 +1324,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1151582564995526879}
   - component: {fileID: 1151582565002485617}
-  - component: {fileID: 1973324952688828423}
   - component: {fileID: 6599943413599161772}
   - component: {fileID: 6323019362705282112}
   - component: {fileID: 2592950527574908686}
   - component: {fileID: 3172289561290764524}
+  - component: {fileID: 4181381869427904525}
+  - component: {fileID: 1319415631564810299}
   m_Layer: 9
   m_Name: EnemyWolf(Tiger)
   m_TagString: EnemyWolf
@@ -1343,7 +1344,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151582564995099903}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.8318453, y: -0.24157625, z: -0.44532776}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
@@ -1372,19 +1373,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1973324952688828423
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151582564995099903}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &6599943413599161772
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1447,9 +1435,13 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
+  rigid: {fileID: 0}
 --- !u!114 &3172289561290764524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,6 +1455,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackNocice: {fileID: 7103765068486206646}
+--- !u!54 &4181381869427904525
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151582564995099903}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1319415631564810299
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151582564995099903}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 31.2
+  m_Height: 200
+  m_Direction: 2
+  m_Center: {x: 0, y: 52.42, z: 0}
 --- !u!1 &6532790835118322341
 GameObject:
   m_ObjectHideFlags: 0

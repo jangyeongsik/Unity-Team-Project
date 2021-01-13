@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366971559414005255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 113.8, z: 47.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2683750033574209655}
-  m_RootOrder: 3
+  m_Father: {fileID: 2683750033574209595}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2683750033574441985
 GameObject:
@@ -462,6 +462,7 @@ Transform:
   m_Children:
   - {fileID: 2683750033574209579}
   - {fileID: 2683750033574209589}
+  - {fileID: 7237334341177883290}
   m_Father: {fileID: 2683750033574209597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -52.319542, y: -46.89832, z: 21.922764}
@@ -951,13 +952,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2683750033574209655}
   - component: {fileID: 2683750033583818695}
-  - component: {fileID: 203995089297059442}
   - component: {fileID: 203995089297059444}
   - component: {fileID: 203995089297059445}
   - component: {fileID: 8195905718909522667}
+  - component: {fileID: 1252518460141307034}
+  - component: {fileID: 7036586200880356788}
   m_Layer: 9
   m_Name: EnemyVishop
-  m_TagString: Untagged
+  m_TagString: EnemyVishop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -969,14 +971,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2683750033574442071}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.71, y: 0, z: -3.4099998}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 2683750033574209575}
   - {fileID: 2683750033574209651}
   - {fileID: 2683750033574209653}
-  - {fileID: 7237334341177883290}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -999,19 +1000,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &203995089297059442
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683750033574442071}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &203995089297059444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,9 +1027,13 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
+  rigid: {fileID: 0}
 --- !u!195 &203995089297059445
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1080,6 +1072,36 @@ MonoBehaviour:
   arrowFirePoint: {fileID: 7237334341177883290}
   arrowPrefab: {fileID: 186447331761152080, guid: 15e7fc5d13203454fbc8cc1cb376febb,
     type: 3}
+--- !u!54 &1252518460141307034
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2683750033574442071}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7036586200880356788
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2683750033574442071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 37.85
+  m_Height: 200
+  m_Direction: 1
+  m_Center: {x: 0, y: 75.57, z: 0}
 --- !u!1 &2683750033574442081
 GameObject:
   m_ObjectHideFlags: 0

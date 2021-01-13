@@ -49,16 +49,7 @@ public class EnemyArcher : MonoBehaviour
             EnemySet(3);
             monster.attack_aware_distance = 6.0f;
         }
-        //else if(gameObject.name == "EnemyArcher")
-        //{
-        //    EnemySet(1);
-        //    monster.attack_aware_distance = 6.0f;
-        //}
-        //else
-        //{
-        //    EnemySet(1);
-        //    monster.attack_aware_distance = 6.0f;
-        //}
+
         else if(gameObject.CompareTag("EnemyVishop"))
         {
             EnemySet(1);
@@ -149,7 +140,6 @@ public class EnemyArcher : MonoBehaviour
     }
     public void OnDeadEvent()
     {
-
         monster.animator.SetBool("isDead", true);
         monster.monsterState = State.MonsterState.M_Dead;
         //플레이어 실린더 게이지 추가

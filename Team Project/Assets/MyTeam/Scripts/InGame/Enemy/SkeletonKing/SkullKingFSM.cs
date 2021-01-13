@@ -24,10 +24,6 @@ public class SkullKingFSM : MonoBehaviour
 
     private bool dead = false;
 
-    //해골 땅에서 나타나고부터 애니메이션 메서드 실행 위한 타임제어 변수 
-    float delay = 0.0f;
-    float time = 2.5f; 
-
     private void Start()
     {
         skullKing = GetComponent<Monster>();
@@ -63,7 +59,7 @@ public class SkullKingFSM : MonoBehaviour
     {
         if (!targeting)
         {
-            if(skullKing.DistacneWithTarget() > 30.0f)
+            if(skullKing.DistacneWithTarget() < 10.0f)
             {
                 targeting = true;
             }

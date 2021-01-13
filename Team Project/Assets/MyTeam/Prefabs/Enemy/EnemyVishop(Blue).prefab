@@ -597,10 +597,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7060885363652679138}
   - component: {fileID: 7060885363661945426}
-  - component: {fileID: 8202199970860152248}
   - component: {fileID: 6456603937395694915}
   - component: {fileID: 3202190481198272479}
   - component: {fileID: 3348625479103215538}
+  - component: {fileID: 3776875315850248606}
+  - component: {fileID: 7018525098761631619}
   m_Layer: 9
   m_Name: EnemyVishop(Blue)
   m_TagString: EnemyVishop
@@ -645,19 +646,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &8202199970860152248
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7060885363652446658}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &6456603937395694915
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -707,9 +695,13 @@ MonoBehaviour:
   target_notice_distance: 0
   monsterKind: 0
   monsterState: 0
+  dropItem_Key: 1
+  isGet: 0
+  monsterDead: 0
   navigation: {fileID: 0}
   animator: {fileID: 0}
   counterjudgement: 0
+  rigid: {fileID: 0}
 --- !u!114 &3348625479103215538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,6 +718,36 @@ MonoBehaviour:
   arrowFirePoint: {fileID: 4878552746674994329}
   arrowPrefab: {fileID: 3634379708873836938, guid: ccefec46e76d5f8428eaf9ef5ba3faa0,
     type: 3}
+--- !u!54 &3776875315850248606
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060885363652446658}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7018525098761631619
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060885363652446658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 40
+  m_Height: 200
+  m_Direction: 1
+  m_Center: {x: 0, y: 75.57, z: 0}
 --- !u!1 &7060885363652446662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8792376253512145900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 78, z: 44}
+  m_LocalPosition: {x: 0, y: 78, z: 85.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7060885363652679138}
