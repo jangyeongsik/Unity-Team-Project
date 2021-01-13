@@ -52,6 +52,7 @@ public class BossTartos : MonoBehaviour
     void TartosHitEvent()
     {
         --hp;
+
         if (hp <= 0)
         {
             tartos.animator.SetTrigger("Dead");

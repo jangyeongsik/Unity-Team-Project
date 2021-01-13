@@ -39,6 +39,8 @@ public class TartosCharge03 : StateMachineBehaviour
             patton1_4 = animator.transform.parent.GetComponent<BossTartos>().tartosPatton1_4;
         patton1_4.SetActive(false);
 
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern1");
+
         Vector3 dir = tartos.target.position - tartos.position.position;
         dir.y = 0;
         tartos.position.LookAt(tartos.position.position + dir);

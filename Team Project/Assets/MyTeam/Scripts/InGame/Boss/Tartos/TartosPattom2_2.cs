@@ -27,6 +27,8 @@ public class TartosPattom2_2 : StateMachineBehaviour
         if (bossTartos == null)
             bossTartos = animator.transform.parent.GetComponent<BossTartos>();
 
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern2");
+
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.navigation.SetDestination(bossTartos.pattern2Point.position);
 
