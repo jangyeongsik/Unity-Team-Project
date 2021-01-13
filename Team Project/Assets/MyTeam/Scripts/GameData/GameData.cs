@@ -163,6 +163,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         if(!File.Exists(playerFilePath))
         {
+            Debug.Log("aa");
             CreateAllPlayerData();
             return;
         }
