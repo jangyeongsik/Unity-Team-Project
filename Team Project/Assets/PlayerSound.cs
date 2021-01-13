@@ -12,6 +12,7 @@ public class PlayerSound : MonoBehaviour
     void PlayerGameOver()
     {
         //플레이어 체력회복
+        GameData.Instance.player.currentHp = 1;
         GameEventToUI.Instance.playerHP_Increase(GameData.Instance.player.hp);
         //상태 초기화
         GetComponent<Animator>().Play("Idle");

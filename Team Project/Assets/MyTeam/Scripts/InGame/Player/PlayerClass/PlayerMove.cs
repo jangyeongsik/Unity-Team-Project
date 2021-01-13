@@ -44,7 +44,9 @@ public class PlayerMove : MonoBehaviour
             GameData.Instance.player.overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
 
         AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
-        for(int i = clips.Length-1; i >= 0; --i)
+        GameData.Instance.player.orgList.Clear();
+        GameData.Instance.player.aniList.Clear();
+        for (int i = clips.Length-1; i >= 0; --i)
         {
             if(clips[i].name.Contains("Base"))
             {
