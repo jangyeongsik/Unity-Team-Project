@@ -82,9 +82,6 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(EquipInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
         UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
-        TalkCanvas.SetActive(false);
-
-       
     }
 
     void Update()

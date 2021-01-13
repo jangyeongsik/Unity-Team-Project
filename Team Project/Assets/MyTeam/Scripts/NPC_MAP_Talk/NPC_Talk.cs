@@ -6,10 +6,8 @@ public class NPC_Talk : MonoBehaviour
 {
     void Start()
     {
-        if (!GameData.Instance.player.tutorial)
-        {
 
-        }
+        
     }
 
 

@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
         //나중에 조이스틱 사용할때 주석해제
         UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
         UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        animator.enabled = false;
     }
 
     private void Start()

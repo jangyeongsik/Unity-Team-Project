@@ -8,8 +8,7 @@ public class npc_talk_chage : MonoBehaviour
     public List<string> talk_data;
     int count;
     Text npc_talk;
-
-    private void Start()
+    private void Awake()
     {
         talk_data = new List<string>();
         npc_talk = GetComponent<Text>();
@@ -17,7 +16,6 @@ public class npc_talk_chage : MonoBehaviour
         GameEventToUI.Instance.npc_talk_setting += OnTalkSetting;
         GameEventToUI.Instance.npc_talk_print += talk_print;
         GameEventToUI.Instance.npc_talk_Next += NextTalk;
-
     }
 
     public void OnEventTalkChage(string name)

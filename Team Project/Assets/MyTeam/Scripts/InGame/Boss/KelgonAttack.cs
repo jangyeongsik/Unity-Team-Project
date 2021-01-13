@@ -155,4 +155,9 @@ public class KelgonAttack : MonoBehaviour
     {
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Dead");
     }
+
+    public void BossClear()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
 }

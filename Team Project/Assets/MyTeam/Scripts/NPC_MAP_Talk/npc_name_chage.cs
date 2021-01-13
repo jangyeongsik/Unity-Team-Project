@@ -8,8 +8,7 @@ public class npc_name_chage : MonoBehaviour
     public List<string> name_data;
     int count;
     Text npc_name;
-
-    private void Start()
+    private void Awake()
     {
         name_data = new List<string>();
         npc_name = GetComponent<Text>();
@@ -17,6 +16,10 @@ public class npc_name_chage : MonoBehaviour
         GameEventToUI.Instance.npc_name_setting += OnNameSetting;
         GameEventToUI.Instance.npc_name_print += name_print;
         GameEventToUI.Instance.npc_talk_Next += Nextname;
+    }
+    private void Start()
+    {
+        transform.parent.gameObject.SetActive(false);
     }
 
     public void OnEventNameChage(string name)

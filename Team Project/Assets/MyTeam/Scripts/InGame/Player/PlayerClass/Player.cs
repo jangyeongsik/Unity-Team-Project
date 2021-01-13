@@ -208,6 +208,9 @@ public class Player
 
     public IEnumerator PlayerMovePosition(Vector3 pos)
     {
+        if (animator.enabled == false)
+            animator.enabled = true;
+
         controller.enabled = false;
         position.position = pos;
         isSceneMove = true;
