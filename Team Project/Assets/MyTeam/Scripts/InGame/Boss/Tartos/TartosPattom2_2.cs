@@ -23,8 +23,6 @@ public class TartosPattom2_2 : StateMachineBehaviour
             tartos = animator.transform.parent.GetComponent<BossData>();
         tartos.bossState = State.BossState.B_SkillChargeTwo;
 
-        tartos.position.position = new Vector3(0, 0, 0);
-
         number2 = Random.Range(0, 3);
 
         if (patton2_1 == null)
@@ -48,7 +46,7 @@ public class TartosPattom2_2 : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        tartos.position.position = new Vector3(0, 0, 0);
+        tartos.navigation.SetDestination(tartos.pattonTarget.position);
         tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
         if (number2 == 0)
         {

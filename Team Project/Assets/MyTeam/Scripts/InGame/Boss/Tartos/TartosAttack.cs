@@ -39,7 +39,6 @@ public class TartosAttack : MonoBehaviour
             switch (tartos.bossState)
             {          
                 case State.BossState.B_Attack:
-                    Debug.Log("Asdasd");
                     tartos.animator.SetInteger("Attack", 2);
                     break;
                 case State.BossState.B_SkillChargeOne:

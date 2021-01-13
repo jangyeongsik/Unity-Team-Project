@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class BossTartos : MonoBehaviour
 {
     public Transform target;
+    public Transform pattonTarget;
 
     BossData tartos;
     Monster monster;

@@ -6,6 +6,7 @@ public class TartosPattom2_1 : StateMachineBehaviour
 {
     BossData tartos;
 
+
     GameObject patton2_1;
     GameObject patton2_2;
     GameObject patton2_3;
@@ -19,12 +20,13 @@ public class TartosPattom2_1 : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
+
         if (tartos == null)
             tartos = animator.transform.parent.GetComponent<BossData>();
         tartos.bossState = State.BossState.B_SkillChargeTwo;
 
-        tartos.position.position = new Vector3(0, 0, 0);
-        tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
+        
 
         number = Random.Range(0, 3);
 
@@ -48,23 +50,27 @@ public class TartosPattom2_1 : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        tartos.position.position = new Vector3(0, 0, 0);
-        if (number == 0)
+        tartos.navigation.SetDestination(tartos.pattonTarget.position);
+        tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (tartos.position.position.x == 0)
         {
-            patton2_1.SetActive(true);
-            patton2_3.SetActive(true);
-            patton2_8.SetActive(true);
-        }
-        else if (number == 1)
-        {
-            patton2_2.SetActive(true);
-            patton2_5.SetActive(true);
-            patton2_7.SetActive(true);
-        }
-        else
-        {
-            patton2_4.SetActive(true);
-            patton2_6.SetActive(true);
+            if (number == 0)
+            {
+                patton2_1.SetActive(true);
+                patton2_3.SetActive(true);
+                patton2_8.SetActive(true);
+            }
+            else if (number == 1)
+            {
+                patton2_2.SetActive(true);
+                patton2_5.SetActive(true);
+                patton2_7.SetActive(true);
+            }
+            else
+            {
+                patton2_4.SetActive(true);
+                patton2_6.SetActive(true);
+            }
         }
     }
 

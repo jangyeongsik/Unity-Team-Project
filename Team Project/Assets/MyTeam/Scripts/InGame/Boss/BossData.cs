@@ -10,6 +10,7 @@ public class BossData : character
     public float attack_aware_distance;   //공격 거리
 
     public Transform target;
+    public Transform pattonTarget;
 
     public State.BossState bossState;
     public State.BossState lastAttack;

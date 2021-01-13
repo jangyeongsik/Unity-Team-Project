@@ -2507,6 +2507,7 @@ MonoBehaviour:
   counter_reslstance: 0
   attack_aware_distance: 0
   target: {fileID: 1651873539}
+  pattonTarget: {fileID: 1833470631}
   bossState: 0
   lastAttack: 0
   chargeNum: 0
@@ -2547,6 +2548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1651873539}
+  pattonTarget: {fileID: 1833470631}
   tartosPatton1_1: {fileID: 1714976533}
   tartosPatton1_2: {fileID: 1874626718}
   tartosPatton1_3: {fileID: 1921530551}
@@ -2760,6 +2762,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 809938405}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1833470630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1833470631}
+  m_Layer: 0
+  m_Name: Patton2Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1833470631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833470630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874626718
 GameObject:
