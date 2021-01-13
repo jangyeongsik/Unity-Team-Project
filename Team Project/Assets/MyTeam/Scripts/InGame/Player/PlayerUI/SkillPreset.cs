@@ -40,18 +40,11 @@ public class SkillPreset : MonoBehaviour
         skillImages = transform.Find("Skill Presets").GetComponentsInChildren<Image>();
         skillImages[selectIdx].color = selectColor;
 
-        for(int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
+        for (int i = 0; i < GameData.Instance.player.skillIdx.Length; ++i)
         {
-            for(int j = 0; j < GameData.Instance.player.skill.skillClips.Length; ++j)
-            {
-                if (GameData.Instance.player.aniList[i] == GameData.Instance.player.skill.skillClips[j])
-                {
-                    btnImages[i].sprite = skillImages[j].sprite;
-                    Debug.Log("i : " + i + " j : " + j);
-                }
-                else continue;
-            }
+            btnImages[i].sprite = skillImages[i].sprite;
         }
+
     }
 
     private void OnEnable()

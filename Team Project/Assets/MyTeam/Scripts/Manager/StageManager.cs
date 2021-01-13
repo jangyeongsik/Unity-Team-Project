@@ -40,7 +40,10 @@ public class StageManager : MonoBehaviour
             if (GameObject.FindObjectOfType<Monster>() == null)
             {
                 isClear = true;
-                NoneRegenMap.Add(GameData.Instance.player.curSceneName, !isRegen);
+                if (!isRegen)
+                {
+                    NoneRegenMap.Add(GameData.Instance.player.curSceneName, !isRegen);
+                }
             }
         }
         else
