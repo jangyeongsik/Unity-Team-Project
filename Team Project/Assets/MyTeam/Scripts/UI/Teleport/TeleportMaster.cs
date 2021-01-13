@@ -16,9 +16,13 @@ public class TeleportMaster : MonoBehaviour
 
     private void Start()
     {
+        Disable = Resources.Load("DeActive") as Mesh;
+        Active = Resources.Load("Active") as Mesh;
+
         mesh = GetComponent<MeshFilter>();
         if (!isPossibleMove && Disable != null)
             mesh.mesh = Disable;
+
     }
 
     private void OnTriggerEnter(Collider other)
