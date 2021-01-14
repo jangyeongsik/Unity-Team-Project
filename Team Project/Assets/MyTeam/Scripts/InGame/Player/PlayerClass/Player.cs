@@ -32,6 +32,7 @@ public class PlayerData
     public int[]        skillIdx;                  //현재 선택한 스킬
     public string       SaveSceneName;             //체크포인트 씬
     public string       SavePortalName;            //저장한 씬으로 갈 포탈이름
+    public bool[]       Talk_Box;                  //대화 시스템 관리
 
     public PlayerData(int slot)
     {
@@ -60,6 +61,7 @@ public class PlayerData
         player.skillIdx             = skillIdx;
         player.SaveSceneName        = SaveSceneName;
         player.SavePortalName       = SavePortalName;
+        player.Talk_Box             = Talk_Box;
         return player;
     }
 
@@ -85,6 +87,7 @@ public class PlayerData
         skillIdx            = new int[3] { 1, 2, 3 };
         SaveSceneName       = "MAP001";
         SavePortalName      = "MAP001";
+        Talk_Box            = new bool[28];
         return this;
     }
     //플레이어 데이터를 초기화한다
@@ -109,6 +112,7 @@ public class PlayerData
         skillIdx            = new int[3] { 1, 2, 3 };
         SaveSceneName       = "MAP001";
         SavePortalName      = "MAP001";
+        Talk_Box            = new bool[28];
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
@@ -133,6 +137,7 @@ public class PlayerData
         skillIdx            = player.skillIdx;
         SaveSceneName       = player.SaveSceneName;
         SavePortalName      = player.SavePortalName;
+        Talk_Box            = player.Talk_Box;
     }
 }
 
@@ -159,6 +164,7 @@ public class Player
     public int[] skillIdx;                  //현재 선택한 스킬
     public string SaveSceneName;            //체크포인트 씬
     public string SavePortalName;           //저장한 씬으로 갈 포탈이름
+    public bool[] Talk_Box;                 //대화 시스템 관리
 
     //저장 안할 변수들
     public Transform position;              //위치       

@@ -35,6 +35,7 @@ public class LoadingProgress : MonoBehaviour
 
             if(op.progress < 0.9f)
             {
+                Debug.Log(op.progress);
                 progressBar.fillAmount = op.progress;
             }
             else

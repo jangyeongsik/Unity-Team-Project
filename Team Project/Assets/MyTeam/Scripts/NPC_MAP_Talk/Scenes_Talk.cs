@@ -5,14 +5,14 @@ using UnityEngine;
 public class Scenes_Talk : MonoBehaviour
 {
     [SerializeField] int talk_id;
-    bool isTrue;
+    [SerializeField] int Map_number;
 
     private void Start()
     {
-        if (!isTrue)
+        if (GameData.Instance.player.Talk_Box[Map_number] == false)
         {
             GameEventToUI.Instance.OnEvent_TalkBox(talk_id);
-            isTrue = true;
+            GameData.Instance.player.Talk_Box[Map_number] = true;
         }
     }
 }
