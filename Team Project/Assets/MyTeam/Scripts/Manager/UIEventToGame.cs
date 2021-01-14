@@ -57,6 +57,10 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public event System.Action<bool> TPActivate;
     //텔레포터 작동 안함 메시지 보냄
     public event System.Action<bool> CancelActivate;
+    public event System.Action<int> SwordChangeEvent;
+    public event System.Action<bool> ActivateTemplePortal;
+
+    public event System.Action JoystickSetting;
     public void OnTPActivate(bool isOn)
     {
         TPActivate(isOn);
@@ -64,5 +68,18 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnCancel(bool isOn)
     {
         CancelActivate(isOn);
+    }
+    public void OnSwordChangeEvent(int index)
+    {
+        SwordChangeEvent(index);
+    }
+    public void OnActivateTemplePortal(bool isOn)
+    {
+        ActivateTemplePortal(isOn);
+    }
+
+    public void OnUiEventJoystickSetting()
+    {
+        JoystickSetting();
     }
 }

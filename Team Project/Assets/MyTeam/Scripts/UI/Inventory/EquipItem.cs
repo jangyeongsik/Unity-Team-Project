@@ -24,11 +24,7 @@ public class EquipItem : MonoBehaviour
     public TMP_Text TSubStat;
     private void Start()
     {
-        pE = DataManager.Instance.EquipInvenData;
-        foreach(Equipment a in pE.CurrentEquipmentList)
-        {
-            SetButtonImage(a);
-        }
+        RefreshAllImages();
     }
 
     public void Equip(Equipment _item)
@@ -40,7 +36,7 @@ public class EquipItem : MonoBehaviour
         {
             if (pE.CurrentEquipmentList[i].equipmentType.Equals(_item.equipmentType))
             {
-                DataManager.Instance.AddEquipmentData(pE.CurrentEquipmentList[i]);
+                DataManager.Instance.AddEquipmentData(pE.CurrentEquipmentList[i], 1);
                 DataManager.Instance.RemoveEquipInvenData(pE.CurrentEquipmentList[i]);
 
                 DataManager.Instance.AddEquipInvenData(_item);
@@ -65,6 +61,17 @@ public class EquipItem : MonoBehaviour
             SetButtonImage(_item);
         }
         Inventory.Instance.SetImage();
+    }
+    public void RefreshAllImages()
+    {
+        pE = DataManager.Instance.EquipInvenData;
+        if (pE != null)
+        {
+            foreach (Equipment a in pE.CurrentEquipmentList)
+            {
+                SetButtonImage(a);
+            }
+        }
     }
     public void SetButtonImage(Equipment _item)
     {
@@ -98,7 +105,6 @@ public class EquipItem : MonoBehaviour
         {
             infoScreen.gameObject.SetActive(true);
         }
-        
         switch (val)
         {
             case "Helm":
@@ -108,6 +114,7 @@ public class EquipItem : MonoBehaviour
                     break;
                 }
                 Equipment temp = FindItem(EQUIPMENTTYPE.HELM);
+                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
                 //아이템 이미지 받아와 넣기
                 TName.text = temp.name;
                 TCategory.text = temp.equipmentType.ToString();
@@ -123,6 +130,7 @@ public class EquipItem : MonoBehaviour
                     break;
                 }
                 temp = FindItem(EQUIPMENTTYPE.ARMOR);
+                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
                 //아이템 이미지 받아와 넣기
                 TName.text = temp.name;
                 TCategory.text = temp.equipmentType.ToString();
@@ -138,6 +146,7 @@ public class EquipItem : MonoBehaviour
                     break;
                 }
                 temp = FindItem(EQUIPMENTTYPE.WEAPON);
+                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
                 //아이템 이미지 받아와 넣기
                 TName.text = temp.name;
                 TCategory.text = temp.equipmentType.ToString();
@@ -153,6 +162,7 @@ public class EquipItem : MonoBehaviour
                     break;
                 }
                 temp = FindItem(EQUIPMENTTYPE.GLOVE);
+                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
                 //아이템 이미지 받아와 넣기
                 TName.text = temp.name;
                 TCategory.text = temp.equipmentType.ToString();
@@ -168,6 +178,7 @@ public class EquipItem : MonoBehaviour
                     break;
                 }
                 temp = FindItem(EQUIPMENTTYPE.BOOTS);
+                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
                 //아이템 이미지 받아와 넣기
                 TName.text = temp.name;
                 TCategory.text = temp.equipmentType.ToString();

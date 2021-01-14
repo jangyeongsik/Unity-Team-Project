@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Text.RegularExpressions;
 
 public class StartScene : MonoBehaviour 
 {
@@ -15,6 +16,13 @@ public class StartScene : MonoBehaviour
 
     int slotIdx = 0;
 
+    public GameObject gameLogo;
+    public GameObject startErrorPopup;
+    public GameObject errorPopup;
+    InputField inputField;
+
+    string pattern = @"^[a-zA-Z0-9가-힣]*$";
+
     private void Start()
     {
         isSlotEmpty = new bool[3];
@@ -25,14 +33,14 @@ public class StartScene : MonoBehaviour
 
         for(int i = 0; i < GameData.Instance.playerData.Count; ++i)
         {
-            if(GameData.Instance.playerData[i].name == "")
+            if(GameData.Instance.playerData[i].p_name == "")
             {
                 Slots[i].GetChild(0).GetComponent<Text>().text = "비어있음";
                 isSlotEmpty[i] = true;
             }
             else
             {
-                Slots[i].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[i].name;
+                Slots[i].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[i].p_name;
                 isSlotEmpty[i] = false;
             }
         }
@@ -42,15 +50,23 @@ public class StartScene : MonoBehaviour
 
     private void Update()
     {
-        
+        if(Input.GetMouseButtonDown(0))
+        {
+            gameLogo.SetActive(false);
+        }
     }
 
     //씬 로드
     public void GoToMainGameScene()
     {
+        if(GameData.Instance.player.p_name == "")
+        {
+            startErrorPopup.SetActive(true);
+            return;
+        }
         LoadingProgress.LoadScene("UI Scene");
         //Debug.Log(GameData.Instance.player.stamina);
-        //SceneManager.LoadScene("UI Scene");
+        //SceneManager.LoadScene("Loading");
     }
 
     //슬롯 선택
@@ -93,12 +109,13 @@ public class StartScene : MonoBehaviour
             values[2].text = GameData.Instance.player.movespeed.ToString();
             values[3].text = GameData.Instance.player.hp.ToString();
             values[4].text = GameData.Instance.player.stamina.ToString();
-            values[5].text = GameData.Instance.player.defence.ToString();
+            //values[5].text = GameData.Instance.player.defence.ToString();
         }
     }
 
     //obj 액티브 끄기
     public void Cancle(GameObject obj)
+
     {
         obj.SetActive(false);
     }
@@ -113,15 +130,27 @@ public class StartScene : MonoBehaviour
     //슬롯 생성
     public void CreatePlayer(GameObject obj)
     {
-        //슬롯 새로생성
-        GameData.Instance.CreateNewPlayerSlot(slotIdx, obj.transform.Find("InputField").GetComponent<InputField>().text);
+        if (inputField == null)
+            inputField = obj.transform.Find("InputField").GetComponent<InputField>();
+        //입력 검사
+        string text = inputField.text;
+        if(!Regex.IsMatch(text,pattern) || text == "")
+        {
+            inputField.text = "";
+            obj.SetActive(false);
+            errorPopup.SetActive(true);
+            return;
+        }
+            //슬롯 새로생성
+        //GameData.Instance.CreateNewPlayerSlot(slotIdx, obj.transform.Find("InputField").GetComponent<InputField>().text);
+        GameData.Instance.CreateNewPlayerSlot(slotIdx,text);
         obj.SetActive(false);
 
         //슬롯 텍스트 초기화 (없으면 이전에 입력했던거 유지됌@.@)
         obj.transform.Find("InputField").GetComponent<InputField>().text = "";
 
         //슬롯이름 변경
-        Slots[slotIdx].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[slotIdx].name;
+        Slots[slotIdx].GetChild(0).GetComponent<Text>().text = GameData.Instance.playerData[slotIdx].p_name;
         isSlotEmpty[slotIdx] = false;
 
         //스탯 텍스트 설정
@@ -136,6 +165,7 @@ public class StartScene : MonoBehaviour
 
         Slots[slotIdx].GetChild(0).GetComponent<Text>().text = "비어있음";
         isSlotEmpty[slotIdx] = true;
+        setPlayerStat(slotIdx);
     }
 
     //obj 팝업 액티브

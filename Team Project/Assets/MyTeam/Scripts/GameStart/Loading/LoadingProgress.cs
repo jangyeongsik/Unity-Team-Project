@@ -46,6 +46,7 @@ public class LoadingProgress : MonoBehaviour
                 progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
                 if(progressBar.fillAmount >= 1.0f)
                 {
+                    ScreenFade.Instance.OnFadeIn(1.5f);
                     op.allowSceneActivation = true;
                     yield break;
                 }  

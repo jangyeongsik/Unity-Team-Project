@@ -10,8 +10,9 @@ class ColorZone
 
     public ColorZone(RectTransform tr)
     {
-        startPos = tr.localPosition.x;
-        endPos = startPos + tr.sizeDelta.x;
+        float wid = tr.sizeDelta.x * 0.5f;
+        startPos = tr.localPosition.x  - wid;
+        endPos = tr.localPosition.x + wid;
     }
     
     public bool CheckInZone(float pos)
@@ -44,10 +45,12 @@ public class SkillGauge : MonoBehaviour
 
     public COLORZONE zone;
 
-    [SerializeField]
     float followDistX = 42f;
-    [SerializeField]
     float followDistY = 27f;
+
+    public float gWid = 10;
+    public float bWid = 20;
+    public float rWid = 30;
 
     private void Start()
     {
@@ -56,6 +59,13 @@ public class SkillGauge : MonoBehaviour
         redZone = new ColorZone(Red);
 
         endPos = GetComponent<RectTransform>().sizeDelta.x;
+
+        Green.sizeDelta = new Vector2(gWid, 20);
+        Yellow.sizeDelta = new Vector2(bWid, 20);
+        Red.sizeDelta = new Vector2(rWid, 20);
+
+        Yellow.localPosition = new Vector3(Green.localPosition.x - Green.sizeDelta.x, Green.localPosition.y, Green.localPosition.z);
+        Red.localPosition = new Vector3(Yellow.localPosition.x - Yellow.sizeDelta.x, Yellow.localPosition.y, Yellow.localPosition.z);
     }
 
     

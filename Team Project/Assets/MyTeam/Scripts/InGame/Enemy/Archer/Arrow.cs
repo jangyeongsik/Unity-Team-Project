@@ -8,7 +8,7 @@ public class Arrow : PoolableObject
 
     private void OnEnable()
     {
-        StartCoroutine(RoMove());
+        StartCoroutine(ReMove());
     }
     private void Update()
     {
@@ -17,11 +17,14 @@ public class Arrow : PoolableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
-        GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);
+            GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+        }
     }
 
-    IEnumerator RoMove()
+    IEnumerator ReMove()
     {
         yield return new WaitForSecondsRealtime(5.0f);
         ObjectPoolManager.GetInstance().objectPool.PushObject(gameObject);

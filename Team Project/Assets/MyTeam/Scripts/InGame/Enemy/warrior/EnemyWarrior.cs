@@ -45,6 +45,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.movespeed = 8.0f;
         e_Warrior.attack_aware_distance = 1.5f;
         e_Warrior.navigation.enabled = true;
+        e_Warrior.damage = 1;
 
     }
 
@@ -58,58 +59,60 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (!targeting)
         {
-            if (P_distance() > 20)
+            if (P_distance() < 10)
             {
                 targeting = true;
             }
         }
-        if (!dead)
+        if (targeting)
         {
-            if (count >= 3)
+            if (!dead)
             {
-                e_Warrior.navigation.enabled = false;
+                if (count >= 3)
+                {
+                    e_Warrior.navigation.enabled = false;
 
-                dead = true;
-                running = false;
+                    dead = true;
+                    running = false;
+                    e_Warrior.counterjudgement = false;
+                    e_Warrior.animator.SetBool("IsRun", false);
+                    e_Warrior.animator.SetBool("IsAttack", false);
+                    e_Warrior.animator.SetTrigger("isDead");
+                    e_Warrior.monsterState = State.MonsterState.M_Dead;
+                    GameEventToUI.Instance.OnAttactReset();
+                    GameEventToUI.Instance.OnPlayerCylinderGauge(20);
+                }
+                switch (e_Warrior.monsterState)
+                {
+                    case State.MonsterState.M_Idle:
+                        M_Idle();
+                        break;
+                    case State.MonsterState.M_Move:
+                        M_Move();
+                        break;
+                    case State.MonsterState.M_Dead:
+
+                        break;
+                    case State.MonsterState.M_Groar:
+                        break;
+                    case State.MonsterState.M_Attack:
+                        M_Attack();
+                        attackCount();
+                        break;
+                    case State.MonsterState.M_Return:
+                        break;
+                    case State.MonsterState.M_Damage:
+                        M_Damage();
+                        break;
+                }
+            }
+            if (e_Warrior.monsterState != State.MonsterState.M_Attack)
+            {
+                AttackNocice.SetActive(false);
+                attackTime = 0;
                 e_Warrior.counterjudgement = false;
-                e_Warrior.animator.SetBool("IsRun", false);
-                e_Warrior.animator.SetBool("IsAttack", false);
-                e_Warrior.animator.SetTrigger("isDead");
-                e_Warrior.monsterState = State.MonsterState.M_Dead;
-                GameEventToUI.Instance.OnAttactReset();
-                GameEventToUI.Instance.OnPlayerCylinderGauge(20);
-            }
-            switch (e_Warrior.monsterState)
-            {
-                case State.MonsterState.M_Idle:
-                    M_Idle();
-                    break;
-                case State.MonsterState.M_Move:
-                    M_Move();
-                    break;
-                case State.MonsterState.M_Dead:
-
-                    break;
-                case State.MonsterState.M_Groar:
-                    break;
-                case State.MonsterState.M_Attack:
-                    M_Attack();
-                    attackCount();
-                    break;
-                case State.MonsterState.M_Return:
-                    break;
-                case State.MonsterState.M_Damage:
-                    M_Damage();
-                    break;
             }
         }
-        if (e_Warrior.monsterState != State.MonsterState.M_Attack)
-        {
-            AttackNocice.SetActive(false);
-            attackTime = 0;
-            e_Warrior.counterjudgement = false;
-        }
-
     }
 
     private void M_Damage()
@@ -145,6 +148,8 @@ public class EnemyWarrior : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.25f);
         if(!dead)
             e_Warrior.navigation.SetDestination(target.transform.position);
+
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Warrior Move");
         running = false;
     }
 
@@ -218,7 +223,7 @@ public class EnemyWarrior : MonoBehaviour
     public void AttackHit()
     {
         count++;
-
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
         e_Warrior.animator.SetBool("IsRun", false);
         e_Warrior.animator.SetBool("IsAttack", false);
         e_Warrior.animator.SetTrigger("Hit");
@@ -229,5 +234,16 @@ public class EnemyWarrior : MonoBehaviour
         }
     }
 
-  
+    private void AttackSound()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Sword Attack");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
+
+
+        }
+    }
 }

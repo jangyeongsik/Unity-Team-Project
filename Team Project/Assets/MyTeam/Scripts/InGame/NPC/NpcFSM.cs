@@ -8,12 +8,15 @@ public class NpcFSM : MonoBehaviour
     private Npc npc;
     Vector3 originPos;
 
+    private bool trigger =false;
+
     void Start()
     {
         npc = GetComponent<Npc>();
-        NpcSetting();
+       // NpcSetting();
+        GameEventToUI.Instance.player_Trigger += isTrigger;
     }
-
+/*
     private void NpcSetting()
     {
         npc.npcState = State.NpcState.N_Idle;
@@ -33,7 +36,27 @@ public class NpcFSM : MonoBehaviour
     private void Idle()
     {
 
+    }*/
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEventTalkBtn(true);
+            trigger = true;
+        }
     }
 
-    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEventTalkBtn(false);
+            trigger = false;
+        }
+    }
+
+    public bool isTrigger()
+    {
+        return trigger;
+    }
 }

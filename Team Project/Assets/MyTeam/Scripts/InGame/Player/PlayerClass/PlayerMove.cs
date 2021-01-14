@@ -17,18 +17,17 @@ public class PlayerMove : MonoBehaviour
     float z;
     Vector3 dir;
 
-    Outline outline;
 
     public AnimationClip[] ciol;
 
     private void Awake()
     {
-        outline = GetComponent<Outline>();
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         //나중에 조이스틱 사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash += PlayerBtnDash;
+        animator.enabled = false;
     }
 
     private void Start()
@@ -43,7 +42,9 @@ public class PlayerMove : MonoBehaviour
             GameData.Instance.player.overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
 
         AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
-        for(int i = clips.Length-1; i >= 0; --i)
+        GameData.Instance.player.orgList.Clear();
+        GameData.Instance.player.aniList.Clear();
+        for (int i = clips.Length-1; i >= 0; --i)
         {
             if(clips[i].name.Contains("Base"))
             {
@@ -51,6 +52,8 @@ public class PlayerMove : MonoBehaviour
                 GameData.Instance.player.aniList.Add(clips[i]);
             }
         }
+
+        GameData.Instance.player.currentHp = 4;
     }
 
     private void FixedUpdate()
@@ -58,20 +61,24 @@ public class PlayerMove : MonoBehaviour
         //방향키 wasd이동
         Move();
         PlayerDash();
+        if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead)
+        {
+            animator.SetTrigger("Dead");
+            GameData.Instance.player.m_state = State.PlayerState.P_Dead;
+        }
     }
 
     private void Update()
     {
         Dash();
         Guard();
-        //WallCheck();3.09 + 23.48721
     }
 
     private void OnDestroy()
     {
         //조이스틱사용할때 주석해제
-        //UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
-        //UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
+        UIEventToGame.Instance.PlayerMove -= PlayerJoyMove;
+        UIEventToGame.Instance.PlayerDash -= PlayerBtnDash;
     }
 
     void Move()
@@ -143,6 +150,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
         animator.SetTrigger("Dash");
+        dashSpeed = 20.0f;
     }
 
     void Guard()
@@ -166,21 +174,5 @@ public class PlayerMove : MonoBehaviour
         {
             GameEventToUI.Instance.OnEventInterActionOnOff(false);
         }
-    }
-
-
-    void WallCheck()
-    {
-        RaycastHit hit;
-        Vector3 dir = (transform.position+ Vector3.up) - Camera.main.transform.position;
-        Debug.DrawRay(Camera.main.transform.position, dir);
-        if(Physics.Raycast(Camera.main.transform.position,dir,out hit,dir.magnitude))
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Object"))
-                outline.enabled = true;
-            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-                outline.enabled = false;   
-        }
-    }
-
+    }    
 }

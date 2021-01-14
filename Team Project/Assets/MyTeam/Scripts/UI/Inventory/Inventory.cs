@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-[Serializable]
-public class IntSprite : SerializableDictionary<int, Sprite>
-{ }
+using UnityEngine.SceneManagement;
+
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
     public static bool inventoryActivated = false;
@@ -27,9 +26,11 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public Toggle[] InvenTabs;
     //드롭다운 메뉴 (정렬)
     public GameObject menu;
-    private TMP_Dropdown dropDown;
+    private TMP_Dropdown dropDown; 
+    bool CoroutineIsRunning = false;
     private void Start()
     {
+        itemImages = GameData.Instance.itemImages;
         //플레이어 인벤토리 초기화
         pInven = DataManager.Instance.AllInvenData;
         //인벤토리 탭 번호 (0 = 장비, 1 = 재료, 2 = 기타)
@@ -38,17 +39,71 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         //인벤토리 드롭다운 메뉴 초기화
         dropDown = menu.GetComponent<TMP_Dropdown>();
         //슬롯초기화
-        slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>();
-        slotCount = pInven.EquipmentList.Count;
+        slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>(); 
+        if (pInven == null){ slotCount = 0; }
+        else { slotCount = pInven.EquipmentList.Count; }
         SetSlotNumber();
         SlotChange(slotCount);
 
         //시작할 때 높은 등급 순으로 정렬
-        DataManager.Instance.SortByIDDecending(InvenTabNum);
-        pInven = DataManager.Instance.AllInvenData;
-        SetImage();
+        if (pInven != null)
+        {
+            DataManager.Instance.SortByIDDecending(InvenTabNum);
+            pInven = DataManager.Instance.AllInvenData;
+            SetImage();
+        }
+        isVisible = InvenUI.activeSelf;
 
-        isVisible = gameObject.activeSelf;
+
+        #region"시작 재료 추가"
+        AddIngredient(101);
+        AddIngredient(102);
+        AddIngredient(103);
+        AddIngredient(104);
+        AddIngredient(105);
+        AddIngredient(106);
+        AddIngredient(107);
+        AddIngredient(108);
+        AddIngredient(109);
+        AddIngredient(110);
+        AddIngredient(111);
+        AddIngredient(112);
+        AddIngredient(113);
+        AddIngredient(114);
+        AddIngredient(115);
+        AddIngredient(116);
+        AddIngredient(117);
+        AddIngredient(118);
+        AddIngredient(119);
+        #endregion
+
+        #region"시작 장비 추가"
+        AddEquipment(1000);
+        AddEquipment(1001);
+        AddEquipment(1002);
+        AddEquipment(1003);
+        AddEquipment(1004);
+        AddEquipment(1005);
+        AddEquipment(1006);
+        AddEquipment(1007);
+        AddEquipment(1008);
+        AddEquipment(1009);
+        AddEquipment(1010);
+        AddEquipment(1011);
+        AddEquipment(1012);
+        AddEquipment(1013);
+        AddEquipment(1014);
+        AddEquipment(1015);
+        AddEquipment(1016);
+        AddEquipment(1017);
+        AddEquipment(1018);
+        AddEquipment(1019);
+        AddEquipment(1020);
+        AddEquipment(1021);
+        AddEquipment(1022);
+        AddEquipment(1023);
+        AddEquipment(1024);
+        #endregion
     }
     private void Update()
     {
@@ -72,8 +127,54 @@ public class Inventory : SingletonMonobehaviour<Inventory>
             AddIngredient(103);
             AddIngredient(104);
             AddIngredient(105);
+            AddIngredient(108);
+            AddIngredient(111);
         }
-        isVisible = gameObject.activeSelf;
+        isVisible = InvenUI.activeSelf; 
+        if (isVisible)
+        {
+            if (!CoroutineIsRunning)
+            {
+                if (pInven != null)
+                {
+                    CoroutineIsRunning = true;
+                    StartCoroutine(RefreshCoroutine());
+                }
+            }
+        }
+    }
+    IEnumerator RefreshCoroutine()
+    {
+        switch (InvenTabNum)
+        {
+            case 0:
+                for (int i = 0; i < pInven.EquipmentList.Count; i++)
+                {
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                break;
+            case 1:
+                for (int i = 0; i < pInven.IngredientList.Count; i++)
+                {
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                break;
+            case 2:
+                for (int i = 0; i < pInven.MiscList.Count; i++)
+                {
+                    slots[i].GetComponent<ItemInfo>().RefreshCount(true);
+                }
+                break;
+        }
+        AddSlot();
+        SetImage();
+        yield return new WaitForSecondsRealtime(0.2f);
+        CoroutineIsRunning = false;
+    }
+    //스타트 씬으로 돌아가면 파괴
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
     //=====================================
     //아이템 슬롯 관련
@@ -93,6 +194,12 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //슬롯버튼 한개 잠금해제
     public void AddSlot()
     {
+        if (pInven == null)
+        {
+            slotCount = 0;
+            SlotChange(slotCount);
+            return;
+        }
         switch (InvenTabNum)
         {
             case 0:
@@ -198,25 +305,22 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         
     }
     //아이템 추가
-    public void AddEquipment(int itemID)
+    public void AddEquipment(int itemID, int count = 1)
     {
-        DataManager.Instance.AddEquipmentData(GameData.Instance.FindEquipmentByID(itemID));
-        for (int i = 0; i < pInven.EquipmentList.Count; i++)
-        {
-            slots[i].GetComponent<ItemInfo>().RefreshCount(true);
-        }
-        AddSlot();
-        SetImage();
+        DataManager.Instance.AddEquipmentData(GameData.Instance.FindEquipmentByID(itemID), count);
     }
-    public void AddIngredient(int itemID)
+    public void AddIngredient(int itemID, int count = 1)
     {
-        DataManager.Instance.AddIngredientData(GameData.Instance.FindIngredientByID(itemID)); 
-        for (int i = 0; i < pInven.IngredientList.Count; i++)
-        {
-            slots[i].GetComponent<ItemInfo>().RefreshCount(true);
-        }
-        AddSlot();
-        SetImage();
+        DataManager.Instance.AddIngredientData(GameData.Instance.FindIngredientByID(itemID), count);
+    }
+    //아이템 삭제
+    public void RemoveEquipment(int itemID)
+    {
+        DataManager.Instance.RemoveEquipmentData(GameData.Instance.FindEquipmentByID(itemID));
+    }
+    public void RemoveIngredient(int itemID, int count = 1)
+    {
+        DataManager.Instance.RemoveIngredientData(GameData.Instance.FindIngredientByID(itemID), count);
     }
     //등급 이미지(색상) 교체
     public void SetGradeColor(int itemGrade, int index)
@@ -237,42 +341,27 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //=====================================
     //아이템탭 교체
     //=====================================
-    public void ChangeTabToEquipment()
+    public void CheckIsSelected(int val)
     {
-        InvenTabNum = 0;
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void ChangeTabToIngredient()
-    {
-        InvenTabNum = 1; 
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void ChangeTabToMisc()
-    {
-        InvenTabNum = 2;
-        CheckIsSelected();
-        ChangeTab();
-    }
-    public void CheckIsSelected()
-    {
-        if (InvenTabs[InvenTabNum].isOn)
+        for (int i = 0; i < InvenTabs.Length; i++)
         {
-            InvenTabs[InvenTabNum].animator.ResetTrigger("Deselected");
-            InvenTabs[InvenTabNum].animator.SetTrigger("Selected");
+            if (i != val)
+            {
+                InvenTabs[i].gameObject.GetComponent<Animator>().ResetTrigger("Selected");
+                InvenTabs[i].gameObject.GetComponent<Animator>().SetTrigger("Deselected");
+            }
         }
-        else
-        {
-            InvenTabs[InvenTabNum].animator.ResetTrigger("Selected");
-            InvenTabs[InvenTabNum].animator.SetTrigger("Deselected");
-        }
+        InvenTabs[val].isOn = true;
+        InvenTabs[val].gameObject.GetComponent<Animator>().ResetTrigger("Deselected");
+        InvenTabs[val].gameObject.GetComponent<Animator>().SetTrigger("Selected");
     }
     //=====================================
     //아이템 탭에 따라 슬롯 아이템 교체
     //=====================================
-    public void ChangeTab()
+    public void ChangeTab(int val)
     {
+        InvenTabNum = val;
+        CheckIsSelected(val);
         AddSlot();
         SetImage();
     }
@@ -295,5 +384,56 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         }
         pInven = DataManager.Instance.AllInvenData;
         SetImage();
+    }
+    //=====================================
+    //인벤에서 아이템 검색
+    //=====================================
+    public Equipment FindEquipment(int itemID)
+    {
+        for (int i = 0; i < pInven.EquipmentList.Count; i++)
+        {
+            if (pInven.EquipmentList[i].ID == itemID)
+            {
+                return pInven.EquipmentList[i];
+            }
+        }
+        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
+        return null;
+    }
+    public bool IsEquipmentExist(int itemID)
+    {
+        for (int i = 0; i < pInven.EquipmentList.Count; i++)
+        {
+            if (pInven.EquipmentList[i].ID == itemID)
+            {
+                return true;
+            }
+        }
+        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
+        return false;
+    }
+    public Ingredient FindIngredient(int itemID)
+    {
+        for (int i = 0; i < pInven.IngredientList.Count; i++)
+        {
+            if (pInven.IngredientList[i].ID == itemID)
+            {
+                return pInven.IngredientList[i];
+            }
+        }
+        Debug.Log("ItemID " + itemID + " Ingredient is not in pInven.IngredientList!");
+        return null;
+    }
+    public bool IsIngredientExist(int itemID)
+    {
+        for (int i = 0; i < pInven.IngredientList.Count; i++)
+        {
+            if (pInven.IngredientList[i].ID == itemID)
+            {
+                return true;
+            }
+        }
+        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
+        return false;
     }
 }

@@ -1,11 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CSVReader;
 using System.IO;
+using UnityEngine.SceneManagement;
 
+//아이템 이미지 딕셔너리
+[Serializable]
+public class IntSprite : SerializableDictionary<int, Sprite>
+{ }
 public class GameData : SingletonMonobehaviour<GameData>
 {
+    //아이템 이미지 딕셔너리
+    public IntSprite itemImages;
+
     private PlayerDataList playerDataList;
     int playerIdx = 0;
     public List<PlayerData> playerData;
@@ -13,7 +22,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public List<NPCReader.NPCTalk> data;
     public List<Equipment> equipmentData;
     public List<Ingredient> ingredientData;
-    public List<Production> producitonData;
+    public List<Production> productionData;
     string playerFilePath;
 
     private void Start()
@@ -24,30 +33,28 @@ public class GameData : SingletonMonobehaviour<GameData>
         Table ingred = CSVReader.Reader.ReadCSVToTable("IngredientData");
         ingredientData = ingred.TableToList<Ingredient>();
         Table prod = CSVReader.Reader.ReadCSVToTable("ProductionDB");
-        producitonData = prod.TableToList<Production>();
+        productionData = prod.TableToList<Production>();
         //System.GC.Collect();
         data = CSVReaderNPC.CSVReaderNPC.FileRead("talkdata");
 
         playerFilePath = Application.persistentDataPath + "/PlayerData.json";
         PlayerLoad();
         System.GC.Collect();
-
     }
 
     public void Print()
     {
-        foreach(Equipment a in equipmentData)
+        for(int i = 0; i < data.Count; i++)
         {
-            Debug.Log(a.ID + " " + a.name + " " + a.itemGrade);
+            for(int j = 0; j < data[i].talk_name.Count; j++)
+            {
+                Debug.Log(data[i].talk_name[j]);
+            }
+            for (int c = 0; c < data[i].talk.Count; c++)
+            {
+                Debug.Log(data[i].talk[c]);
+            }
         }
-    }
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.F2))
-        //{
-        //    Print();
-        //}
-
     }
 
     //아이템 매니저 함수들
@@ -118,13 +125,14 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void LoadFromPlayerSlot(int slot)
     {
         playerIdx = slot;
-        playerData[slot].WriteData(player);
+        player = playerData[slot].WriteData(player);
     }
 
     //플레이어 슬롯 새로만들기
     public void CreateNewPlayerSlot(int slot, string name)
     {
         playerData[slot].CreateNewPlayer(slot, name);
+        player = playerData[slot].WriteData(player);
         PlayerSave();
     }
 
@@ -144,7 +152,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         PlayerLoad();
     }
 
-    void PlayerSave()
+    public void PlayerSave()
     {
         playerData[playerIdx].CopyPlayer(player);
         playerDataList.datas = playerData;
@@ -153,8 +161,9 @@ public class GameData : SingletonMonobehaviour<GameData>
 
     void PlayerLoad()
     {
-        if(JsonManageAndroid.Instance.LoadJsonFile<PlayerDataList>("PlayerData") == null)
+        if(!File.Exists(playerFilePath))
         {
+            Debug.Log("aa");
             CreateAllPlayerData();
             return;
         }

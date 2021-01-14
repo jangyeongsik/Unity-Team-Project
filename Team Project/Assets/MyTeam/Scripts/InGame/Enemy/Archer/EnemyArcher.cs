@@ -30,16 +30,31 @@ public class EnemyArcher : MonoBehaviour
         monster.monsterKind = State.MonsterKind.M_Archer;
         monster.EnemyHitEvent += OnDeadEvent;
         target = GameData.Instance.player.position.gameObject;
-        setting();
-      }
+        RemoteEnemySetting();
+    }
 
-    private void setting()
+    private void EnemySet(int attack)
     {
         monster.monsterState = State.MonsterState.M_Idle;
         monster.navigation = GetComponent<NavMeshAgent>();
         monster.animator = GetComponent<Animator>();
         monster.movespeed = 8.0f;
-        monster.attack_aware_distance = 10.0f;
+        monster.damage = attack;
+    }
+
+    private void RemoteEnemySetting()
+    {
+        if(gameObject.CompareTag("EnemyArcher"))
+        {
+            EnemySet(3);
+            monster.attack_aware_distance = 6.0f;
+        }
+
+        else if(gameObject.CompareTag("EnemyVishop"))
+        {
+            EnemySet(1);
+            monster.attack_aware_distance = 6.0f;
+        }
     }
 
     private void OnDestroy()
@@ -99,34 +114,7 @@ public class EnemyArcher : MonoBehaviour
     }
 
     private void Move()
-    {/* bool my_coroutine_is_running = false;
- 
-    void Start_coroutine()
     {
-        // 코루틴 시작.
-        StartCoroutine("My_coroutine");
-    }
- 
-    IEnumerator My_coroutine()
-    {
-        my_coroutine_is_running = true;
- 
-        yield return
- 
-        my_coroutine_is_running = false;
-    }
- 
-    void Use_another_funcion()
-    {
-        if (my_coroutine_is_running)
-        {
-            // My_coroutine 이 실행중인지 
-            // 확인 후 수행할 것들.
-        }
-    }
-
-        
-         */
         if (!running)
         { 
             StartCoroutine(navigationSet());
@@ -146,6 +134,7 @@ public class EnemyArcher : MonoBehaviour
     {
         running = true;
         yield return new WaitForSecondsRealtime(0.25f);
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Archer Move");
         monster.navigation.SetDestination(target.transform.position);
         running = false;
     }
@@ -155,6 +144,7 @@ public class EnemyArcher : MonoBehaviour
         monster.monsterState = State.MonsterState.M_Dead;
         //플레이어 실린더 게이지 추가
         GameEventToUI.Instance.OnPlayerCylinderGauge(10);
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
     }
 
     public void OnTargetingEvent()
@@ -164,14 +154,26 @@ public class EnemyArcher : MonoBehaviour
 
     public void ArrowFire()
     {
-        GameObject arrow = ObjectPoolManager.GetInstance().objectPool.PopObject();
-      
-        Vector3 dir = tPos - arrowFirePoint.position;
-        dir.y = 0;
-        arrow.transform.position = arrowFirePoint.position;
-        arrow.transform.LookAt(arrow.transform.position + dir);
-
-        arrow.GetComponent<Arrow>().EnemyTranform = transform;
+        if(gameObject.CompareTag("EnemyArcher"))
+        {
+            GameObject arrow = ObjectPoolManager.GetInstance().objectPool.PopObject();
+            Vector3 dir = tPos - arrowFirePoint.position;
+            dir.y = 0;
+            arrow.transform.position = arrowFirePoint.position;
+            arrow.transform.LookAt(arrow.transform.position + dir);
+            arrow.GetComponent<Arrow>().EnemyTranform = transform;
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Arrow");
+        }
+        else if (gameObject.CompareTag("EnemyVishop"))
+        {
+            GameObject vishopArrow = ObjectPoolManager.GetInstance().objectPool2.PopObject();
+            Vector3 dir = tPos - arrowFirePoint.position;
+            dir.y = 0;
+            vishopArrow.transform.position = arrowFirePoint.position;
+            vishopArrow.transform.LookAt(vishopArrow.transform.position + dir);
+            vishopArrow.GetComponent<VishopArrow>().EnemyTranform = transform;
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Arrow");
+        }
     }
 
     public void PlayerLookAt()

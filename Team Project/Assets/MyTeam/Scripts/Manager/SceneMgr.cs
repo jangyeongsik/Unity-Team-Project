@@ -14,18 +14,21 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
 
     IEnumerator MovePlayer(string SceneName, string portalName)
     {
-        if(CurrentSceneName != "")
+
+        ScreenFade.Instance.OnFadeIn(1);
+
+        if (CurrentSceneName != "")
         {
             SceneManager.UnloadSceneAsync(CurrentSceneName);
         }
         CurrentSceneName = SceneName;
+        GameData.Instance.player.curSceneName = SceneName;
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         while (GameObject.Find(portalName) == null)
         {
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log(GameObject.Find(portalName).name);
-        Debug.Log(GameObject.Find(portalName).transform.position);
-        GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position);
+        StartCoroutine(GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position));
+        //GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position);
     }
 }

@@ -16,6 +16,14 @@ public class PlayerAttack : MonoBehaviour
 
     public float ArrowRadius = 1.5f;
 
+    public GameObject prefab;
+
+    COLORZONE colorZone;
+
+    Color red = new Color(1, 0, 0);
+    Color green = new Color(0, 1, 0);
+    Color blue = new Color(0, 0, 1);
+
     private void Awake()
     {
         if (controller == null)
@@ -30,7 +38,9 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Attack_SuccessEvent += Attack_SuccessEvent;
         GameEventToUI.Instance.AttactReset += AttackReset;
         GameEventToUI.Instance.Player_Hit += PlayerHit;
+        GameEventToUI.Instance.Player_Boss_Hit += PlayerBossHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
+
     }
 
     private void OnDestroy()
@@ -39,19 +49,13 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Attack_SuccessEvent -= Attack_SuccessEvent;
         GameEventToUI.Instance.AttactReset -= AttackReset;
         GameEventToUI.Instance.Player_Hit -= PlayerHit;
+        GameEventToUI.Instance.Player_Boss_Hit -= PlayerBossHit;
         UIEventToGame.Instance.Player_Delay -= PlayerDelay;
     }
 
-    //private void Update()
-    //{
-    //    if(curAttackEnemy != null)
-    //    {
-            
-    //    }
-    //}
-
     void playerAttack(float time, COLORZONE color)
     {
+        colorZone = color;
         switch (GameData.Instance.player.m_state)
         {
             case State.PlayerState.P_Idle:
@@ -87,6 +91,7 @@ public class PlayerAttack : MonoBehaviour
             case State.PlayerState.P_1st_Skill:
             case State.PlayerState.P_2nd_Skill:
             case State.PlayerState.P_3rd_Skill:
+
                 switch (color)
                 {
                     case COLORZONE.NONE://검은색 맞추면 딜레이로 돌입
@@ -129,6 +134,7 @@ public class PlayerAttack : MonoBehaviour
                         }
                         else
                         {
+                            StartCoroutine(MoveToEnemy(curAttackEnemy));
                             Attack_Success = true;
                             animator.SetTrigger("NextSkill");
                             GameEventToUI.Instance.OnSkillGaugeActive(false);
@@ -146,6 +152,8 @@ public class PlayerAttack : MonoBehaviour
                 break;
         }
     }
+
+  
 
     public bool Attack_SuccessEvent()
     {
@@ -198,16 +206,34 @@ public class PlayerAttack : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.up, ArrowRadius, LayerMask.GetMask("Bullet"));
         if (colliders.Length == 0) return null;
 
-        Transform T = colliders[0].gameObject.GetComponent<Arrow>().EnemyTranform;
-        float dist = Vector3.Distance(transform.position,T.position);
+        Transform T;
+        Debug.Log(colliders[0].gameObject.tag);
+        Debug.Log(colliders[0].gameObject.name);
 
-        for(int i = 1; i < colliders.Length; ++i)
+        if (colliders[0].CompareTag("VishopArrow"))
         {
-            float d = Vector3.Distance(transform.position, colliders[i].transform.position);
-            if (d < dist)
-                T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
-        }
+            T = colliders[0].gameObject.GetComponent<VishopArrow>().EnemyTranform;
+            float dist = Vector3.Distance(transform.position, T.position);
 
+            for (int i = 1; i < colliders.Length; ++i)
+            {
+                float d = Vector3.Distance(transform.position, colliders[i].transform.position);
+                if (d < dist)
+                    T = colliders[i].gameObject.GetComponent<VishopArrow>().EnemyTranform;
+            }
+        }
+        else
+        {
+            T = colliders[0].gameObject.GetComponent<Arrow>().EnemyTranform;
+            float dist = Vector3.Distance(transform.position, T.position);
+
+            for (int i = 1; i < colliders.Length; ++i)
+            {
+                float d = Vector3.Distance(transform.position, colliders[i].transform.position);
+                if (d < dist)
+                    T = colliders[i].gameObject.GetComponent<Arrow>().EnemyTranform;
+            }
+        }
         return T;
     }
 
@@ -216,13 +242,36 @@ public class PlayerAttack : MonoBehaviour
     {
         //트레일 이펙트 켜기
         StartCoroutine(SetTrail());
-        yield return new WaitForEndOfFrame();
         Vector3 dir = T.position - transform.position;
+        dir.x += Random.Range(-2, 2);
+        dir.z += Random.Range(-2, 2);
         dir.y = 0;
         float d = dir.magnitude - 1.5f;
         dir.Normalize();
+        GameObject obj = Instantiate(prefab);
+        obj.transform.position = transform.position + Vector3.up;
+        obj.transform.LookAt(obj.transform.position + dir);
+        foreach(Transform tr in obj.transform)
+        {
+            var main = tr.GetComponent<ParticleSystem>().main;
+            switch (colorZone)
+            {
+                case COLORZONE.GREEN:
+                    main.startColor = green;
+                    break;
+                case COLORZONE.YELLOW:
+                    main.startColor = blue;
+                    break;
+                case COLORZONE.RED:
+                    main.startColor = red;
+                    break;
+            }
+        }
+        yield return new WaitForEndOfFrame();
+        PlayerSkillSound();
         controller.Move(dir * d);
         transform.LookAt(transform.position + dir);
+
     }
 
     //트레일 켰다가 1초뒤에 삭제
@@ -287,6 +336,55 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
+    void PlayerBossHit(Transform t, int damage, State.BossState state)
+    {
+        switch (state)
+        {
+            //방어와 가드가 가능
+            case State.BossState.B_Attack:
+            case State.BossState.B_AttackTwo:
+                {
+                    if (GameData.Instance.player.m_state == State.PlayerState.P_Idle ||
+                   GameData.Instance.player.m_state == State.PlayerState.P_Run ||
+                   GameData.Instance.player.m_state == State.PlayerState.P_Delay)
+                    {
+                        Vector3 dir = t.position - transform.position;
+                        dir.y = 0;
+                        dir.Normalize();
+                        transform.LookAt(transform.position + dir);
+
+                        animator.CrossFade("Hit", 0.1f);
+
+                        GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
+                    }
+                    else if (GameData.Instance.player.m_state == State.PlayerState.P_Guard)
+                    {
+                        Vector3 dir = t.position - transform.position;
+                        dir.y = 0;
+                        dir.Normalize();
+                        transform.LookAt(transform.position + dir);
+
+                        animator.CrossFade("Guard Hit", 0.1f);
+                    }
+                }
+                break;
+            //방어가 불가능
+            default:
+                {
+                    Vector3 dir = t.position - transform.position;
+                    dir.y = 0;
+                    dir.Normalize();
+                    transform.LookAt(transform.position + dir);
+
+                    animator.CrossFade("Hit", 0.1f);
+                    animator.SetTrigger("Hit");
+
+                    GameEventToUI.Instance.OnPlayerHp_Decrease(damage);
+                }
+                break;
+        }
+    }
+
     //딜레이
     void PlayerDelay()
     {
@@ -314,8 +412,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (curAttackEnemy == null) return;
         {
-
-
             //switch (curAttackEnemy.tag)
             //{
             //    case "EnemyWarrior":
@@ -332,8 +428,22 @@ public class PlayerAttack : MonoBehaviour
             //        break;
             //}
             curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
-            
+        }
+    }
 
+    void PlayerSkillSound()
+    {
+        switch (GameData.Instance.player.m_state)
+        {
+            case State.PlayerState.P_1st_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[0]);
+                break;
+            case State.PlayerState.P_2nd_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[1]);
+                break;
+            case State.PlayerState.P_3rd_Skill:
+                SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerSkill, "Skill" + GameData.Instance.player.skillIdx[2]);
+                break;
         }
     }
 }

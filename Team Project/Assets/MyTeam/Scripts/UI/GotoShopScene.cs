@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GotoShopScene : MonoBehaviour
 {
+
+    public GameObject joystick;
     public GameObject shopCanvas;
     public GameObject TalkCanvas;
     public GameObject miniMapCanvas;
@@ -16,9 +18,14 @@ public class GotoShopScene : MonoBehaviour
     public GameObject EncyclopediaCanvas;
     public GameObject MinimapCanvas;
     public GameObject SettingCanvas;
+    public GameObject QuitGameScreen;
     public GameObject TPCanvas;
     public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
+    public GameObject LeverCanvas;
+
+    public GameObject ItemInfoScreen;
+    public GameObject EquipInfoScreen;
 
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
@@ -27,7 +34,6 @@ public class GotoShopScene : MonoBehaviour
     public Toggle[] Toggles;
     public GameObject Menu;
     public GameObject SkillMenu;
-
 
     List<GameObject> CanvasList = new List<GameObject>();
 
@@ -47,16 +53,22 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.talk += TalkOn;
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
+        GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
+        GameEventToUI.Instance.talkOnOff += TalkOff;
+        GameEventToUI.Instance.Event_TalkBox += TalkBox;
+
+        GameEventToUI.Instance.joystick_on += joystickon;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
-        SceneMgr.Instance.LoadScene("MAP004", "ToMap003");
+        //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
+        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+        //SceneMgr.Instance.LoadScene("MAP006", "FromMap006 ToMap005");
+        //SceneMgr.Instance.LoadScene("MAP028", "FromMap028 ToMap028");
         GameData.Instance.player.SetGravity(0.9f); 
     }
 
     private void Start()
     {
-        GameObject text = TalkCanvas.transform.Find("sorse").gameObject;
-        talk = text.GetComponent<Text>();
-
+        
         CanvasList.Add(shopCanvas);
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);
@@ -66,7 +78,10 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(InvenUI);
         CanvasList.Add(EquipUI);
         CanvasList.Add(SkillMenu);
+        CanvasList.Add(ItemInfoScreen);
+        CanvasList.Add(EquipInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
+        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
 
     void Update()
@@ -86,28 +101,59 @@ public class GotoShopScene : MonoBehaviour
     {
         shopCanvas.SetActive(isOn);
     }
-    public void TalkOn(bool isOn, int id, string NpcName)
+    public void TalkOn()
     {
-        FindNpc(id, NpcName);
-        TalkCanvas.SetActive(isOn);
+        if (GameEventToUI.Instance.onEventPlayer_Trigger())
+        {
+            joystickoff();
+            TalkCanvas.SetActive(true);
+            if (GameData.Instance.player.tutorial == false)
+            {
+                GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(8000));
+                GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(8000));
+
+                GameEventToUI.Instance.OnNpc_name_print();
+                GameEventToUI.Instance.Onnpc_talk_print();
+                GameData.Instance.player.tutorial = true;
+            }
+            else
+            {
+                GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(8006));
+                GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(8006));
+
+                GameEventToUI.Instance.OnNpc_name_print();
+                GameEventToUI.Instance.Onnpc_talk_print();
+            }
+        }
+        
+    }
+
+    public void TalkBox(int id)
+    {
+        joystickoff();
+        TalkCanvas.SetActive(true);
+        GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(id));
+        GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(id));
+
+        GameEventToUI.Instance.OnNpc_name_print();
+        GameEventToUI.Instance.Onnpc_talk_print();
+    }
+
+    public void TalkOff()
+    {
+        TalkCanvas.SetActive(false);
     }
     public void MiniMapOn(bool isOn)
     {
         miniMapCanvas.SetActive(isOn);
     }
-    public void FindNpc(int id, string NpcName)
+    public int Talk_Find_index(int id)
     {
-        for (int i = 0; i < GameData.Instance.data.Count; i++)
+        for(int i = 0; i < GameData.Instance.data.Count;i++)
         {
-            if (GameData.Instance.data[i].id == id && GameData.Instance.data[i].name.Equals(NpcName))
-            {
-                firstTxt = i;
-                startTalking = true;
-                count = 0;
-                break;
-            }
+            if (GameData.Instance.data[i].id == id) return i;
         }
-        talk.text = GameData.Instance.data[firstTxt].talk[count++];
+        return 999;
     }
 
     void NextDialouge()
@@ -140,6 +186,7 @@ public class GotoShopScene : MonoBehaviour
         {
             EquipUI.SetActive(true);
         }
+        EquipUI.GetComponent<EquipItem>().RefreshAllImages();
         Toggles[0].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //가방 창 켜기
@@ -153,6 +200,7 @@ public class GotoShopScene : MonoBehaviour
         {
             InvenUI.SetActive(true);
         }
+        Inventory.Instance.ChangeTab(0);
         Toggles[1].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //제작 창 켜기
@@ -162,6 +210,7 @@ public class GotoShopScene : MonoBehaviour
         {
             CraftCanvas.SetActive(true);
         }
+        CraftCanvas.GetComponent<CraftController>().SetEquipItem();
         Toggles[2].GetComponent<MenuButtonsController>().SetIsOn();
     }
     //스킬 창 켜기
@@ -174,6 +223,17 @@ public class GotoShopScene : MonoBehaviour
     public void SettingScreenOn()
     {
         SettingCanvas.SetActive(true);
+        Toggles[4].GetComponent<MenuButtonsController>().SetIsOn();
+    }
+    public void QuitGameScreenOn()
+    {
+        QuitGameScreen.SetActive(true);
+    }
+    public void LogOut()
+    {
+        GameData.Instance.PlayerSave();
+        Inventory.Instance.Destroy();
+        SceneManager.LoadScene("GameStartScene");
     }
     //모든 UI창 끄기
     public void SetAllInactive()
@@ -218,6 +278,9 @@ public class GotoShopScene : MonoBehaviour
     public void CloseUI()
     {
         StartCoroutine(CloseUICoroutine());
+
+        //무기 체인지
+        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
     public IEnumerator CloseUICoroutine()
     {
@@ -258,5 +321,26 @@ public class GotoShopScene : MonoBehaviour
     {
         TPCanvas.SetActive(isOn);
     }
+    public void OnOffLeverPopup(bool isOn, string name, string description)
+    {
+        LeverCanvas.SetActive(isOn);
+        LeverCanvas.transform.GetChild(3).GetComponent<TMP_Text>().text = name;
+        LeverCanvas.transform.GetChild(4).GetComponent<TMP_Text>().text = description;
+    }
 
+    public void joystickon()
+    {
+        joystick.SetActive(true);
+    }
+    public void joystickoff()
+    {
+        UIEventToGame.Instance.OnUiEventJoystickSetting();
+        joystick.SetActive(false);
+
+    }
+
+    public void Next_talk()
+    {
+        GameEventToUI.Instance.Onnpc_talk_Next();
+    }
 }

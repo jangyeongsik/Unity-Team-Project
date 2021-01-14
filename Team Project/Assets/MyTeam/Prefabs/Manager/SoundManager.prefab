@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1852584571008658926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852584571008658925}
+  - component: {fileID: 1852584571008658924}
+  - component: {fileID: 1852584571008658927}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1852584571008658925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852584571008658926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 472.21616, y: 282.19702, z: -92.0625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1852584571008658924
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852584571008658926}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1852584571008658927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852584571008658926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76523dd767a9c0445a94d4f604ac380b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 1
+  PlayerMoveSound:
+  - name: Dash
+    clip: {fileID: 8300000, guid: e0b5de6db27013b45a8c5677aab0beab, type: 3}
+  - name: Chapter Move1
+    clip: {fileID: 8300000, guid: 99db5afb6074b664b8117f33b62cae62, type: 3}
+  - name: Chapter1 Move2
+    clip: {fileID: 8300000, guid: 996a253f6bc826044ad54b6b54d8a034, type: 3}
+  - name: Chapter Move
+    clip: {fileID: 8300000, guid: ca16a73ff774b23419ac0aba57668e8f, type: 3}
+  - name: Carpet Move
+    clip: {fileID: 8300000, guid: 0c9716dd2fe88a344a1135e5ee3d7fa7, type: 3}
+  PlayerSkillSound:
+  - name: Skill1
+    clip: {fileID: 8300000, guid: e05c44fcbbfa38c4f84e4ed15c45af3b, type: 3}
+  - name: Skill2
+    clip: {fileID: 8300000, guid: ce137814704fdc44cbd9d9931cd0f198, type: 3}
+  - name: Skill3
+    clip: {fileID: 8300000, guid: 0e278b7852eefe241a7f05b5edffb815, type: 3}
+  - name: Skill4
+    clip: {fileID: 8300000, guid: 765761ee2027af7488b64e25443d3dd0, type: 3}
+  - name: Skill5
+    clip: {fileID: 8300000, guid: 2f61cfa4d20e30d48adbfd500309615c, type: 3}
+  - name: Skill6
+    clip: {fileID: 8300000, guid: 45e1b70fdb5be804aaa8398411b4b8e8, type: 3}
+  - name: Skill7
+    clip: {fileID: 8300000, guid: c5be2689aa84aaa449bed0f9a3e235c2, type: 3}
+  - name: Skill8
+    clip: {fileID: 8300000, guid: e0faf65ab191afe46800d25949fcf9e4, type: 3}
+  - name: Skill04_02
+    clip: {fileID: 8300000, guid: 9fbd70f1329aa664eb789e0fd5041359, type: 3}
+  BatSound:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 64286c3267fad6545af1cacbe119444e, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 19ea718dcaff8b6459e241359bf2dde0, type: 3}
+  - name: Move
+    clip: {fileID: 8300000, guid: 783bc33600a5f9040b2810ebe58852a5, type: 3}
+  BoneSound:
+  - name: Arrow
+    clip: {fileID: 8300000, guid: a412f534b5c19b94c97b90cc5fbf79e5, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 5b07ffba05a08ce49bec9c7d6aa0b933, type: 3}
+  - name: Archer Move
+    clip: {fileID: 8300000, guid: 37da1568a288ced4990a0949320be139, type: 3}
+  - name: Warrior Move
+    clip: {fileID: 8300000, guid: 1d053bb180808da44ad8462b3f724a87, type: 3}
+  - name: Sword Attack
+    clip: {fileID: 8300000, guid: b9cc3426f0f223a419763d24448ba754, type: 3}
+  Chapter1_BossSound:
+  - name: Attack1
+    clip: {fileID: 8300000, guid: 3374fe54d1c81fd4583bd7fa888d5241, type: 3}
+  - name: Attack2
+    clip: {fileID: 8300000, guid: 14f4c5335723b064caf19c2584e9ed62, type: 3}
+  - name: EnCounter
+    clip: {fileID: 8300000, guid: 840540338d2af2b46b42b992e3850dd7, type: 3}
+  - name: Dead
+    clip: {fileID: 8300000, guid: 4acdd7715ea71184382a7bdf51fe401f, type: 3}
+  - name: Hit Voice
+    clip: {fileID: 8300000, guid: 4acdd7715ea71184382a7bdf51fe401f, type: 3}
+  - name: Pattern1
+    clip: {fileID: 8300000, guid: 2b8c4472d9953fd4d9edeb0803a9c231, type: 3}
+  - name: Pattern2
+    clip: {fileID: 8300000, guid: ef9f814f478b76642b4c9743c6869a4d, type: 3}
+  - name: Pattern3
+    clip: {fileID: 8300000, guid: 12e4f12a99c188e4ea55ebe36b111fb6, type: 3}
+  Chapter2_BossSound:
+  - name: Attack1
+    clip: {fileID: 8300000, guid: a7e745ed880139e4a89ef089b20245e9, type: 3}
+  - name: Attack2
+    clip: {fileID: 8300000, guid: 4d5b0a2ac0c50014b9a84b22d916a37c, type: 3}
+  - name: Encounter
+    clip: {fileID: 8300000, guid: 42df765963a22e84987af2bd42ff99dc, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 05fdb883453aae345b21b8880e82737c, type: 3}
+  - name: Pattern1
+    clip: {fileID: 8300000, guid: e5a3bf0374bfaf742b03f4e8de45eec4, type: 3}
+  - name: Pattern2
+    clip: {fileID: 8300000, guid: 4109fcafc4ea4c34ba4a5f08494eb188, type: 3}
+  PriestsSound:
+  - name: Attack
+    clip: {fileID: 8300000, guid: e488c90671ab84348ab53536ef9faa6e, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 70f59ed43022d6a45b588c89b3508f1b, type: 3}
+  ViperSound:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 667c4f735d90dce4f8d4ded22672a4c9, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 2d1ff521351d2e84480cc6b81e34976e, type: 3}
+  WolfSound:
+  - name: Attack
+    clip: {fileID: 8300000, guid: ddd325262e8af0a4c9a9bbcfb21a0e7d, type: 3}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 7a9ea2e560a08594198b63ae006c4f0d, type: 3}
+  - name: Move1
+    clip: {fileID: 8300000, guid: 874152c63a891af429a54301d3955774, type: 3}
+  - name: Move2
+    clip: {fileID: 8300000, guid: 9e8568f4471db6c46930850b735bf719, type: 3}

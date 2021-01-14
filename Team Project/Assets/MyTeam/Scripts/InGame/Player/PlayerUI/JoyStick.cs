@@ -20,6 +20,7 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         lever = transform.Find("Lever").GetComponent<RectTransform>();
         back = transform.Find("Background").GetComponent<RectTransform>();
         center = back.position;
+        UIEventToGame.Instance.JoystickSetting += Joystick_Center_Setting;
     }
 
     void Update()
@@ -41,6 +42,13 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
 
     //드래그끝
     public void OnEndDrag(PointerEventData eventData)
+    {
+        lever.position = center;
+        direction = Vector3.zero;
+        amount = 0f;
+    }
+
+    public void Joystick_Center_Setting()
     {
         lever.position = center;
         direction = Vector3.zero;

@@ -13,15 +13,16 @@ public class PlayerButtonEvent : MonoBehaviour
     GameObject _instance;
     private void Awake()
     {
-        if (_instance == null)
+        _instance = this.gameObject;
+        if (GameObject.Find("player") && GameObject.Find("player") == _instance)
         {
-            _instance = gameObject;
             DontDestroyOnLoad(this.gameObject);
             DontDestroyOnLoad(vCam.gameObject);
         }
         else
         {
             Destroy(this.gameObject);
+            Destroy(vCam.gameObject);
         }
     }
     private void Update()
@@ -44,14 +45,14 @@ public class PlayerButtonEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             talkOnOff = !talkOnOff;
             GameEventToUI.Instance.OnEventTalkOnOff(talkOnOff, 1000, other.gameObject.name);
         }
-    }
+    }*/
 
 
 }

@@ -35,11 +35,16 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "플레이어 에너미한테 피격"
     public event System.Action<Transform, int> Player_Hit;
+    public event System.Action<Transform, int, State.BossState> Player_Boss_Hit; 
 
     public void OnPlayerHit(Transform t, int damage)
     {
         if (Player_Hit != null)
             Player_Hit(t, damage);
+    }
+    public void OnPlayerBossHit(Transform t, int damage, State.BossState state)
+    {
+        Player_Boss_Hit?.Invoke(t, damage, state);
     }
     #endregion
 
@@ -50,6 +55,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
         PlayerCylinderGauge?.Invoke(value);
     }
     #endregion
+
+    #region "몬스터 키 드랍"
+    public event System.Action<int> keyCount;
+    #endregion
+
+    #region "드롭아이템 멘트박스"
+    public event System.Action isGet;
+    #endregion
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 
@@ -58,26 +71,93 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public delegate void PlayerHP_Decrease(int damage);
     public PlayerHP_Decrease playerHP_Decrease;
+    public event System.Action<int,int> playerHP_Increase;
 
     public event System.Action AttactReset;
 
     public event System.Action<bool> onOff;
 
-    public event System.Action<bool, int, string> talk;
+    public event System.Action talk;
     public event System.Action<bool> interOnOff;
     public event System.Action<bool> TPOpearteOnOff;
     public event System.Action<bool> TPCanvasOnOff;
+    public event System.Action<bool, string, string> leverOnOff;
+    public event System.Action<bool> talkButOnOff;
+    public event System.Action talkOnOff;
+
+    public event System.Action joystick_on;
+
+
+    public event System.Action<int> Event_TalkBox;
+
+
+    public delegate bool Player_Trigger();
+    public Player_Trigger player_Trigger;
+    #region 대화 출력
+    public event System.Action<string> npc_name_chage;
+    public event System.Action<int> npc_name_setting;
+    public event System.Action npc_name_print;
+
+    public event System.Action<string> npc_talk_chage;
+    public event System.Action<int> npc_talk_setting;
+    public event System.Action npc_talk_print;
+
+
+    public event System.Action npc_talk_Next;
+
+
+    public void OnNpc_name_Setting(int data)
+    {
+        npc_name_setting(data);
+    }
+    public void OnNpc_name_print()
+    {
+        npc_name_print();
+    }
+    public void Onnpc_talk_setting(int data)
+    {
+        npc_talk_setting(data);
+    }
+    public void Onnpc_talk_print()
+    {
+        npc_talk_print();
+    }
+    public void Onnpc_talk_Next()
+    {
+        npc_talk_Next();
+    }
+
+    public void OnEventTalkoff()
+    {
+        talkOnOff();
+    }
+    #endregion
+
+
+    public void OnEventJoystick()
+    {
+        joystick_on();
+    }
 
     public void OnEventShopOnOff(bool isOn)
     {
         onOff(isOn);
     }
 
-    public void OnEventTalkOnOff(bool isOn, int id, string npcName)
+    public void OnEventTalkOnOff()
     {
-        talk(isOn, id, npcName);
+        talk();
     }
 
+    public void OnEventTalkBtn(bool isOn)
+    {
+        talkButOnOff(isOn);
+    }
+
+    public void OnEvent_TalkBox(int id) {
+        Event_TalkBox(id);
+
+    }
     public KeyValuePair<bool, Transform> OnPlayer_AttackEvent()
     {
         return Player_Attack.Invoke();
@@ -97,6 +177,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
         if (playerHP_Decrease != null)
             playerHP_Decrease(damage);
     }
+    public void OnPlayerHp_Increase(int value,int per)
+    {
+        playerHP_Increase.Invoke(value,per);
+    }
     public void OnEventInterActionOnOff(bool isOn)
     {
         interOnOff(isOn);
@@ -109,4 +193,25 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         TPCanvasOnOff(isOn);
     }
+    public bool onEventPlayer_Trigger()
+    {
+        return player_Trigger.Invoke();
+    }
+
+    public void OnEventMonsterDrop(int count)
+    {
+        keyCount(count);
+    }
+
+    public void OnEventDropItemMentBoxOnOff()
+    {
+        isGet();
+    }
+    #region 레버 충돌시 팝업창 출현
+    public void OnLeverPopup(bool isOn, string name = " ", string description = " ")
+    {
+        leverOnOff(isOn, name, description);
+    }
+    #endregion
+
 }
