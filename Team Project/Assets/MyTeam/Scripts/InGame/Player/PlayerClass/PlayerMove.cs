@@ -52,6 +52,8 @@ public class PlayerMove : MonoBehaviour
                 GameData.Instance.player.aniList.Add(clips[i]);
             }
         }
+
+        GameData.Instance.player.currentHp = 4;
     }
 
     private void FixedUpdate()

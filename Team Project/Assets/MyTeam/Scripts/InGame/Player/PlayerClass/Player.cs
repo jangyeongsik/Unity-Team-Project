@@ -83,8 +83,8 @@ public class PlayerData
         presetID            = slot;
         bossClear           = false;
         skillIdx            = new int[3] { 1, 2, 3 };
-        SaveSceneName       = "";
-        SavePortalName      = "";
+        SaveSceneName       = "MAP001";
+        SavePortalName      = "MAP001";
         return this;
     }
     //플레이어 데이터를 초기화한다
@@ -107,8 +107,8 @@ public class PlayerData
         presetID            = slot;
         bossClear           = false;
         skillIdx            = new int[3] { 1, 2, 3 };
-        SaveSceneName       = "";
-        SavePortalName      = "";
+        SaveSceneName       = "MAP001";
+        SavePortalName      = "MAP001";
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
