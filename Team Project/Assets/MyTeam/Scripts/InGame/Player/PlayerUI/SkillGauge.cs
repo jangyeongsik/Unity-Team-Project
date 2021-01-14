@@ -64,6 +64,7 @@ public class SkillGauge : MonoBehaviour
         Yellow.sizeDelta = new Vector2(bWid, 20);
         Red.sizeDelta = new Vector2(rWid, 20);
 
+
         Yellow.localPosition = new Vector3(Green.localPosition.x - Green.sizeDelta.x, Green.localPosition.y, Green.localPosition.z);
         Red.localPosition = new Vector3(Yellow.localPosition.x - Yellow.sizeDelta.x, Yellow.localPosition.y, Yellow.localPosition.z);
     }

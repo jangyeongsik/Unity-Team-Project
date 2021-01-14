@@ -22,7 +22,10 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
             SceneManager.UnloadSceneAsync(CurrentSceneName);
         }
         CurrentSceneName = SceneName;
+        //현재씬 이름 저장
         GameData.Instance.player.curSceneName = SceneName;
+        //플레이어 데이터 저장
+        GameData.Instance.PlayerSave();
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         while (GameObject.Find(portalName) == null)
         {

@@ -100,7 +100,7 @@ public class KelgonAttack : MonoBehaviour
     Vector3 boxSize = new Vector3(9, 3, 5);
     void Charge2()
     {
-        Collider[] colliders = Physics.OverlapBox(transform.parent.position - boxPos, boxSize, Quaternion.identity, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapBox(transform.parent.position - boxPos, boxSize * 0.5f, Quaternion.identity, LayerMask.GetMask("Player"));
         if (colliders.Length >= 1)
         {
             kelgon.PlayerHit();
