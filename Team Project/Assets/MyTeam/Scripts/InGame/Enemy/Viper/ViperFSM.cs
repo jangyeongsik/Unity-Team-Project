@@ -36,6 +36,7 @@ public class ViperFSM : MonoBehaviour
         viper.monsterState = State.MonsterState.M_Idle;
         viper.navigation = GetComponent<NavMeshAgent>();
         viper.animator = GetComponent<Animator>();
+        viper.rigid = GetComponent<Rigidbody>();
         viper.movespeed = 8.0f;
         viper.attack_aware_distance = 10.0f;
         viper.damage = attack;
@@ -211,5 +212,7 @@ public class ViperFSM : MonoBehaviour
         return distance;
     }
 
+
+  
 
 }

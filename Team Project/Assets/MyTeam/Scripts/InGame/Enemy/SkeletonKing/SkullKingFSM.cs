@@ -44,6 +44,7 @@ public class SkullKingFSM : MonoBehaviour
         skullKing.navigation = GetComponent<NavMeshAgent>();
         skullKing.navigation.enabled = false;
         skullKing.animator = GetComponent<Animator>();
+        skullKing.rigid = GetComponent<Rigidbody>();
         skullKing.movespeed = 11.0f;
         skullKing.attack_aware_distance = 1.9f;
         skullKing.navigation.enabled = true;
