@@ -20,6 +20,12 @@ public class BossTartos : MonoBehaviour
     public GameObject tartosPatton1_4;
     public GameObject tartosPatton1_5;
 
+    public GameObject tartosPattonPaticle1_1;
+    public GameObject tartosPattonPaticle1_2;
+    public GameObject tartosPattonPaticle1_3;
+    public GameObject tartosPattonPaticle1_4;
+    public GameObject tartosPattonPaticle1_5;
+
     public GameObject tartosPatton2_1;
     public GameObject tartosPatton2_2;
     public GameObject tartosPatton2_3;
@@ -88,6 +94,16 @@ public class BossTartos : MonoBehaviour
                 tartosPatton2_8.SetActive(false);
             if (AttackNotice.activeSelf)
                 AttackNotice.SetActive(false);
+            if (tartosPattonPaticle1_1.activeSelf)
+                tartosPattonPaticle1_1.SetActive(false);
+            if (tartosPattonPaticle1_2.activeSelf)
+                tartosPattonPaticle1_2.SetActive(false);
+            if (tartosPattonPaticle1_3.activeSelf)
+                tartosPattonPaticle1_3.SetActive(false);
+            if (tartosPattonPaticle1_4.activeSelf)
+                tartosPattonPaticle1_4.SetActive(false);
+            if (tartosPattonPaticle1_5.activeSelf)
+                tartosPattonPaticle1_5.SetActive(false);
         }
     }
 
@@ -95,6 +111,37 @@ public class BossTartos : MonoBehaviour
     {
         target = T;
         tartos.target = T;
+    }
+
+    public void PaticleOn1_1()
+    {
+        tartosPattonPaticle1_3.SetActive(true);
+    }
+    public void PaticleOn1_2()
+    {
+        tartosPattonPaticle1_2.SetActive(true);
+        tartosPattonPaticle1_4.SetActive(true);
+    }
+    public void PaticleOn1_3()
+    {
+        tartosPattonPaticle1_1.SetActive(true);
+        tartosPattonPaticle1_3.SetActive(true);
+        tartosPattonPaticle1_5.SetActive(true);
+    }
+    public void PaticleOff1_1()
+    {
+        tartosPattonPaticle1_3.SetActive(false);
+    }
+    public void PaticleOff1_2()
+    {
+        tartosPattonPaticle1_2.SetActive(false);
+        tartosPattonPaticle1_4.SetActive(false);
+    }
+    public void PaticleOff1_3()
+    {
+        tartosPattonPaticle1_1.SetActive(false);
+        tartosPattonPaticle1_3.SetActive(false);
+        tartosPattonPaticle1_5.SetActive(false);
     }
 }
 

@@ -49,6 +49,7 @@ public class TartosAttack : MonoBehaviour
                     tartos.animator.SetInteger("Attack", 1);
                     break;         
                 case State.BossState.B_AttackTwo:
+                    BossTartos.PaticleOff1_3();
                     {
                         int count = tartos.animator.GetInteger("Charge");
                         if (count >= 2) count = 0;
@@ -73,6 +74,7 @@ public class TartosAttack : MonoBehaviour
 
     void Attack1()
     {
+        
         Vector3 dir = transform.parent.position - tartos.target.position;
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         if (angle < 180 && angle > 0 && dir.magnitude < 3.5f)

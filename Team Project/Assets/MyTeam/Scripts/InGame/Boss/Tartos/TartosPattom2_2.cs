@@ -24,8 +24,6 @@ public class TartosPattom2_2 : StateMachineBehaviour
             tartos = animator.transform.parent.GetComponent<BossData>();
         tartos.bossState = State.BossState.B_SkillChargeTwo;
 
-<<<<<<< HEAD
-=======
         if (bossTartos == null)
             bossTartos = animator.transform.parent.GetComponent<BossTartos>();
 
@@ -34,7 +32,6 @@ public class TartosPattom2_2 : StateMachineBehaviour
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.navigation.SetDestination(bossTartos.pattern2Point.position);
 
->>>>>>> 20d6c6daf325569702c665b85a32ac857afecd8b
         number2 = Random.Range(0, 3);
 
         if (patton2_1 == null)
@@ -58,13 +55,11 @@ public class TartosPattom2_2 : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-<<<<<<< HEAD
         tartos.navigation.SetDestination(tartos.pattonTarget.position);
         tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
-=======
+
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
->>>>>>> 20d6c6daf325569702c665b85a32ac857afecd8b
         if (number2 == 0)
         {
             patton2_1.SetActive(true);
@@ -94,5 +89,7 @@ public class TartosPattom2_2 : StateMachineBehaviour
         patton2_6.SetActive(false);
         patton2_7.SetActive(false);
         patton2_8.SetActive(false);
+
+        tartos.animator.SetTrigger("Move");
     }
 }
