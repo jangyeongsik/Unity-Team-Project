@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class KelgonAttack : MonoBehaviour
 {
+    BossKelgon bossKelgon;
     BossData kelgon;
     Monster monster;
 
     public GameObject attackNotice;
+    public GameObject paticle;
 
     private void Start()
     {
+        bossKelgon = transform.parent.GetComponent<BossKelgon>();
         kelgon = transform.parent.GetComponent<BossData>();
         monster = transform.parent.GetComponent<Monster>();
     }
@@ -22,16 +25,20 @@ public class KelgonAttack : MonoBehaviour
         {
             case State.BossState.B_Attack:
             case State.BossState.B_AttackTwo:
+                paticle.SetActive(false);
                 Attack1();
                 break;
             case State.BossState.B_SkillChargeOne:
                 Charge1();
+                bossKelgon.ChargeCircle1.SetActive(false);
                 break;
             case State.BossState.B_SkillChargeTwo:
                 Charge2();
+                bossKelgon.ChargeCircle2.SetActive(false);
                 break;
             case State.BossState.B_SkillChargeThree:
                 Charge3();
+                bossKelgon.ChargeCircle3.SetActive(false);
                 break;
         }
 
@@ -79,6 +86,9 @@ public class KelgonAttack : MonoBehaviour
             kelgon.animator.SetTrigger("Walk");
             kelgon.animator.SetInteger("Attack", 0);
             //몇번차지였는지 저장한다
+            if(kelgon.bossState == State.BossState.B_SkillChargeOne ||
+                kelgon.bossState == State.BossState.B_SkillChargeTwo ||
+                kelgon.bossState == State.BossState.B_SkillChargeThree)
             kelgon.chargeNum = kelgon.animator.GetInteger("Charge");
             kelgon.animator.SetInteger("Charge", 0);
             kelgon.lastAttack = kelgon.bossState;
@@ -87,7 +97,7 @@ public class KelgonAttack : MonoBehaviour
 
     void Charge1()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 4, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapSphere(transform.parent.position, 6, LayerMask.GetMask("Player"));
         if(colliders.Length >= 1)
         {
             kelgon.PlayerHit();
@@ -96,11 +106,11 @@ public class KelgonAttack : MonoBehaviour
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern3");
     }
 
-    Vector3 boxPos = new Vector3(0, 0, 1.2f);
-    Vector3 boxSize = new Vector3(9, 3, 5);
+    Vector3 boxPos = new Vector3(0, 0, 3f);
+    Vector3 boxSize = new Vector3(12, 3, 8);
     void Charge2()
     {
-        Collider[] colliders = Physics.OverlapBox(transform.parent.position - boxPos, boxSize * 0.5f, Quaternion.identity, LayerMask.GetMask("Player"));
+        Collider[] colliders = Physics.OverlapBox(transform.parent.position - transform.parent.TransformDirection(boxPos), boxSize, Quaternion.identity, LayerMask.GetMask("Player"));
         if (colliders.Length >= 1)
         {
             kelgon.PlayerHit();
@@ -159,5 +169,10 @@ public class KelgonAttack : MonoBehaviour
     public void BossClear()
     {
         transform.parent.gameObject.SetActive(false);
+    }
+
+    public void paticleOn()
+    {
+        paticle.SetActive(true);
     }
 }

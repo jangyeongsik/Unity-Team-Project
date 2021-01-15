@@ -20,7 +20,7 @@ public class Kelgon_Charge2 : StateMachineBehaviour
         if (circle == null)
             circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle2;
         circle.SetActive(true);
-        circle.transform.position = kelgon.position.position;
+        circle.transform.position = kelgon.position.position + kelgon.position.TransformDirection(new Vector3(0, 0, 3f));
 
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern2");
     }

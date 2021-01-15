@@ -9,6 +9,8 @@ public class TartosCharge02 : StateMachineBehaviour
     GameObject patton1_1;
     GameObject patton1_2;
     GameObject patton1_4;
+
+    BossTartos paticle1_2;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -28,10 +30,19 @@ public class TartosCharge02 : StateMachineBehaviour
             patton1_4 = animator.transform.parent.GetComponent<BossTartos>().tartosPatton1_4;
         patton1_4.SetActive(true);
 
+        if (paticle1_2 == null)
+            paticle1_2 = animator.transform.parent.GetComponent<BossTartos>();
+
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern1");
 
         Vector3 dir = tartos.target.position - tartos.position.position;
         dir.y = 0;
         tartos.position.LookAt(tartos.position.position + dir);
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        paticle1_2.PaticleOn1_2();
+        paticle1_2.PaticleOff1_1();
     }
 }

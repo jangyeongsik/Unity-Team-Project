@@ -24,4 +24,5 @@ public class TartosPatton1 : MonoBehaviour
         }
         transform.parent.gameObject.SetActive(false);
     }
+   
 }

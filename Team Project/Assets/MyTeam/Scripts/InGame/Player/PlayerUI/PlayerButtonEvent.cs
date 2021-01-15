@@ -14,6 +14,7 @@ public class PlayerButtonEvent : MonoBehaviour
     public bool minmapOnOff;
 
     [SerializeField] GameObject minmapCam;
+    [SerializeField] RectTransform playerimg;
     private void Awake()
     {
         _instance = this.gameObject;
@@ -31,6 +32,11 @@ public class PlayerButtonEvent : MonoBehaviour
     }
     private void Update()
     {
+        if (miniMapOnOff)
+        {
+            //빈칸...
+        }
+
        if (Input.anyKey)
        {
            if (!talkOnOff)

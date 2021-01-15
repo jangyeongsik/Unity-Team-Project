@@ -35,8 +35,11 @@ public class GotoShopScene : MonoBehaviour
     public GameObject Menu;
     public GameObject SkillMenu;
 
+    public GameObject MinMapCam;
+
     List<GameObject> CanvasList = new List<GameObject>();
 
+    private bool minMapOpen = false;
     private bool isUIOn = false;
     private bool startTalking = false;
     private bool BadgeCanvastOnOff = false;
@@ -56,7 +59,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
         GameEventToUI.Instance.talkOnOff += TalkOff;
         GameEventToUI.Instance.Event_TalkBox += TalkBox;
-
+        
         GameEventToUI.Instance.joystick_on += joystickon;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
@@ -130,6 +133,8 @@ public class GotoShopScene : MonoBehaviour
 
     public void MinMapOpen()
     {
+        minMapOpen = !minMapOpen;
+        MinMapCam.SetActive(minMapOpen);
         UIEventToGame.Instance.OnUIEventMinMap();
     }
 

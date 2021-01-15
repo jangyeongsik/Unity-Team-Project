@@ -15,8 +15,9 @@ public class Kelgon_Charge3 : StateMachineBehaviour
         kelgon.bossState = State.BossState.B_SkillChargeThree;
 
         if (circle == null)
-            circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle1;
+            circle = animator.transform.parent.GetComponent<BossKelgon>().ChargeCircle3;
         circle.SetActive(true);
+
         circle.transform.position = kelgon.target.position;
 
         if (bossKelgon == null)

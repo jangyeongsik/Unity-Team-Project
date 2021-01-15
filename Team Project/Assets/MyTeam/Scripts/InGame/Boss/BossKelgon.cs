@@ -15,6 +15,7 @@ public class BossKelgon : MonoBehaviour
      public int hp = 20;
 
     public GameObject ChargeCircle1;
+    public GameObject ChargeCircle1_1;
     public GameObject ChargeCircle2;
     public GameObject ChargeCircle3;
     public GameObject AttackNotice;
