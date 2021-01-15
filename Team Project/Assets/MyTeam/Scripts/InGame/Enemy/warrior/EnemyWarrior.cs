@@ -43,7 +43,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.navigation.enabled = false;
         e_Warrior.animator = GetComponent<Animator>();
         e_Warrior.movespeed = 8.0f;
-        e_Warrior.attack_aware_distance = 1.5f;
+        e_Warrior.attack_aware_distance = 2.0f;
         e_Warrior.navigation.enabled = true;
         e_Warrior.damage = 1;
 
@@ -97,7 +97,6 @@ public class EnemyWarrior : MonoBehaviour
                         break;
                     case State.MonsterState.M_Attack:
                         M_Attack();
-                        attackCount();
                         break;
                     case State.MonsterState.M_Return:
                         break;
@@ -122,7 +121,7 @@ public class EnemyWarrior : MonoBehaviour
 
     private void M_Attack()
     {
-
+        AttackNocice.SetActive(e_Warrior.counterjudgement);
         if (P_distance() > e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Move;
@@ -136,12 +135,15 @@ public class EnemyWarrior : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
+
         if (P_distance() < e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Attack;
             e_Warrior.animator.SetBool("IsAttack", true);
-        }
+        } 
+        
     }
+
     IEnumerator navigationSet()
     {
         running = true;
@@ -195,20 +197,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.monsterState = State.MonsterState.M_Idle;
     }
 
-    void attackCount()
-    {
-        attackTime += Time.deltaTime;
 
-        if (attackTime > attckCountMin && attackTime < attckCountMax)
-        {
-            e_Warrior.counterjudgement = true;
-        }
-        else
-        {
-            e_Warrior.counterjudgement = false;
-        }
-        AttackNocice.SetActive(e_Warrior.counterjudgement);
-    }
 
     //public KeyValuePair<bool, Transform> Player_AttackEvent()
     //{

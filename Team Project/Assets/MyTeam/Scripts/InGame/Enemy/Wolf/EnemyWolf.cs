@@ -100,7 +100,6 @@ public class EnemyWolf : MonoBehaviour
                 case State.MonsterState.M_Groar:
                     break;
                 case State.MonsterState.M_Attack:
-                    attackCount();
                     StartAttack();
                     break;
                 case State.MonsterState.M_Return:
@@ -173,6 +172,7 @@ public class EnemyWolf : MonoBehaviour
 
     private void StartAttack()
     {
+        AttackNocice.SetActive(monster.counterjudgement);
         if (targetDistance() > monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
@@ -191,21 +191,6 @@ public class EnemyWolf : MonoBehaviour
         offset = transform.position - target.transform.position;
         float distance = offset.magnitude;
         return distance;
-    }
-
-    void attackCount()
-    {
-        attackTime += Time.deltaTime;
-
-        if (attackTime > attckCountMin && attackTime < attckCountMax)
-        {
-            monster.counterjudgement = true;
-        }
-        else
-        {
-            monster.counterjudgement = false;
-        }
-        AttackNocice.SetActive(monster.counterjudgement);
     }
 
     public void AttackSetting()

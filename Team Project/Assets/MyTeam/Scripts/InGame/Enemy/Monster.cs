@@ -70,4 +70,14 @@ public class Monster : character
 
         GameEventToUI.Instance.OnPlayerHp_Increase(1, 15);
     }
+
+    public void TurnOnCautionPoint()
+    {
+        counterjudgement = true;
+    }
+
+    public void TurnOffCautionPoint()
+    {
+        counterjudgement = false;
+    }
 }
