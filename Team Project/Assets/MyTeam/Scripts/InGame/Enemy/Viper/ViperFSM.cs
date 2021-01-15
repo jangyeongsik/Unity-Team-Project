@@ -91,7 +91,6 @@ public class ViperFSM : MonoBehaviour
                     break;
                 case State.MonsterState.M_Attack:
                     Attack();
-                    attackCount();
                     break;
                 case State.MonsterState.M_Return:
                     break;
@@ -114,26 +113,12 @@ public class ViperFSM : MonoBehaviour
 
     private void Attack()
     {
+        AttackNocice.SetActive(viper.counterjudgement);
         if (distance() > viper.navigation.stoppingDistance)
         {
             viper.monsterState = State.MonsterState.M_Move;
             viper.animator.SetBool("viperAttack", false);
         }
-    }
-
-    void attackCount()
-    {
-        attackTime += Time.deltaTime;
-
-        if (attackTime > attckCountMin && attackTime < attckCountMax)
-        {
-            viper.counterjudgement = true;
-        }
-        else
-        {
-            viper.counterjudgement = false;
-        }
-        AttackNocice.SetActive(viper.counterjudgement);
     }
 
     private void Idle()

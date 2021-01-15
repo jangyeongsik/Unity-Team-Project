@@ -47,13 +47,13 @@ public class EnemyArcher : MonoBehaviour
         if(gameObject.CompareTag("EnemyArcher"))
         {
             EnemySet(3);
-            monster.attack_aware_distance = 6.0f;
+            monster.attack_aware_distance = 10.0f;
         }
 
         else if(gameObject.CompareTag("EnemyVishop"))
         {
             EnemySet(1);
-            monster.attack_aware_distance = 6.0f;
+            monster.attack_aware_distance = 10.0f;
         }
     }
 
