@@ -42,6 +42,7 @@ public class EnemyWarrior : MonoBehaviour
         e_Warrior.navigation = GetComponent<NavMeshAgent>();
         e_Warrior.navigation.enabled = false;
         e_Warrior.animator = GetComponent<Animator>();
+        e_Warrior.rigid = GetComponent<Rigidbody>();
         e_Warrior.movespeed = 8.0f;
         e_Warrior.attack_aware_distance = 2.0f;
         e_Warrior.navigation.enabled = true;

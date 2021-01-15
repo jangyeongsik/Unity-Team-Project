@@ -20,6 +20,7 @@ public class Monster : character
     public bool monsterDead;
     public NavMeshAgent navigation;
     public Animator animator;
+    public Rigidbody rigid;
 
     public bool counterjudgement;
 
@@ -27,7 +28,6 @@ public class Monster : character
 
     public event System.Action EnemyDeadEvent;
 
-    public Rigidbody rigid;
 
 
     private void Start()
@@ -79,5 +79,20 @@ public class Monster : character
     public void TurnOffCautionPoint()
     {
         counterjudgement = false;
+    }
+
+
+    //몬스터들 그나마 덜겹치게 해줌 ㅇㅅㅇ 네이스 ~ 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            rigid.isKinematic = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        rigid.isKinematic = false;
     }
 }

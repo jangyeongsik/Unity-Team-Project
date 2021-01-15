@@ -36,6 +36,7 @@ public class BatFSM : MonoBehaviour
         bat.monsterState = State.MonsterState.M_Idle;
         bat.navigation = GetComponent<NavMeshAgent>();
         bat.animator = GetComponent<Animator>();
+        bat.rigid = GetComponent<Rigidbody>();
         bat.movespeed = 8.0f;
         bat.attack_aware_distance = 2.0f;
         bat.damage = attack;

@@ -38,6 +38,7 @@ public class EnemyArcher : MonoBehaviour
         monster.monsterState = State.MonsterState.M_Idle;
         monster.navigation = GetComponent<NavMeshAgent>();
         monster.animator = GetComponent<Animator>();
+        monster.rigid = GetComponent<Rigidbody>();
         monster.movespeed = 8.0f;
         monster.damage = attack;
     }

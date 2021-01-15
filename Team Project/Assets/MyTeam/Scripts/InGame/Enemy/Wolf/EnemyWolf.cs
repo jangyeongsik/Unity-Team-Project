@@ -28,6 +28,7 @@ public class EnemyWolf : MonoBehaviour
     {
         GameEventToUI.Instance.Player_Attack += Player_AttackWolfEvent;
         monster = GetComponent<Monster>();
+        monster.rigid = GetComponent<Rigidbody>();
         monster.position = transform;
         monster.monsterKind = State.MonsterKind.M_Wolf;
         monster.EnemyHitEvent += AttackHit;
