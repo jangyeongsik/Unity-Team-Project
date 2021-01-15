@@ -1130,7 +1130,7 @@ Transform:
   - {fileID: 1739734794}
   - {fileID: 505878701}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &326806237
 PrefabInstance:
@@ -2911,7 +2911,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
-      value: FromMap020 ToMap017
+      value: FromMap021 ToMap017
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5916,6 +5916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1483882012}
+  - component: {fileID: 1483882013}
   m_Layer: 0
   m_Name: Object
   m_TagString: Untagged
@@ -5964,6 +5965,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1483882013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483882011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d7e4773ceb5540b017dfb559657cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClear: 0
+  isRegen: 1
 --- !u!1001 &1489265109
 PrefabInstance:
   m_ObjectHideFlags: 0
