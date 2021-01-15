@@ -24,10 +24,11 @@ public enum SoundKind
 
 public class SoundManager : SingletonMonobehaviour<SoundManager>
 {
-    AudioSource audioSource;
+    [HideInInspector]
+    public AudioSource Effect_Audio;
+    [HideInInspector]
+    public AudioSource BGM_Audio;
 
-    [Range(0,1)]
-    public float volume = 1f;
 
     #region"사운드 배열들"
     [Header("플레이어 사운드")]
@@ -58,7 +59,8 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        Effect_Audio = GetComponent<AudioSource>();
+        BGM_Audio = GetComponents<AudioSource>()[1];
         //배열 딕셔너리로 옮기기
         SetDictionary();
     }
@@ -98,13 +100,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
                 break;
         }
         if (audioClip != null)
-            audioSource.PlayOneShot(audioClip);
-    }
-
-    //볼륨 설정
-    public void SetVolume(float value)
-    {
-        audioSource.volume = Mathf.Clamp01(value);
+            Effect_Audio.PlayOneShot(audioClip);
     }
 
     //배열데이터 딕셔너리로 옮겨주자
