@@ -82,7 +82,7 @@ public class Monster : character
     }
 
 
-    //몬스터들 그나마 덜겹치게 해줌 ㅇㅅㅇ 네이스 ~ 
+    //몬스터들 그나마 덜겹치게 해줌
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
