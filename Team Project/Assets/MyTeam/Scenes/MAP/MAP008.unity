@@ -1675,6 +1675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 161697143}
+  - component: {fileID: 161697144}
   m_Layer: 0
   m_Name: Object
   m_TagString: Untagged
@@ -1719,6 +1720,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161697144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161697142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4d7e4773ceb5540b017dfb559657cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClear: 0
+  isRegen: 1
 --- !u!1001 &167909224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17072,7 +17087,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_Name
-      value: FromMap008 ToMap005
+      value: FromMap008 ToMap004
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -17128,31 +17143,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
---- !u!1 &1826741679 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500,
-    type: 3}
-  m_PrefabInstance: {fileID: 1826741678}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1826741680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826741679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e590c1c4b5e83d44ab65dff634ddab73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Disable: {fileID: 0}
-  Active: {fileID: 0}
-  mesh: {fileID: 0}
-  NextPortalName: FromMap004 ToMap008
-  NextSceneName: MAP004
-  isPossibleMove: 0
-  checkBossClear: 0
 --- !u!1001 &1835390684
 PrefabInstance:
   m_ObjectHideFlags: 0
