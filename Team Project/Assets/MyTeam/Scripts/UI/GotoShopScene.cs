@@ -128,6 +128,11 @@ public class GotoShopScene : MonoBehaviour
         
     }
 
+    public void MinMapOpen()
+    {
+        UIEventToGame.Instance.OnUIEventMinMap();
+    }
+
     public void TalkBox(int id)
     {
         joystickoff();

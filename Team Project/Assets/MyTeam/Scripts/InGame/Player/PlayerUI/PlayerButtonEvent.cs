@@ -11,6 +11,9 @@ public class PlayerButtonEvent : MonoBehaviour
     [SerializeField]
     GameObject vCam;
     GameObject _instance;
+    public bool minmapOnOff;
+
+    [SerializeField] GameObject minmapCam;
     private void Awake()
     {
         _instance = this.gameObject;
@@ -24,6 +27,7 @@ public class PlayerButtonEvent : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(vCam.gameObject);
         }
+        UIEventToGame.Instance.minMap += MinMapOnOff;
     }
     private void Update()
     {
@@ -43,6 +47,11 @@ public class PlayerButtonEvent : MonoBehaviour
             shopOnOff = !shopOnOff;
             GameEventToUI.Instance.OnEventShopOnOff(shopOnOff);
         }
+    }
+    public void MinMapOnOff()
+    {
+        minmapOnOff = !minmapOnOff;
+        minmapCam.SetActive(minmapOnOff);
     }
 
    /* private void OnTriggerStay(Collider other)

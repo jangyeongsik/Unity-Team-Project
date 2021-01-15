@@ -21,6 +21,9 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public event System.Action<Vector2, float> PlayerMove;
     public event System.Action<bool> PlayerDash;
 
+
+    public event System.Action minMap;
+
     public void OnPlayerMove(Vector2 direction, float amount)
     {
         if (PlayerMove != null)
@@ -81,5 +84,10 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnUiEventJoystickSetting()
     {
         JoystickSetting();
+    }
+
+    public void OnUIEventMinMap()
+    {
+        minMap();
     }
 }
