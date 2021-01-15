@@ -35,6 +35,17 @@ public class BossTartos : MonoBehaviour
     public GameObject tartosPatton2_7;
     public GameObject tartosPatton2_8;
 
+    public GameObject tartosPattonPaticle2_1;
+    public GameObject tartosPattonPaticle2_2;
+    public GameObject tartosPattonPaticle2_3;
+    public GameObject tartosPattonPaticle2_4;
+    public GameObject tartosPattonPaticle2_5;
+    public GameObject tartosPattonPaticle2_6;
+    public GameObject tartosPattonPaticle2_7;
+    public GameObject tartosPattonPaticle2_8;
+
+    public GameObject tartosPatton2_Center;
+
     public GameObject AttackNotice;
 
     public Transform pattern2Point;
@@ -76,6 +87,7 @@ public class BossTartos : MonoBehaviour
                 tartosPatton1_4.SetActive(false);
             if (tartosPatton1_5.activeSelf)
                 tartosPatton1_5.SetActive(false);
+
             if (tartosPatton2_1.activeSelf)
                 tartosPatton2_1.SetActive(false);
             if (tartosPatton2_2.activeSelf)
@@ -92,8 +104,10 @@ public class BossTartos : MonoBehaviour
                 tartosPatton2_7.SetActive(false);
             if (tartosPatton2_8.activeSelf)
                 tartosPatton2_8.SetActive(false);
+
             if (AttackNotice.activeSelf)
                 AttackNotice.SetActive(false);
+
             if (tartosPattonPaticle1_1.activeSelf)
                 tartosPattonPaticle1_1.SetActive(false);
             if (tartosPattonPaticle1_2.activeSelf)
@@ -104,6 +118,23 @@ public class BossTartos : MonoBehaviour
                 tartosPattonPaticle1_4.SetActive(false);
             if (tartosPattonPaticle1_5.activeSelf)
                 tartosPattonPaticle1_5.SetActive(false);
+
+            if (tartosPattonPaticle2_1.activeSelf)
+                tartosPattonPaticle2_1.SetActive(false);
+            if (tartosPattonPaticle2_2.activeSelf)
+                tartosPattonPaticle2_2.SetActive(false);
+            if (tartosPattonPaticle2_3.activeSelf)
+                tartosPattonPaticle2_3.SetActive(false);
+            if (tartosPattonPaticle2_4.activeSelf)
+                tartosPattonPaticle2_4.SetActive(false);
+            if (tartosPattonPaticle2_5.activeSelf)
+                tartosPattonPaticle2_5.SetActive(false);
+            if (tartosPattonPaticle2_6.activeSelf)
+                tartosPattonPaticle2_6.SetActive(false);
+            if (tartosPattonPaticle2_7.activeSelf)
+                tartosPattonPaticle2_7.SetActive(false);
+            if (tartosPattonPaticle2_8.activeSelf)
+                tartosPattonPaticle2_8.SetActive(false);
         }
     }
 
@@ -113,6 +144,7 @@ public class BossTartos : MonoBehaviour
         tartos.target = T;
     }
 
+    #region 패턴1 파티클
     public void PaticleOn1_1()
     {
         tartosPattonPaticle1_3.SetActive(true);
@@ -143,5 +175,42 @@ public class BossTartos : MonoBehaviour
         tartosPattonPaticle1_3.SetActive(false);
         tartosPattonPaticle1_5.SetActive(false);
     }
+    #endregion
+    #region 패턴2 파티클
+    public void PaticleOn2_1()
+    {
+        tartosPattonPaticle2_1.SetActive(true);
+        tartosPattonPaticle2_3.SetActive(true);
+        tartosPattonPaticle2_8.SetActive(true);
+    }
+    public void PaticleOn2_2()
+    {
+        tartosPattonPaticle2_2.SetActive(true);
+        tartosPattonPaticle2_5.SetActive(true);
+        tartosPattonPaticle2_7.SetActive(true);
+    }
+    public void PaticleOn2_3()
+    {
+        tartosPattonPaticle2_4.SetActive(true);
+        tartosPattonPaticle2_6.SetActive(true);
+    }
+    public void PaticleOff2_1()
+    {
+        tartosPattonPaticle2_1.SetActive(false);
+        tartosPattonPaticle2_3.SetActive(false);
+        tartosPattonPaticle2_8.SetActive(false);
+    }
+    public void PaticleOff2_2()
+    {
+        tartosPattonPaticle2_2.SetActive(false);
+        tartosPattonPaticle2_5.SetActive(false);
+        tartosPattonPaticle2_7.SetActive(false);
+    }
+    public void PaticleOff2_3()
+    {
+        tartosPattonPaticle2_4.SetActive(false);
+        tartosPattonPaticle2_6.SetActive(false);
+    }
+    #endregion
 }
 

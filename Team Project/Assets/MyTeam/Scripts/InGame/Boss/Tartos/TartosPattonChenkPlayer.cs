@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class TartosPattonChenkPlayer : MonoBehaviour
 {
+    BossData tartos;
     private Collider[] cols;
     bool checkingPlayer = false;
+
+    private void Start()
+    {
+        tartos = transform.parent.GetComponent<BossData>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -15,8 +21,7 @@ public class TartosPattonChenkPlayer : MonoBehaviour
         {
             if (cols[i].gameObject.tag == "Player")
             {
-                Debug.Log("잡았다");
-                checkingPlayer = true;
+                tartos.PlayerHit();
             }
         }
     }

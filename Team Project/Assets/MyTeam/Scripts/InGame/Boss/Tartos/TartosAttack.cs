@@ -56,14 +56,15 @@ public class TartosAttack : MonoBehaviour
 
                         ++count;
                         tartos.animator.SetInteger("Charge", count);
+                        Debug.Log(count);
                     }
                     break;
             }
         }
         else
         {
-            tartos.animator.SetTrigger("Move");
             tartos.animator.SetInteger("Attack", 0);
+            tartos.animator.SetTrigger("Move");
 
             tartos.chargeNum = tartos.animator.GetInteger("Charge");
             tartos.animator.SetInteger("Charge", 0);

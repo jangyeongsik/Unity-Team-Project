@@ -16,6 +16,7 @@ public class TartosPattom2_1 : StateMachineBehaviour
     GameObject patton2_6;
     GameObject patton2_7;
     GameObject patton2_8;
+    GameObject patton2_C;
 
 
     int number;
@@ -55,19 +56,23 @@ public class TartosPattom2_1 : StateMachineBehaviour
             patton2_7 = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_7;
         if (patton2_8 == null)
             patton2_8 = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_8;
+        if (patton2_C == null)
+            patton2_C = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_Center;
+
+        bossTartos.PaticleOff2_1();
+        bossTartos.PaticleOff2_2();
+        bossTartos.PaticleOff2_3();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        tartos.navigation.SetDestination(tartos.pattonTarget.position);
-        tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
-        if (tartos.position.position.x == 0)
-
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
+        patton2_C.SetActive(true);
         if (number == 0)
         {
+            
             patton2_1.SetActive(true);
             patton2_3.SetActive(true);
             patton2_8.SetActive(true);
@@ -81,7 +86,6 @@ public class TartosPattom2_1 : StateMachineBehaviour
         }
         else
         {
-
             patton2_4.SetActive(true);
             patton2_6.SetActive(true);
 
@@ -90,23 +94,8 @@ public class TartosPattom2_1 : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (number == 0)
-        {
-            patton2_3.SetActive(true);
-            patton2_8.SetActive(true);
+      
 
-        }
-        else if (number == 1)
-        {
-            patton2_2.SetActive(true);
-            patton2_5.SetActive(true);
-            patton2_7.SetActive(true);
-        }
-        else
-        {
-            patton2_4.SetActive(true);
-            patton2_6.SetActive(true);
-        }
         patton2_1.SetActive(false);
         patton2_2.SetActive(false);
         patton2_3.SetActive(false);
@@ -115,5 +104,12 @@ public class TartosPattom2_1 : StateMachineBehaviour
         patton2_6.SetActive(false);
         patton2_7.SetActive(false);
         patton2_8.SetActive(false);
+
+        if (number == 0)
+            bossTartos.PaticleOn2_1();
+        else if (number == 1)
+            bossTartos.PaticleOn2_2();
+        else
+            bossTartos.PaticleOn2_3();
     }
 }
