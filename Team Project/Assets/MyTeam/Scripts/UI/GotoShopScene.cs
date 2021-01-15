@@ -62,7 +62,7 @@ public class GotoShopScene : MonoBehaviour
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
         SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
         //SceneMgr.Instance.LoadScene("MAP006", "FromMap006 ToMap005");
-        //SceneMgr.Instance.LoadScene("MAP028", "FromMap028 ToMap028");
+        //SceneMgr.Instance.LoadScene("MAP022", "FromMap022 ToMap017");
         GameData.Instance.player.SetGravity(0.9f); 
     }
 

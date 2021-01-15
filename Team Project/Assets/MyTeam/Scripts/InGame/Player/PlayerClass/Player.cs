@@ -192,7 +192,7 @@ public class Player
     {
         if (animator.enabled == false)
             animator.enabled = true;
-
+        Debug.Log(pos);
         controller.enabled = false;
         position.position = pos;
         isSceneMove = true;
