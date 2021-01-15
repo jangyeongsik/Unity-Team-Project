@@ -10,8 +10,6 @@ public class SoundSetting : MonoBehaviour
 
     private void Start()
     {
-        SetEffectVolume();
-        SetBGMVolume();
         effectSetting.onValueChanged.AddListener(delegate { SetEffectVolume(); });
         bgmSetting.onValueChanged.AddListener(delegate { SetBGMVolume(); });
     }
