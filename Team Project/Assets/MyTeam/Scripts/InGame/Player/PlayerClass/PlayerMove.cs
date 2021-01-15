@@ -96,7 +96,7 @@ public class PlayerMove : MonoBehaviour
         dir.y -= GameData.Instance.player.gravity; 
         dir.Normalize();
 
-        controller.Move(dir * speed * Time.deltaTime);
+        controller.Move(dir * 40 * Time.deltaTime);
         dir.y = 0;
         transform.LookAt(transform.position + dir);
         if (x != 0 || z != 0)
