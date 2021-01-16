@@ -11,17 +11,7 @@ public class P_Dash : StateMachineBehaviour
         GameEventToUI.Instance.OnEventStaminaRestore(STAMINAGAUGE.DECREASE, 15);
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_PlayerMove, "Dash");
         GameEventToUI.Instance.OnSkillGaugeActive(false);
-    }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //
-    //}
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
         GameEventToUI.Instance.OnEventStaminaRestore(STAMINAGAUGE.RESTORE);
     }
+
 }

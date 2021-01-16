@@ -108,7 +108,7 @@ public class StaminaGauge : MonoBehaviour
 
     IEnumerator IsRestoreTrue(STAMINAGAUGE _state)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         state = _state;
     }
 

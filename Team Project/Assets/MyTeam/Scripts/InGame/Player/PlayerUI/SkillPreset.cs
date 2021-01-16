@@ -28,12 +28,6 @@ public class SkillPreset : MonoBehaviour
         skills = GameData.Instance.player.skill.skillClips;
         curSkillIdx = 0;
         selectIdx = 0;
-        //int i = 0;
-        //foreach(Transform tr in transform.Find("Skill Presets"))
-        //{
-        //     tr.GetChild(0).GetComponent<Text>().text = skills[i].name;
-        //    i++;
-        //}
 
         btnImages[curSkillIdx].color = selectColor;
 
@@ -90,7 +84,7 @@ public class SkillPreset : MonoBehaviour
         for(int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
         {
             if (i == curSkillIdx) continue;
-            if (GameData.Instance.player.aniList[curSkillIdx] == skills[selectIdx]) return;
+            if (GameData.Instance.player.aniList[i] == skills[selectIdx]) return;
         }
         GameData.Instance.player.aniList[curSkillIdx] = skills[selectIdx];
         btnImages[curSkillIdx].sprite = skillImages[selectIdx].sprite;
