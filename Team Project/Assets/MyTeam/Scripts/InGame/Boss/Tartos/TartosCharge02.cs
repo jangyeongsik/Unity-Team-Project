@@ -34,10 +34,6 @@ public class TartosCharge02 : StateMachineBehaviour
             paticle1_2 = animator.transform.parent.GetComponent<BossTartos>();
 
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern1");
-
-        Vector3 dir = tartos.target.position - tartos.position.position;
-        dir.y = 0;
-        tartos.position.LookAt(tartos.position.position + dir);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -9,6 +9,7 @@ public class KelgonAttack : MonoBehaviour
     Monster monster;
 
     public GameObject attackNotice;
+    public GameObject paticle;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class KelgonAttack : MonoBehaviour
         {
             case State.BossState.B_Attack:
             case State.BossState.B_AttackTwo:
+                paticle.SetActive(false);
                 Attack1();
                 break;
             case State.BossState.B_SkillChargeOne:
@@ -167,5 +169,10 @@ public class KelgonAttack : MonoBehaviour
     public void BossClear()
     {
         transform.parent.gameObject.SetActive(false);
+    }
+
+    public void paticleOn()
+    {
+        paticle.SetActive(true);
     }
 }

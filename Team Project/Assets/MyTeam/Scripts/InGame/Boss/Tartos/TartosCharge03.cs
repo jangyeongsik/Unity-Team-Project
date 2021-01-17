@@ -46,14 +46,13 @@ public class TartosCharge03 : StateMachineBehaviour
 
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern1");
 
-        Vector3 dir = tartos.target.position - tartos.position.position;
-        dir.y = 0;
-        tartos.position.LookAt(tartos.position.position + dir);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         paticle1_3.PaticleOn1_3();
         paticle1_3.PaticleOff1_2();
+
+        tartos.animator.SetTrigger("Move");
     }
 }

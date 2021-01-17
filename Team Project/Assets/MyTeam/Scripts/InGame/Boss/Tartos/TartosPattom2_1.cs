@@ -32,6 +32,11 @@ public class TartosPattom2_1 : StateMachineBehaviour
         if (bossTartos == null)
             bossTartos = animator.transform.parent.GetComponent<BossTartos>();
 
+        bossTartos.PaticleOff2_1();
+        bossTartos.PaticleOff2_2();
+        bossTartos.PaticleOff2_3();
+
+
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern2");
 
         tartos.position.position = bossTartos.pattern2Point.position;
@@ -59,9 +64,7 @@ public class TartosPattom2_1 : StateMachineBehaviour
         if (patton2_C == null)
             patton2_C = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_Center;
 
-        bossTartos.PaticleOff2_1();
-        bossTartos.PaticleOff2_2();
-        bossTartos.PaticleOff2_3();
+
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -94,7 +97,12 @@ public class TartosPattom2_1 : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      
+        if (number == 0)
+            bossTartos.PaticleOn2_1();
+        else if (number == 1)
+            bossTartos.PaticleOn2_2();
+        else
+            bossTartos.PaticleOn2_3();
 
         patton2_1.SetActive(false);
         patton2_2.SetActive(false);
@@ -105,11 +113,6 @@ public class TartosPattom2_1 : StateMachineBehaviour
         patton2_7.SetActive(false);
         patton2_8.SetActive(false);
 
-        if (number == 0)
-            bossTartos.PaticleOn2_1();
-        else if (number == 1)
-            bossTartos.PaticleOn2_2();
-        else
-            bossTartos.PaticleOn2_3();
+       
     }
 }

@@ -22,13 +22,12 @@ public class TartosCharge01 : StateMachineBehaviour
         if (paticle1_1 == null)
             paticle1_1 = animator.transform.parent.GetComponent<BossTartos>();
 
+        paticle1_1.PaticleOff1_1();
+        paticle1_1.PaticleOff1_2();
+        paticle1_1.PaticleOff1_3();
 
 
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern1");
-
-        Vector3 dir = tartos.target.position - tartos.position.position;
-        dir.y = 0;
-        tartos.position.LookAt(tartos.position.position + dir);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

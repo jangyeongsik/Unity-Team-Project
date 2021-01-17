@@ -55,16 +55,12 @@ public class TartosPattom2_2 : StateMachineBehaviour
         if (patton2_C == null)
             patton2_C = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_Center;
 
-        bossTartos.PaticleOff2_1();
-        bossTartos.PaticleOff2_2();
-        bossTartos.PaticleOff2_3();
+       
 
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //tartos.navigation.SetDestination(tartos.pattonTarget.position);
-        //tartos.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
@@ -89,6 +85,19 @@ public class TartosPattom2_2 : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
+        if (number2 == 0)
+            bossTartos.PaticleOff2_1();
+        else if (number2 == 1)
+            bossTartos.PaticleOff2_2();
+        else
+            bossTartos.PaticleOff2_3();
+
+        if (number2 == 0)
+            bossTartos.PaticleOn2_1();
+        else if (number2 == 1)
+            bossTartos.PaticleOn2_2();
+        else
+            bossTartos.PaticleOn2_3();
 
         patton2_1.SetActive(false);
         patton2_2.SetActive(false);
@@ -100,11 +109,5 @@ public class TartosPattom2_2 : StateMachineBehaviour
         patton2_8.SetActive(false);
         patton2_C.SetActive(false);
 
-        if (number2 == 0)
-            bossTartos.PaticleOn2_1();
-        else if (number2 == 1)
-            bossTartos.PaticleOn2_2();
-        else
-            bossTartos.PaticleOn2_3();
     }
 }

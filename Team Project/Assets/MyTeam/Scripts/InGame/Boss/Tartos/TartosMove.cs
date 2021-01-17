@@ -55,12 +55,11 @@ public class TartosMove : StateMachineBehaviour
                         break;
                     default:
                         {
-                            int count = tartos.animator.GetInteger("Charge");
+                            int count = animator.GetInteger("Charge");
                             if (count >= 2) count = 0;
 
                             ++count;
-                            tartos.animator.SetInteger("Charge", count);
-                            tartos.bossState = State.BossState.B_SkillChargeOne;
+                            animator.SetInteger("Charge", count);
                         }
                         break;
                 }
