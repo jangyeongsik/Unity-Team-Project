@@ -50,7 +50,7 @@ public class TartosAttack : MonoBehaviour
                     break;         
                 case State.BossState.B_AttackTwo:
                     {
-                        int count = tartos.animator.GetInteger("Charge");
+                        int count = tartos.chargeNum;
                         if (count >= 2)
                             count = 0;
 
@@ -65,8 +65,7 @@ public class TartosAttack : MonoBehaviour
             tartos.animator.SetTrigger("Move");
             tartos.animator.SetInteger("Attack", 0);
 
-            if (tartos.bossState == State.BossState.B_SkillChargeOne ||
-                tartos.bossState == State.BossState.B_SkillChargeTwo)
+            if(tartos.animator.GetInteger("Charge") != 0)
                 tartos.chargeNum = tartos.animator.GetInteger("Charge");
             tartos.animator.SetInteger("Charge", 0);
             tartos.lastAttack = tartos.bossState;
