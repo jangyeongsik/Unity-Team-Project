@@ -15,6 +15,8 @@ public class TeleportMaster : MonoBehaviour
     public bool isPossibleMove = false;
     public bool checkBossClear;
 
+    ClearZone clearZone;
+
     private void Start()
     {
         Disable = Resources.Load("DeActive") as Mesh;
@@ -24,6 +26,7 @@ public class TeleportMaster : MonoBehaviour
         if (!isPossibleMove && Disable != null)
             mesh.mesh = Disable;
 
+        clearZone = FindObjectOfType<ClearZone>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,5 +43,6 @@ public class TeleportMaster : MonoBehaviour
     {
         if (GameData.Instance.player.isSceneMove)
             GameData.Instance.player.isSceneMove = false;
+        clearZone.portalName = transform;
     }
 }
