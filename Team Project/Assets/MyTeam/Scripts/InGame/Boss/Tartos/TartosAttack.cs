@@ -44,9 +44,13 @@ public class TartosAttack : MonoBehaviour
                     break;
                 case State.BossState.B_SkillChargeOne:
                     tartos.animator.SetInteger("Attack", 1);
+                    if (tartos.animator.GetInteger("Charge") != 0)
+                        tartos.chargeNum = tartos.animator.GetInteger("Charge");
                     break;
                 case State.BossState.B_SkillChargeTwo:
                     tartos.animator.SetInteger("Attack", 1);
+                    if (tartos.animator.GetInteger("Charge") != 0)
+                        tartos.chargeNum = tartos.animator.GetInteger("Charge");
                     break;         
                 case State.BossState.B_AttackTwo:
                     {

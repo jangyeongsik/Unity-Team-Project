@@ -147,17 +147,39 @@ public class BossTartos : MonoBehaviour
     #region 패턴1 파티클
     public void PaticleOn1_1()
     {
+        Vector3 pos = Vector3.zero;
+        pos.z += 5;
+        tartosPattonPaticle1_3.transform.position =transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_3.SetActive(true);
     }
     public void PaticleOn1_2()
     {
+        Vector3 pos = Vector3.zero;
+        pos.z += 5;
+        pos.x += 1;
+        tartosPattonPaticle1_2.transform.position = transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_2.SetActive(true);
+        pos = Vector3.zero;
+        pos.z += 5;
+        pos.x -= 1;
+        tartosPattonPaticle1_4.transform.position = transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_4.SetActive(true);
     }
     public void PaticleOn1_3()
     {
+        Vector3 pos = Vector3.zero;
+        pos.z += 5;
+        pos.x += 2;
+        tartosPattonPaticle1_1.transform.position = transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_1.SetActive(true);
+        pos = Vector3.zero;
+        pos.z += 5;
+        tartosPattonPaticle1_3.transform.position = transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_3.SetActive(true);
+        pos = Vector3.zero;
+        pos.z += 5;
+        pos.x -= 2;
+        tartosPattonPaticle1_5.transform.position = transform.position + transform.TransformDirection(pos);
         tartosPattonPaticle1_5.SetActive(true);
     }
     public void PaticleOff1_1()
