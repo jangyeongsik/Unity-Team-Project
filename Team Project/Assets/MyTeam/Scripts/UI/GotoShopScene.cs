@@ -35,7 +35,7 @@ public class GotoShopScene : MonoBehaviour
     public Toggle[] Toggles;
     public GameObject Menu;
     public GameObject SkillMenu;
-
+    public GameObject TalkBtn;
     public GameObject MinMapCam;
 
     List<GameObject> CanvasList = new List<GameObject>();
@@ -61,7 +61,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.templeOnOff += OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff += TalkOff;
         GameEventToUI.Instance.Event_TalkBox += TalkBox;
-
+        GameEventToUI.Instance.talkButOnOff += Talk_Box_onOff;
         GameEventToUI.Instance.joystick_on += joystickon;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
@@ -378,5 +378,9 @@ public class GotoShopScene : MonoBehaviour
     public void Next_talk()
     {
         GameEventToUI.Instance.Onnpc_talk_Next();
+    }
+    public void Talk_Box_onOff(bool isOn)
+    {
+        TalkBtn.SetActive(isOn);
     }
 }

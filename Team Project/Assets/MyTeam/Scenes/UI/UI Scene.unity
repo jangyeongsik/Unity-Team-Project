@@ -854,6 +854,7 @@ MonoBehaviour:
   Toggles: []
   Menu: {fileID: 717035812}
   SkillMenu: {fileID: 1693614711}
+  TalkBtn: {fileID: 1145113667}
   MinMapCam: {fileID: 848648275}
 --- !u!114 &1027175088 stripped
 MonoBehaviour:
@@ -1059,7 +1060,7 @@ PrefabInstance:
     - target: {fileID: 6365913841055692883, guid: f8e4fd18e6051d845b20e6ab419e9acf,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365913841167682888, guid: f8e4fd18e6051d845b20e6ab419e9acf,
         type: 3}
@@ -1104,7 +1105,7 @@ PrefabInstance:
     - target: {fileID: 6365913841167682889, guid: f8e4fd18e6051d845b20e6ab419e9acf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365913841167682890, guid: f8e4fd18e6051d845b20e6ab419e9acf,
         type: 3}
@@ -1127,6 +1128,12 @@ PrefabInstance:
 --- !u!224 &1145113666 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6365913841055692882, guid: f8e4fd18e6051d845b20e6ab419e9acf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1145113665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1145113667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6365913841055692883, guid: f8e4fd18e6051d845b20e6ab419e9acf,
     type: 3}
   m_PrefabInstance: {fileID: 1145113665}
   m_PrefabAsset: {fileID: 0}
@@ -2116,6 +2123,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 891604236112376374, guid: 13bc8d217d80b7647a7f69806e251c22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 891604237000187446, guid: 13bc8d217d80b7647a7f69806e251c22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1004741558}
+    - target: {fileID: 891604237000187446, guid: 13bc8d217d80b7647a7f69806e251c22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Next_talk
+      objectReference: {fileID: 0}
     - target: {fileID: 1572340476226860295, guid: 13bc8d217d80b7647a7f69806e251c22,
         type: 3}
       propertyPath: joystick
@@ -2978,7 +3000,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1004741558}
         m_MethodName: MinMapOpen
         m_Mode: 1
         m_Arguments:

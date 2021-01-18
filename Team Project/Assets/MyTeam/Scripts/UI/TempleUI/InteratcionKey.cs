@@ -8,11 +8,11 @@ public class InteratcionKey : MonoBehaviour
 
     
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-        GameEventToUI.Instance.interOnOff += interactionBtnOn;
-    }
+   // private void Start()
+    
+        //gameObject.SetActive(false);
+        //GameEventToUI.Instance.interOnOff += interactionBtnOn;
+    
 
     public void OpenTheTempleInfo()
     {

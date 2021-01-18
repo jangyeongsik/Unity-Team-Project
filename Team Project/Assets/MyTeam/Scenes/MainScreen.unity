@@ -194,7 +194,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 18.13674
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 7c92030b745c58b49bab00a75806b666, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c92030b745c58b49bab00a75806b666, type: 3}
 --- !u!4 &21291576 stripped
 Transform:
@@ -312,66 +313,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!21 &211676597
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: LiberationSans SDF Material
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee,
-          type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _FaceDilate: 0
-    - _GradientScale: 10
-    - _MaskSoftnessX: 0
-    - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0
-    - _PerspectiveFilter: 0.875
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.73125
-    - _ScaleX: 1
-    - _ScaleY: 1
-    - _ShaderFlags: 0
-    - _Sharpness: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
-    - _VertexOffsetX: 0
-    - _VertexOffsetY: 0
-    - _WeightBold: 0.75
-    - _WeightNormal: 0
-    m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!1 &266583800
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 211676597}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -431,9 +372,9 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 211676597}
+  m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 266583803}
   m_TextComponent: {fileID: 814159769}
   m_materialReferenceIndex: 1
@@ -584,7 +525,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.623643
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
 --- !u!1001 &422575710
 PrefabInstance:
@@ -814,7 +756,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.9139925
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 544d6011b282ef349b3929a1c2eef68c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 544d6011b282ef349b3929a1c2eef68c, type: 3}
 --- !u!1001 &502686266
 PrefabInstance:
@@ -871,7 +814,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -339.421
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 2f4cc646dfacefb48862e5ba5591232f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4cc646dfacefb48862e5ba5591232f, type: 3}
 --- !u!1001 &574892982
 PrefabInstance:
@@ -940,7 +884,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 8.2227
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 544d6011b282ef349b3929a1c2eef68c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 544d6011b282ef349b3929a1c2eef68c, type: 3}
 --- !u!4 &634871553 stripped
 Transform:
@@ -1138,7 +1083,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5563997
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 2f4cc646dfacefb48862e5ba5591232f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f4cc646dfacefb48862e5ba5591232f, type: 3}
 --- !u!1 &814159767
 GameObject:
@@ -1267,13 +1213,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 814159769}
-    characterCount: 14
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1390,18 +1336,6 @@ Transform:
   m_Father: {fileID: 968483642}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &926301118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3027177175272103746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a15266bd88d44f48b49bf463c0022a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &932581609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 22b20073f50d71c47a5048c45a915390,
@@ -1475,7 +1409,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 11.979167
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: f525021a58a57a041a0f4513bcc20959, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f525021a58a57a041a0f4513bcc20959, type: 3}
 --- !u!4 &944209465 stripped
 Transform:
@@ -1767,7 +1702,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5.2331185
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
 --- !u!1 &1202113050
 GameObject:
@@ -1896,13 +1832,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1202113052}
-    characterCount: 9
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2175,7 +2111,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.00001
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 50900ef0df41817498ece9690554cc0a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 50900ef0df41817498ece9690554cc0a, type: 3}
 --- !u!1001 &1506443279
 PrefabInstance:
@@ -2244,7 +2181,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 9.157433
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: fff96e1a05a9d424f8a6af9d7ef483ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fff96e1a05a9d424f8a6af9d7ef483ca, type: 3}
 --- !u!1 &1517459142
 GameObject:
@@ -2515,7 +2453,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -67.634
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: fc6bcd081b333c24ba2aa28909ba19e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc6bcd081b333c24ba2aa28909ba19e8, type: 3}
 --- !u!4 &1706184476 stripped
 Transform:
@@ -2572,7 +2511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 211676597}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
@@ -2582,9 +2521,9 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 211676597}
+  m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1727488449}
   m_TextComponent: {fileID: 1202113052}
   m_materialReferenceIndex: 1
@@ -2663,7 +2602,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10.648848
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 77eedb76ac6fcfc419c5f4780083156f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 77eedb76ac6fcfc419c5f4780083156f, type: 3}
 --- !u!4 &1766173140 stripped
 Transform:
@@ -2912,7 +2852,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.658331
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6400000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22b20073f50d71c47a5048c45a915390, type: 3}
 --- !u!1 &2131954942
 GameObject:
@@ -4489,7 +4430,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2042919279440260433}
   - component: {fileID: 8274215890124390443}
-  - component: {fileID: 926301118}
   m_Layer: 0
   m_Name: brute
   m_TagString: Untagged
