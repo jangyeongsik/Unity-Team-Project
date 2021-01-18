@@ -71,6 +71,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public delegate void PlayerHP_Decrease(int damage);
     public PlayerHP_Decrease playerHP_Decrease;
+
+    public delegate int Talk_Box();
+    public Talk_Box talk_box;
+
     public event System.Action<int,int> playerHP_Increase;
 
     public event System.Action AttactReset;
@@ -208,6 +212,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         isGet();
     }
+
+    public int OnEventTalk_id()
+    {
+        return talk_box.Invoke();
+    }
+
+
+
     #region 레버 충돌시 팝업창 출현
     public void OnLeverPopup(bool isOn, string name = " ", string description = " ")
     {

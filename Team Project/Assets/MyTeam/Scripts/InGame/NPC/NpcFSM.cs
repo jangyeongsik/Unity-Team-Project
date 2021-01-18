@@ -7,6 +7,7 @@ public class NpcFSM : MonoBehaviour
 {
     private Npc npc;
     Vector3 originPos;
+    [SerializeField] int talk_id;
 
     private bool trigger =false;
 
@@ -15,6 +16,8 @@ public class NpcFSM : MonoBehaviour
         npc = GetComponent<Npc>();
        // NpcSetting();
         GameEventToUI.Instance.player_Trigger += isTrigger;
+       
+
     }
 /*
     private void NpcSetting()
@@ -43,6 +46,7 @@ public class NpcFSM : MonoBehaviour
         {
             gameObject.transform.LookAt(other.gameObject.transform);
             GameEventToUI.Instance.OnEventTalkBtn(true);
+            GameEventToUI.Instance.talk_box += return_Talk_id;
             trigger = true;
         }
     }
@@ -53,6 +57,7 @@ public class NpcFSM : MonoBehaviour
         {
             gameObject.transform.LookAt(other.gameObject.transform);
             GameEventToUI.Instance.OnEventTalkBtn(false);
+            GameEventToUI.Instance.talk_box -= return_Talk_id;
             trigger = false;
         }
     }
@@ -60,5 +65,10 @@ public class NpcFSM : MonoBehaviour
     public bool isTrigger()
     {
         return trigger;
+    }
+
+    public int return_Talk_id()
+    {
+        return talk_id;
     }
 }
