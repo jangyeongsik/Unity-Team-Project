@@ -43,6 +43,9 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     public Sound[] PriestsSound;
     public Sound[] ViperSound;
     public Sound[] WolfSound;
+
+    [Header("BGM")]
+    public Sound[] BGMS;
     #endregion
 
     #region"사운드 딕셔너리들"
@@ -55,6 +58,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     public Dictionary<string, AudioClip> D_PriestsSound = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_ViperSound = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_WolfSound = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> D_BGMS = new Dictionary<string, AudioClip>();
     #endregion
 
     private void Start()
@@ -63,6 +67,12 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         BGM_Audio = GetComponents<AudioSource>()[1];
         //배열 딕셔너리로 옮기기
         SetDictionary();
+
+        AudioClip c;
+        D_BGMS.TryGetValue("Temple",out c);
+        BGM_Audio.clip = c;
+        BGM_Audio.loop = true;
+        BGM_Audio.Play();
     }
 
     //타입과 이름을 적으세용 이름은 인스펙터에서 확인가능합니당
@@ -149,6 +159,11 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         for (int i = 0; i < WolfSound.Length; ++i)
         {
             D_WolfSound.Add(WolfSound[i].name, WolfSound[i].clip);
+        }
+
+        for (int i = 0; i < WolfSound.Length; ++i)
+        {
+            D_BGMS.Add(BGMS[i].name, BGMS[i].clip);
         }
     }
 }

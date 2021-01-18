@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum STAGEKIND
+{
+    Temple,Safe_Zone,Chapter1_Normal,Boss
+}
+
 public class StageManager : MonoBehaviour
 {
+    public STAGEKIND stageKind;
     public bool isClear = false;
     public bool isRegen = true;
 
@@ -30,6 +36,15 @@ public class StageManager : MonoBehaviour
                     enemys[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        AudioClip clip;
+        SoundManager.Instance.D_BGMS.TryGetValue(stageKind.ToString(),out clip);
+        Debug.Log(clip.name);
+        if(SoundManager.Instance.BGM_Audio.clip != clip)
+        {
+            SoundManager.Instance.BGM_Audio.clip = clip;
+            SoundManager.Instance.BGM_Audio.Play();
         }
     }
 

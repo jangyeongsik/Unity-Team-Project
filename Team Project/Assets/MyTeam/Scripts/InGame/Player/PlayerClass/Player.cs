@@ -22,6 +22,7 @@ public class PlayerData
     public float        attackspeed;               //공격속도
     public float        defence;                   //방어
     public int          cylinderCounter;           //실린더 개수
+    public int          keyCounter;                //키 개수
     public int          cylinderPercent;           //실린더 게이지 저장
     public int          stamina;                   //스태미너
     public float        counter_judgement;         //카운터 판결
@@ -51,6 +52,7 @@ public class PlayerData
         player.attackspeed          = attackspeed;
         player.defence              = defence;
         player.cylinderCounter      = cylinderCounter;
+        player.keyCounter           = keyCounter;
         player.cylinderPercent      = cylinderPercent;
         player.stamina              = stamina;
         player.counter_judgement    = counter_judgement;
@@ -77,6 +79,7 @@ public class PlayerData
         attackspeed         = 1;
         defence             = 1;
         cylinderCounter     = 0;
+        keyCounter          = 0;
         cylinderPercent     = 0;
         stamina             = 40;
         counter_judgement   = 1;
@@ -102,6 +105,7 @@ public class PlayerData
         attackspeed         = 1;
         defence             = 1;
         cylinderCounter     = 0;
+        keyCounter          = 0;
         cylinderPercent     = 0;
         stamina             = 40;
         counter_judgement   = 1;
@@ -127,6 +131,7 @@ public class PlayerData
         attackspeed         = player.attackspeed;
         defence             = player.defence;
         cylinderCounter     = player.cylinderCounter;
+        keyCounter          = player.keyCounter;
         cylinderPercent     = player.cylinderPercent;
         stamina             = player.stamina;
         counter_judgement   = player.counter_judgement;
@@ -154,6 +159,7 @@ public class Player
     public float attackspeed;               //공격속도
     public float defence;                   //방어
     public int cylinderCounter;             //실린더 개수
+    public int keyCounter;                  //키 개수
     public int cylinderPercent;             //실린더 게이지 저장
     public int stamina;                     //스태미너
     public float counter_judgement;         //카운터 판결
