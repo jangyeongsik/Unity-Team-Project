@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Text;
 
 public class EquipItem : MonoBehaviour
 {
@@ -20,8 +21,7 @@ public class EquipItem : MonoBehaviour
     public TMP_Text TName;
     public TMP_Text TCategory;
     public TMP_Text TDescription;
-    public TMP_Text TStat;
-    public TMP_Text TSubStat;
+    public TMP_Text TGrade;
     private void Start()
     {
         RefreshAllImages();
@@ -105,6 +105,8 @@ public class EquipItem : MonoBehaviour
         {
             infoScreen.gameObject.SetActive(true);
         }
+        StringBuilder sb = new StringBuilder();
+        Equipment e = new Equipment();
         switch (val)
         {
             case "Helm":
@@ -113,15 +115,34 @@ public class EquipItem : MonoBehaviour
                     infoScreen.gameObject.SetActive(false);
                     break;
                 }
-                Equipment temp = FindItem(EQUIPMENTTYPE.HELM);
-                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
+                e = FindItem(EQUIPMENTTYPE.HELM);
                 //아이템 이미지 받아와 넣기
-                TName.text = temp.name;
-                TCategory.text = temp.equipmentType.ToString();
-                image.sprite = HelmBtn.transform.GetChild(0).GetComponent<Image>().sprite;
-                //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                TStat.text = "Grade :  " + temp.itemGrade;
-                TSubStat.text = "ID : " + temp.ID;
+                TName.text = e.name;
+                sb.Append("투구");
+                TCategory.text = sb.ToString();
+                image.sprite = Inventory.Instance.itemImages[e.itemScriptID];
+                sb.Clear();
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                TDescription.text = sb.ToString();
+                sb.Clear();
+                sb.Append("등급 : ");
+                switch (e.itemGrade)
+                {
+                    case 1:
+                        sb.Append("평작");
+                        break;
+                    case 2:
+                        sb.Append("걸작");
+                        break;
+                    case 3:
+                        sb.Append("명작");
+                        break;
+                }
+                TGrade.text = sb.ToString();
                 break;
             case "Armor":
                 if (FindItem(EQUIPMENTTYPE.ARMOR) == null)
@@ -129,15 +150,34 @@ public class EquipItem : MonoBehaviour
                     infoScreen.gameObject.SetActive(false);
                     break;
                 }
-                temp = FindItem(EQUIPMENTTYPE.ARMOR);
-                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
+                e = FindItem(EQUIPMENTTYPE.ARMOR);
                 //아이템 이미지 받아와 넣기
-                TName.text = temp.name;
-                TCategory.text = temp.equipmentType.ToString();
-                image.sprite = ArmorBtn.transform.GetChild(0).GetComponent<Image>().sprite;
-                //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                TStat.text = "Grade :  " + temp.itemGrade;
-                TSubStat.text = "ID : " + temp.ID;
+                TName.text = e.name;
+                sb.Append("갑옷");
+                TCategory.text = sb.ToString();
+                image.sprite = Inventory.Instance.itemImages[e.itemScriptID];
+                sb.Clear();
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                TDescription.text = sb.ToString();
+                sb.Clear();
+                sb.Append("등급 : ");
+                switch (e.itemGrade)
+                {
+                    case 1:
+                        sb.Append("평작");
+                        break;
+                    case 2:
+                        sb.Append("걸작");
+                        break;
+                    case 3:
+                        sb.Append("명작");
+                        break;
+                }
+                TGrade.text = sb.ToString();
                 break;
             case "Weapon":
                 if (FindItem(EQUIPMENTTYPE.WEAPON) == null)
@@ -145,15 +185,34 @@ public class EquipItem : MonoBehaviour
                     infoScreen.gameObject.SetActive(false);
                     break;
                 }
-                temp = FindItem(EQUIPMENTTYPE.WEAPON);
-                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
+                e = FindItem(EQUIPMENTTYPE.WEAPON);
                 //아이템 이미지 받아와 넣기
-                TName.text = temp.name;
-                TCategory.text = temp.equipmentType.ToString();
-                image.sprite = WeaponBtn.transform.GetChild(0).GetComponent<Image>().sprite;
-                //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                TStat.text = "Grade :  " + temp.itemGrade;
-                TSubStat.text = "ID : " + temp.ID;
+                TName.text = e.name;
+                sb.Append("무기");
+                TCategory.text = sb.ToString();
+                image.sprite = Inventory.Instance.itemImages[e.itemScriptID];
+                sb.Clear();
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                TDescription.text = sb.ToString();
+                sb.Clear();
+                sb.Append("등급 : ");
+                switch (e.itemGrade)
+                {
+                    case 1:
+                        sb.Append("평작");
+                        break;
+                    case 2:
+                        sb.Append("걸작");
+                        break;
+                    case 3:
+                        sb.Append("명작");
+                        break;
+                }
+                TGrade.text = sb.ToString();
                 break;
             case "Glove":
                 if (FindItem(EQUIPMENTTYPE.GLOVE) == null)
@@ -161,15 +220,34 @@ public class EquipItem : MonoBehaviour
                     infoScreen.gameObject.SetActive(false);
                     break;
                 }
-                temp = FindItem(EQUIPMENTTYPE.GLOVE);
-                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
+                e = FindItem(EQUIPMENTTYPE.GLOVE);
                 //아이템 이미지 받아와 넣기
-                TName.text = temp.name;
-                TCategory.text = temp.equipmentType.ToString();
-                image.sprite = GloveBtn.transform.GetChild(0).GetComponent<Image>().sprite;
-                //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                TStat.text = "Grade :  " + temp.itemGrade;
-                TSubStat.text = "ID : " + temp.ID;
+                TName.text = e.name;
+                sb.Append("장갑");
+                TCategory.text = sb.ToString();
+                image.sprite = Inventory.Instance.itemImages[e.itemScriptID];
+                sb.Clear();
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                TDescription.text = sb.ToString();
+                sb.Clear();
+                sb.Append("등급 : ");
+                switch (e.itemGrade)
+                {
+                    case 1:
+                        sb.Append("평작");
+                        break;
+                    case 2:
+                        sb.Append("걸작");
+                        break;
+                    case 3:
+                        sb.Append("명작");
+                        break;
+                }
+                TGrade.text = sb.ToString();
                 break;
             case "Boots":
                 if (FindItem(EQUIPMENTTYPE.BOOTS) == null)
@@ -177,15 +255,34 @@ public class EquipItem : MonoBehaviour
                     infoScreen.gameObject.SetActive(false);
                     break;
                 }
-                temp = FindItem(EQUIPMENTTYPE.BOOTS);
-                infoScreen.GetComponent<ItemInfoScreen>().e = temp;
+                e = FindItem(EQUIPMENTTYPE.BOOTS);
                 //아이템 이미지 받아와 넣기
-                TName.text = temp.name;
-                TCategory.text = temp.equipmentType.ToString();
-                image.sprite = BootsBtn.transform.GetChild(0).GetComponent<Image>().sprite;
-                //아이템 설명 TDescription.text = data.equipmentData[slotNum].;
-                TStat.text = "Grade :  " + temp.itemGrade;
-                TSubStat.text = "ID : " + temp.ID;
+                TName.text = e.name;
+                sb.Append("신발");
+                TCategory.text = sb.ToString();
+                image.sprite = Inventory.Instance.itemImages[e.itemScriptID];
+                sb.Clear();
+                sb.AppendFormat("공격력 : {0}\n", e.damage);
+                sb.AppendFormat("속도 : {0}\n", e.speed);
+                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
+                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
+                sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
+                TDescription.text = sb.ToString();
+                sb.Clear();
+                sb.Append("등급 : ");
+                switch (e.itemGrade)
+                {
+                    case 1:
+                        sb.Append("평작");
+                        break;
+                    case 2:
+                        sb.Append("걸작");
+                        break;
+                    case 3:
+                        sb.Append("명작");
+                        break;
+                }
+                TGrade.text = sb.ToString();
                 break;
         }
     }

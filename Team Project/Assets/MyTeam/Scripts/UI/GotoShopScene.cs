@@ -63,6 +63,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.Event_TalkBox += TalkBox;
 
         GameEventToUI.Instance.joystick_on += joystickon;
+        GameEventToUI.Instance.joystick_off += joystickoff;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
         if (GameData.Instance.player.tutorial == false)
@@ -372,7 +373,6 @@ public class GotoShopScene : MonoBehaviour
     {
         UIEventToGame.Instance.OnUiEventJoystickSetting();
         joystick.SetActive(false);
-
     }
 
     public void Next_talk()

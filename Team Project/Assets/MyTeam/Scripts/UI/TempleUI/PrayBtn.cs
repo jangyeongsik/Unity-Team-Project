@@ -10,8 +10,20 @@ public class PrayBtn : MonoBehaviour
     public Button prayFiveTimes;
     public Button prayTenTimes;
     public TMP_Text keyCount;
-    public void SetPrayCount(int count)
+    public int count;
+    public void SetPrayCount(int _count)
     {
-        keyCount.text = count.ToString();
+        keyCount.text = _count.ToString();
+        count = _count;
+    }
+    public void CloseUI()
+    {
+        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
+    }
+    public void Pray()
+    {
+        UIEventToGame.Instance.OnActivateTemplePortal(true);
+        transform.parent.gameObject.SetActive(false);
     }
 }

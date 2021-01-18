@@ -35,7 +35,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "플레이어 에너미한테 피격"
     public event System.Action<Transform, int> Player_Hit;
-    public event System.Action<Transform, int, State.BossState> Player_Boss_Hit; 
+    public event System.Action<Transform, int, State.BossState> Player_Boss_Hit;
 
     public void OnPlayerHit(Transform t, int damage)
     {
@@ -71,7 +71,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public delegate void PlayerHP_Decrease(int damage);
     public PlayerHP_Decrease playerHP_Decrease;
-    public event System.Action<int,int> playerHP_Increase;
+    public event System.Action<int, int> playerHP_Increase;
 
     public event System.Action AttactReset;
 
@@ -87,6 +87,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action talkOnOff;
 
     public event System.Action joystick_on;
+    public event System.Action joystick_off;
 
 
     public event System.Action<int> Event_TalkBox;
@@ -139,7 +140,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
     {
         joystick_on();
     }
-
+    public void OnEventJoystickOff()
+    {
+        joystick_off();
+    }
     public void OnEventShopOnOff(bool isOn)
     {
         onOff(isOn);

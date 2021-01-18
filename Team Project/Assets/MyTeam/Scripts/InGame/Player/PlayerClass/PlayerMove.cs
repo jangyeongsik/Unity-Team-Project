@@ -156,19 +156,4 @@ public class PlayerMove : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Z))
             animator.SetBool("isGuard", false);
     }
-        private void OnTriggerEnter(Collider other)
-    {
-        if(LayerMask.NameToLayer("Temple") == other.gameObject.layer)
-        {
-            GameEventToUI.Instance.OnEventInterActionOnOff(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (LayerMask.NameToLayer("Temple") == other.gameObject.layer)
-        {
-            GameEventToUI.Instance.OnEventInterActionOnOff(false);
-        }
-    }    
 }
