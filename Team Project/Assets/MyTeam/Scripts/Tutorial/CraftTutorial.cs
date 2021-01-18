@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class CraftTutorial : MonoBehaviour
 {
     public GameObject tipPopup;
+    public bool isTrue;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")&& isTrue == false)
         {
+            isTrue = true;
             tipPopup.SetActive(true);
             GameEventToUI.Instance.OnEventJoystickOff();
         }

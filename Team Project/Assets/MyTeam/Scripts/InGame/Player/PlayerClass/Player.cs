@@ -12,7 +12,7 @@ public class PlayerDataList
 [Serializable]
 public class PlayerData
 {
-    //저장할 데이터 변수들
+
     public int id;                        //아이디 값
     public int hp;                        //채력
     public float movespeed;                 //움직임 속도 
@@ -35,6 +35,7 @@ public class PlayerData
     public string SavePortalName;            //저장한 씬으로 갈 포탈이름
     public bool[] Talk_Box;                  //대화 시스템 관리
 
+
     public PlayerData(int slot)
     {
         CreateNewPlayer(slot, "");
@@ -43,6 +44,7 @@ public class PlayerData
     //플레이어 데이터에 있는것들을 플레이어에 넣어준다
     public Player WriteData(in Player player)
     {
+
         player.id = id;
         player.hp = hp;
         player.movespeed = movespeed;
@@ -64,12 +66,14 @@ public class PlayerData
         player.SaveSceneName = SaveSceneName;
         player.SavePortalName = SavePortalName;
         player.Talk_Box = Talk_Box;
+
         return player;
     }
 
     //새로운 플레이어 데이터를 만든다
     public PlayerData CreateNewPlayer(int slot, string name)
     {
+
         id = slot;
         hp = 4;
         movespeed = 1;
@@ -91,11 +95,13 @@ public class PlayerData
         SaveSceneName = "MAP001";
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
+
         return this;
     }
     //플레이어 데이터를 초기화한다
     public PlayerData DeleteData(int slot)
     {
+
         id = slot;
         hp = 4;
         movespeed = 1;
@@ -117,11 +123,13 @@ public class PlayerData
         SaveSceneName = "MAP001";
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
+
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
     public void CopyPlayer(Player player)
     {
+
         id = player.id;
         hp = player.hp;
         movespeed = player.movespeed;
@@ -143,6 +151,7 @@ public class PlayerData
         SaveSceneName = player.SaveSceneName;
         SavePortalName = player.SavePortalName;
         Talk_Box = player.Talk_Box;
+
     }
 }
 
@@ -198,7 +207,6 @@ public class Player
     {
         if (animator.enabled == false)
             animator.enabled = true;
-        Debug.Log(pos);
         controller.enabled = false;
         position.position = pos;
         isSceneMove = true;

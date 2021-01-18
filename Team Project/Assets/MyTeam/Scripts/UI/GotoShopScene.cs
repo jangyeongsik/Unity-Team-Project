@@ -54,7 +54,6 @@ public class GotoShopScene : MonoBehaviour
     private void Awake()
     {
         GameEventToUI.Instance.onOff += ShopOn;
-        GameEventToUI.Instance.talk += TalkOn;
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
@@ -115,33 +114,19 @@ public class GotoShopScene : MonoBehaviour
     {
         shopCanvas.SetActive(isOn);
     }
-    public void TalkOn()
+
+    public void Talk_Box_Print()
     {
-        if (GameEventToUI.Instance.onEventPlayer_Trigger())
-        {
-            joystickoff();
-            TalkCanvas.SetActive(true);
-            if (GameData.Instance.player.tutorial == false)
-            {
-                GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(8000));
-                GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(8000));
+        joystickoff();
+        TalkCanvas.SetActive(true);
+        GameEventToUI.Instance.OnNpc_name_Setting(GameData.Instance.Talk_Find_index(GameEventToUI.Instance.OnEventTalk_id()));
+        GameEventToUI.Instance.Onnpc_talk_setting(GameData.Instance.Talk_Find_index(GameEventToUI.Instance.OnEventTalk_id()));
 
-                GameEventToUI.Instance.OnNpc_name_print();
-                GameEventToUI.Instance.Onnpc_talk_print();
-                GameData.Instance.player.tutorial = true;
-            }
-            else
-            {
-                GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(8006));
-                GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(8006));
-
-                GameEventToUI.Instance.OnNpc_name_print();
-                GameEventToUI.Instance.Onnpc_talk_print();
-            }
-        }
+        GameEventToUI.Instance.OnNpc_name_print();
+        GameEventToUI.Instance.Onnpc_talk_print();
+       
 
     }
-
     public void MinMapOpen()
     {
         minMapOpen = !minMapOpen;
@@ -153,9 +138,9 @@ public class GotoShopScene : MonoBehaviour
     {
         joystickoff();
         TalkCanvas.SetActive(true);
-        GameEventToUI.Instance.OnNpc_name_Setting(Talk_Find_index(id));
-        GameEventToUI.Instance.Onnpc_talk_setting(Talk_Find_index(id));
-
+        GameEventToUI.Instance.OnNpc_name_Setting(GameData.Instance.Talk_Find_index(id));
+        GameEventToUI.Instance.Onnpc_talk_setting(GameData.Instance.Talk_Find_index(id));
+        
         GameEventToUI.Instance.OnNpc_name_print();
         GameEventToUI.Instance.Onnpc_talk_print();
     }
@@ -168,14 +153,7 @@ public class GotoShopScene : MonoBehaviour
     {
         miniMapCanvas.SetActive(isOn);
     }
-    public int Talk_Find_index(int id)
-    {
-        for (int i = 0; i < GameData.Instance.data.Count; i++)
-        {
-            if (GameData.Instance.data[i].id == id) return i;
-        }
-        return 999;
-    }
+   
 
     void NextDialouge()
     {

@@ -41,7 +41,14 @@ public class GameData : SingletonMonobehaviour<GameData>
         PlayerLoad();
         System.GC.Collect();
     }
-
+    public int Talk_Find_index(int id)
+    {
+        for (int i = 0; i < data.Count; i++)
+        {
+            if (data[i].id == id) return i;
+        }
+        return 999;
+    }
     public void Print()
     {
         for(int i = 0; i < data.Count; i++)
