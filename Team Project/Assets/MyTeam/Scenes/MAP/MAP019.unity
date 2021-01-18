@@ -4515,6 +4515,7 @@ Transform:
   - {fileID: 1672887729}
   - {fileID: 260751333}
   - {fileID: 221680104}
+  - {fileID: 1415392144}
   - {fileID: 749580172}
   - {fileID: 1110753344}
   - {fileID: 1714545841}
@@ -4525,7 +4526,7 @@ Transform:
   - {fileID: 1571504321}
   - {fileID: 868456214}
   - {fileID: 1158913239}
-  - {fileID: 1415392144}
+  - {fileID: 1575783602}
   - {fileID: 1186404160}
   - {fileID: 1910434988}
   - {fileID: 1501859587}
@@ -4533,7 +4534,6 @@ Transform:
   - {fileID: 1219654297}
   - {fileID: 1905220112}
   - {fileID: 805029105}
-  - {fileID: 1575783602}
   - {fileID: 868937321}
   - {fileID: 2105913102}
   - {fileID: 1453552518}
@@ -17287,7 +17287,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 361179918}
-  m_RootOrder: 301
+  m_RootOrder: 291
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1420258085
 PrefabInstance:
@@ -18764,7 +18764,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 361179918}
-  m_RootOrder: 309
+  m_RootOrder: 302
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1580233216
 PrefabInstance:
@@ -20182,6 +20182,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1683591113}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1690874890
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 52.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304421, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304423, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: m_Name
+      value: Clear Zone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54f6e66ce98ee0f4aacbc6eb5271490a, type: 3}
 --- !u!1001 &1702994331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20687,7 +20756,7 @@ MeshCollider:
   m_GameObject: {fileID: 1738336506}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
