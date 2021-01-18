@@ -68,6 +68,7 @@ public class TutoMon_Short : MonoBehaviour
             case State.MonsterState.M_Return:
                 break;
             case State.MonsterState.M_Damage:
+                Damage();
                 break;
             case State.MonsterState.M_Dash:
                 break;
@@ -95,6 +96,11 @@ public class TutoMon_Short : MonoBehaviour
             //skullKing.counterjudgement = false;
             //AttackNotice.SetActive(false);
         }
+    }
+
+    private void Damage()
+    {
+
     }
 
     //거의 대부분의 에너미에 공통적으로 들어가는 메서드. 

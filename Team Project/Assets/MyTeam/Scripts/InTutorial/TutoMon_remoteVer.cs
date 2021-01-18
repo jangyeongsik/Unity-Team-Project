@@ -13,8 +13,6 @@ public class TutoMon_remoteVer : MonoBehaviour
     public Transform arrowFirePoint;
     private Vector3 shotDirection;
 
-    public GameObject arrowPrefab;
-
     bool running = false;
 
     Vector3 tPos;
@@ -27,9 +25,8 @@ public class TutoMon_remoteVer : MonoBehaviour
         monster = GetComponent<Monster>();
         monster.position = transform;
         monster.monsterKind = State.MonsterKind.M_Archer;
-        monster.EnemyHitEvent += OnDeadEvent;
         target = GameData.Instance.player.position.gameObject;
-        monster.attack_aware_distance = 10.0f;
+        monster.damage = 0;
         EnemySet();
     }
 
@@ -38,12 +35,11 @@ public class TutoMon_remoteVer : MonoBehaviour
     {
         monster.monsterState = State.MonsterState.M_Idle;
         monster.animator = GetComponent<Animator>();
-        //monster.rigid = GetComponent<Rigidbody>();
+        monster.rigid = GetComponent<Rigidbody>();
     }
 
     private void OnDestroy()
     {
-        monster.EnemyHitEvent -= OnDeadEvent;
     }
     private void Update()
     {
@@ -68,15 +64,15 @@ public class TutoMon_remoteVer : MonoBehaviour
                 break;
             default:
                 break;
-        }
+        } 
     }
-
+    
+    
     private void Move()
     {
         float distanceToTarget = (transform.position - target.transform.position).magnitude;
-        if (distanceToTarget <  10.0f)
+        if (distanceToTarget < 8.0f)
         {
-            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
             monster.animator.SetBool("isAttack", true);
         }
         else
@@ -99,6 +95,7 @@ public class TutoMon_remoteVer : MonoBehaviour
             GameObject vishopArrow = ObjectPoolManager.GetInstance().objectPool2.PopObject();
             Vector3 dir = tPos - arrowFirePoint.position;
             dir.y = 0;
+            vishopArrow.GetComponent<VishopArrow>().damage = monster.damage;
             vishopArrow.transform.position = arrowFirePoint.position;
             vishopArrow.transform.LookAt(vishopArrow.transform.position + dir);
             vishopArrow.GetComponent<VishopArrow>().EnemyTranform = transform;
@@ -108,7 +105,7 @@ public class TutoMon_remoteVer : MonoBehaviour
 
     public void PlayerLookAt()
     {
-        transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+        transform.LookAt(target.transform);
     }
 
     public void SavePos()

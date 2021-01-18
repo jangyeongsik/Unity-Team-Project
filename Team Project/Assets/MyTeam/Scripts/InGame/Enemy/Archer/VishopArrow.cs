@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class VishopArrow : PoolableObject
 {
-    public Transform EnemyTranform;             
-
+    public Transform EnemyTranform;
+    public int damage = 1;
     private void OnEnable()
     {
         StartCoroutine(ReMove());
@@ -21,7 +21,7 @@ public class VishopArrow : PoolableObject
         if(other.CompareTag("Player"))
         {
             ObjectPoolManager.GetInstance().objectPool2.PushObject(gameObject);
-            GameEventToUI.Instance.OnPlayerHit(EnemyTranform, 1);
+            GameEventToUI.Instance.OnPlayerHit(EnemyTranform, damage);
         }
     }
 
