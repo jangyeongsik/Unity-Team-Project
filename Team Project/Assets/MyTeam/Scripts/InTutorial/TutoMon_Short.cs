@@ -117,6 +117,11 @@ public class TutoMon_Short : MonoBehaviour
         }
     }
 
+    public void PlayerLookAt()
+    {
+        transform.LookAt(target.transform);
+    }
+
     public void AttackHit()
     {
         //count++;
