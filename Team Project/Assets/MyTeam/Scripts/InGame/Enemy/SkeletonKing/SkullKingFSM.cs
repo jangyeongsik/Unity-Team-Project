@@ -153,6 +153,8 @@ public class SkullKingFSM : MonoBehaviour
         
     }
 
+
+
     //해골왕 등장 후 -> 움직이는 메서드 
     private void KingMove()
     {
