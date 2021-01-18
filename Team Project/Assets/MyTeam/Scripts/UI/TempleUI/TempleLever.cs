@@ -7,26 +7,39 @@ public class TempleLever : MonoBehaviour
     public string leverName;
     public GameObject templePortal;
     public bool isActivated;
+    public bool isClear;
+    public StageManager sM;
 
     private void Start()
     {
         UIEventToGame.Instance.ActivateTemplePortal += ActivateTemplePortal;
         UIEventToGame.Instance.ActivateTemple += ActivateTemple;
         isActivated = false;
+        isClear = sM.isClear;
+    }
+    private void Update()
+    {
+        isClear = sM.isClear;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (isClear)
         {
-            GameEventToUI.Instance.OnTemplePopup(true, isActivated, leverName);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GameEventToUI.Instance.OnTemplePopup(true, isActivated, leverName);
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (isClear)
         {
-            GameEventToUI.Instance.OnTemplePopup(false, isActivated, leverName);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GameEventToUI.Instance.OnTemplePopup(false, isActivated, leverName);
+            }
         }
     }
     private void ActivateTemplePortal(bool isOn)
