@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 2005416546357836663}
   - component: {fileID: 8838007943538411257}
   - component: {fileID: 2005416546365081832}
-  - component: {fileID: 6891191059260630343}
+  - component: {fileID: -8896150591780628888}
   m_Layer: 9
   m_Name: Tutomon2
   m_TagString: EnemyWarrior
@@ -1320,22 +1320,19 @@ CapsuleCollider:
   m_Height: 200
   m_Direction: 1
   m_Center: {x: 0, y: 80, z: 20}
---- !u!54 &6891191059260630343
-Rigidbody:
+--- !u!114 &-8896150591780628888
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005416546365081833}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5621a5c1634331b4da76a6bfac0cece6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackNotice: {fileID: 3260976875583833262}
 --- !u!1 &2005416546365081835
 GameObject:
   m_ObjectHideFlags: 0
