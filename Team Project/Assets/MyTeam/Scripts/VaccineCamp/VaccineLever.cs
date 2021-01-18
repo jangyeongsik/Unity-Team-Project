@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempleLever : MonoBehaviour
+public class VaccineLever : MonoBehaviour
 {
     public string leverName;
     public string description;
@@ -10,7 +10,7 @@ public class TempleLever : MonoBehaviour
 
     private void Start()
     {
-        UIEventToGame.Instance.ActivateTemplePortal += ActiavateTemplePortal;
+        UIEventToGame.Instance.ActivateVaccineCampPortal += ActiavateVaccineCampPortal;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,8 +20,15 @@ public class TempleLever : MonoBehaviour
             GameEventToUI.Instance.OnLeverPopup(true, leverName, description);
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameEventToUI.Instance.OnLeverPopup(false, leverName, description);
+        }
+    }
 
-    private void ActiavateTemplePortal(bool isOn)
+    private void ActiavateVaccineCampPortal(bool isOn)
     {
         templePortal.SetActive(isOn);
     }

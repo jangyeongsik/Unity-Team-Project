@@ -8,11 +8,13 @@ public class SdInteractioniBtn : MonoBehaviour
 
     public void OpenTheSecretDungeonInfo()
     {
+        UIEventToGame.Instance.OnActivateTemplePortal(true);
         secretDungeonWindow.SetActive(true);
     }
 
     public void CloseTheSecretDungeonInfo()
     {
+        UIEventToGame.Instance.OnActivateTemplePortal(false);
         secretDungeonWindow.SetActive(false);
     }
 }
