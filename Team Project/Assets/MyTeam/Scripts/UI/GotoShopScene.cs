@@ -63,7 +63,15 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.joystick_on += joystickon;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
-        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+        if (GameData.Instance.player.tutorial == false)
+        {
+            SceneMgr.Instance.LoadScene("MAP000", "FromMap000 ToMap000"); 
+        }
+        else
+        {
+            SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+
+        }
         //SceneMgr.Instance.LoadScene("MAP006", "FromMap006 ToMap005");
         //SceneMgr.Instance.LoadScene("MAP025", "FromMap025 ToMap006");
         GameData.Instance.player.SetGravity(0.9f); 

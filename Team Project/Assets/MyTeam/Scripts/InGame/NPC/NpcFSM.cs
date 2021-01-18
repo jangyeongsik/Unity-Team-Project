@@ -41,6 +41,7 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            gameObject.transform.LookAt(other.gameObject.transform);
             GameEventToUI.Instance.OnEventTalkBtn(true);
             trigger = true;
         }
@@ -50,6 +51,7 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            gameObject.transform.LookAt(other.gameObject.transform);
             GameEventToUI.Instance.OnEventTalkBtn(false);
             trigger = false;
         }
