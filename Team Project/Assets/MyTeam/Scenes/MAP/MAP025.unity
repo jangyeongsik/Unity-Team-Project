@@ -17092,7 +17092,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5885d124a64dae3439efeada71f15202, type: 3}
       propertyPath: m_Name
-      value: Transport01_f
+      value: FirePillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5885d124a64dae3439efeada71f15202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5885d124a64dae3439efeada71f15202, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17158,6 +17162,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 759266136}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &759266138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 5885d124a64dae3439efeada71f15202,
+    type: 3}
+  m_PrefabInstance: {fileID: 759266136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &759266139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759266138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uBD88\uC758 \uAE30\uB465"
+  description: "\uD06C\uB9AC\uC2A4\uD0C8 \uAE30\uB465 \uC0AC\uC774\uC5D0 \uBD89\uC740
+    \uAE30\uB465\uC774 \uC19F\uC544\uC788\uB2E4. \uB9CC\uC838\uBCF8\uB2E4."
+  templePortal: {fileID: 1481365109}
+  sM: {fileID: 1195214090}
+--- !u!65 &759266140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759266138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &759389410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35373,6 +35413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromMap025 ToMap026
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
       value: -63.663406
@@ -42847,6 +42891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromMap025 ToMap027
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.837845
@@ -46632,7 +46680,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: a7169bf15dad86745a3685e735032a4d, type: 3}
       propertyPath: m_Name
-      value: Plant06_g
+      value: RedFlower
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a7169bf15dad86745a3685e735032a4d, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -46702,6 +46750,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1920956882}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1920956884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: a7169bf15dad86745a3685e735032a4d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1920956882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1920956885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920956884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uBD89\uC740 \uAF43"
+  description: "\uB178\uB797\uAC8C \uD53C\uC5B4\uB09C \uAF43 \uC0AC\uC774\uC5D0 \uC720\uC77C\uD558\uAC8C
+    \uD53C\uC5B4\uB09C \uBD89\uC740\uC0C9 \uAF43. \uAEBE\uC5B4\uBCF8\uB2E4."
+  templePortal: {fileID: 1775417555}
+  sM: {fileID: 1195214090}
+--- !u!65 &1920956886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920956884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34807563, y: 0.42504126, z: 0.8256422}
+  m_Center: {x: 0.000007674098, y: 0.037218936, z: 0.37009448}
 --- !u!1001 &1928536095
 PrefabInstance:
   m_ObjectHideFlags: 0

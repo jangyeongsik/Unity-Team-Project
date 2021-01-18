@@ -7,29 +7,45 @@ public class VaccineLever : MonoBehaviour
     public string leverName;
     public string description;
     public GameObject templePortal;
-
+    public StageManager sM;
+    bool isUsed;
     private void Start()
     {
-        UIEventToGame.Instance.ActivateVaccineCampPortal += ActiavateVaccineCampPortal;
+        
+        isUsed = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (sM.isClear && !isUsed)
         {
-            GameEventToUI.Instance.OnLeverPopup(true, leverName, description);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                UIEventToGame.Instance.ActivateVaccineCampPortal += ActiavateVaccineCampPortal;
+                GameEventToUI.Instance.OnLeverPopup(true, leverName, description);
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (sM.isClear && !isUsed)
         {
-            GameEventToUI.Instance.OnLeverPopup(false, leverName, description);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GameEventToUI.Instance.OnLeverPopup(false, leverName, description);
+                UIEventToGame.Instance.ActivateVaccineCampPortal -= ActiavateVaccineCampPortal;
+            }
         }
     }
 
     private void ActiavateVaccineCampPortal(bool isOn)
     {
+        isUsed = true;
         templePortal.SetActive(isOn);
+        templePortal.GetComponent<TeleportMaster>().isPossibleMove = true;
+    }
+    private void OnDestroy()
+    {
+        UIEventToGame.Instance.ActivateVaccineCampPortal -= ActiavateVaccineCampPortal;
     }
 }

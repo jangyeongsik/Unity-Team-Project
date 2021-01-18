@@ -15588,7 +15588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: b1839bfd20a5bc8489dce911eea5e774, type: 3}
       propertyPath: m_Name
-      value: Coffin03_a
+      value: LeverCoffin
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b1839bfd20a5bc8489dce911eea5e774, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15654,6 +15654,31 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 976129970}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &976129972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: b1839bfd20a5bc8489dce911eea5e774,
+    type: 3}
+  m_PrefabInstance: {fileID: 976129970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &976129973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976129972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uC11D\uAD00"
+  description: "\uACE0\uB3C5\uD558\uAC8C \uB193\uC5EC\uC788\uB294 \uC655\uC758 \uC11D\uAD00.
+    \uC5B4\uB290 \uC655\uAD6D\uC758 \uC655\uC77C\uAE4C. \uC774\uC2A4\uD130\uC758
+    \uB9D0 \uCC98\uB7FC \uC815\uB9D0 \uC800 \uC11D\uAD00\uB3C4 \uC7A5\uC2DD\uC6A9\uC77C\uAE4C?
+    \uC655\uC758 \uC11D\uAD00\uC744 \uC0B4\uBA70\uC2DC \uC5F4\uC5B4\uBCF8\uB2E4."
+  templePortal: {fileID: 2140185156}
+  sM: {fileID: 1904402436}
 --- !u!1001 &977665277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16199,7 +16224,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100030, guid: ec1163a093cf21e4fa9bf591622212f1, type: 3}
       propertyPath: m_Name
-      value: Bookcase05
+      value: LeverBookShelf
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: ec1163a093cf21e4fa9bf591622212f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16265,6 +16290,44 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1026839178}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1026839180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100030, guid: ec1163a093cf21e4fa9bf591622212f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1026839178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1026839181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026839180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uCC45\uC7A5"
+  description: "\uBA3C\uC9C0\uB85C \uB4A4\uB36E\uC778 \uCC45\uC7A5\uC774\uB2E4. \uC0B4\uD3B4\uBCF4\uB2C8
+    \uC77D\uAE30 \uC5B4\uB824\uC6B4 \uAE00\uC790\uB85C \uB418\uC5B4\uC788\uB2E4.
+    \uADF8 \uB9CE\uC740 \uCC45\uB4E4 \uC911 \uC791\uC131\uC790 \uC774\uC2A4\uD130,
+    \uADF8 \uCC45\uC744 \uC9D1\uC5B4\uB4E0\uB2E4."
+  templePortal: {fileID: 1800409220}
+  sM: {fileID: 1904402436}
+--- !u!65 &1026839182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026839180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.66, y: 2.12, z: 1}
+  m_Center: {x: 0, y: 1.01, z: 0.03}
 --- !u!1001 &1034102583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29402,6 +29465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromMap015 ToMap009
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
       value: -146.95903
@@ -35878,6 +35945,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
       value: FromMap015 ToMap010
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x

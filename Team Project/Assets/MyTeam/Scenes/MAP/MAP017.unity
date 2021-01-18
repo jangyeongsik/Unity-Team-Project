@@ -14233,6 +14233,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromMap017 ToMap019
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.85652
@@ -14300,7 +14304,7 @@ MonoBehaviour:
   Disable: {fileID: 0}
   Active: {fileID: 0}
   mesh: {fileID: 0}
-  NextPortalName: FromMap019 ToMap017
+  NextPortalName: LeverPot
   NextSceneName: MAP019
   isPossibleMove: 0
   checkBossClear: 0
@@ -15489,7 +15493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
       propertyPath: m_Name
-      value: Table05
+      value: LeverPotion
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15547,6 +15551,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.7040001
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
+      propertyPath: m_Size.x
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46dcca6ff06c1af43bda987dbca5db77, type: 3}
 --- !u!4 &950642323 stripped
@@ -15555,6 +15575,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 950642322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &950642324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 46dcca6ff06c1af43bda987dbca5db77,
+    type: 3}
+  m_PrefabInstance: {fileID: 950642322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &950642325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950642324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uD3EC\uC158"
+  description: "\uB204\uAC00\uBD10\uB3C4 \uC218\uC0C1\uD574 \uBCF4\uC774\uB294 \uD3EC\uC158\uC774\uB2E4.
+    \uBA39\uC5B4\uBCFC\uAE4C?"
+  templePortal: {fileID: 1848229609}
+  sM: {fileID: 1566101929}
 --- !u!1001 &950879550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16440,6 +16483,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
       value: FromMap017 ToMap018
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18760,7 +18807,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100020, guid: eb5c4e940f477bf4f822b4c6f4b74e9b, type: 3}
       propertyPath: m_Name
-      value: Table03
+      value: FoodTable
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: eb5c4e940f477bf4f822b4c6f4b74e9b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18826,6 +18873,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1092633995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1092633997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100020, guid: eb5c4e940f477bf4f822b4c6f4b74e9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1092633995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1092633998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092633997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1092633999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092633997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uD14C\uC774\uBE14"
+  description: "\uC9C4\uC218\uC131\uCC2C\uC774 \uCC28\uB824\uC9C4 \uC218\uC0C1\uD55C
+    \uD14C\uC774\uBE14\uC774\uB2E4. \uC74C\uC2DD\uC744 \uC9D1\uC5B4\uBCF8\uB2E4."
+  templePortal: {fileID: 998823899}
+  sM: {fileID: 1566101929}
 --- !u!1001 &1094065360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32837,6 +32920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromMap017 ToMap020
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
       value: 142.35382
@@ -33632,7 +33719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
       propertyPath: m_Name
-      value: Pot02_b
+      value: LeverPot
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33690,6 +33777,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 6.9956007
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
+      propertyPath: m_Size.y
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
+      propertyPath: m_Size.x
+      value: 0.29
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c65f86b242d9c74c92255bd73353d58, type: 3}
 --- !u!4 &1889223811 stripped
@@ -33698,6 +33797,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1889223810}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1889223812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 2c65f86b242d9c74c92255bd73353d58,
+    type: 3}
+  m_PrefabInstance: {fileID: 1889223810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1889223813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889223812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uC220\uB3C5"
+  description: "\uB2EC\uCF64\uD55C \uC220\uB0C4\uC0C8\uAC00 \uB098\uB294 \uC220\uD56D\uC544\uB9AC\uB2E4.
+    \uC220\uBCD1\uC744 \uC9D1\uC5B4\uB4E0\uB2E4."
+  templePortal: {fileID: 874680772}
+  sM: {fileID: 1566101929}
 --- !u!1001 &1893148784
 PrefabInstance:
   m_ObjectHideFlags: 0
