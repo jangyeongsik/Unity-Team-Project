@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
         GameData.Instance.player.aniList.Clear();
         for (int i = clips.Length-1; i >= 0; --i)
         {
-            if(clips[i].name.Contains("Base"))
+            if(clips[i].name.Contains("Skill"))
             {
                 GameData.Instance.player.orgList.Add(clips[i]);
                 GameData.Instance.player.aniList.Add(clips[i]);
