@@ -82,6 +82,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> TPOpearteOnOff;
     public event System.Action<bool> TPCanvasOnOff;
     public event System.Action<bool, string, string> leverOnOff;
+    public event System.Action<bool, bool, string> templeOnOff;
     public event System.Action<bool> talkButOnOff;
     public event System.Action talkOnOff;
 
@@ -213,5 +214,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
         leverOnOff(isOn, name, description);
     }
     #endregion
-
+    #region 신전 충돌시 팝업창 출현
+    public void OnTemplePopup(bool isOn, bool isActivated = false, string name = " ")
+    {
+        templeOnOff(isOn, isActivated, name);
+    }
+    #endregion
 }

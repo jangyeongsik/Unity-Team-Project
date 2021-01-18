@@ -15,9 +15,6 @@ public class TempleText : MonoBehaviour
 
     private void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
-
-        text.text = "신전";
         text2.text = "에 공물을 바칠까요?";
 
         text.color = Color.red;

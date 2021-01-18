@@ -61,7 +61,9 @@ public class UIEventToGame : Singleton<UIEventToGame>
     //텔레포터 작동 안함 메시지 보냄
     public event System.Action<bool> CancelActivate;
     public event System.Action<int> SwordChangeEvent;
+    public event System.Action<bool> ActivateVaccineCampPortal;
     public event System.Action<bool> ActivateTemplePortal;
+    public event System.Action<bool> ActivateTemple;
 
     public event System.Action JoystickSetting;
     public void OnTPActivate(bool isOn)
@@ -76,9 +78,17 @@ public class UIEventToGame : Singleton<UIEventToGame>
     {
         SwordChangeEvent(index);
     }
+    public void OnActivateVaccineCampPortal(bool isOn)
+    {
+        ActivateVaccineCampPortal(isOn);
+    }
     public void OnActivateTemplePortal(bool isOn)
     {
         ActivateTemplePortal(isOn);
+    }
+    public void OnActivateTemple(bool isActivated)
+    {
+        ActivateTemple(isActivated);
     }
 
     public void OnUiEventJoystickSetting()

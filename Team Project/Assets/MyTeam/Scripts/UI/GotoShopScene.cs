@@ -23,6 +23,7 @@ public class GotoShopScene : MonoBehaviour
     public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
     public GameObject LeverCanvas;
+    public Temple TempleCanvas;
 
     public GameObject ItemInfoScreen;
     public GameObject EquipInfoScreen;
@@ -57,21 +58,30 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
         GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
+        GameEventToUI.Instance.templeOnOff += OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff += TalkOff;
         GameEventToUI.Instance.Event_TalkBox += TalkBox;
-        
+
         GameEventToUI.Instance.joystick_on += joystickon;
         //SceneManager.LoadScene("MAP001", LoadSceneMode.Additive);
         //SceneMgr.Instance.LoadScene("MAP001", "MAP001");
-        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+        if (GameData.Instance.player.tutorial == false)
+        {
+            SceneMgr.Instance.LoadScene("MAP000", "FromMap000 ToMap000");
+        }
+        else
+        {
+            SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+
+        }
         //SceneMgr.Instance.LoadScene("MAP006", "FromMap006 ToMap005");
         //SceneMgr.Instance.LoadScene("MAP025", "FromMap025 ToMap006");
-        GameData.Instance.player.SetGravity(0.9f); 
+        GameData.Instance.player.SetGravity(0.9f);
     }
 
     private void Start()
     {
-        
+
         CanvasList.Add(shopCanvas);
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);
@@ -128,7 +138,7 @@ public class GotoShopScene : MonoBehaviour
                 GameEventToUI.Instance.Onnpc_talk_print();
             }
         }
-        
+
     }
 
     public void MinMapOpen()
@@ -159,7 +169,7 @@ public class GotoShopScene : MonoBehaviour
     }
     public int Talk_Find_index(int id)
     {
-        for(int i = 0; i < GameData.Instance.data.Count;i++)
+        for (int i = 0; i < GameData.Instance.data.Count; i++)
         {
             if (GameData.Instance.data[i].id == id) return i;
         }
@@ -336,6 +346,22 @@ public class GotoShopScene : MonoBehaviour
         LeverCanvas.SetActive(isOn);
         LeverCanvas.transform.GetChild(3).GetComponent<TMP_Text>().text = name;
         LeverCanvas.transform.GetChild(4).GetComponent<TMP_Text>().text = description;
+    }
+    public void OnOffTemplePopup(bool isOn, bool isActivated, string name)
+    {
+        TempleCanvas.gameObject.SetActive(isOn);
+        if (!isActivated)
+        {
+            TempleCanvas.TempleSelectUI.SetActive(isOn);
+            TempleCanvas.PrayUI.SetActive(!isOn);
+            TempleCanvas.TempleSelectUINameText.text = name;
+        }
+        else
+        {
+            TempleCanvas.TempleSelectUI.SetActive(!isOn);
+            TempleCanvas.PrayUI.SetActive(isOn);
+            TempleCanvas.PrayUINameText.text = name;
+        }
     }
 
     public void joystickon()
