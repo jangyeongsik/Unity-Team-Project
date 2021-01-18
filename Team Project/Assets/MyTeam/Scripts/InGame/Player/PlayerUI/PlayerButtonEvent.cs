@@ -32,6 +32,10 @@ public class PlayerButtonEvent : MonoBehaviour
     }
     private void Update()
     {
+        Vector3 rot = playerimg.rotation.eulerAngles;
+        rot = Vector3.zero;
+        rot.z = -transform.rotation.eulerAngles.y;
+        playerimg.rotation = Quaternion.Euler(rot);
         if (miniMapOnOff)
         {
             //빈칸...
