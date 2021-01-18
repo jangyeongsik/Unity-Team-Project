@@ -85,7 +85,7 @@ public class TutoMon_Short : MonoBehaviour
     //가만히 있다가 거리되면 지 자리에서 공격함. 
     private void KingMove()
     {
-        AttackNotice.SetActive(skull.counterjudgement);
+        //AttackNotice.SetActive(skull.counterjudgement);
         if (skull.DistacneWithTarget() < 2.5f)
         {
             skull.animator.SetBool("IsAttack", true);

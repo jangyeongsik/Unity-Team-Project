@@ -42,7 +42,6 @@ public class StageManager : MonoBehaviour
 
         AudioClip clip;
         SoundManager.Instance.D_BGMS.TryGetValue(stageKind.ToString(),out clip);
-        Debug.Log(clip.name);
         if(SoundManager.Instance.BGM_Audio.clip != clip)
         {
             SoundManager.Instance.BGM_Audio.clip = clip;
