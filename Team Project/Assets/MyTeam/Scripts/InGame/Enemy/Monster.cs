@@ -48,8 +48,6 @@ public class Monster : character
 
     public void OnPlayerHit()
     {
-       // if(gameObject.CompareTag("TutoMons") && monsterState == State.MonsterState.M_Idle)
-       //     GameEventToUI.Instance.OnPlayerHit(transform, damage);
          if (monsterState == State.MonsterState.M_Attack)
             GameEventToUI.Instance.OnPlayerHit(transform, damage);
     }
