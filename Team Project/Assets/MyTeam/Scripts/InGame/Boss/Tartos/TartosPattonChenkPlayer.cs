@@ -16,13 +16,19 @@ public class TartosPattonChenkPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cols = Physics.OverlapBox(gameObject.transform.position, gameObject.transform.position);
-        for (int i = 0; i < cols.Length; i++)
-        {
-            if (cols[i].gameObject.tag == "Player")
-            {
-                tartos.PlayerHit();
+
+            cols = Physics.OverlapBox(gameObject.transform.position, gameObject.transform.position);
+            for (int i = 0; i < cols.Length; i++)
+            {                
+                /*if (cols[i].CompareTag("Player"))
+                {
+                    tartos.PlayerHit();
+                    isCheck = true;
+                    break;
+                }*/
             }
-        }
+             
     }
+
+
 }
