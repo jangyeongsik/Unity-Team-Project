@@ -8,11 +8,7 @@ public class TrackCamera : MonoBehaviour
     private float cameraMovingDelay = 5.0f;
     void Start()
     {
-       if(GameObject.FindObjectsOfType<Monster>().Length == 0)
-       {
-           transform.parent.gameObject.SetActive(false);
-            Debug.Log("aa");
-       }
+
     }
 
     // Update is called once per frame
