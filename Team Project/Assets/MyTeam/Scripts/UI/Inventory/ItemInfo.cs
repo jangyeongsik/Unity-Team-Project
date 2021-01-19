@@ -15,8 +15,9 @@ public class ItemInfo : MonoBehaviour
     public Transform infoUI;
     public TMP_Text TName;
     public TMP_Text TCategory;
-    public TMP_Text TDescription;
+    public TMP_Text TStat;
     public TMP_Text TGrade;
+    public TMP_Text TDescription;
     public int InvenTabNum;
 
     public void SetSlotNum(int num)
@@ -38,6 +39,152 @@ public class ItemInfo : MonoBehaviour
         if (InvenTabNum != Inventory.Instance.InvenTabNum)
         {
             InvenTabNum = Inventory.Instance.InvenTabNum;
+        }
+    }
+    public void SetEquipmentDescription(StringBuilder sb, int itemID)
+    {
+        sb.Clear();
+        switch (itemID)
+        {
+            case 1000:
+                sb.Append("평범한 갑옷이다.");
+                break;
+            case 1001:
+                sb.Append("평범한 신발이다.");
+                break;
+            case 1002:
+                sb.Append("평범한 투구다.");
+                break;
+            case 1003:
+                sb.Append("평범한 장갑이다.");
+                break;
+            case 1004:
+                sb.Append("평범한 대검이다.");
+                break;
+            case 1005:
+                sb.Append("실력있는 대장장이가 만든 갑옷이다. 튼튼하진 않은거 같은데..?");
+                break;
+            case 1006:
+                sb.Append("실력있는 대장장이가 만든 신발이다. 치명적인 매력이 있다.");
+                break;
+            case 1007:
+                sb.Append("실력있는 대장장이가 만든 투구다. 치명적인 아픔이 있다.");
+                break;
+            case 1008:
+                sb.Append("실력있는 대장장이가 만든 장갑이다. 좀 더 강하게 때릴 수 있다.");
+                break;
+            case 1009:
+                sb.Append("실력있는 대장장이가 만든 대검이다. 강 하 다!");
+                break;
+            case 1010:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1011:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1012:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1013:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1014:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1015:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1016:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1017:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1018:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1019:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1020:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1021:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1022:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1023:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1024:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+        }
+    }
+    public void SetIngredientDescription(StringBuilder sb, int itemID)
+    {
+        sb.Clear();
+        switch (itemID)
+        {
+            case 101:
+                sb.Append("평범한 장비를 만들수 있는 코드다.");
+                break;
+            case 102:
+                sb.Append("평범한 장비를 만들수 있는 코드다.");
+                break;
+            case 103:
+                sb.Append("잘 맹근 장비를 만들수 있는 코드다.");
+                break;
+            case 104:
+                sb.Append("잘 맹근 장비를 만들수 있는 코드다.");
+                break;
+            case 105:
+                sb.Append("크리퍼 갑옷을 만들수 있는 특수코드이다.");
+                break;
+            case 106:
+                sb.Append("바이럿 갑옷을 만들수 있는 특수코드이다.");
+                break;
+            case 107:
+                sb.Append("트로이잔 갑옷을 만들수 있는 특수코드이다.");
+                break;
+            case 108:
+                sb.Append("크리퍼 신발을 만들수 있는 특수코드이다.");
+                break;
+            case 109:
+                sb.Append("바이럿 신발을 만들수 있는 특수코드이다.");
+                break;
+            case 110:
+                sb.Append("트로이잔 신발을 만들수 있는 특수코드이다.");
+                break;
+            case 111:
+                sb.Append("크리퍼 투구를 만들수 있는 특수코드이다.");
+                break;
+            case 112:
+                sb.Append("바이럿 투구를 만들수 있는 특수코드이다.");
+                break;
+            case 113:
+                sb.Append("트로이잔 투구를 만들수 있는 특수코드이다.");
+                break;
+            case 114:
+                sb.Append("크리퍼 장갑을 만들수 있는 특수코드이다.");
+                break;
+            case 115:
+                sb.Append("바이럿 장갑을 만들수 있는 특수코드이다.");
+                break;
+            case 116:
+                sb.Append("트로이잔 장갑을 만들수 있는 특수코드이다.");
+                break;
+            case 117:
+                sb.Append("크리퍼 대검을 만들수 있는 특수코드이다.");
+                break;
+            case 118:
+                sb.Append("바이럿 대검을 만들수 있는 특수코드이다.");
+                break;
+            case 119:
+                sb.Append("트로이잔 대검을 만들수 있는 특수코드이다.");
+                break;
         }
     }
     public void ShowItemInfo()
@@ -67,7 +214,7 @@ public class ItemInfo : MonoBehaviour
                     sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                     sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                     sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                    TDescription.text = sb.ToString();
+                    TStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append("등급 : ");
                     switch (e.itemGrade)
@@ -83,6 +230,8 @@ public class ItemInfo : MonoBehaviour
                             break;
                     }
                     TGrade.text = sb.ToString();
+                    SetEquipmentDescription(sb, e.ID);
+                    TDescription.text = sb.ToString();
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
                 }
@@ -109,10 +258,12 @@ public class ItemInfo : MonoBehaviour
                     {
                         sb.AppendFormat("백신 야영지에서 구할 수 있습니다.");
                     }
-                    TDescription.text = sb.ToString();
+                    TStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append(" ");
                     TGrade.text = sb.ToString();
+                    SetIngredientDescription(sb, e.ID);
+                    TDescription.text = sb.ToString();
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
               }
@@ -132,7 +283,7 @@ public class ItemInfo : MonoBehaviour
                     image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                     sb.Clear();
                     sb.Append("사냥으로 구할 수 있습니다.");
-                    TDescription.text = sb.ToString();
+                    TStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append(" ");
                     TGrade.text = sb.ToString();

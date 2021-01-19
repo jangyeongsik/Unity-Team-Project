@@ -46,6 +46,9 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     [Header("BGM")]
     public Sound[] BGMS;
+
+    [Header("제작 사운드")]
+    public Sound[] ForgeSounds;
     #endregion
 
     #region"사운드 딕셔너리들"
@@ -59,6 +62,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     public Dictionary<string, AudioClip> D_ViperSound = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_WolfSound = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_BGMS = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> D_ForgeSounds = new Dictionary<string, AudioClip>();
     #endregion
 
     private void Start()
@@ -165,5 +169,14 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         {
             D_BGMS.Add(BGMS[i].name, BGMS[i].clip);
         }
+
+        for (int i = 0; i < ForgeSounds.Length; i++)
+        {
+            D_ForgeSounds.Add(ForgeSounds[i].name, ForgeSounds[i].clip);
+        }
+    }
+    public void PlayForgeSound(string name)
+    {
+        Effect_Audio.PlayOneShot(D_ForgeSounds[name]);
     }
 }
