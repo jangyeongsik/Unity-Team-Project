@@ -13,28 +13,28 @@ public class PlayerDataList
 public class PlayerData
 {
 
-    public int id;                        //아이디 값
-    public int hp;                        //채력
-    public float movespeed;                 //움직임 속도 
-    public float criticalpercent;           //크리티컬 확률
-    public float criticaldamage;            //크리티컬 대미지
-    public int damage;                    //공격력
-    public float attackspeed;               //공격속도
-    public float defence;                   //방어
-    public int cylinderCounter;           //실린더 개수
-    public int keyCounter;                //키 개수
-    public int cylinderPercent;           //실린더 게이지 저장
-    public int stamina;                   //스태미너
-    public float counter_judgement;         //카운터 판결
-    public string p_name;                    //이름
-    public bool tutorial;                  //튜토리얼 대사 출력 여부
-    public int presetID;                  //뭔지 모르겠음
-    public bool bossClear;                 //중간보스 클리어여부
-    public int[] skillIdx;                  //현재 선택한 스킬
-    public string SaveSceneName;             //체크포인트 씬
-    public string SavePortalName;            //저장한 씬으로 갈 포탈이름
-    public bool[] Talk_Box;                  //대화 시스템 관리
-
+    public int id;                              //아이디 값
+    public int hp;                              //채력
+    public float movespeed;                     //움직임 속도 
+    public float criticalpercent;               //크리티컬 확률
+    public float criticaldamage;                //크리티컬 대미지
+    public int damage;                          //공격력
+    public float attackspeed;                   //공격속도
+    public float defence;                       //방어
+    public int cylinderCounter;                 //실린더 개수
+    public int keyCounter;                      //키 개수
+    public int cylinderPercent;                 //실린더 게이지 저장
+    public int stamina;                         //스태미너
+    public float counter_judgement;             //카운터 판결
+    public string p_name;                       //이름
+    public bool tutorial;                       //튜토리얼 대사 출력 여부
+    public int presetID;                        //뭔지 모르겠음
+    public bool bossClear;                      //중간보스 클리어여부
+    public int[] skillIdx;                      //현재 선택한 스킬
+    public string SaveSceneName;                //체크포인트 씬
+    public string SavePortalName;               //저장한 씬으로 갈 포탈이름
+    public bool[] Talk_Box;                     //대화 시스템 관리
+    public List<StageData> stageData;                 //스테이지 데이터
 
     public PlayerData(int slot)
     {
@@ -66,6 +66,14 @@ public class PlayerData
         player.SaveSceneName = SaveSceneName;
         player.SavePortalName = SavePortalName;
         player.Talk_Box = Talk_Box;
+        player.stageData = stageData;
+        for(int i = 0; i < stageData.Count; ++i)
+        {
+            if(!player.D_stageData.ContainsKey(stageData[i].key))
+            {
+                player.D_stageData.Add(stageData[i].key, stageData[i].value);
+            }
+        }
 
         return player;
     }
@@ -95,6 +103,7 @@ public class PlayerData
         SaveSceneName = "MAP001";
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
+        stageData = new List<StageData>();
 
         return this;
     }
@@ -123,6 +132,7 @@ public class PlayerData
         SaveSceneName = "MAP001";
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
+        stageData = new List<StageData>();
 
         return this;
     }
@@ -151,6 +161,7 @@ public class PlayerData
         SaveSceneName = player.SaveSceneName;
         SavePortalName = player.SavePortalName;
         Talk_Box = player.Talk_Box;
+        stageData = player.stageData;
 
     }
 }
@@ -159,27 +170,28 @@ public class PlayerData
 public class Player
 {
     //저장할 데이터 변수들
-    public int id;                          //아이디 값
-    public int hp;                          //채력
-    public float movespeed;                 //움직임 속도 
-    public float criticalpercent;           //크리티컬 확률
-    public float criticaldamage;            //크리티컬 대미지
-    public int damage;                      //공격력
-    public float attackspeed;               //공격속도
-    public float defence;                   //방어
-    public int cylinderCounter;             //실린더 개수
-    public int keyCounter;                  //키 개수
-    public int cylinderPercent;             //실린더 게이지 저장
-    public int stamina;                     //스태미너
-    public float counter_judgement;         //카운터 판결
-    public string p_name;                   //이름
-    public bool tutorial;                   //튜토리얼 대사 출력 여부
-    public int presetID;                    //뭔지 모르겠음
-    public bool bossClear;                  //중간보스 클리어여부
-    public int[] skillIdx;                  //현재 선택한 스킬
-    public string SaveSceneName;            //체크포인트 씬
-    public string SavePortalName;           //저장한 씬으로 갈 포탈이름
-    public bool[] Talk_Box;                 //대화 시스템 관리
+    public int id;                              //아이디 값
+    public int hp;                              //채력
+    public float movespeed;                     //움직임 속도 
+    public float criticalpercent;               //크리티컬 확률
+    public float criticaldamage;                //크리티컬 대미지
+    public int damage;                          //공격력
+    public float attackspeed;                   //공격속도
+    public float defence;                       //방어
+    public int cylinderCounter;                 //실린더 개수
+    public int keyCounter;                      //키 개수
+    public int cylinderPercent;                 //실린더 게이지 저장
+    public int stamina;                         //스태미너
+    public float counter_judgement;             //카운터 판결
+    public string p_name;                       //이름
+    public bool tutorial;                       //튜토리얼 대사 출력 여부
+    public int presetID;                        //뭔지 모르겠음
+    public bool bossClear;                      //중간보스 클리어여부
+    public int[] skillIdx;                      //현재 선택한 스킬
+    public string SaveSceneName;                //체크포인트 씬
+    public string SavePortalName;               //저장한 씬으로 갈 포탈이름
+    public bool[] Talk_Box;                     //대화 시스템 관리
+    public List<StageData> stageData;
 
     //저장 안할 변수들
     public Transform position;              //위치       
@@ -197,6 +209,7 @@ public class Player
     public bool isSceneMove = false;
     public float currentHp;
     public string curSceneName;
+    public Dictionary<string, bool> D_stageData = new Dictionary<string, bool>();
 
     public void SetGravity(float gr)
     {
@@ -213,5 +226,18 @@ public class Player
         yield return new WaitForSeconds(0.2f);
         controller.enabled = true;
         gravity = 1.5f;
+    }
+}
+
+[Serializable]
+public class StageData
+{
+    public string key;
+    public bool value;
+    
+    public StageData(string st, bool b)
+    {
+        key = st;
+        value = b;
     }
 }

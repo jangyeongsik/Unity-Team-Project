@@ -48,9 +48,13 @@ public class SkillGauge : MonoBehaviour
     float followDistX = 42f;
     float followDistY = 27f;
 
-    public float gWid = 10;
-    public float bWid = 20;
-    public float rWid = 30;
+
+    float MingWid = 10;
+    float MinbWid = 20;
+    float MinrWid = 30;
+    float MaxgWid = 15;
+    float MaxbWid = 25;
+    float MaxrWid = 35;
 
     private void Start()
     {
@@ -59,17 +63,7 @@ public class SkillGauge : MonoBehaviour
         redZone = new ColorZone(Red);
 
         endPos = GetComponent<RectTransform>().sizeDelta.x;
-
-        Green.sizeDelta = new Vector2(gWid, 20);
-        Yellow.sizeDelta = new Vector2(bWid, 20);
-        Red.sizeDelta = new Vector2(rWid, 20);
-
-
-        Yellow.localPosition = new Vector3(Green.localPosition.x - Green.sizeDelta.x, Green.localPosition.y, Green.localPosition.z);
-        Red.localPosition = new Vector3(Yellow.localPosition.x - Yellow.sizeDelta.x, Yellow.localPosition.y, Yellow.localPosition.z);
     }
-
-    
 
     private void FollowPlayer(Vector2 pos)
     {
@@ -78,10 +72,30 @@ public class SkillGauge : MonoBehaviour
         transform.position = pos;
     }
 
+    Vector2 gSizedelta = new Vector3();
+    Vector2 bSizedelta = new Vector3();
+    Vector2 rSizedelta = new Vector3();
     private void OnEnable()
     {
         Ticktok.localPosition = Vector3.zero;
         zone = COLORZONE.NONE;
+
+        //카운터 크기 설정
+        gSizedelta.Set(MingWid, 20);
+        gSizedelta.x = Mathf.Clamp(gSizedelta.x + (((MaxgWid - MingWid) / 10) * GameData.Instance.player.counter_judgement), MingWid, MaxgWid);
+        bSizedelta.Set(MinbWid, 20);
+        bSizedelta.x = Mathf.Clamp(bSizedelta.x + (((MaxbWid - MinbWid) / 10) * GameData.Instance.player.counter_judgement), MinbWid, MaxbWid);
+        rSizedelta.Set(MinrWid, 20);
+        rSizedelta.x = Mathf.Clamp(rSizedelta.x + (((MaxrWid - MinrWid) / 10) * GameData.Instance.player.counter_judgement), MinrWid, MaxrWid);
+
+        //판정박스 크기
+        Green.sizeDelta = gSizedelta;
+        Yellow.sizeDelta = bSizedelta;
+        Red.sizeDelta = rSizedelta;
+
+        //위치들 설정
+        Yellow.localPosition = new Vector3(Green.localPosition.x - Green.sizeDelta.x, Green.localPosition.y, Green.localPosition.z);
+        Red.localPosition = new Vector3(Yellow.localPosition.x - Yellow.sizeDelta.x, Yellow.localPosition.y, Yellow.localPosition.z);
     }
 
     private void Update()
