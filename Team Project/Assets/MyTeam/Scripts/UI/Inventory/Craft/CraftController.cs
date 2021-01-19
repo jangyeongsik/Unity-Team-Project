@@ -10,6 +10,8 @@ public class CraftController : MonoBehaviour
     public GameObject ingredientInfoScreen;
     public GameObject equipmentInfoScreen;
     public GameObject specialIngScreen;
+    public GameObject forgeButton;
+    public GameObject forgeBar;
     IngredientInfoScreen ingInfo;
     EquipmentInfoScreen eqInfo;
     SpecialIngScreen spIng;
@@ -371,7 +373,10 @@ public class CraftController : MonoBehaviour
     {
         int itemID = eqInfo.itemID;
         string btnName = eqInfo.btnName;
-
+        forgeButton.SetActive(false);
+        forgeBar.SetActive(true);
+        StartCoroutine(ForgeCoroutine());
+        StartCoroutine(ForgeSoundCoroutine());
         if (btnName.Contains("명작장비"))
         {
             CutIngredientCount(currentUniqueIngID, currentUniqueIngCount);
@@ -428,6 +433,25 @@ public class CraftController : MonoBehaviour
         }
         pEquip = DataManager.Instance.EquipInvenData.CurrentEquipmentList;
         Inventory.Instance.pInven = DataManager.Instance.AllInvenData;
+    }
+    IEnumerator ForgeCoroutine()
+    {
+        do
+        {
+            forgeBar.GetComponent<Slider>().value += 0.01f;
+            yield return new WaitForSecondsRealtime(0.01f);
+        } while (forgeBar.GetComponent<Slider>().value < forgeBar.GetComponent<Slider>().maxValue);
+        forgeBar.GetComponent<Slider>().value = 0f;
+        forgeBar.SetActive(false);
+        forgeButton.SetActive(true);
+    }
+    IEnumerator ForgeSoundCoroutine()
+    {
+        SoundManager.Instance.PlayForgeSound("Hammer1");
+        yield return new WaitForSecondsRealtime(1f);
+        SoundManager.Instance.PlayForgeSound("Hammer2");
+        yield return new WaitForSecondsRealtime(1f);
+        SoundManager.Instance.PlayForgeSound("Hammer3");
     }
     #endregion
     #region 특수 재료 선택 창

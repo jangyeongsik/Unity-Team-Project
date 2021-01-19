@@ -20,13 +20,96 @@ public class EquipItem : MonoBehaviour
     public Transform infoUI;
     public TMP_Text TName;
     public TMP_Text TCategory;
-    public TMP_Text TDescription;
+    public TMP_Text TStat;
     public TMP_Text TGrade;
+    public TMP_Text TDescription;
     private void Start()
     {
         RefreshAllImages();
     }
 
+    public void SetEquipmentDescription(StringBuilder sb, int itemID)
+    {
+        sb.Clear();
+        switch (itemID)
+        {
+            case 1000:
+                sb.Append("평범한 갑옷이다.");
+                break;
+            case 1001:
+                sb.Append("평범한 신발이다.");
+                break;
+            case 1002:
+                sb.Append("평범한 투구다.");
+                break;
+            case 1003:
+                sb.Append("평범한 장갑이다.");
+                break;
+            case 1004:
+                sb.Append("평범한 대검이다.");
+                break;
+            case 1005:
+                sb.Append("실력있는 대장장이가 만든 갑옷이다. 튼튼하진 않은거 같은데..?");
+                break;
+            case 1006:
+                sb.Append("실력있는 대장장이가 만든 신발이다. 치명적인 매력이 있다.");
+                break;
+            case 1007:
+                sb.Append("실력있는 대장장이가 만든 투구다. 치명적인 아픔이 있다.");
+                break;
+            case 1008:
+                sb.Append("실력있는 대장장이가 만든 장갑이다. 좀 더 강하게 때릴 수 있다.");
+                break;
+            case 1009:
+                sb.Append("실력있는 대장장이가 만든 대검이다. 강 하 다!");
+                break;
+            case 1010:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1011:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1012:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1013:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1014:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1015:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1016:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1017:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1018:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1019:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1020:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1021:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+            case 1022:
+                sb.Append("I'M THE CREEPER. CATCH ME IF YOU CAN!");
+                break;
+            case 1023:
+                sb.Append("DON'T TREAT ME. IT'S USELESS.");
+                break;
+            case 1024:
+                sb.Append("I'M PERFECT. YOU WANT ME, RIGHT?");
+                break;
+        }
+    }
     public void Equip(Equipment _item)
     {
         int i = 0;
@@ -127,7 +210,7 @@ public class EquipItem : MonoBehaviour
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                TDescription.text = sb.ToString();
+                TStat.text = sb.ToString();
                 sb.Clear();
                 sb.Append("등급 : ");
                 switch (e.itemGrade)
@@ -143,6 +226,8 @@ public class EquipItem : MonoBehaviour
                         break;
                 }
                 TGrade.text = sb.ToString();
+                SetEquipmentDescription(sb, e.ID);
+                TDescription.text = sb.ToString();
                 break;
             case "Armor":
                 if (FindItem(EQUIPMENTTYPE.ARMOR) == null)
@@ -162,7 +247,7 @@ public class EquipItem : MonoBehaviour
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                TDescription.text = sb.ToString();
+                TStat.text = sb.ToString();
                 sb.Clear();
                 sb.Append("등급 : ");
                 switch (e.itemGrade)
@@ -178,6 +263,8 @@ public class EquipItem : MonoBehaviour
                         break;
                 }
                 TGrade.text = sb.ToString();
+                SetEquipmentDescription(sb, e.ID);
+                TDescription.text = sb.ToString();
                 break;
             case "Weapon":
                 if (FindItem(EQUIPMENTTYPE.WEAPON) == null)
@@ -197,7 +284,7 @@ public class EquipItem : MonoBehaviour
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                TDescription.text = sb.ToString();
+                TStat.text = sb.ToString();
                 sb.Clear();
                 sb.Append("등급 : ");
                 switch (e.itemGrade)
@@ -213,6 +300,8 @@ public class EquipItem : MonoBehaviour
                         break;
                 }
                 TGrade.text = sb.ToString();
+                SetEquipmentDescription(sb, e.ID);
+                TDescription.text = sb.ToString();
                 break;
             case "Glove":
                 if (FindItem(EQUIPMENTTYPE.GLOVE) == null)
@@ -232,7 +321,7 @@ public class EquipItem : MonoBehaviour
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                TDescription.text = sb.ToString();
+                TStat.text = sb.ToString();
                 sb.Clear();
                 sb.Append("등급 : ");
                 switch (e.itemGrade)
@@ -248,6 +337,8 @@ public class EquipItem : MonoBehaviour
                         break;
                 }
                 TGrade.text = sb.ToString();
+                SetEquipmentDescription(sb, e.ID);
+                TDescription.text = sb.ToString();
                 break;
             case "Boots":
                 if (FindItem(EQUIPMENTTYPE.BOOTS) == null)
@@ -267,7 +358,7 @@ public class EquipItem : MonoBehaviour
                 sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                 sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                TDescription.text = sb.ToString();
+                TStat.text = sb.ToString();
                 sb.Clear();
                 sb.Append("등급 : ");
                 switch (e.itemGrade)
@@ -283,6 +374,8 @@ public class EquipItem : MonoBehaviour
                         break;
                 }
                 TGrade.text = sb.ToString();
+                SetEquipmentDescription(sb, e.ID);
+                TDescription.text = sb.ToString();
                 break;
         }
     }
