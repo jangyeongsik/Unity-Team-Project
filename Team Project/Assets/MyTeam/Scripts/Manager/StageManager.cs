@@ -14,32 +14,51 @@ public class StageManager : MonoBehaviour
     public bool isClear = false;
     public bool isRegen = true;
 
-    static Dictionary<string, bool> NoneRegenMap = new Dictionary<string, bool>();
 
     Monster[] enemys;
 
     TeleportMaster[] portals;
 
-    private void Start()
+    private void Awake()
     {
-        
-            if (enemys == null)
-                enemys = GameObject.FindObjectsOfType<Monster>();
-            if (portals == null)
-                portals = GameObject.FindObjectsOfType<TeleportMaster>();
+        if (enemys == null)
+            enemys = GameObject.FindObjectsOfType<Monster>();
+        if (portals == null)
+            portals = GameObject.FindObjectsOfType<TeleportMaster>();
 
-            if (NoneRegenMap.TryGetValue(GameData.Instance.player.curSceneName, out bool value) && isRegen == false)
+        //리젠 불가능한 스테이지 일때 플레이어 데이터에 스테이지정보가 없으면 추가한다
+        if (!isRegen)
+        {
+            bool val = true;
+            for (int i = 0; i < GameData.Instance.player.stageData.Count; ++i)
             {
-                if (value)
+                if (GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
                 {
-                    for (int i = 0; i < enemys.Length; ++i)
-                    {
-                        enemys[i].gameObject.SetActive(false);
-                    }
+                    val = false;
+                    break;
                 }
             }
-        
+            if (val)
+            {
+                StageData st = new StageData(GameData.Instance.player.curSceneName, false);
+                GameData.Instance.player.stageData.Add(st);
+                GameData.Instance.player.D_stageData.Add(st.key, st.value);
+            }
+        }
 
+        //이전에 클리어한 데이터가 있다면 바로 에너미를 꺼버린다
+        if (GameData.Instance.player.D_stageData.TryGetValue(GameData.Instance.player.curSceneName, out bool value) && !isRegen)
+        {
+            if (value)
+            {
+                for (int i = 0; i < enemys.Length; ++i)
+                    enemys[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void Start()
+    {
         AudioClip clip;
         SoundManager.Instance.D_BGMS.TryGetValue(stageKind.ToString(),out clip);
         if(SoundManager.Instance.BGM_Audio.clip != clip)
@@ -51,14 +70,26 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
+        //맵 클리어 이전일때
         if (isClear == false)
         {
+            //맵에 몬스터가 남아있지않다면
             if (GameObject.FindObjectOfType<Monster>() == null)
             {
                 isClear = true;
+                //리젠을 하지않는 맵이라면
                 if (!isRegen)
                 {
-                    NoneRegenMap.Add(GameData.Instance.player.curSceneName, !isRegen);
+                    //저장하기위한 값변경
+                    for(int i =0; i < GameData.Instance.player.stageData.Count; ++i)
+                    {
+                        if(GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
+                        {
+                            GameData.Instance.player.stageData[i].value = true;
+                        }
+                    }
+                    //인게임중 확인할 값변경
+                    GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName] = true;
                 }
             }
         }
