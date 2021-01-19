@@ -71,7 +71,8 @@ public class EnemyWolf : MonoBehaviour
     }
     private void Update()
     {
-        if(!dead)
+        Debug.Log(monster.counterjudgement);
+        if (!dead)
         {
             if(count >= 5)
             {
@@ -116,6 +117,7 @@ public class EnemyWolf : MonoBehaviour
             attackTime = 0;
             monster.counterjudgement = false;
         }
+        
     }
 
     private void GotDamage()

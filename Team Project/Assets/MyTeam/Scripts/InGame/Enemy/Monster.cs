@@ -78,6 +78,7 @@ public class Monster : character
 
     public void TurnOffCautionPoint()
     {
+        Debug.Log("a");
         counterjudgement = false;
     }
 
