@@ -38,19 +38,15 @@ public class BatFSM : MonoBehaviour
         bat.animator = GetComponent<Animator>();
         bat.rigid = GetComponent<Rigidbody>();
         bat.movespeed = 8.0f;
-        bat.attack_aware_distance = 2.0f;
+        bat.attack_aware_distance = 4.0f;
         bat.damage = attack;
     }
 
     private void BatsSetting()
     {
-        if (gameObject.name == "EnemyBat")
+        if (gameObject.CompareTag("EnemyBat"))
         {
             EnemyBatsSet(1);
-        }
-        else
-        {
-            EnemyBatsSet(2);
         }
     }
 
@@ -97,6 +93,7 @@ public class BatFSM : MonoBehaviour
                 case State.MonsterState.M_Return:
                     break;
                 case State.MonsterState.M_Damage:
+                    GetDamage();
                     break;
             }
         }
@@ -106,6 +103,11 @@ public class BatFSM : MonoBehaviour
             attackTime = 0;
             bat.counterjudgement = false;
         }
+    }
+
+    private void GetDamage()
+    {
+        
     }
 
     private void Attack()

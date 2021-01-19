@@ -44,11 +44,11 @@ public class ViperFSM : MonoBehaviour
 
     private void VipersSetting()
     {
-        if (gameObject.name == "EnemyViper")
+        if (gameObject.CompareTag("EnemyViper"))
         {
             EnemyVipersSet(1);
         }
-        else
+        else if(gameObject.CompareTag("EnemyViperRed"))
         {
             EnemyVipersSet(2);
         }
@@ -96,6 +96,7 @@ public class ViperFSM : MonoBehaviour
                 case State.MonsterState.M_Return:
                     break;
                 case State.MonsterState.M_Damage:
+                    GetDamage();
                     break;
             }
         }
@@ -107,10 +108,10 @@ public class ViperFSM : MonoBehaviour
         }
     }
 
-    //private KeyValuePair<bool, Transform> Player_AttackViperEvent()
-    //{
-    //    return new KeyValuePair<bool, Transform>(viper.counterjudgement, transform);
-    //}
+    private void GetDamage()
+    {
+        
+    }
 
     private void Attack()
     {
