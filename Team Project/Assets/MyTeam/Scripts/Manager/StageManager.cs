@@ -53,6 +53,7 @@ public class StageManager : MonoBehaviour
             {
                 for (int i = 0; i < enemys.Length; ++i)
                     enemys[i].gameObject.SetActive(false);
+                isClear = true;
             }
         }
     }
@@ -66,6 +67,7 @@ public class StageManager : MonoBehaviour
             SoundManager.Instance.BGM_Audio.clip = clip;
             SoundManager.Instance.BGM_Audio.Play();
         }
+
     }
 
     private void Update()
@@ -77,6 +79,14 @@ public class StageManager : MonoBehaviour
             if (GameObject.FindObjectOfType<Monster>() == null)
             {
                 isClear = true;
+
+                //백신 클리어하면 아이템추가
+                if(stageKind == STAGEKIND.Chapter1_Normal && !isRegen)
+                {
+                    string str = GameData.Instance.player.curSceneName;
+                    string id = str.Substring(3);
+                    GameEventToUI.Instance.OnItemDropInfo(true, int.Parse(id));
+                }
                 //리젠을 하지않는 맵이라면
                 if (!isRegen)
                 {

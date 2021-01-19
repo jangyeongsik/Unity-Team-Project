@@ -34,7 +34,8 @@ public class PlayerData
     public string SaveSceneName;                //체크포인트 씬
     public string SavePortalName;               //저장한 씬으로 갈 포탈이름
     public bool[] Talk_Box;                     //대화 시스템 관리
-    public List<StageData> stageData;                 //스테이지 데이터
+    public List<StageData> stageData;           //스테이지 데이터
+    public float currentHp;                       //현재 체력
 
     public PlayerData(int slot)
     {
@@ -47,6 +48,7 @@ public class PlayerData
 
         player.id = id;
         player.hp = hp;
+        player.currentHp = currentHp;
         player.movespeed = movespeed;
         player.criticalpercent = criticalpercent;
         player.criticaldamage = criticaldamage;
@@ -67,10 +69,12 @@ public class PlayerData
         player.SavePortalName = SavePortalName;
         player.Talk_Box = Talk_Box;
         player.stageData = stageData;
+        player.D_stageData.Clear();
         for(int i = 0; i < stageData.Count; ++i)
         {
             if(!player.D_stageData.ContainsKey(stageData[i].key))
             {
+                Debug.Log("왜");
                 player.D_stageData.Add(stageData[i].key, stageData[i].value);
             }
         }
@@ -84,6 +88,7 @@ public class PlayerData
 
         id = slot;
         hp = 4;
+        currentHp = 4;
         movespeed = 1;
         criticalpercent = 1;
         criticaldamage = 1;
@@ -113,6 +118,7 @@ public class PlayerData
 
         id = slot;
         hp = 4;
+        currentHp = 4;
         movespeed = 1;
         criticalpercent = 1;
         criticaldamage = 1;
@@ -142,6 +148,7 @@ public class PlayerData
 
         id = player.id;
         hp = player.hp;
+        currentHp = player.currentHp;
         movespeed = player.movespeed;
         criticalpercent = player.criticalpercent;
         criticaldamage = player.criticaldamage;
@@ -191,7 +198,8 @@ public class Player
     public string SaveSceneName;                //체크포인트 씬
     public string SavePortalName;               //저장한 씬으로 갈 포탈이름
     public bool[] Talk_Box;                     //대화 시스템 관리
-    public List<StageData> stageData;
+    public List<StageData> stageData;           //스테이지 데이터
+    public float currentHp;                     //현재 체력
 
     //저장 안할 변수들
     public Transform position;              //위치       
@@ -207,7 +215,6 @@ public class Player
     public List<AnimationClip> aniList = new List<AnimationClip>();
     public List<KeyValuePair<AnimationClip, AnimationClip>> applyList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
     public bool isSceneMove = false;
-    public float currentHp;
     public string curSceneName;
     public Dictionary<string, bool> D_stageData = new Dictionary<string, bool>();
 

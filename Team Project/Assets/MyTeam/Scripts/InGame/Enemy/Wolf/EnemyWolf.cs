@@ -71,7 +71,6 @@ public class EnemyWolf : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(monster.counterjudgement);
         if (!dead)
         {
             if(count >= 5)

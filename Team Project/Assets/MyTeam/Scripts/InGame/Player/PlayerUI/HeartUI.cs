@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class HeartUI : MonoBehaviour
 {
-    int maxHeartSize = 10;
     Image[] hearts;
     Image[] disabled;
 
@@ -31,7 +30,7 @@ public class HeartUI : MonoBehaviour
 
     private void Start()
     {
-        for (currentHeart = 0; currentHeart < GameData.Instance.player.hp; ++currentHeart)
+        for (currentHeart = 0; currentHeart < GameData.Instance.player.currentHp; ++currentHeart)
         {
             hearts[currentHeart].gameObject.SetActive(true);
             hearts[currentHeart].fillAmount = 1;
@@ -41,6 +40,7 @@ public class HeartUI : MonoBehaviour
 
         GameEventToUI.Instance.playerHP_Decrease += CutHeart;
         GameEventToUI.Instance.playerHP_Increase += AddHeart;
+        GameEventToUI.Instance.AddMaxHp += AddMaxHp;
     }
 
     private void Update()
@@ -52,6 +52,7 @@ public class HeartUI : MonoBehaviour
     {
         GameEventToUI.Instance.playerHP_Decrease -= CutHeart;
         GameEventToUI.Instance.playerHP_Increase -= AddHeart;
+        GameEventToUI.Instance.AddMaxHp -= AddMaxHp;
     }
 
     public void CutHeart(int damage)
@@ -89,7 +90,18 @@ public class HeartUI : MonoBehaviour
 
     void SetNewHeart(int idx, float amount = 1)
     {
+        disabled[idx].gameObject.SetActive(true);
         hearts[idx].gameObject.SetActive(true);
         hearts[idx].fillAmount = amount;
+    }
+
+    void AddMaxHp(int hp)
+    {
+        for(int i = 0; i < hp; ++i)
+        {
+            GameData.Instance.player.hp++;
+            SetNewHeart(GameData.Instance.player.hp - 1,0);
+            AddHeart(2, 100);
+        }
     }
 }

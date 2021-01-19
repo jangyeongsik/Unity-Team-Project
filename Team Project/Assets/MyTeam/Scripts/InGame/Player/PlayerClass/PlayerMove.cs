@@ -42,16 +42,14 @@ public class PlayerMove : MonoBehaviour
         AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
         GameData.Instance.player.orgList.Clear();
         GameData.Instance.player.aniList.Clear();
-        for (int i = clips.Length-1; i >= 0; --i)
+        for (int i = clips.Length - 1; i >= 0; --i)
         {
-            if(clips[i].name.Contains("Skill"))
+            if (clips[i].name.Contains("Skill"))
             {
                 GameData.Instance.player.orgList.Add(clips[i]);
                 GameData.Instance.player.aniList.Add(clips[i]);
             }
         }
-
-        GameData.Instance.player.currentHp = 4;
 
         //나중에 조이스틱 사용할때 주석해제
         UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
@@ -63,7 +61,7 @@ public class PlayerMove : MonoBehaviour
         //방향키 wasd이동
         Move();
         PlayerDash();
-        if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead)
+        if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead && GameData.Instance.player.curSceneName != "")
         {
             animator.SetTrigger("Dead");
             GameData.Instance.player.m_state = State.PlayerState.P_Dead;

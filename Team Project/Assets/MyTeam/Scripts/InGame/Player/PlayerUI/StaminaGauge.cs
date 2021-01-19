@@ -28,6 +28,7 @@ public class StaminaGauge : MonoBehaviour
         targetStamina = curStamina;
 
         GameEventToUI.Instance.staminaRestore += setIsRestore;
+        GameEventToUI.Instance.AddStamina += AddPlayerMaxStamina;
 
         //시작 스테미나 슬라이더 크기 설정
         Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
@@ -45,11 +46,6 @@ public class StaminaGauge : MonoBehaviour
             GameData.Instance.player.isDashPossible = true;
         else if(GameData.Instance.player.isDashPossible && curStamina < 15)
             GameData.Instance.player.isDashPossible = false;
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            AddPlayerMaxStamina(10);
-        }
 
         switch (state)
         {
@@ -82,6 +78,7 @@ public class StaminaGauge : MonoBehaviour
     private void OnDestroy()
     {
         GameEventToUI.Instance.staminaRestore -= setIsRestore;
+        GameEventToUI.Instance.AddStamina -= AddPlayerMaxStamina;
     }
 
     public bool UseStamina(float percent)

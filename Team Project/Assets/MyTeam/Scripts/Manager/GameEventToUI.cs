@@ -12,11 +12,16 @@ public class GameEventToUI : Singleton<GameEventToUI>
 {
     #region "스테미나 게이지"
     public event System.Action<STAMINAGAUGE, float> staminaRestore;
+    public event System.Action<int> AddStamina;
 
     public void OnEventStaminaRestore(STAMINAGAUGE state, float percent = 0)
     {
         if (staminaRestore != null)
             staminaRestore(state, percent);
+    }
+    public void OnAddStamina(int add)
+    {
+        AddStamina?.Invoke(add);
     }
     #endregion
 
@@ -63,6 +68,22 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "드롭아이템 멘트박스"
     public event System.Action isGet;
+    #endregion
+
+    #region "아이템 드랍"
+    public event System.Action<bool,int> ItemDropInfo;
+    public void OnItemDropInfo(bool value, int str)
+    {
+        ItemDropInfo?.Invoke(value,str);
+    }
+    #endregion
+
+    #region "플레이어 최대체력 증가"
+    public event System.Action<int> AddMaxHp;
+    public void OnAddMaxHp(int add)
+    {
+        AddMaxHp?.Invoke(add);
+    }
     #endregion
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
