@@ -43,7 +43,7 @@ public class VishopFSM : MonoBehaviour
         vishop.EnemyHitEvent -= OnDeadEvent;
     }
 
-    public void OnDeadEvent()
+    public void OnDeadEvent(int damage)
     {
         vishop.animator.SetBool("isDead", true);
         vishop.monsterState = State.MonsterState.M_Dead;

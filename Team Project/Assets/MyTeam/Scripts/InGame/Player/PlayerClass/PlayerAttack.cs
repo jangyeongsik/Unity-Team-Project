@@ -427,7 +427,7 @@ public class PlayerAttack : MonoBehaviour
             //        curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
             //        break;
             //}
-            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent();
+            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
         }
     }
 

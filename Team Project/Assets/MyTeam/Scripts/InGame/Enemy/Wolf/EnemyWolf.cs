@@ -199,9 +199,9 @@ public class EnemyWolf : MonoBehaviour
         attackTime = 0;
     }
 
-    public void AttackHit()
+    public void AttackHit(int damage)
     {
-        count++;
+        count+= damage;
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Hit");
         monster.animator.SetBool("wolfDash", false);
         monster.animator.SetBool("wolfAttack", false);

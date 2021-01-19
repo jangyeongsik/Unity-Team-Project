@@ -80,6 +80,8 @@ public class TutoMon_Short : MonoBehaviour
         {
             skull.counterjudgement = false;
         }
+
+        AttackNotice.SetActive(skull.counterjudgement);
     }
 
     //가만히 있다가 거리되면 지 자리에서 공격함. 
@@ -122,7 +124,7 @@ public class TutoMon_Short : MonoBehaviour
         transform.LookAt(target.transform);
     }
 
-    public void AttackHit()
+    public void AttackHit(int damage)
     {
         //count++;
         //skullKing.animator.SetBool("isWalk", false);

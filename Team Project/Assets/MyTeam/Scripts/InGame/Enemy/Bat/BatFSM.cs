@@ -184,11 +184,11 @@ public class BatFSM : MonoBehaviour
             transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
     }
 
-    public void AttackHit()
+    public void AttackHit(int damage)
     {
         if (!dead)
         {
-            count++;
+            count+= damage;
 
             bat.animator.SetBool("isWalk", false);
             bat.animator.SetBool("isAttack", false);

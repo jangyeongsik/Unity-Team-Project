@@ -210,9 +210,9 @@ public class EnemyWarrior : MonoBehaviour
         attackTime = 0;
     }
 
-    public void AttackHit()
+    public void AttackHit(int damage)
     {
-        count++;
+        count += damage;
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
         e_Warrior.animator.SetBool("IsRun", false);
         e_Warrior.animator.SetBool("IsAttack", false);

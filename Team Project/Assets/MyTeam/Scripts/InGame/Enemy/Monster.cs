@@ -24,7 +24,7 @@ public class Monster : character
 
     public bool counterjudgement;
 
-    public event System.Action EnemyHitEvent;
+    public event System.Action<int> EnemyHitEvent;
 
     public event System.Action EnemyDeadEvent;
 
@@ -37,9 +37,9 @@ public class Monster : character
         rigid = GetComponent<Rigidbody>();
     }
 
-    public void OnEnemyHitEvent()
+    public void OnEnemyHitEvent(int damage)
     {
-        EnemyHitEvent?.Invoke();
+        EnemyHitEvent?.Invoke(damage);
     }
     public void OnEnemyDeadEvent()
     {

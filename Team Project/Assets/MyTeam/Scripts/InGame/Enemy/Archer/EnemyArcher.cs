@@ -139,7 +139,7 @@ public class EnemyArcher : MonoBehaviour
         monster.navigation.SetDestination(target.transform.position);
         running = false;
     }
-    public void OnDeadEvent()
+    public void OnDeadEvent(int damage)
     {
         monster.animator.SetBool("isDead", true);
         monster.monsterState = State.MonsterState.M_Dead;

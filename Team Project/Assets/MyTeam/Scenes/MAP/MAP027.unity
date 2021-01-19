@@ -1691,6 +1691,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500, type: 3}
+--- !u!4 &121909749 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 5ce8fbea8cbb88f44ad0cee7bfbac500,
+    type: 3}
+  m_PrefabInstance: {fileID: 121909748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &125806588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20074,6 +20080,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2153453472707304422, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
+        type: 3}
+      propertyPath: portalName
+      value: 
+      objectReference: {fileID: 121909749}
     - target: {fileID: 2153453472707304423, guid: 54f6e66ce98ee0f4aacbc6eb5271490a,
         type: 3}
       propertyPath: m_Name
@@ -33922,7 +33933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2090032267
 Transform:
   m_ObjectHideFlags: 0

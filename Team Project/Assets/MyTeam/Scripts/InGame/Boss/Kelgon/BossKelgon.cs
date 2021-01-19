@@ -37,9 +37,9 @@ public class BossKelgon : MonoBehaviour
     }
 
 
-    void KelgonHitEvent()
+    void KelgonHitEvent(int damage)
     {
-        --hp;
+        hp-= damage;
         if(hp <= 0)
         {
             kelgon.animator.SetTrigger("Dead");

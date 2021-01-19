@@ -214,9 +214,9 @@ public class SkullKingFSM : MonoBehaviour
         attackTime = 0;
     }
 
-    public void AttackHit()
+    public void AttackHit(int damage)
     {
-        count++;
+        count+= damage;
         skullKing.animator.SetBool("isWalk", false);
         skullKing.animator.SetBool("isAttack", false);
         skullKing.animator.SetTrigger("isHit");

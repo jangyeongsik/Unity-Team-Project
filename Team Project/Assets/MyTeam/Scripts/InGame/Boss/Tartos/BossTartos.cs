@@ -67,9 +67,9 @@ public class BossTartos : MonoBehaviour
         monster.EnemyHitEvent -= TartosHitEvent;
     }
 
-    void TartosHitEvent()
+    void TartosHitEvent(int damage)
     {
-        --hp;
+        hp -= damage;
 
         if (hp <= 0)
         {

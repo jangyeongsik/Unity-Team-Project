@@ -13,7 +13,7 @@ public class PlayerSound : MonoBehaviour
     {
         //플레이어 체력회복
         GameData.Instance.player.currentHp = 1;
-        GameEventToUI.Instance.OnPlayerHp_Increase(GameData.Instance.player.hp,100);
+        GameEventToUI.Instance.OnPlayerHp_Increase(GameData.Instance.player.hp*2,100);
         //상태 초기화
         GetComponent<Animator>().Play("Idle");
         GameData.Instance.PlayerSave();
