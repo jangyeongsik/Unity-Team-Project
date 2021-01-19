@@ -106,6 +106,7 @@ public class EnemyWolf : MonoBehaviour
                 case State.MonsterState.M_Return:
                     break;
                 case State.MonsterState.M_Damage:
+                    GotDamage();
                     break;
             }
         }
@@ -115,6 +116,11 @@ public class EnemyWolf : MonoBehaviour
             attackTime = 0;
             monster.counterjudgement = false;
         }
+    }
+
+    private void GotDamage()
+    {
+        
     }
 
     private KeyValuePair<bool, Transform> Player_AttackWolfEvent()
