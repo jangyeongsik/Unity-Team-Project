@@ -82,6 +82,10 @@ public class StartScene : MonoBehaviour
 
                 //현재슬롯 번호
                 slotIdx = i;
+                DataManager.Instance.slotIdx = slotIdx;
+                DataManager.Instance.SetString();
+                DataManager.Instance.InvenLoad();
+                DataManager.Instance.EquipLoad();
 
                 //슬롯 데이터 읽기
                 GameData.Instance.LoadFromPlayerSlot(i);
