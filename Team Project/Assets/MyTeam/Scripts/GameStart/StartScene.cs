@@ -173,6 +173,9 @@ public class StartScene : MonoBehaviour
         Slots[slotIdx].GetChild(0).GetComponent<Text>().text = "비어있음";
         isSlotEmpty[slotIdx] = true;
         setPlayerStat(slotIdx);
+        DataManager.Instance.DeleteData();
+        StartCoroutine(sse.SetImageCoroutine());
+
     }
 
     //obj 팝업 액티브

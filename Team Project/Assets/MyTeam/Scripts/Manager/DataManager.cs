@@ -47,6 +47,17 @@ public class DataManager : SingletonMonobehaviour<DataManager>
                 break;
         }
     }
+
+    public void DeleteData()
+    {
+        AllInvenData.EquipmentList.Clear();
+        AllInvenData.IngredientList.Clear();
+        AllInvenData.MiscList.Clear();
+        EquipInvenData.CurrentEquipmentList.Clear();
+        InvenSave();
+        EquipSave();
+    }
+
     public void InvenLoad()
     {
         if (JsonManageAndroid.Instance.LoadJsonFile<PlayerInven>(currentInvenDataName) == null)
