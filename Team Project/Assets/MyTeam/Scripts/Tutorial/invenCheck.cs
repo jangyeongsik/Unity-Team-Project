@@ -6,7 +6,7 @@ public class invenCheck : MonoBehaviour
 {
     BoxCollider collider;
     public int talk_id;
-
+    private bool isTalk;
     bool check;
 
     void Start()
@@ -22,32 +22,27 @@ public class invenCheck : MonoBehaviour
         {
             check = true;
             collider.isTrigger = true;
-            if(GameEventToUI.Instance.talk_box != null)
-            {
-                GameEventToUI.Instance.talk_box -= Talk_id;
-            }
 
         }
 
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(!check)
-            GameEventToUI.Instance.talk_box += Talk_id;
+        if (check && !isTalk && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEvent_TalkBox(talk_id);
+            isTalk = true;
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (!check)
-            GameEventToUI.Instance.talk_box -= Talk_id;
+        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+
+            isTalk = false;
+        }
     }
 
-
-
-    public int Talk_id()
-    {
-        return talk_id;
-    }
 
 }

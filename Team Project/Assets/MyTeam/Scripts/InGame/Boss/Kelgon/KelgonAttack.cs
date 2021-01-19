@@ -11,6 +11,9 @@ public class KelgonAttack : MonoBehaviour
     public GameObject attackNotice;
     public GameObject paticle;
 
+    public GameObject paticle3;
+    public GameObject ChargeCircle3;
+
     private void Start()
     {
         bossKelgon = transform.parent.GetComponent<BossKelgon>();
@@ -174,5 +177,15 @@ public class KelgonAttack : MonoBehaviour
     public void paticleOn()
     {
         paticle.SetActive(true);
+    }
+
+    public void Paticle3_0n()
+    {
+        paticle3.transform.position = ChargeCircle3.transform.position;
+        paticle3.SetActive(true);
+    }
+    public void Paticle3_0ff()
+    {
+        paticle3.SetActive(false);
     }
 }

@@ -7,6 +7,8 @@ public class Check_Portal : MonoBehaviour
     public GameObject p_1;
     public GameObject p_2;
 
+    public int talk_id;
+    bool isTalk;
     BoxCollider collider;
 
     private void Start()
@@ -20,6 +22,24 @@ public class Check_Portal : MonoBehaviour
         {
             collider.isTrigger = true;
         }
-    }  
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isTalk&& other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            GameEventToUI.Instance.OnEvent_TalkBox(talk_id);
+            isTalk = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+
+            isTalk = false;
+        }
+    }
 
 }

@@ -19,7 +19,10 @@ public class BossEntry : MonoBehaviour
                 collider.SetActive(true);
             }
             if (tartos != null)
+            {
                 tartos.SetTarget(other.transform);
+                collider.SetActive(true);
+            }
         }
     }
 

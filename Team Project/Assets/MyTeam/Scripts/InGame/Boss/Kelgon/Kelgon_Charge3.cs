@@ -10,6 +10,7 @@ public class Kelgon_Charge3 : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if (kelgon == null)
             kelgon = animator.transform.parent.GetComponent<BossData>();
         kelgon.bossState = State.BossState.B_SkillChargeThree;
@@ -23,6 +24,7 @@ public class Kelgon_Charge3 : StateMachineBehaviour
         if (bossKelgon == null)
             bossKelgon = animator.transform.parent.GetComponent<BossKelgon>();
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "EnCounter");
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -18,6 +18,7 @@ public class BossKelgon : MonoBehaviour
     public GameObject ChargeCircle1_1;
     public GameObject ChargeCircle2;
     public GameObject ChargeCircle3;
+    public GameObject paticle3;
     public GameObject AttackNotice;
 
     private void Start()
@@ -39,7 +40,7 @@ public class BossKelgon : MonoBehaviour
 
     void KelgonHitEvent(int damage)
     {
-        hp-= damage;
+        hp -= damage;
         if(hp <= 0)
         {
             kelgon.animator.SetTrigger("Dead");
@@ -54,6 +55,8 @@ public class BossKelgon : MonoBehaviour
                 ChargeCircle3.SetActive(false);
             if(AttackNotice.activeSelf)
                 AttackNotice.SetActive(false);
+            if (paticle3.activeSelf)
+                paticle3.SetActive(false);
             GameData.Instance.player.bossClear = true;
 
         }
@@ -64,4 +67,6 @@ public class BossKelgon : MonoBehaviour
         target = T;
         kelgon.target = T;
     }
+
+    
 }
