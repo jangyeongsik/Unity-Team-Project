@@ -19,32 +19,36 @@ public class NpcFSM : MonoBehaviour
        
 
     }
-/*
-    private void NpcSetting()
-    {
-        npc.npcState = State.NpcState.N_Idle;
-        npc.animator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        switch (npc.npcState)
+    /*
+        private void NpcSetting()
         {
-            case State.NpcState.N_Idle:
-                Idle();
-                break;
+            npc.npcState = State.NpcState.N_Idle;
+            npc.animator = GetComponent<Animator>();
         }
-    }
 
-    private void Idle()
-    {
+        private void Update()
+        {
+            switch (npc.npcState)
+            {
+                case State.NpcState.N_Idle:
+                    Idle();
+                    break;
+            }
+        }
 
-    }*/
+        private void Idle()
+        {
+
+        }*/
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            gameObject.transform.LookAt(other.gameObject.transform);
+            Vector3 pos = other.gameObject.transform.position - gameObject.transform.position;
+            pos.y = 0;
+
+            gameObject.transform.LookAt(gameObject.transform.position + pos);
             GameEventToUI.Instance.OnEventTalkBtn(true);
             GameEventToUI.Instance.talk_box += return_Talk_id;
             trigger = true;
@@ -55,7 +59,7 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            gameObject.transform.LookAt(other.gameObject.transform);
+
             GameEventToUI.Instance.OnEventTalkBtn(false);
             GameEventToUI.Instance.talk_box -= return_Talk_id;
             trigger = false;
