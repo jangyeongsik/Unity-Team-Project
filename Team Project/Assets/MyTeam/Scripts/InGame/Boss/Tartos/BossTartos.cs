@@ -147,15 +147,29 @@ public class BossTartos : MonoBehaviour
     #region 패턴1 파티클
     public void PaticleOn1_1()
     {
+        tartosPattonPaticle1_3.transform.position = tartosPatton1_3.transform.position;
+        tartosPattonPaticle1_3.transform.rotation = tartosPatton1_3.transform.rotation;
         tartosPattonPaticle1_3.SetActive(true);
     }
+
     public void PaticleOn1_2()
-    {
+    {      
+        tartosPattonPaticle1_2.transform.position = tartosPatton1_2.transform.position;
+        tartosPattonPaticle1_2.transform.rotation = tartosPatton1_2.transform.rotation;
         tartosPattonPaticle1_2.SetActive(true);
+        tartosPattonPaticle1_4.transform.position = tartosPatton1_4.transform.position;
+        tartosPattonPaticle1_4.transform.rotation = tartosPatton1_4.transform.rotation;
         tartosPattonPaticle1_4.SetActive(true);
     }
     public void PaticleOn1_3()
     {
+        tartosPattonPaticle1_1.transform.position = tartosPatton1_1.transform.position;
+        tartosPattonPaticle1_3.transform.position = tartosPatton1_3.transform.position;
+        tartosPattonPaticle1_5.transform.position = tartosPatton1_5.transform.position;
+ 
+        tartosPattonPaticle1_1.transform.rotation = tartosPatton1_1.transform.rotation;
+        tartosPattonPaticle1_3.transform.rotation = tartosPatton1_3.transform.rotation;
+        tartosPattonPaticle1_5.transform.rotation = tartosPatton1_5.transform.rotation;
         tartosPattonPaticle1_1.SetActive(true);
         tartosPattonPaticle1_3.SetActive(true);
         tartosPattonPaticle1_5.SetActive(true);
