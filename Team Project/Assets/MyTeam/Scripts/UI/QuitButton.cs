@@ -8,6 +8,7 @@ public class QuitButton : MonoBehaviour
     public GotoShopScene UIManager;
     public void QuitGame()
     {
+        GameData.Instance.PlayerSave();
         Application.Quit();
     }
     public void KeepPlay()

@@ -30,13 +30,14 @@ public class HeartUI : MonoBehaviour
 
     private void Start()
     {
-        for (currentHeart = 0; currentHeart < GameData.Instance.player.currentHp; ++currentHeart)
+        for (int i = 0; i < GameData.Instance.player.hp; ++i)
         {
-            hearts[currentHeart].gameObject.SetActive(true);
-            hearts[currentHeart].fillAmount = 1;
-            disabled[currentHeart].gameObject.SetActive(true);
+            //hearts[currentHeart].gameObject.SetActive(true);
+            //hearts[currentHeart].fillAmount = 1;
+            disabled[i].gameObject.SetActive(true);
         }
-        currentHeart--;
+
+        AddHeart((int)(GameData.Instance.player.currentHp * 2), 100);
 
         GameEventToUI.Instance.playerHP_Decrease += CutHeart;
         GameEventToUI.Instance.playerHP_Increase += AddHeart;
@@ -79,10 +80,13 @@ public class HeartUI : MonoBehaviour
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
             {
+                Debug.Log("up");
                 SetNewHeart(++currentHeart, 0.5f);
             }
             else
             {
+                if (!hearts[currentHeart].gameObject.activeSelf)
+                    hearts[currentHeart].gameObject.SetActive(true);
                 hearts[currentHeart].fillAmount += 0.5f;
             }
         }
