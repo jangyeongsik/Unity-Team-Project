@@ -19,8 +19,7 @@ public class TartosPatton1 : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(transform.position, boxSize * 0.5f, tartos.position.rotation, LayerMask.GetMask("Player"));
         if(colliders.Length >= 1)
         {
-            Debug.Log("hit");
-            tartos.PlayerHit();
+            GameEventToUI.Instance.OnPlayerBossHit(tartos.position, 2, tartos.bossState);
         }
         transform.parent.gameObject.SetActive(false);
     }

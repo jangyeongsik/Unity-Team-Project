@@ -26,8 +26,6 @@ public class TestCSV : MonoBehaviour
         //테이블에 있는 데이터를 Dictionary로 변환
         Dictionary<string, TestData> dictionaryData = table.TableToDictionary<string, TestData>();
 
-        Debug.Log("SucceededLoad");
-
         System.GC.Collect();
     }
 

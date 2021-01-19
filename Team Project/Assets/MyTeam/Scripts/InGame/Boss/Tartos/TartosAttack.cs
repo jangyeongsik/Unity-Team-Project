@@ -82,8 +82,9 @@ public class TartosAttack : MonoBehaviour
     {
         
         Vector3 dir = transform.parent.position - tartos.target.position;
+        dir = transform.parent.TransformDirection(dir);
         float angle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
-        if (angle < 180 && angle > 0 && dir.magnitude < 3.5f)
+        if (dir.magnitude < 3.5f)
         {
             tartos.PlayerHit();
         }

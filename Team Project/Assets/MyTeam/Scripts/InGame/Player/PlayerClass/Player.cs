@@ -74,7 +74,6 @@ public class PlayerData
         {
             if(!player.D_stageData.ContainsKey(stageData[i].key))
             {
-                Debug.Log("왜");
                 player.D_stageData.Add(stageData[i].key, stageData[i].value);
             }
         }

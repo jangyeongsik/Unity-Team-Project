@@ -63,16 +63,15 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.talkButOnOff += Talk_Box_onOff;
         GameEventToUI.Instance.joystick_on += joystickon;
         GameEventToUI.Instance.joystick_off += joystickoff;
-        SceneMgr.Instance.LoadScene("MAP028", "FromMap028 ToMap016");
-        //if (GameData.Instance.player.tutorial == false)
-        //{
-        //    SceneMgr.Instance.LoadScene("MAP000", "FromMap000 ToMap000");
-        //}
-        //else
-        //{
-        //    SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
-        //    
-        //}
+        if (GameData.Instance.player.tutorial == false)
+        {
+            SceneMgr.Instance.LoadScene("MAP000", "FromMap000 ToMap000");
+        }
+        else
+        {
+            SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+            
+        }
         GameData.Instance.player.SetGravity(0.9f);
     }
 
@@ -91,7 +90,7 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(ItemInfoScreen);
         CanvasList.Add(EquipInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
-        //UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
+        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
 
     void Update()

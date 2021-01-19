@@ -30,7 +30,6 @@ public class ObjectPool<T> where T : PoolableObject
     {
         for (int index = 0; index < this.allocateCount; ++index)
         {
-            Debug.Log("A");
             this.objStack.Push(this.initializer());
         }
     }

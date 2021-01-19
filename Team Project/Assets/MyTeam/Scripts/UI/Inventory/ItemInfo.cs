@@ -193,7 +193,6 @@ public class ItemInfo : MonoBehaviour
         {
             infoScreen.gameObject.SetActive(true);
         }
-        Debug.Log(Application.persistentDataPath);
         switch (InvenTabNum)
         {
             //EQUIPMENT

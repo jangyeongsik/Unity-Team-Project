@@ -55,11 +55,11 @@ public class GameData : SingletonMonobehaviour<GameData>
         {
             for(int j = 0; j < data[i].talk_name.Count; j++)
             {
-                Debug.Log(data[i].talk_name[j]);
+                //Debug.Log(data[i].talk_name[j]);
             }
             for (int c = 0; c < data[i].talk.Count; c++)
             {
-                Debug.Log(data[i].talk[c]);
+                //Debug.Log(data[i].talk[c]);
             }
         }
     }
@@ -170,7 +170,6 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         if(!File.Exists(playerFilePath))
         {
-            Debug.Log("aa");
             CreateAllPlayerData();
             return;
         }

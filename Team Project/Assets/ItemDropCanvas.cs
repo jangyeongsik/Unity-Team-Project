@@ -27,7 +27,6 @@ public class ItemDropCanvas : MonoBehaviour
         {
             case 008:
                 //이미지 설정
-                Debug.Log(8);
                 image1.sprite = GameData.Instance.itemImages[46];
                 image2.sprite = GameData.Instance.itemImages[GameData.Instance.FindIngredientByID(105).itemScriptID];
 

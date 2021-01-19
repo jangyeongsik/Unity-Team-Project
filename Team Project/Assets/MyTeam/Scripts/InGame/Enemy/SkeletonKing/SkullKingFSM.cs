@@ -71,7 +71,6 @@ public class SkullKingFSM : MonoBehaviour
             {
                 if (count >= 10)
                 {
-                    Debug.Log(skullKing.monsterState);
                     skullKing.navigation.enabled = false;
                     dead = true;
                     isRunning = false;

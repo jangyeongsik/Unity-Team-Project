@@ -12,7 +12,6 @@ public class VishopArrow : PoolableObject
     }
     private void Update()
     {
-        Debug.Log(EnemyTranform.position);
         transform.Translate(Vector3.forward * 15f * Time.deltaTime);
     }
 

@@ -41,7 +41,6 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Player_Boss_Hit += PlayerBossHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
 
-        Debug.Log(Application.persistentDataPath);
 
     }
 
@@ -209,8 +208,6 @@ public class PlayerAttack : MonoBehaviour
         if (colliders.Length == 0) return null;
 
         Transform T;
-        Debug.Log(colliders[0].gameObject.tag);
-        Debug.Log(colliders[0].gameObject.name);
 
         if (colliders[0].CompareTag("VishopArrow"))
         {

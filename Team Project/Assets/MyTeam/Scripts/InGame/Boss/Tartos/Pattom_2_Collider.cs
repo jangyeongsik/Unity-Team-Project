@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Pattom_2_Collider : MonoBehaviour
 {
+    BossData bossData;
     bool isTrigger;
+
+    private void Start()
+    {
+        bossData = transform.parent.parent.parent.GetComponent<BossData>();
+    }
 
     public void PlayerHit()
     {
         if (isTrigger)
         {
-            PlayerHit();
+            GameEventToUI.Instance.OnPlayerBossHit(bossData.position, 3, bossData.bossState);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -18,7 +24,6 @@ public class Pattom_2_Collider : MonoBehaviour
 
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("이 싯팔");
             isTrigger = true;
         }
     }

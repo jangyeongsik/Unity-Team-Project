@@ -10,7 +10,6 @@ public class ClearZone : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("aa");
             GameData.Instance.player.isSceneMove = true;
             GameEventToUI.Instance.OnPlayerHp_Decrease(2);
             StartCoroutine(GameData.Instance.player.PlayerMovePosition(portalName.position));
