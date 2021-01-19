@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 using System.Linq;
 using System;
 
@@ -13,9 +14,14 @@ public class DataManager : SingletonMonobehaviour<DataManager>
     public List<Ingredient> i;
     public List<Misc> m;
     public List<Equipment> pE;
+    public int slotIdx = 0;
+    private StringBuilder sb;
+    private string currentInvenDataName;
+    private string currentEquipDataName;
 
     private void Start()
     {
+        SetString();
         ParsingInvenList();
         ParsingEquipInvenList();
         e = AllInvenData.EquipmentList;
@@ -23,20 +29,41 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         m = AllInvenData.MiscList;
         pE = EquipInvenData.CurrentEquipmentList;
     }
+    public void SetString()
+    {
+        switch (slotIdx)
+        {
+            case 0:
+                currentInvenDataName = "PlayerInvenData0";
+                currentEquipDataName = "PlayerEquipData0";
+                break;
+            case 1:
+                currentInvenDataName = "PlayerInvenData1";
+                currentEquipDataName = "PlayerEquipData1";
+                break;
+            case 2:
+                currentInvenDataName = "PlayerInvenData2";
+                currentEquipDataName = "PlayerEquipData2";
+                break;
+        }
+    }
     public void InvenLoad()
     {
-        if (JsonManageAndroid.Instance.LoadJsonFile<PlayerInven>("PlayerInvenData") == null)
+        if (JsonManageAndroid.Instance.LoadJsonFile<PlayerInven>(currentInvenDataName) == null)
         {
             CreateInvenData();
         }
         else
         {
-            AllInvenData = JsonManageAndroid.Instance.LoadJsonFile<PlayerInven>("PlayerInvenData");
+            AllInvenData = JsonManageAndroid.Instance.LoadJsonFile<PlayerInven>(currentInvenDataName);
         }
+        e = AllInvenData.EquipmentList;
+        i = AllInvenData.IngredientList;
+        m = AllInvenData.MiscList;
     }
     private void InvenSave()
     {
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
     }
     private void CreateInvenData()
     {
@@ -49,18 +76,19 @@ public class DataManager : SingletonMonobehaviour<DataManager>
     }
     public void EquipLoad()
     {
-        if (JsonManageAndroid.Instance.LoadJsonFile<PlayerEquipment>("PlayerEquipData") == null)
+        if (JsonManageAndroid.Instance.LoadJsonFile<PlayerEquipment>(currentEquipDataName) == null)
         {
             CreateEquipData();
         }
         else
         {
-            EquipInvenData = JsonManageAndroid.Instance.LoadJsonFile<PlayerEquipment>("PlayerEquipData");
+            EquipInvenData = JsonManageAndroid.Instance.LoadJsonFile<PlayerEquipment>(currentEquipDataName);
         }
+        pE = EquipInvenData.CurrentEquipmentList;
     }
     private void EquipSave()
     {
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerEquipData", EquipInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentEquipDataName, EquipInvenData);
     }
     private void CreateEquipData()
     {
@@ -136,8 +164,7 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             AllInvenData.EquipmentList.Add(_pItem);
             AddEquipmentData(_pItem, count - 1);
         }
-
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void AddIngredientData(Ingredient _pItem, int count)
@@ -147,7 +174,7 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             AllInvenData.IngredientList.Add(_pItem);
             AddIngredientData(_pItem, count - 1);
         }
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void RemoveEquipmentData(Equipment _pItem)
@@ -171,7 +198,7 @@ public class DataManager : SingletonMonobehaviour<DataManager>
                 }
             }
         }
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void RemoveIngredientData(Ingredient _pItem, int count = 1)
@@ -195,14 +222,14 @@ public class DataManager : SingletonMonobehaviour<DataManager>
                 }
             }
         }
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerInvenData", AllInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     //장비리스트
     public void AddEquipInvenData(Equipment _pItem)
     {
         EquipInvenData.CurrentEquipmentList.Add(_pItem);
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerEquipData", EquipInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentEquipDataName, EquipInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerEquipData", EquipInvenData);
     }
     public void RemoveEquipInvenData(Equipment _pItem)
@@ -214,7 +241,7 @@ public class DataManager : SingletonMonobehaviour<DataManager>
                 EquipInvenData.CurrentEquipmentList.Remove(EquipInvenData.CurrentEquipmentList[i]);
             }
         }
-        JsonManageAndroid.Instance.SaveJsonFile("PlayerEquipData", EquipInvenData);
+        JsonManageAndroid.Instance.SaveJsonFile(currentEquipDataName, EquipInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerEquipData", EquipInvenData);
     }
     public bool IsEquipmentExist(int itemID)
