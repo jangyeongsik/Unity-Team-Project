@@ -95,8 +95,6 @@ public class TutoMon_Short : MonoBehaviour
         else
         {
             skull.animator.SetBool("IsAttack", false);
-            //skullKing.counterjudgement = false;
-            //AttackNotice.SetActive(false);
         }
     }
 
@@ -126,11 +124,8 @@ public class TutoMon_Short : MonoBehaviour
 
     public void AttackHit(int damage)
     {
-        //count++;
-        //skullKing.animator.SetBool("isWalk", false);
         skull.animator.SetBool("IsAttack", false);
         skull.animator.SetTrigger("Hit");
-        //skullKing.monsterState = State.MonsterState.M_Damage;
         if (GameEventToUI.Instance.OnAttack_SuccessEvent())
         {
             GameEventToUI.Instance.OnAttactReset();

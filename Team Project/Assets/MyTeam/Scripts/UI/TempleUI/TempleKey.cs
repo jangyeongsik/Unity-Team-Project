@@ -15,6 +15,7 @@ public class TempleKey : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(keyCount);
         if (!isRunning)
         {
             isRunning = true;
