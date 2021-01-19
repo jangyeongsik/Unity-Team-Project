@@ -41,6 +41,8 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Player_Boss_Hit += PlayerBossHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
 
+        Debug.Log(Application.persistentDataPath);
+
     }
 
     private void OnDestroy()

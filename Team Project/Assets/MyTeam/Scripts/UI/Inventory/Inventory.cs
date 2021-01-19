@@ -55,55 +55,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         isVisible = InvenUI.activeSelf;
 
 
-        #region"시작 재료 추가"
-        AddIngredient(101);
-        AddIngredient(102);
-        AddIngredient(103);
-        AddIngredient(104);
-        AddIngredient(105);
-        AddIngredient(106);
-        AddIngredient(107);
-        AddIngredient(108);
-        AddIngredient(109);
-        AddIngredient(110);
-        AddIngredient(111);
-        AddIngredient(112);
-        AddIngredient(113);
-        AddIngredient(114);
-        AddIngredient(115);
-        AddIngredient(116);
-        AddIngredient(117);
-        AddIngredient(118);
-        AddIngredient(119);
-        #endregion
-
-        #region"시작 장비 추가"
-        AddEquipment(1000);
-        AddEquipment(1001);
-        AddEquipment(1002);
-        AddEquipment(1003);
-        AddEquipment(1004);
-        AddEquipment(1005);
-        AddEquipment(1006);
-        AddEquipment(1007);
-        AddEquipment(1008);
-        AddEquipment(1009);
-        AddEquipment(1010);
-        AddEquipment(1011);
-        AddEquipment(1012);
-        AddEquipment(1013);
-        AddEquipment(1014);
-        AddEquipment(1015);
-        AddEquipment(1016);
-        AddEquipment(1017);
-        AddEquipment(1018);
-        AddEquipment(1019);
-        AddEquipment(1020);
-        AddEquipment(1021);
-        AddEquipment(1022);
-        AddEquipment(1023);
-        AddEquipment(1024);
-        #endregion
     }
     private void Update()
     {

@@ -85,6 +85,7 @@ public class CraftController : MonoBehaviour
         if (ingredientInfoScreen.activeSelf) { ingredientInfoScreen.SetActive(false); }
         if (equipmentInfoScreen.activeSelf) { equipmentInfoScreen.SetActive(false); }
         if (specialIngScreen.activeSelf) { specialIngScreen.SetActive(false); }
+        SetCraftTree(10005);
     }
     public void SetCraftButtonName()
     {

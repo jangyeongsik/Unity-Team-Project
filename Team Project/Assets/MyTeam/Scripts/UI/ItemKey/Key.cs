@@ -19,11 +19,13 @@ public class Key : MonoBehaviour
     public void OnGetTempleKeys(int addition)
     {
         GameData.Instance.player.keyCounter += addition;
+        resourceText.text = GameData.Instance.player.keyCounter.ToString();
     }
 
     public void OnLoseTempleKeys(int addition)
     {
         GameData.Instance.player.keyCounter -= addition;
+        resourceText.text = GameData.Instance.player.keyCounter.ToString();
     }
 
     private void OnDestroy()

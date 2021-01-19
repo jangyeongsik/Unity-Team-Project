@@ -179,7 +179,7 @@ public class EnemyArcher : MonoBehaviour
 
     public void PlayerLookAt()
     {
-        transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+        transform.LookAt(target.transform);
     }
 
     public void SavePos()

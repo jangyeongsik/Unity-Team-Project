@@ -2757,7 +2757,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: a4aec788fb1c22346a59bc13273771da, type: 3}
       propertyPath: m_Name
-      value: Dungeon04_c
+      value: StoneDoor
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a4aec788fb1c22346a59bc13273771da, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2815,6 +2815,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8471
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: a4aec788fb1c22346a59bc13273771da, type: 3}
+      propertyPath: m_Center.y
+      value: -0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: a4aec788fb1c22346a59bc13273771da, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4aec788fb1c22346a59bc13273771da, type: 3}
 --- !u!4 &179015941 stripped
@@ -2823,6 +2831,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 179015940}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &179015942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: a4aec788fb1c22346a59bc13273771da,
+    type: 3}
+  m_PrefabInstance: {fileID: 179015940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &179015943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179015942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uC11D\uBB38"
+  description: "\uBE44\uC2B7\uD558\uAC8C \uC0DD\uAE34 \uC11D\uBB38\uC774 \uC788\uB294
+    \uBBF8\uB85C. \uD558\uC9C0\uB9CC \uC774 \uBB38\uC740 \uBB54\uAC00 \uC2E0\uBE44\uB85C\uC6CC
+    \uBCF4\uC778\uB2E4."
+  templePortal: {fileID: 634319089}
+  sM: {fileID: 370601548}
 --- !u!1001 &179319477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9051,6 +9083,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
       value: FromMap022 ToMap023
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15583,7 +15619,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 7445329c47335bd45b35373440a21d78, type: 3}
       propertyPath: m_Name
-      value: Chest04_all (2)
+      value: TreasureChest
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7445329c47335bd45b35373440a21d78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15649,6 +15685,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1059587399}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1059587401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7445329c47335bd45b35373440a21d78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1059587399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1059587402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059587401}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.6}
+  m_Center: {x: 0, y: 0.5, z: 0.1}
+--- !u!114 &1059587403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059587401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverName: "\uBCF4\uBB3C\uC0C1\uC790"
+  description: "\uC655\uC758 \uC11D\uC0C1 \uC544\uB798\uC5D0 \uC788\uB294 \uBCF4\uBB3C\uC0C1\uC790.
+    \uC5B4\uB5A4 \uBCF4\uBB3C\uC774 \uB4E4\uC5B4\uC788\uB294\uC9C0 \uD655\uC778\uD574\uBCF8\uB2E4."
+  templePortal: {fileID: 1715816625}
+  sM: {fileID: 370601548}
 --- !u!1001 &1063456525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25692,6 +25764,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_Name
       value: FromMap022 ToMap024
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 43c9cb2d40638da4d90a7303eeef2520, type: 3}
       propertyPath: m_LocalPosition.x
