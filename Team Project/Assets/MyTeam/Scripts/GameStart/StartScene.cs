@@ -13,6 +13,7 @@ public class StartScene : MonoBehaviour
     public RectTransform[] Slots;
     public bool[] isSlotEmpty;
     public RectTransform Select;
+    public StartSceneEquipment sse;
 
     int slotIdx = 0;
 
@@ -92,6 +93,8 @@ public class StartScene : MonoBehaviour
 
                 //스텟창에 텍스트 띄우기
                 setPlayerStat(i);
+
+                StartCoroutine(sse.SetImageCoroutine());
             }
         }
     }
