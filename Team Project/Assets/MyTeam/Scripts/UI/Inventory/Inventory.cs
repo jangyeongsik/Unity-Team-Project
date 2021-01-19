@@ -348,7 +348,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 return pInven.EquipmentList[i];
             }
         }
-        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
         return null;
     }
     public bool IsEquipmentExist(int itemID)
@@ -360,7 +359,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 return true;
             }
         }
-        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
         return false;
     }
     public Ingredient FindIngredient(int itemID)
@@ -372,7 +370,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 return pInven.IngredientList[i];
             }
         }
-        Debug.Log("ItemID " + itemID + " Ingredient is not in pInven.IngredientList!");
         return null;
     }
     public bool IsIngredientExist(int itemID)
@@ -384,7 +381,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 return true;
             }
         }
-        Debug.Log("ItemID " + itemID + " Equipment is not in pInven.EquipmentList!");
         return false;
     }
 }

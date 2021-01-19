@@ -23,7 +23,10 @@ public class PrayBtn : MonoBehaviour
     }
     public void Pray()
     {
+        if (count <= 0) return;
+        if (count > GameData.Instance.player.keyCounter) return;
         UIEventToGame.Instance.OnActivateTemplePortal(true);
         transform.parent.gameObject.SetActive(false);
+        GameEventToUI.Instance.OnLoseTempleKeys(count);
     }
 }

@@ -58,6 +58,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "몬스터 키 드랍"
     public event System.Action<int> keyCount;
+    public event System.Action<int> LoseTempleKeys;
     #endregion
 
     #region "드롭아이템 멘트박스"
@@ -137,7 +138,10 @@ public class GameEventToUI : Singleton<GameEventToUI>
         talkOnOff();
     }
     #endregion
-
+    public void OnLoseTempleKeys(int count)
+    {
+        LoseTempleKeys(count);
+    }
 
     public void OnEventJoystick()
     {
