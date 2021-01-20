@@ -24,6 +24,17 @@ public class ItemInfoScreen : MonoBehaviour
     public void EquipItem()
     {
         EquipUI.GetComponent<EquipItem>().Equip(Inventory.Instance.pInven.EquipmentList[slotNum]);
+        for(int i = 0; i < DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count; ++i)
+        {
+            GameData.Instance.player.damage = 1;
+            GameData.Instance.player.damage += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].damage;
+
+            GameData.Instance.player.movespeed = 1;
+            GameData.Instance.player.movespeed += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].speed;
+
+            GameData.Instance.player.counter_judgement = 1;
+            GameData.Instance.player.counter_judgement += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].counterJudgement;
+        }
         gameObject.SetActive(false);
     }
     public void MoveToInventoryScreen()

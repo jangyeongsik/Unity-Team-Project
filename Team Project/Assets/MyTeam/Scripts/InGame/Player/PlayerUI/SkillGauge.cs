@@ -81,12 +81,13 @@ public class SkillGauge : MonoBehaviour
         zone = COLORZONE.NONE;
 
         //카운터 크기 설정
+        float size = (GameData.Instance.player.counter_judgement > 10) ? 10 : GameData.Instance.player.counter_judgement;
         gSizedelta.Set(MingWid, 20);
-        gSizedelta.x = Mathf.Clamp(gSizedelta.x + (((MaxgWid - MingWid) / 10) * GameData.Instance.player.counter_judgement), MingWid, MaxgWid);
+        gSizedelta.x = Mathf.Clamp(gSizedelta.x + (((MaxgWid - MingWid) / 10) * size), MingWid, MaxgWid);
         bSizedelta.Set(MinbWid, 20);
-        bSizedelta.x = Mathf.Clamp(bSizedelta.x + (((MaxbWid - MinbWid) / 10) * GameData.Instance.player.counter_judgement), MinbWid, MaxbWid);
+        bSizedelta.x = Mathf.Clamp(bSizedelta.x + (((MaxbWid - MinbWid) / 10) * size), MinbWid, MaxbWid);
         rSizedelta.Set(MinrWid, 20);
-        rSizedelta.x = Mathf.Clamp(rSizedelta.x + (((MaxrWid - MinrWid) / 10) * GameData.Instance.player.counter_judgement), MinrWid, MaxrWid);
+        rSizedelta.x = Mathf.Clamp(rSizedelta.x + (((MaxrWid - MinrWid) / 10) * size), MinrWid, MaxrWid);
 
         //판정박스 크기
         Green.sizeDelta = gSizedelta;
