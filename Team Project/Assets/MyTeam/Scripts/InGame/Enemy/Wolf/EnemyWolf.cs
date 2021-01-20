@@ -8,7 +8,7 @@ public class EnemyWolf : MonoBehaviour
 {
     private Monster monster;
     private GameObject target;
-    public GameObject AttackNocice;             
+    public GameObject AttackNocice;
 
     bool wolfRunning = false;
     private bool targeting = false;
@@ -33,7 +33,7 @@ public class EnemyWolf : MonoBehaviour
         monster.monsterKind = State.MonsterKind.M_Wolf;
         monster.EnemyHitEvent += AttackHit;
         WolfSetting();
-        target = GameData.Instance.player.position.gameObject; 
+        target = GameData.Instance.player.position.gameObject;
     }
 
     private void OnDestroy()
@@ -47,7 +47,7 @@ public class EnemyWolf : MonoBehaviour
         {
             EnemyWolvesSet(1);
         }
-        else if(gameObject.CompareTag("EnemyWolf(Red)"))
+        else if (gameObject.CompareTag("EnemyWolf(Red)"))
         {
             EnemyWolvesSet(3);
         }
@@ -64,7 +64,7 @@ public class EnemyWolf : MonoBehaviour
         monster.animator = GetComponent<Animator>();
         monster.movespeed = 10.0f;
         monster.attack_aware_distance = 3.0f;
-       // monster.target_notice_distance = 10.0f;
+        monster.target_notice_distance = 10.0f;
         monster.navigation.enabled = true;
         monster.damage = attack;
 
@@ -73,7 +73,7 @@ public class EnemyWolf : MonoBehaviour
     {
         if (!dead)
         {
-            if(count >= 5)
+            if (count >= 5)
             {
                 monster.navigation.enabled = false;
                 dead = true;
@@ -110,18 +110,18 @@ public class EnemyWolf : MonoBehaviour
                     break;
             }
         }
-        if(monster.monsterState != State.MonsterState.M_Attack)
+        if (monster.monsterState != State.MonsterState.M_Attack)
         {
             AttackNocice.SetActive(false);
             attackTime = 0;
             monster.counterjudgement = false;
         }
-        
+
     }
 
     private void GotDamage()
     {
-        
+
     }
 
     private KeyValuePair<bool, Transform> Player_AttackWolfEvent()
@@ -131,18 +131,18 @@ public class EnemyWolf : MonoBehaviour
 
     private void Idle()
     {
-        if(targetDistance() < monster.attack_aware_distance)
+        if (targetDistance() < monster.target_notice_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfDash", true);
         }
-        else
+        else if (targetDistance() < monster.attack_aware_distance)
         {
-            //monster.monsterState = State.MonsterState.M_Attack;
-            monster.animator.SetBool("wolfDash", false);
-            //monster.animator.SetBool("wolfAttack", true);
+            monster.monsterState = State.MonsterState.M_Attack;
+            monster.animator.SetBool("wolfDash", true);
+            monster.animator.SetBool("wolfAttack", true);
         }
-        if(targeting)
+        if (targeting)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfDash", true);
@@ -160,7 +160,7 @@ public class EnemyWolf : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
-        if (targetDistance() < monster.navigation.stoppingDistance)
+        if (targetDistance() < monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Attack;
             monster.animator.SetBool("wolfAttack", true);
@@ -171,7 +171,7 @@ public class EnemyWolf : MonoBehaviour
     {
         wolfRunning = true;
         yield return new WaitForSecondsRealtime(0.3f);
-        if(!dead)
+        if (!dead)
             monster.navigation.SetDestination(target.transform.position);
 
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Move1");
@@ -208,7 +208,7 @@ public class EnemyWolf : MonoBehaviour
 
     public void AttackHit(int damage)
     {
-        count+= damage;
+        count += damage;
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Hit");
         monster.animator.SetBool("wolfDash", false);
         monster.animator.SetBool("wolfAttack", false);
