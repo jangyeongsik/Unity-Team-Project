@@ -23,26 +23,10 @@ public class SkillPreset : MonoBehaviour
     Image[] skillImages;
     Text[] skillTexts;
 
-    private void Start()
+    private void Awake()
     {
-        skills = GameData.Instance.player.skill.skillClips;
         curSkillIdx = 0;
         selectIdx = 0;
-
-        btnImages[curSkillIdx].color = selectColor;
-
-        skillImages = transform.Find("Skill Presets").GetComponentsInChildren<Image>();
-        skillImages[selectIdx].color = selectColor;
-
-        for (int i = 0; i < GameData.Instance.player.skillIdx.Length; ++i)
-        {
-            btnImages[i].sprite = skillImages[i].sprite;
-        }
-
-    }
-
-    private void OnEnable()
-    {
         if (btnText == null)
         {
             btnImages = new Image[3];
@@ -51,9 +35,28 @@ public class SkillPreset : MonoBehaviour
             foreach (Transform tr in transform.Find("Skills"))
             {
                 btnImages[i] = tr.GetComponent<Image>();
-                //btnText[i] = tr.GetChild(0).GetComponent<Text>();
                 i++;
             }
+        }
+        skillImages = transform.Find("Skill Presets").GetComponentsInChildren<Image>();
+        skillImages[selectIdx].color = selectColor;
+        btnImages[curSkillIdx].color = selectColor;
+    }
+
+    private void Start()
+    {
+        skills = GameData.Instance.player.skill.skillClips;
+        
+    }
+
+    private void OnEnable()
+    {
+        curSkillIdx = 0;
+        selectIdx = 0;
+
+        for (int i = 0; i < GameData.Instance.player.skillIdx.Length; ++i)
+        {
+            btnImages[i].sprite = skillImages[GameData.Instance.player.skillIdx[i]-1].sprite;
         }
         //for (int i = 0; i < btnText.Length; ++i)
         //{

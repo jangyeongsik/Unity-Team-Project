@@ -22,7 +22,7 @@ public class ItemDropCanvas : MonoBehaviour
     void OnItemDropInfo(bool value, int MapIdx)
     {
         gameObject.SetActive(value);
-
+        Debug.Log("aaa");
         switch (MapIdx)
         {
             case 008:

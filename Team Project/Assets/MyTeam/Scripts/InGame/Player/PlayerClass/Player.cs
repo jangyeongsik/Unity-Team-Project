@@ -231,7 +231,23 @@ public class Player
         isSceneMove = true;
         yield return new WaitForSeconds(0.2f);
         controller.enabled = true;
-        gravity = 1.5f;
+        gravity = 10f;
+    }
+
+    public void SetAniList()
+    {
+        for(int i = 0; i < skillIdx.Length; ++i)
+        {
+            aniList[i] = skill.skillClips[skillIdx[i]-1];
+        }
+
+        applyList.Clear();
+        for (int i = 0; i < orgList.Count; ++i)
+        {
+            applyList.Add(new KeyValuePair<AnimationClip, AnimationClip>(orgList[i], aniList[i]));
+        }
+        overrideController.ApplyOverrides(applyList);
+        animator.runtimeAnimatorController = overrideController;
     }
 }
 

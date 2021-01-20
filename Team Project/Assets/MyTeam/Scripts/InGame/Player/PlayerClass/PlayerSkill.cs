@@ -21,6 +21,21 @@ public class PlayerSkill : MonoBehaviour
         animator = transform.GetChild(0).GetComponent<Animator>();
 
         GameData.Instance.player.skill = this;
+
+        if (GameData.Instance.player.overrideController == null)
+            GameData.Instance.player.overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+
+        AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
+        GameData.Instance.player.orgList.Clear();
+        GameData.Instance.player.aniList.Clear();
+        for (int i = 0; i < clips.Length; ++i)
+        {
+            if (clips[i].name.Contains("Skill"))
+            {
+                GameData.Instance.player.orgList.Add(clips[i]);
+                GameData.Instance.player.aniList.Add(clips[i]);
+            }
+        }
     }
 
     public void SkillEffectActive(AnimationClip clip)

@@ -91,6 +91,9 @@ public class StartScene : MonoBehaviour
                 //슬롯 데이터 읽기
                 GameData.Instance.LoadFromPlayerSlot(i);
 
+                //스킬 적용해놓기
+                GameData.Instance.player.SetAniList();
+
                 //스텟창에 텍스트 띄우기
                 setPlayerStat(i);
 
@@ -152,6 +155,9 @@ public class StartScene : MonoBehaviour
         //GameData.Instance.CreateNewPlayerSlot(slotIdx, obj.transform.Find("InputField").GetComponent<InputField>().text);
         GameData.Instance.CreateNewPlayerSlot(slotIdx,text);
         obj.SetActive(false);
+
+        //스킬 읽어오기
+        GameData.Instance.player.SetAniList();
 
         //슬롯 텍스트 초기화 (없으면 이전에 입력했던거 유지됌@.@)
         obj.transform.Find("InputField").GetComponent<InputField>().text = "";

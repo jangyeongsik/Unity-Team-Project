@@ -444,6 +444,7 @@ public class CraftController : MonoBehaviour
         forgeBar.GetComponent<Slider>().value = 0f;
         forgeBar.SetActive(false);
         forgeButton.SetActive(true);
+        OnEquipmentInfoScreen(eqInfo.btnName, eqInfo.itemID);
     }
     IEnumerator ForgeSoundCoroutine()
     {
