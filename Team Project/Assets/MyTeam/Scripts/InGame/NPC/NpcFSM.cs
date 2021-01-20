@@ -8,6 +8,7 @@ public class NpcFSM : MonoBehaviour
     private Npc npc;
     Vector3 originPos;
     [SerializeField] int talk_id;
+    [SerializeField] int next_talk_id;
 
     private bool trigger =false;
 

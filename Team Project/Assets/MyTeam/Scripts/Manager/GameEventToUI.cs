@@ -111,6 +111,8 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> talkButOnOff;
     public event System.Action talkOnOff;
 
+    public event System.Action talkBtnEvent;
+
     public event System.Action joystick_on;
     public event System.Action joystick_off;
 
@@ -244,6 +246,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public int OnEventTalk_id()
     {
         return talk_box.Invoke();
+    }
+
+    public void OnTalkBtnEvent()
+    {
+        talkBtnEvent();
     }
 
 

@@ -21,6 +21,7 @@ public class Kelgon_Charge3 : StateMachineBehaviour
 
         circle.transform.position = kelgon.target.position;
 
+
         if (bossKelgon == null)
             bossKelgon = animator.transform.parent.GetComponent<BossKelgon>();
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "EnCounter");

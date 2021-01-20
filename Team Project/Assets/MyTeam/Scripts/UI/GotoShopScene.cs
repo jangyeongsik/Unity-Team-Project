@@ -120,8 +120,9 @@ public class GotoShopScene : MonoBehaviour
 
         GameEventToUI.Instance.OnNpc_name_print();
         GameEventToUI.Instance.Onnpc_talk_print();
-       
 
+        GameEventToUI.Instance.OnTalkBtnEvent();
+        
     }
     public void MinMapOpen()
     {

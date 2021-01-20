@@ -744,7 +744,8 @@ GameObject:
   - component: {fileID: 868587140909603693}
   - component: {fileID: 868587140919162055}
   - component: {fileID: 1055940627}
-  - component: {fileID: 1055940628}
+  - component: {fileID: 6531739935667753304}
+  - component: {fileID: 2982869323326272815}
   m_Layer: 0
   m_Name: Prond
   m_TagString: Untagged
@@ -802,7 +803,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 82.68, z: 0}
---- !u!114 &1055940628
+--- !u!114 &6531739935667753304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -811,10 +812,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 868587140909631309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1777a6448634e1468500b158dd71a0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 57c24e0528c4e974d8d94793ed6fc082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talk_id: 8010
+--- !u!114 &2982869323326272815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868587140909631309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11488602a0bb16a40b108b3ac43867e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talk_id: 4a1f00004b1f00004c1f00004d1f0000
 --- !u!1 &868587140909631311
 GameObject:
   m_ObjectHideFlags: 0

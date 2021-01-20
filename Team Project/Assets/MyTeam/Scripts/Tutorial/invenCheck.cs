@@ -8,7 +8,6 @@ public class invenCheck : MonoBehaviour
     public int talk_id;
     private bool isTalk;
     bool check;
-    bool isOn;
     void Start()
     {
         collider = GetComponent<BoxCollider>();
@@ -28,25 +27,13 @@ public class invenCheck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!isOn && !check && other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            GameEventToUI.Instance.OnEvent_TalkBox(talk_id);
-            isTalk = true;
-        }else if( check && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(!check && other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             GameEventToUI.Instance.OnEvent_TalkBox(talk_id);
             isTalk = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-
-            isTalk = false;
-        }
-    }
 
 
 }

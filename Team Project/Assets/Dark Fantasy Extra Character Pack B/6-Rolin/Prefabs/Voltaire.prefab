@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 6146116869820677799}
   - component: {fileID: 6146116869811376397}
   - component: {fileID: 1367919470}
+  - component: {fileID: 1039130062102783951}
+  - component: {fileID: 1367919471}
   m_Layer: 0
   m_Name: Voltaire
   m_TagString: Untagged
@@ -207,6 +209,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talk_id: 8018
+  next_talk_id: 0
+--- !u!136 &1039130062102783951
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146116869820899975}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 256.79
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1367919471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146116869820899975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc90360b8a6ff2443b65278388701724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6146116869820899977
 GameObject:
   m_ObjectHideFlags: 0

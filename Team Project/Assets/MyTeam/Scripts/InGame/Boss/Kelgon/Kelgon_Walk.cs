@@ -62,6 +62,7 @@ public class Kelgon_Walk : StateMachineBehaviour
                             int count = kelgon.chargeNum;
                             if (count >= 2)
                                 count = 0;
+
                             ++count;
                             kelgon.animator.SetInteger("Charge", count);
                         }
@@ -71,6 +72,7 @@ public class Kelgon_Walk : StateMachineBehaviour
                             int count = animator.GetInteger("Charge");
                             if (count >= 2)
                                 count = 0;
+
                             ++count;
                             animator.SetInteger("Charge", count);
                             kelgon.bossState = State.BossState.B_SkillChargeOne;

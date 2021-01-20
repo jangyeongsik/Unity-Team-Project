@@ -56,6 +56,7 @@ public class KelgonAttack : MonoBehaviour
                     kelgon.animator.SetInteger("Attack", 2);
                     break;
                 case State.BossState.B_SkillChargeOne:
+                    Paticle3_0ff();
                     kelgon.animator.SetInteger("Attack", 1);
                     break;
                 case State.BossState.B_SkillChargeTwo:
@@ -66,7 +67,7 @@ public class KelgonAttack : MonoBehaviour
                     break;
                 case State.BossState.B_AttackTwo:
                     {
-                        int count = kelgon.animator.GetInteger("Charge");
+                        int count = kelgon.chargeNum;
                         if (count >= 2)
                             count = 0;
                         ++count;
@@ -89,10 +90,8 @@ public class KelgonAttack : MonoBehaviour
             kelgon.animator.SetTrigger("Walk");
             kelgon.animator.SetInteger("Attack", 0);
             //몇번차지였는지 저장한다
-            if(kelgon.bossState == State.BossState.B_SkillChargeOne ||
-                kelgon.bossState == State.BossState.B_SkillChargeTwo ||
-                kelgon.bossState == State.BossState.B_SkillChargeThree)
-            kelgon.chargeNum = kelgon.animator.GetInteger("Charge");
+            if(kelgon.animator.GetInteger("Charge") != 0)
+                kelgon.chargeNum = kelgon.animator.GetInteger("Charge");
             kelgon.animator.SetInteger("Charge", 0);
             kelgon.lastAttack = kelgon.bossState;
         }
