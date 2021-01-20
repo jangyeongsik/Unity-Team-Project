@@ -7,12 +7,11 @@ public class PlayerMove : MonoBehaviour
     CharacterController controller;
     Animator animator;
 
-    [SerializeField]
     float speed = 7f;
 
-    [SerializeField]
-    float startDashSpeed = 20f;
-    float dashSpeed = 20f;
+    float minus = 0.3f;
+    float startDashSpeed = 15f;
+    float dashSpeed;
 
     float x;
     float z;
@@ -94,7 +93,7 @@ public class PlayerMove : MonoBehaviour
         //dir.y -= GameData.Instance.player.gravity;
         controller.Move(dir * dashSpeed * Time.deltaTime);
         if (dashSpeed > 0)
-            dashSpeed -= 0.5f;
+            dashSpeed -= minus;
     }
 
     void PlayerJoyMove(Vector2 direction, float amount)
@@ -120,6 +119,7 @@ public class PlayerMove : MonoBehaviour
         if (GameData.Instance.player.m_state == State.PlayerState.P_Dash ||
             !GameData.Instance.player.isDashPossible) return;
         animator.SetTrigger("Dash");
-        dashSpeed = startDashSpeed + GameData.Instance.player.movespeed * 0.5f;
+        dashSpeed = startDashSpeed + GameData.Instance.player.movespeed;
+        minus = 0.3f + GameData.Instance.player.movespeed * 0.03f;
     }
 }
