@@ -14,9 +14,14 @@ public class ItemInfoScreen : MonoBehaviour
     public GameObject EquipUI;
     public GameObject UIManager;
     private GotoShopScene goToShop;
+    EquipItemStatInfo EquipItemStatInfo;
     private void Awake()
     {
         goToShop = UIManager.GetComponent<GotoShopScene>();
+    }
+    private void Start()
+    {
+        EquipItemStatInfo = FindObjectOfType<EquipItemStatInfo>();
     }
     public void CloseTab()
     {
@@ -25,15 +30,16 @@ public class ItemInfoScreen : MonoBehaviour
     public void EquipItem()
     {
         EquipUI.GetComponent<EquipItem>().Equip(Inventory.Instance.pInven.EquipmentList[slotNum]);
-        for(int i = 0; i < DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count; ++i)
+        GameData.Instance.player.damage = 1;
+        GameData.Instance.player.movespeed = 1;
+        GameData.Instance.player.counter_judgement = 1;
+
+        for (int i = 0; i < DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count; ++i)
         {
-            GameData.Instance.player.damage = 1;
             GameData.Instance.player.damage += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].damage;
 
-            GameData.Instance.player.movespeed = 1;
             GameData.Instance.player.movespeed += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].speed;
 
-            GameData.Instance.player.counter_judgement = 1;
             GameData.Instance.player.counter_judgement += (int)DataManager.Instance.EquipInvenData.CurrentEquipmentList[i].counterJudgement;
         }
         gameObject.SetActive(false);
@@ -67,6 +73,13 @@ public class ItemInfoScreen : MonoBehaviour
                 break;
         }
         
+        GameData.Instance.player.damage -= (int)e.damage;
+
+        GameData.Instance.player.movespeed -= (int)e.speed;
+
+        GameData.Instance.player.counter_judgement -= (int)e.counterJudgement;
+
+        EquipItemStatInfo.SetText();
     }
     public void MoveToCraftScreen()
     {

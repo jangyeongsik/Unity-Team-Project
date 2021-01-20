@@ -13,6 +13,11 @@ public class EquipItemStatInfo : MonoBehaviour
 
     private void OnEnable()
     {
+        SetText();
+    }
+
+    public void SetText()
+    {
         Damage.text = GameData.Instance.player.damage.ToString();
         Judement.text = GameData.Instance.player.counter_judgement.ToString();
         Speed.text = GameData.Instance.player.movespeed.ToString();
