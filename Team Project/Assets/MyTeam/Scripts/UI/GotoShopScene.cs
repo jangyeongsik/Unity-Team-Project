@@ -27,6 +27,7 @@ public class GotoShopScene : MonoBehaviour
 
     public GameObject ItemInfoScreen;
     public GameObject EquipInfoScreen;
+    public GameObject IngredientInfoScreen;
 
     public GameObject InventoryCanvas;
     public GameObject InvenUI;
@@ -89,6 +90,7 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(SkillMenu);
         CanvasList.Add(ItemInfoScreen);
         CanvasList.Add(EquipInfoScreen);
+        CanvasList.Add(IngredientInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
         UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }

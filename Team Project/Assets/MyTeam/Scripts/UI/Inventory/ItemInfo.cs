@@ -11,13 +11,20 @@ public class ItemInfo : MonoBehaviour
     GameData data;
     private int slotNum;
     public Canvas infoScreen;
-    public Image image;
+    public Canvas ingredientInfoScreen;
+    public Image ISImage;
+    public Image IISImage;
     public Transform infoUI;
-    public TMP_Text TName;
-    public TMP_Text TCategory;
-    public TMP_Text TStat;
-    public TMP_Text TGrade;
-    public TMP_Text TDescription;
+    public TMP_Text ISName;
+    public TMP_Text ISCategory;
+    public TMP_Text ISStat;
+    public TMP_Text ISGrade;
+    public TMP_Text ISDescription;
+    public TMP_Text IISName;
+    public TMP_Text IISCategory;
+    public TMP_Text IISStat;
+    public TMP_Text IISGrade;
+    public TMP_Text IISDescription;
     public int InvenTabNum;
 
     public void SetSlotNum(int num)
@@ -41,6 +48,7 @@ public class ItemInfo : MonoBehaviour
             InvenTabNum = Inventory.Instance.InvenTabNum;
         }
     }
+    #region 아이템 설명 넣어주기
     public void SetEquipmentDescription(StringBuilder sb, int itemID)
     {
         sb.Clear();
@@ -187,33 +195,34 @@ public class ItemInfo : MonoBehaviour
                 break;
         }
     }
+    #endregion
     public void ShowItemInfo()
     {
-        if (!infoScreen.gameObject.activeSelf)
-        {
-            infoScreen.gameObject.SetActive(true);
-        }
         switch (InvenTabNum)
         {
             //EQUIPMENT
             case 0:
                 #region 장비 리스트
+                if (!infoScreen.gameObject.activeSelf)
+                {
+                    infoScreen.gameObject.SetActive(true);
+                }
                 if (slotNum < Inventory.Instance.pInven.EquipmentList.Count)
                 {
                     StringBuilder sb = new StringBuilder();
                     Equipment e = Inventory.Instance.pInven.EquipmentList[slotNum];
                     //아이템 이미지 받아와 넣기
-                    TName.text = e.name;
+                    ISName.text = e.name;
                     sb.Append("장비");
-                    TCategory.text = sb.ToString();
-                    image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
+                    ISCategory.text = sb.ToString();
+                    ISImage.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                     sb.Clear();
                     sb.AppendFormat("공격력 : {0}\n", e.damage);
                     sb.AppendFormat("속도 : {0}\n", e.speed);
                     sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
                     sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                     sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
-                    TStat.text = sb.ToString();
+                    ISStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append("등급 : ");
                     switch (e.itemGrade)
@@ -228,9 +237,9 @@ public class ItemInfo : MonoBehaviour
                             sb.Append("명작");
                             break;
                     }
-                    TGrade.text = sb.ToString();
+                    ISGrade.text = sb.ToString();
                     SetEquipmentDescription(sb, e.ID);
-                    TDescription.text = sb.ToString();
+                    ISDescription.text = sb.ToString();
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
                 }
@@ -239,15 +248,19 @@ public class ItemInfo : MonoBehaviour
             //INGREDIENT
             case 1:
                 #region 재료 리스트
-              if (slotNum < Inventory.Instance.pInven.IngredientList.Count)
-              {
+                if (!ingredientInfoScreen.gameObject.activeSelf)
+                {
+                    ingredientInfoScreen.gameObject.SetActive(true);
+                }
+                if (slotNum < Inventory.Instance.pInven.IngredientList.Count)
+                {
                     StringBuilder sb = new StringBuilder();
                     Ingredient e = Inventory.Instance.pInven.IngredientList[slotNum];
                     //아이템 이미지 받아와 넣기
-                    TName.text = e.name;
+                    IISName.text = e.name;
                     sb.Append("재료");
-                    TCategory.text = sb.ToString();
-                    image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
+                    IISCategory.text = sb.ToString();
+                    IISImage.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                     sb.Clear();
                     if (e.itemGrade != 3)
                     {
@@ -257,41 +270,41 @@ public class ItemInfo : MonoBehaviour
                     {
                         sb.AppendFormat("백신 야영지에서 구할 수 있습니다.");
                     }
-                    TStat.text = sb.ToString();
+                    IISStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append(" ");
-                    TGrade.text = sb.ToString();
+                    IISGrade.text = sb.ToString();
                     SetIngredientDescription(sb, e.ID);
-                    TDescription.text = sb.ToString();
+                    IISDescription.text = sb.ToString();
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
-              }
-              #endregion
+                }
+                #endregion
                 break;
             //MISC
             case 2:
                 #region 기타 리스트
-              if (slotNum < Inventory.Instance.pInven.MiscList.Count)
-              {
+                if (slotNum < Inventory.Instance.pInven.MiscList.Count)
+                {
                     StringBuilder sb = new StringBuilder();
                     Misc e = Inventory.Instance.pInven.MiscList[slotNum];
                     //아이템 이미지 받아와 넣기
-                    TName.text = e.name;
+                    ISName.text = e.name;
                     sb.Append("열쇠");
-                    TCategory.text = sb.ToString();
-                    image.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
+                    ISCategory.text = sb.ToString();
+                    ISImage.sprite = Inventory.Instance.slots[slotNum].transform.GetChild(0).GetComponent<Image>().sprite;
                     sb.Clear();
                     sb.Append("사냥으로 구할 수 있습니다.");
-                    TStat.text = sb.ToString();
+                    ISStat.text = sb.ToString();
                     sb.Clear();
                     sb.Append(" ");
-                    TGrade.text = sb.ToString();
+                    ISGrade.text = sb.ToString();
                     //슬롯넘버 넘기기
                     infoScreen.GetComponent<ItemInfoScreen>().slotNum = slotNum;
                 }
-              #endregion
+                #endregion
                 break;
-        } 
+        }
     }
     public void RefreshCount(bool isAdded)
     {
