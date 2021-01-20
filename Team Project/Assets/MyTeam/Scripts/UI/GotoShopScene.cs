@@ -227,6 +227,7 @@ public class GotoShopScene : MonoBehaviour
     }
     public void LogOut()
     {
+        SceneMgr.CurrentSceneName = "";
         GameData.Instance.PlayerSave();
         Inventory.Instance.Destroy();
         SceneManager.LoadScene("GameStartScene");
