@@ -43,11 +43,11 @@ public class EnemyWolf : MonoBehaviour
 
     private void WolfSetting()
     {
-        if (gameObject.name == "EnemyWolf")
+        if (gameObject.CompareTag("EnemyWolf"))
         {
             EnemyWolvesSet(1);
         }
-        else if(gameObject.name == "EnemyWolf(Red)")
+        else if(gameObject.CompareTag("EnemyWolf(Red)"))
         {
             EnemyWolvesSet(3);
         }
@@ -64,7 +64,7 @@ public class EnemyWolf : MonoBehaviour
         monster.animator = GetComponent<Animator>();
         monster.movespeed = 10.0f;
         monster.attack_aware_distance = 3.0f;
-        monster.target_notice_distance = 10.0f;
+       // monster.target_notice_distance = 10.0f;
         monster.navigation.enabled = true;
         monster.damage = attack;
 
@@ -131,16 +131,16 @@ public class EnemyWolf : MonoBehaviour
 
     private void Idle()
     {
-        if(targetDistance() < monster.target_notice_distance)
+        if(targetDistance() < monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfDash", true);
         }
-        else if(targetDistance() < monster.attack_aware_distance)
+        else
         {
-            monster.monsterState = State.MonsterState.M_Attack;
-            monster.animator.SetBool("wolfDash", true);
-            monster.animator.SetBool("wolfAttack", true);
+            //monster.monsterState = State.MonsterState.M_Attack;
+            monster.animator.SetBool("wolfDash", false);
+            //monster.animator.SetBool("wolfAttack", true);
         }
         if(targeting)
         {
@@ -160,7 +160,7 @@ public class EnemyWolf : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
-        if (targetDistance() < monster.attack_aware_distance)
+        if (targetDistance() < monster.navigation.stoppingDistance)
         {
             monster.monsterState = State.MonsterState.M_Attack;
             monster.animator.SetBool("wolfAttack", true);
