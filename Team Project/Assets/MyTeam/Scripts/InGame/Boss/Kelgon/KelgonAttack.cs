@@ -107,11 +107,12 @@ public class KelgonAttack : MonoBehaviour
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter1_Boss, "Pattern3");
     }
 
-    Vector3 boxPos = new Vector3(0, 0, 3f);
+    Vector3 boxPos = new Vector3(0, 0, -3f);
     Vector3 boxSize = new Vector3(12, 3, 8);
     void Charge2()
     {
-        Collider[] colliders = Physics.OverlapBox(transform.parent.position - transform.parent.TransformDirection(boxPos), boxSize, Quaternion.identity, LayerMask.GetMask("Player"));
+        Quaternion rot = kelgon.position.rotation;
+        Collider[] colliders = Physics.OverlapBox(transform.parent.position - transform.parent.TransformDirection(boxPos), boxSize * 0.5f, rot, LayerMask.GetMask("Player"));
         if (colliders.Length >= 1)
         {
             kelgon.PlayerHit();
