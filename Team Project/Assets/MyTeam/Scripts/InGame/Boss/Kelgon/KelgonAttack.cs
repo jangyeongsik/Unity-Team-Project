@@ -56,7 +56,6 @@ public class KelgonAttack : MonoBehaviour
                     kelgon.animator.SetInteger("Attack", 2);
                     break;
                 case State.BossState.B_SkillChargeOne:
-                    Paticle3_0ff();
                     kelgon.animator.SetInteger("Attack", 1);
                     break;
                 case State.BossState.B_SkillChargeTwo:
