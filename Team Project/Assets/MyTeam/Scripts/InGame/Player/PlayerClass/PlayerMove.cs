@@ -36,20 +36,7 @@ public class PlayerMove : MonoBehaviour
             GameData.Instance.player.controller = controller;
         if (GameData.Instance.player.animator == null)
             GameData.Instance.player.animator = animator;
-        if (GameData.Instance.player.overrideController == null)
-            GameData.Instance.player.overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-
-        AnimationClip[] clips = GameData.Instance.player.overrideController.animationClips;
-        GameData.Instance.player.orgList.Clear();
-        GameData.Instance.player.aniList.Clear();
-        for (int i = clips.Length - 1; i >= 0; --i)
-        {
-            if (clips[i].name.Contains("Skill"))
-            {
-                GameData.Instance.player.orgList.Add(clips[i]);
-                GameData.Instance.player.aniList.Add(clips[i]);
-            }
-        }
+        
 
         //나중에 조이스틱 사용할때 주석해제
         UIEventToGame.Instance.PlayerMove += PlayerJoyMove;
@@ -61,17 +48,12 @@ public class PlayerMove : MonoBehaviour
         //방향키 wasd이동
         Move();
         PlayerDash();
+        controller.Move(Vector3.down * GameData.Instance.player.gravity * Time.deltaTime);
         if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead && GameData.Instance.player.curSceneName != "")
         {
             animator.SetTrigger("Dead");
             GameData.Instance.player.m_state = State.PlayerState.P_Dead;
         }
-    }
-
-    private void Update()
-    {
-        PlayerDash();
-        Guard();
     }
 
     private void OnDestroy()
@@ -90,7 +72,7 @@ public class PlayerMove : MonoBehaviour
         z = Input.GetAxisRaw("Vertical");
 
         dir = new Vector3(x, 0, z).normalized;
-        dir.y -= GameData.Instance.player.gravity; 
+        //dir.y -= GameData.Instance.player.gravity; 
         dir.Normalize();
 
         controller.Move(dir * 40 * Time.deltaTime);
@@ -104,20 +86,11 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isInput", false);
     }
 
-    void Dash()
-    {
-        if (GameData.Instance.player.m_state != State.PlayerState.P_Dash && GameData.Instance.player.isDashPossible)
-        {
-            animator.SetTrigger("Dash");
-            dashSpeed = 20f;
-        }
-    }
-
     void PlayerDash()
     {
         if (GameData.Instance.player.m_state != State.PlayerState.P_Dash) return;
         Vector3 dir = transform.forward;
-        dir.y -= GameData.Instance.player.gravity;
+        //dir.y -= GameData.Instance.player.gravity;
         controller.Move(dir * dashSpeed * Time.deltaTime);
         if (dashSpeed > 0)
             dashSpeed -= 0.5f;
@@ -142,16 +115,9 @@ public class PlayerMove : MonoBehaviour
 
     void PlayerBtnDash(bool _isDash)
     {
-        if (GameData.Instance.player.m_state == State.PlayerState.P_Dash) return;
+        if (GameData.Instance.player.m_state == State.PlayerState.P_Dash ||
+            !GameData.Instance.player.isDashPossible) return;
         animator.SetTrigger("Dash");
         dashSpeed = 20.0f;
-    }
-
-    void Guard()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-            animator.SetBool("isGuard", true);
-        else if (Input.GetKeyUp(KeyCode.Z))
-            animator.SetBool("isGuard", false);
     }
 }

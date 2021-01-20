@@ -133,6 +133,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     {
         playerIdx = slot;
         player = playerData[slot].WriteData(player);
+        PlayerSave();
     }
 
     //플레이어 슬롯 새로만들기
@@ -146,6 +147,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void DeletePlayerData(int slot)
     {
         playerData[slot].DeleteData(slot);
+        PlayerSave(); 
     }
 
     void CreateAllPlayerData()

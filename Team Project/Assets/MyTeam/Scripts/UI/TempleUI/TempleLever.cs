@@ -22,6 +22,12 @@ public class TempleLever : MonoBehaviour
         isClear = sM.isClear;
     }
 
+    private void OnDestroy()
+    {
+        UIEventToGame.Instance.ActivateTemplePortal -= ActivateTemplePortal;
+        UIEventToGame.Instance.ActivateTemple -= ActivateTemple;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (isClear)
