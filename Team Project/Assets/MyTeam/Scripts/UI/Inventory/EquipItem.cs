@@ -184,14 +184,15 @@ public class EquipItem : MonoBehaviour
     }
     public void ShowEquipItemInfo(string val)
     {
+        StringBuilder sb = new StringBuilder();
+        Equipment e;
         if (!infoScreen.gameObject.activeSelf)
         {
             infoScreen.gameObject.SetActive(true);
         }
-        StringBuilder sb = new StringBuilder();
-        Equipment e = new Equipment();
         switch (val)
         {
+            #region 투구
             case "Helm":
                 if (FindItem(EQUIPMENTTYPE.HELM) == null)
                 {
@@ -228,7 +229,10 @@ public class EquipItem : MonoBehaviour
                 TGrade.text = sb.ToString();
                 SetEquipmentDescription(sb, e.ID);
                 TDescription.text = sb.ToString();
+                infoScreen.GetComponent<ItemInfoScreen>().e = e;
                 break;
+            #endregion
+            #region 갑옷
             case "Armor":
                 if (FindItem(EQUIPMENTTYPE.ARMOR) == null)
                 {
@@ -265,7 +269,10 @@ public class EquipItem : MonoBehaviour
                 TGrade.text = sb.ToString();
                 SetEquipmentDescription(sb, e.ID);
                 TDescription.text = sb.ToString();
+                infoScreen.GetComponent<ItemInfoScreen>().e = e;
                 break;
+            #endregion
+            #region 무기
             case "Weapon":
                 if (FindItem(EQUIPMENTTYPE.WEAPON) == null)
                 {
@@ -302,7 +309,10 @@ public class EquipItem : MonoBehaviour
                 TGrade.text = sb.ToString();
                 SetEquipmentDescription(sb, e.ID);
                 TDescription.text = sb.ToString();
+                infoScreen.GetComponent<ItemInfoScreen>().e = e;
                 break;
+            #endregion
+            #region 장갑
             case "Glove":
                 if (FindItem(EQUIPMENTTYPE.GLOVE) == null)
                 {
@@ -339,7 +349,10 @@ public class EquipItem : MonoBehaviour
                 TGrade.text = sb.ToString();
                 SetEquipmentDescription(sb, e.ID);
                 TDescription.text = sb.ToString();
+                infoScreen.GetComponent<ItemInfoScreen>().e = e;
                 break;
+            #endregion
+            #region 신발
             case "Boots":
                 if (FindItem(EQUIPMENTTYPE.BOOTS) == null)
                 {
@@ -376,7 +389,9 @@ public class EquipItem : MonoBehaviour
                 TGrade.text = sb.ToString();
                 SetEquipmentDescription(sb, e.ID);
                 TDescription.text = sb.ToString();
+                infoScreen.GetComponent<ItemInfoScreen>().e = e;
                 break;
+                #endregion
         }
     }
     public Equipment FindItem(EQUIPMENTTYPE equipType)
