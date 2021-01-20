@@ -240,17 +240,36 @@ public class CraftController : MonoBehaviour
     public void ChangeTreeByEquipItem(int eT)
     {
         Equipment e = new Equipment();
-
+        bool isFound = false;
         for (int i = 0; i < pEquip.Count; i++)
         {
             if (pEquip[i].equipmentType == (EQUIPMENTTYPE)eT)
             {
                 e = pEquip[i];
+                isFound = true;
                 break;
             }
         }
-        if (e == null)
+        if (!isFound)
         {
+            switch (eT)
+            {
+                case 1:
+                    SetCraftTree(10005);
+                    break;
+                case 2:
+                    SetCraftTree(10001);
+                    break;
+                case 3:
+                    SetCraftTree(10003);
+                    break;
+                case 4:
+                    SetCraftTree(10004);
+                    break;
+                case 5:
+                    SetCraftTree(10002);
+                    break;
+            }
             return;
         }
         SetCraftTree(e);

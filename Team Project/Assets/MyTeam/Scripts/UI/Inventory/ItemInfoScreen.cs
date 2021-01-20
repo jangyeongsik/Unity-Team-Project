@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ItemInfoScreen : MonoBehaviour
 {
+    public EquipItem eI;
     public int slotNum;
     public Image itemInfoImage;
     public Equipment e;
@@ -41,6 +42,31 @@ public class ItemInfoScreen : MonoBehaviour
     {
         goToShop.ChangeScreen(2);
         gameObject.SetActive(false);
+    }
+    public void UnEquipItem()
+    {
+        DataManager.Instance.RemoveEquipInvenData(e);
+        Inventory.Instance.AddEquipment(e.ID, 1);
+        CloseTab();
+        switch (e.equipmentType)
+        {
+            case EQUIPMENTTYPE.WEAPON:
+                eI.WeaponBtn.transform.GetChild(0).gameObject.SetActive(false);
+                break;
+            case EQUIPMENTTYPE.ARMOR:
+                eI.ArmorBtn.transform.GetChild(0).gameObject.SetActive(false);
+                break;
+            case EQUIPMENTTYPE.HELM:
+                eI.HelmBtn.transform.GetChild(0).gameObject.SetActive(false);
+                break;
+            case EQUIPMENTTYPE.GLOVE:
+                eI.GloveBtn.transform.GetChild(0).gameObject.SetActive(false);
+                break;
+            case EQUIPMENTTYPE.BOOTS:
+                eI.BootsBtn.transform.GetChild(0).gameObject.SetActive(false);
+                break;
+        }
+        
     }
     public void MoveToCraftScreen()
     {
