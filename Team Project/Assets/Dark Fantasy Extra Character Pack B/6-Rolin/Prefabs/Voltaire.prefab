@@ -150,9 +150,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6146116869820677799}
   - component: {fileID: 6146116869811376397}
-  - component: {fileID: 1367919470}
   - component: {fileID: 1039130062102783951}
   - component: {fileID: 1367919471}
+  - component: {fileID: 1367919470}
   m_Layer: 0
   m_Name: Voltaire
   m_TagString: Untagged
@@ -196,20 +196,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1367919470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6146116869820899975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1777a6448634e1468500b158dd71a0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  talk_id: 8018
-  next_talk_id: 0
 --- !u!136 &1039130062102783951
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -236,6 +222,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc90360b8a6ff2443b65278388701724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1367919470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146116869820899975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59fde5929bbb6948a68f551f9da72fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talk_id: 521f0000531f0000541f0000551f0000
+  box: {fileID: 0}
+  box2: {fileID: 0}
+  p_1: {fileID: 0}
+  p_2: {fileID: 0}
 --- !u!1 &6146116869820899977
 GameObject:
   m_ObjectHideFlags: 0

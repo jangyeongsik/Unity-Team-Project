@@ -80,7 +80,6 @@ public class HeartUI : MonoBehaviour
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
             {
-                Debug.Log("up");
                 SetNewHeart(++currentHeart, 0.5f);
             }
             else

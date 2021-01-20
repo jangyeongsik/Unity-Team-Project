@@ -1,43 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NpcRolin : MonoBehaviour
+public class NpcVoltaire : MonoBehaviour
 {
+
     Vector3 originPos;
     [SerializeField] int[] talk_id;
-    int count;
-
-    public GameObject Box;
+    public GameObject box;
+    public GameObject box2;
+    public GameObject p_1;
+    public GameObject p_2;
     private bool trigger =false;
-    private bool isChack;
-    private bool inTrue;
-    private bool isTalk;
+    private bool isCollider =false;
+    private int count;
     void Start()
     {
-       // NpcSetting();
         GameEventToUI.Instance.player_Trigger += isTrigger;
-
+       
 
     }
+
     private void Update()
     {
-        
-        if (isChack && !isTalk)
+        if(p_1.activeSelf && p_2.activeSelf)
         {
-            isTalk = true;
-            isChack = false;
+            count++;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
+            box2.SetActive(false);
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if (!inTrue && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (!isCollider&& other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            isCollider = true;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
-            inTrue = true;
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -71,12 +71,11 @@ public class NpcRolin : MonoBehaviour
     {
         return talk_id[count];
     }
-
     public void TalkChange()
     {
-        isChack = true;
         count++;
-        Box.SetActive(false);
+        box.SetActive(false);
         GameEventToUI.Instance.talkBtnEvent -= TalkChange;
     }
+
 }

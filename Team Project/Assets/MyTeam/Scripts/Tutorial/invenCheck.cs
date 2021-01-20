@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class invenCheck : MonoBehaviour
 {
-    BoxCollider collider;
     public int talk_id;
     private bool isTalk;
     bool check;
-    void Start()
-    {
-        collider = GetComponent<BoxCollider>();
-    }
 
     private void Update()
     {
@@ -20,7 +15,7 @@ public class invenCheck : MonoBehaviour
         if(DataManager.Instance.AllInvenData.EquipmentList.Count > 0 || DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count > 0)
         {
             check = true;
-            collider.isTrigger = true;
+            gameObject.SetActive(false);
 
         }
 

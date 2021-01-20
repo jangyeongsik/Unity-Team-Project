@@ -6,10 +6,11 @@ public class TutoMon_Short : MonoBehaviour
 {
     private Monster skull;
     private bool targeting = false;
-
+    int hitCount;
     private GameObject target;
     Vector3 offset;
 
+    public GameObject box;
     public GameObject AttackNotice; //그 에너미용 느낌표 
 
     float attackTime;
@@ -75,7 +76,10 @@ public class TutoMon_Short : MonoBehaviour
             default:
                 break;
         }
-        
+        if(hitCount > 3)
+        {
+            box.SetActive(false);
+        }
         if (skull.monsterState != State.MonsterState.M_Idle)
         {
             skull.counterjudgement = false;
@@ -124,6 +128,7 @@ public class TutoMon_Short : MonoBehaviour
 
     public void AttackHit(int damage)
     {
+        hitCount++;
         skull.animator.SetBool("IsAttack", false);
         skull.animator.SetTrigger("Hit");
         if (GameEventToUI.Instance.OnAttack_SuccessEvent())

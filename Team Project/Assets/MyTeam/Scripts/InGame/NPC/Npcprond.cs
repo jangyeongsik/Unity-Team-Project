@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Npcprond : MonoBehaviour
 {
-    private Npc npc;
     Vector3 originPos;
     [SerializeField] int[] talk_id;
     int count;
@@ -15,7 +14,6 @@ public class Npcprond : MonoBehaviour
 
     void Start()
     {
-        npc = GetComponent<Npc>();
        // NpcSetting();
         GameEventToUI.Instance.player_Trigger += isTrigger;
 
@@ -25,7 +23,6 @@ public class Npcprond : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(count);
 ;        if((DataManager.Instance.AllInvenData.EquipmentList.Count > 0 || DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count > 0) && !isChack)
         {
             isChack = true;
