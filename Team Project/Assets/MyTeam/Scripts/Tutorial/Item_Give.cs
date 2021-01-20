@@ -6,6 +6,11 @@ public class Item_Give : MonoBehaviour
 {
     private bool isTrue;
 
+    private void Start()
+    {
+        DataManager.Instance.DeleteData();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!isTrue && other.gameObject.layer == LayerMask.NameToLayer("Player"))

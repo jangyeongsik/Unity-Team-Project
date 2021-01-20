@@ -8,9 +8,10 @@ public class PlayerMove : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    float speed = 10f;
+    float speed = 7f;
 
     [SerializeField]
+    float startDashSpeed = 20f;
     float dashSpeed = 20f;
 
     float x;
@@ -100,9 +101,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (GameData.Instance.player.m_state != State.PlayerState.P_Run &&
             GameData.Instance.player.m_state != State.PlayerState.P_Idle) return;
+        float mSpeed = speed + GameData.Instance.player.movespeed * 0.5f;
         Vector3 dir = new Vector3(direction.x, 0f, direction.y);
         dir.Normalize();
-        controller.Move(dir * amount * speed * Time.deltaTime);
+        controller.Move(dir * amount * mSpeed * Time.deltaTime);
         transform.LookAt(transform.position + dir);
 
         if (amount > 0)
@@ -118,6 +120,6 @@ public class PlayerMove : MonoBehaviour
         if (GameData.Instance.player.m_state == State.PlayerState.P_Dash ||
             !GameData.Instance.player.isDashPossible) return;
         animator.SetTrigger("Dash");
-        dashSpeed = 20.0f;
+        dashSpeed = startDashSpeed + GameData.Instance.player.movespeed * 0.5f;
     }
 }

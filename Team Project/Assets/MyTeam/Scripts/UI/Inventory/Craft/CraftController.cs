@@ -422,6 +422,17 @@ public class CraftController : MonoBehaviour
                     DataManager.Instance.RemoveEquipInvenData(GameData.Instance.FindEquipmentByID(forgingItemID));
                     DataManager.Instance.AddEquipInvenData(GameData.Instance.FindEquipmentByID(targetItemID));
                     SetEquipItem();
+
+                    
+                    GameData.Instance.player.damage -= (int)GameData.Instance.FindEquipmentByID(forgingItemID).damage;
+                    GameData.Instance.player.damage += (int)GameData.Instance.FindEquipmentByID(targetItemID).damage;
+
+                    GameData.Instance.player.movespeed -= (int)GameData.Instance.FindEquipmentByID(forgingItemID).speed;
+                    GameData.Instance.player.movespeed += (int)GameData.Instance.FindEquipmentByID(targetItemID).speed;
+
+                    GameData.Instance.player.counter_judgement -= (int)GameData.Instance.FindEquipmentByID(forgingItemID).counterJudgement;
+                    GameData.Instance.player.counter_judgement += (int)GameData.Instance.FindEquipmentByID(targetItemID).counterJudgement;
+
                     break;
                 }
             }

@@ -80,7 +80,7 @@ public class ItemDropCanvas : MonoBehaviour
                 image2.sprite = GameData.Instance.itemImages[GameData.Instance.FindIngredientByID(115).itemScriptID];
 
                 GameEventToUI.Instance.OnAddStamina(10);
-                Inventory.Instance.AddIngredient(112);
+                Inventory.Instance.AddIngredient(115);
                 break;
             case 023:
                 image1.sprite = GameData.Instance.itemImages[GameData.Instance.FindIngredientByID(118).itemScriptID];
