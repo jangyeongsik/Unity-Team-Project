@@ -46,14 +46,16 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Vector3 pos = other.gameObject.transform.position - gameObject.transform.position;
-            pos.y = 0;
-
-            gameObject.transform.LookAt(gameObject.transform.position + pos);
             GameEventToUI.Instance.OnEventTalkBtn(true);
             GameEventToUI.Instance.talk_box += return_Talk_id;
             trigger = true;
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        Vector3 dir = other.gameObject.transform.position - this.transform.position;
+
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 15);
     }
 
     private void OnTriggerExit(Collider other)

@@ -15,6 +15,7 @@ public class NpcVoltaire : MonoBehaviour
     private bool trigger =false;
     private bool isCollider =false;
     private int count;
+    private bool isTrue;
     void Start()
     {
         GameEventToUI.Instance.player_Trigger += isTrigger;
@@ -24,8 +25,9 @@ public class NpcVoltaire : MonoBehaviour
 
     private void Update()
     {
-        if(p_1.activeSelf && p_2.activeSelf)
+        if(p_1.activeSelf && p_2.activeSelf && !isTrue)
         {
+            isTrue = true;
             count++;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
             box2.SetActive(false);
@@ -41,16 +43,18 @@ public class NpcVoltaire : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Vector3 pos = other.gameObject.transform.position - gameObject.transform.position;
-            pos.y = 0;
-
-            gameObject.transform.LookAt(gameObject.transform.position + pos);
             GameEventToUI.Instance.OnEventTalkBtn(true);
             GameEventToUI.Instance.talk_box += return_Talk_id;
             trigger = true;
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        Vector3 dir = other.gameObject.transform.position - this.transform.position;
+
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 15);
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
