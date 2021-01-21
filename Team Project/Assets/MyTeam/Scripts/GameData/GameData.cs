@@ -147,6 +147,8 @@ public class GameData : SingletonMonobehaviour<GameData>
     public void DeletePlayerData(int slot)
     {
         playerData[slot].DeleteData(slot);
+        playerData[slot].WriteData(in player);
+        player.DeletePlayer();
         PlayerSave(); 
     }
 
