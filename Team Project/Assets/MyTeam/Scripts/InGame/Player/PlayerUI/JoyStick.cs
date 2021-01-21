@@ -23,6 +23,10 @@ public class JoyStick : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragH
         UIEventToGame.Instance.JoystickSetting += Joystick_Center_Setting;
     }
 
+    private void OnDestroy()
+    {
+        UIEventToGame.Instance.JoystickSetting -= Joystick_Center_Setting;
+    }
     void Update()
     {
         UIEventToGame.Instance.OnPlayerMove(direction, amount);

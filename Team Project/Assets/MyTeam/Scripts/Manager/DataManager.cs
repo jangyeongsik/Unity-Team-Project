@@ -55,7 +55,9 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         AllInvenData.MiscList.Clear();
         EquipInvenData.CurrentEquipmentList.Clear();
         InvenSave();
+        InvenLoad();
         EquipSave();
+        EquipLoad();
     }
 
     public void InvenLoad()
@@ -173,7 +175,10 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         if (!CheakDuplicateEquipmentData(_pItem, count))
         {
             AllInvenData.EquipmentList.Add(_pItem);
-            AddEquipmentData(_pItem, count - 1);
+            if (count - 1 > 0)
+            {
+                AddEquipmentData(_pItem, count - 1);
+            }
         }
         JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
@@ -183,9 +188,14 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         if (!CheakDuplicateIngredientData(_pItem, count))
         {
             AllInvenData.IngredientList.Add(_pItem);
-            AddIngredientData(_pItem, count - 1);
+            if (count - 1 > 0)
+            {
+                AddIngredientData(_pItem, count - 1);
+            }
         }
         JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
+        InvenLoad();
+        Inventory.Instance.pInven = AllInvenData;
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void RemoveEquipmentData(Equipment _pItem)
@@ -295,7 +305,12 @@ public class DataManager : SingletonMonobehaviour<DataManager>
 
             if (temp.ID == _pInven.ID)
             {
+                Debug.Log(AllInvenData.IngredientList[i].count);
+                Debug.Log(count);
+
                 AllInvenData.IngredientList[i].count += count;
+
+                Debug.Log(AllInvenData.IngredientList[i].count);
                 return true;
             }
         }

@@ -243,6 +243,12 @@ public class GotoShopScene : MonoBehaviour
     }
     public void LogOut()
     {
+        if (!GameData.Instance.playerData[GameData.Instance.playerIdx].tutorial)
+        {
+            Debug.Log("DELETE Start");
+            DataManager.Instance.DeleteData();
+            Debug.Log("DELETE Finished");
+        }
         SceneMgr.CurrentSceneName = "";
         GameData.Instance.PlayerSave();
         Inventory.Instance.Destroy();

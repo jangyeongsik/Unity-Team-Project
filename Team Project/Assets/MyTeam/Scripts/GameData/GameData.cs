@@ -16,7 +16,7 @@ public class GameData : SingletonMonobehaviour<GameData>
     public IntSprite itemImages;
 
     private PlayerDataList playerDataList;
-    int playerIdx = 0;
+    public int playerIdx = 0;
     public List<PlayerData> playerData;
     public Player player;
     public List<NPCReader.NPCTalk> data;
@@ -51,9 +51,9 @@ public class GameData : SingletonMonobehaviour<GameData>
     }
     public void Print()
     {
-        for(int i = 0; i < data.Count; i++)
+        for (int i = 0; i < data.Count; i++)
         {
-            for(int j = 0; j < data[i].talk_name.Count; j++)
+            for (int j = 0; j < data[i].talk_name.Count; j++)
             {
                 //Debug.Log(data[i].talk_name[j]);
             }
@@ -78,7 +78,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         }
         if (i >= equipmentData.Count)
             return null;
-    
+
         Equipment p = new Equipment();
         p = equipmentData[i];
 
@@ -149,7 +149,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerData[slot].DeleteData(slot);
         playerData[slot].WriteData(in player);
         player.DeletePlayer();
-        PlayerSave(); 
+        PlayerSave();
     }
 
     void CreateAllPlayerData()
@@ -169,10 +169,9 @@ public class GameData : SingletonMonobehaviour<GameData>
         playerDataList.datas = playerData;
         JsonManageAndroid.Instance.SaveJsonFile("PlayerData", playerDataList);
     }
-
     void PlayerLoad()
     {
-        if(!File.Exists(playerFilePath))
+        if (!File.Exists(playerFilePath))
         {
             CreateAllPlayerData();
             return;

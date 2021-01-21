@@ -67,9 +67,13 @@ public class StartScene : MonoBehaviour
         }
         LoadingProgress.LoadScene("UI Scene");
         GameData.Instance.PlayerSave();
-        //Debug.Log(GameData.Instance.player.stamina);
-        //SceneManager.LoadScene("Loading");
+        if (!GameData.Instance.playerData[slotIdx].tutorial)
+        {
+            DataManager.Instance.DeleteData();
+        }
     }
+    //Debug.Log(GameData.Instance.player.stamina);
+    //SceneManager.LoadScene("Loading");}
 
     //슬롯 선택
     public void SlotSelect(GameObject obj)

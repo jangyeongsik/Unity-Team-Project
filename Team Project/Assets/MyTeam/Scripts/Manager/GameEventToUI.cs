@@ -10,6 +10,15 @@ using UnityEngine;
 
 public class GameEventToUI : Singleton<GameEventToUI>
 {
+    #region "튜토리얼 카운트 판정 카운트"
+    public System.Action TutoAttack;
+
+    public void OnEventTutoAttack()
+    {
+        TutoAttack();
+    }
+    #endregion
+
     #region "스테미나 게이지"
     public event System.Action<STAMINAGAUGE, float> staminaRestore;
     public event System.Action<int> AddStamina;
@@ -85,6 +94,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
         AddMaxHp?.Invoke(add);
     }
     #endregion
+
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 

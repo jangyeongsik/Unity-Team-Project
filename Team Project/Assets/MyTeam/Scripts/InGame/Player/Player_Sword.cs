@@ -15,6 +15,10 @@ public class Player_Sword : MonoBehaviour
         }
         OnSwordChange(1);
     }
+    private void OnDestroy()
+    {
+        UIEventToGame.Instance.SwordChangeEvent -= OnSwordChange;
+    }
     public void OnSwordChange(int index)
     {
 

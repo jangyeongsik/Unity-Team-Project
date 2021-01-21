@@ -54,7 +54,6 @@ public class NpcFSM : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Vector3 dir = other.gameObject.transform.position - this.transform.position;
-
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 7);
     }
 

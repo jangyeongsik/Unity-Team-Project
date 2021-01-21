@@ -17,6 +17,23 @@ using System;
 public class UIEventToGame : Singleton<UIEventToGame>
 {
 
+    #region"튜토리얼 퀘스트"
+    public event System.Action<string> Quest_Name;
+    public event System.Action<string> Quest_Count;
+
+    public void OnUiEventQuest_Name(string name)
+    {
+
+        Quest_Name(name);
+    }
+
+    public void OnUiEventQuest_Count(string count)
+    {
+
+        Quest_Count(count);
+    }
+    #endregion
+
     #region"플레이어 조이스틱"
     public event System.Action<Vector2, float> PlayerMove;
     public event System.Action<bool> PlayerDash;

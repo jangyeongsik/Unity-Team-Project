@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using System.Text;
 
 public class NpcVoltaire : MonoBehaviour
 {
@@ -16,22 +16,57 @@ public class NpcVoltaire : MonoBehaviour
     private bool isCollider =false;
     private int count;
     private bool isTrue;
+    int t_count;
+
+    StringBuilder quest_str;
     void Start()
     {
-        GameEventToUI.Instance.player_Trigger += isTrigger;
-       
+        count = 0;
+        t_count = 0;
+        isTrue = false;
+        trigger = false;
+        isCollider = false;
+    GameEventToUI.Instance.player_Trigger += isTrigger;
 
+        quest_str = new StringBuilder();
     }
 
     private void Update()
     {
-        if(p_1.activeSelf && p_2.activeSelf && !isTrue)
+        if (p_1.activeSelf && !p_2.activeSelf)
         {
+            t_count = 1;
+        }
+        if (p_2.activeSelf && !p_1.activeSelf)
+        {
+            t_count = 1;
+        }
+
+        if (p_1.activeSelf && p_2.activeSelf && !isTrue)
+        {
+            t_count = 2;
             isTrue = true;
             count++;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
             box2.SetActive(false);
         }
+
+        quest_str.Append(t_count.ToString());
+        quest_str.Append(" / 2");
+        switch (count)
+        {
+            case 1:
+                UIEventToGame.Instance.OnUiEventQuest_Name("신전 및 석상 상호작용");
+                UIEventToGame.Instance.OnUiEventQuest_Count(quest_str.ToString());
+                break;
+            case 3:
+                UIEventToGame.Instance.OnUiEventQuest_Name("출발지로 이동");
+                UIEventToGame.Instance.OnUiEventQuest_Count(" ");
+                count++;
+                break;
+
+        }
+        quest_str.Clear();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,7 +83,10 @@ public class NpcVoltaire : MonoBehaviour
             trigger = true;
         }
     }
-
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.player_Trigger -= isTrigger;
+    }
     private void OnTriggerStay(Collider other)
     {
         Vector3 dir = other.gameObject.transform.position - this.transform.position;

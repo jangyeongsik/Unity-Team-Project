@@ -15,4 +15,11 @@ public class JsonManageAndroid : Singleton<JsonManageAndroid>
         if (!File.Exists(Application.persistentDataPath + "/" + fileName + ".json")) return default(T);
         return JsonUtility.FromJson<T>(File.ReadAllText(Application.persistentDataPath + "/" + fileName + ".json"));
     }
+    public void DeleteJsonFile(string fileName)
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + fileName + ".json"))
+        {
+            File.Delete(Application.persistentDataPath + "/" + fileName + ".json");
+        }
+    }
 }
