@@ -116,7 +116,7 @@ public class ViperFSM : MonoBehaviour
     private void Attack()
     {
         AttackNocice.SetActive(viper.counterjudgement);
-        if (distance() > viper.navigation.stoppingDistance)
+        if (viper.DistacneWithTarget() > viper.navigation.stoppingDistance)
         {
             viper.monsterState = State.MonsterState.M_Move;
             viper.animator.SetBool("viperAttack", false);
@@ -125,7 +125,7 @@ public class ViperFSM : MonoBehaviour
 
     private void Idle()
     {
-        if (distance() < viper.attack_aware_distance)
+        if (viper.DistacneWithTarget() < viper.attack_aware_distance)
         {
             viper.monsterState = State.MonsterState.M_Move;
             viper.animator.SetBool("viperWalk", true);
@@ -153,7 +153,7 @@ public class ViperFSM : MonoBehaviour
             StartCoroutine(navigationSet());
         }
 
-        if (distance() < viper.navigation.stoppingDistance)
+        if (viper.DistacneWithTarget() < viper.navigation.stoppingDistance)
         {
             viper.monsterState = State.MonsterState.M_Attack;
             viper.animator.SetBool("viperAttack", true);
@@ -190,7 +190,7 @@ public class ViperFSM : MonoBehaviour
                 GameEventToUI.Instance.OnAttactReset();
             }
         }
-}
+    }
 
     public void ExitHit()
     {
@@ -206,14 +206,4 @@ public class ViperFSM : MonoBehaviour
     {
         attackTime = 0;
     }
-
-    private float distance()
-    {
-        float distance = (transform.position - target.transform.position).magnitude;
-        return distance;
-    }
-
-
-  
-
 }

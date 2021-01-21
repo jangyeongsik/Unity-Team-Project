@@ -8,7 +8,7 @@ public class EnemyWolf : MonoBehaviour
 {
     private Monster monster;
     private GameObject target;
-    public GameObject AttackNocice;
+    public GameObject AttackNotice;
 
     bool wolfRunning = false;
     private bool targeting = false;
@@ -112,7 +112,7 @@ public class EnemyWolf : MonoBehaviour
         }
         if (monster.monsterState != State.MonsterState.M_Attack)
         {
-            AttackNocice.SetActive(false);
+            AttackNotice.SetActive(false);
             attackTime = 0;
             monster.counterjudgement = false;
         }
@@ -131,12 +131,12 @@ public class EnemyWolf : MonoBehaviour
 
     private void Idle()
     {
-        if (targetDistance() < monster.target_notice_distance)
+        if (monster.DistacneWithTarget() < monster.target_notice_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfDash", true);
         }
-        else if (targetDistance() < monster.attack_aware_distance)
+        else if (monster.DistacneWithTarget() < monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Attack;
             monster.animator.SetBool("wolfDash", true);
@@ -160,7 +160,7 @@ public class EnemyWolf : MonoBehaviour
         {
             StartCoroutine(navigationSet());
         }
-        if (targetDistance() < monster.attack_aware_distance)
+        if (monster.DistacneWithTarget() < monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Attack;
             monster.animator.SetBool("wolfAttack", true);
@@ -180,8 +180,8 @@ public class EnemyWolf : MonoBehaviour
 
     private void StartAttack()
     {
-        AttackNocice.SetActive(monster.counterjudgement);
-        if (targetDistance() > monster.attack_aware_distance)
+        AttackNotice.SetActive(monster.counterjudgement);
+        if (monster.DistacneWithTarget() > monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("wolfAttack", false);
@@ -192,13 +192,6 @@ public class EnemyWolf : MonoBehaviour
     {
         if (!dead)
             transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    }
-
-    private float targetDistance()
-    {
-        offset = transform.position - target.transform.position;
-        float distance = offset.magnitude;
-        return distance;
     }
 
     public void AttackSetting()
@@ -219,6 +212,7 @@ public class EnemyWolf : MonoBehaviour
             GameEventToUI.Instance.OnAttactReset();
         }
     }
+
     public void ExitHit()
     {
         if (monster.monsterState == State.MonsterState.M_Damage)
