@@ -30,6 +30,7 @@ public class CraftController : MonoBehaviour
     Button[] cBtns;
     private Dictionary<string, Transform> craftButtons;
     private Dictionary<string, TMP_Text> ingredientTexts;
+    public GameObject blockingLayer;
 
     //텍스트 변경용 StringBuilder
     StringBuilder sb;
@@ -412,6 +413,7 @@ public class CraftController : MonoBehaviour
             CutEquipmentCount(itemID);
         }
         SetCraftTree(currentProd.productionID);
+        blockingLayer.SetActive(false);
     }
     //재료 개수 감소/삭제
     public void CutIngredientCount(int ing_1_ID, int ing_1_count, int ing_2_ID = 0, int ing_2_count = 0)
@@ -466,6 +468,8 @@ public class CraftController : MonoBehaviour
     }
     IEnumerator ForgeCoroutine()
     {
+        //BlockingLayer 켜기
+        blockingLayer.SetActive(true);
         do
         {
             forgeBar.GetComponent<Slider>().value += 0.01f;
@@ -474,6 +478,8 @@ public class CraftController : MonoBehaviour
         forgeBar.GetComponent<Slider>().value = 0f;
         forgeBar.SetActive(false);
         forgeButton.SetActive(true);
+        //BlockingLayer 끄기
+        blockingLayer.SetActive(false);
         OnEquipmentInfoScreen(eqInfo.btnName, eqInfo.itemID);
     }
     IEnumerator ForgeSoundCoroutine()

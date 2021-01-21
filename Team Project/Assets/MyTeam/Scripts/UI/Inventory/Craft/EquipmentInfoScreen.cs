@@ -12,6 +12,7 @@ public class EquipmentInfoScreen : MonoBehaviour
     public TMP_Text description;
     public TMP_Text itemName;
     public Button forgeButton;
+    public Image blockingLayer;
     public string btnName;
     public int itemID;
     
@@ -27,4 +28,5 @@ public class EquipmentInfoScreen : MonoBehaviour
             forgeButton.interactable = false;
         }
     }
+
 }

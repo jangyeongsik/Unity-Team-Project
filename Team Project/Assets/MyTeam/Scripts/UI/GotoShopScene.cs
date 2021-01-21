@@ -76,10 +76,22 @@ public class GotoShopScene : MonoBehaviour
         }
         GameData.Instance.player.SetGravity(0.9f);
     }
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.onOff -= ShopOn;
+        GameEventToUI.Instance.TPOpearteOnOff -= OnOffTPOperateCanvas;
+        GameEventToUI.Instance.TPCanvasOnOff -= OnOffTPCanvas;
+        GameEventToUI.Instance.leverOnOff -= OnOffLeverPopup;
+        GameEventToUI.Instance.templeOnOff -= OnOffTemplePopup;
+        GameEventToUI.Instance.talkOnOff -= TalkOff;
+        GameEventToUI.Instance.Event_TalkBox -= TalkBox;
+        GameEventToUI.Instance.talkButOnOff -= Talk_Box_onOff;
+        GameEventToUI.Instance.joystick_on -= joystickon;
+        GameEventToUI.Instance.joystick_off -= joystickoff;
+    }
 
     private void Start()
     {
-
         CanvasList.Add(shopCanvas);
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);

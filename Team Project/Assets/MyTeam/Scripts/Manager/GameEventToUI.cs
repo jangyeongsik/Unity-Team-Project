@@ -71,10 +71,17 @@ public class GameEventToUI : Singleton<GameEventToUI>
     #endregion
 
     #region "아이템 드랍"
+    //백신 야영지
     public event System.Action<bool,int> ItemDropInfo;
+    //신전
+    public event System.Action<bool, int> TempleItemDropInfo;
     public void OnItemDropInfo(bool value, int str)
     {
-        ItemDropInfo?.Invoke(value,str);
+        ItemDropInfo?.Invoke(value, str);
+    }
+    public void OnTempleItemDropInfo(bool val, int str)
+    {
+        TempleItemDropInfo?.Invoke(val, str);
     }
     #endregion
 

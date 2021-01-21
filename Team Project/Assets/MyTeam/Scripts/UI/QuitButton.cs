@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class QuitButton : MonoBehaviour
 {
-    public GotoShopScene UIManager;
+    public GameObject QuitPopup;
     public void QuitGame()
     {
         GameData.Instance.PlayerSave();
@@ -13,6 +13,6 @@ public class QuitButton : MonoBehaviour
     }
     public void KeepPlay()
     {
-        UIManager.CloseUI();
+        QuitPopup.SetActive(false);
     }
 }
