@@ -224,8 +224,6 @@ public class EnemyWarrior : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
-
-
         }
     }
 }

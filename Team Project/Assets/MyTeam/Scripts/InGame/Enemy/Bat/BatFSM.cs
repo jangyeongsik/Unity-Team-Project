@@ -180,11 +180,11 @@ public class BatFSM : MonoBehaviour
         running = false;
     }
 
-    public void PlayerLookAt()
-    {
-        if (!dead)
-            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    }
+    //public void PlayerLookAt()
+    //{
+    //    if (!dead)
+    //        transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+    //}
 
     public void AttackHit(int damage)
     {

@@ -109,4 +109,12 @@ public class Monster : character
     }
     #endregion
 
+    #region 에너미 타겟(플레이어) 바라보게 함.
+    public void PlayerLookAt()
+    {
+        if (gameObject.activeSelf == true)
+            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+    }
+    #endregion
+
 }
