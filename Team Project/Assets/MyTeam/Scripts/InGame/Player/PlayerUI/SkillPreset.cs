@@ -58,10 +58,9 @@ public class SkillPreset : MonoBehaviour
         {
             btnImages[i].sprite = skillImages[GameData.Instance.player.skillIdx[i]-1].sprite;
         }
-        //for (int i = 0; i < btnText.Length; ++i)
-        //{
-        //    btnText[i].text = GameData.Instance.player.aniList[i].name;
-        //}
+
+        skillImages[selectIdx].color = selectColor;
+        btnImages[curSkillIdx].color = selectColor;
     }
 
     //현재 무슨버튼 눌렀는지 바꿔줌
@@ -110,6 +109,9 @@ public class SkillPreset : MonoBehaviour
         }
         GameData.Instance.player.overrideController.ApplyOverrides(GameData.Instance.player.applyList);
         GameData.Instance.player.animator.runtimeAnimatorController = GameData.Instance.player.overrideController;
+
+        btnImages[curSkillIdx].color = defalt;
+        skillImages[selectIdx].color = defalt;
     }
 
 }
