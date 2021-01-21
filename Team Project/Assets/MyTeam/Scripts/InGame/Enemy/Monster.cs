@@ -46,18 +46,37 @@ public class Monster : character
         EnemyDeadEvent?.Invoke();
     }
 
+    #region 몬스터들 공격(데미지 관련)함수.
     public void OnPlayerHit()
     {
          if (monsterState == State.MonsterState.M_Attack)
             GameEventToUI.Instance.OnPlayerHit(transform, damage);
     }
+    #endregion
 
+    #region 플레이어(타겟)과의 거리 구하는 함수. 
     public float DistacneWithTarget()
     {
         float distance = (transform.position - target.transform.position).magnitude;
         return distance;
     }
+    #endregion
 
+    #region 몬스터들 겹치는거 해소하는 함수.
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            rigid.isKinematic = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        rigid.isKinematic = false;
+    }
+    #endregion
+
+    #region 몬스터들 죽으면 사라지고 아이템(신전 키) 떨구는 함수.
     public void SetGameObjectFale()
     {
         rigid.isKinematic = true;
@@ -70,7 +89,9 @@ public class Monster : character
 
         GameEventToUI.Instance.OnPlayerHp_Increase(1, 15);
     }
+    #endregion
 
+    #region 카운터 공격 가능한 이벤트 호출용 함수.
     public void TurnOnCautionPoint()
     {
         counterjudgement = true;
@@ -80,19 +101,6 @@ public class Monster : character
     {
         counterjudgement = false;
     }
+    #endregion
 
-
-    //몬스터들 그나마 덜겹치게 해줌
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            rigid.isKinematic = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        rigid.isKinematic = false;
-    }
 }

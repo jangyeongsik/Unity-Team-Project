@@ -36,10 +36,12 @@ public class TutoMon_remoteVer : MonoBehaviour
         monster.monsterState = State.MonsterState.M_Idle;
         monster.animator = GetComponent<Animator>();
         monster.rigid = GetComponent<Rigidbody>();
+        monster.EnemyHitEvent += OnDeadEvent;
     }
 
     private void OnDestroy()
     {
+        monster.EnemyHitEvent -= OnDeadEvent;
     }
     private void Update()
     {
@@ -61,17 +63,22 @@ public class TutoMon_remoteVer : MonoBehaviour
             case State.MonsterState.M_Return:
                 break;
             case State.MonsterState.M_Damage:
+                GotDamage();
                 break;
             default:
                 break;
         } 
     }
-    
-    
+
+    private void GotDamage()
+    {
+        
+    }
+
     private void Move()
     {
-        float distanceToTarget = (transform.position - target.transform.position).magnitude;
-        if (distanceToTarget < 8.0f)
+        // float distanceToTarget = (transform.position - target.transform.position).magnitude;
+        if (monster.DistacneWithTarget() < 8.0f)
         {
             monster.animator.SetBool("isAttack", true);
         }
@@ -102,6 +109,21 @@ public class TutoMon_remoteVer : MonoBehaviour
             SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Arrow");
         }
     }
+
+    public void OnDeadEvent(int damage)
+    {
+        Debug.Log("aaaaaaa");
+        monster.monsterState = State.MonsterState.M_Damage;
+        monster.animator.SetTrigger("isHit");
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
+    }
+
+    public void ExitHit()
+    {
+        if (monster.monsterState == State.MonsterState.M_Damage)
+            monster.monsterState = State.MonsterState.M_Idle;
+    }
+
 
     public void PlayerLookAt()
     {

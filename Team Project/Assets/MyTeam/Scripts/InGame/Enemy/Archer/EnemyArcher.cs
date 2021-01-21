@@ -92,8 +92,7 @@ public class EnemyArcher : MonoBehaviour
 
     private void Attack()
     {
-        float distanceToTarget = (transform.position - target.transform.position).magnitude;
-        if (distanceToTarget > monster.navigation.stoppingDistance)
+        if (monster.DistacneWithTarget() > monster.navigation.stoppingDistance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("isAttack", false);
@@ -102,8 +101,7 @@ public class EnemyArcher : MonoBehaviour
 
     private void Idle()
     {
-        float distanceToTarget = (transform.position - target.transform.position).magnitude;
-        if (distanceToTarget < monster.attack_aware_distance)
+        if (monster.DistacneWithTarget() < monster.attack_aware_distance)
         {
             monster.monsterState = State.MonsterState.M_Move;
             monster.animator.SetBool("isRun",true);
@@ -121,8 +119,7 @@ public class EnemyArcher : MonoBehaviour
             StartCoroutine(navigationSet());
         }
 
-        float distanceToTarget = (transform.position - target.transform.position).magnitude;
-        if (distanceToTarget < monster.navigation.stoppingDistance)
+        if (monster.DistacneWithTarget() < monster.navigation.stoppingDistance)
         {
             transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
             monster.monsterState = State.MonsterState.M_Attack;

@@ -60,7 +60,7 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (!targeting)
         {
-            if (P_distance() < 10)
+            if (e_Warrior.DistacneWithTarget() < 10)
             {
                 targeting = true;
             }
@@ -123,7 +123,7 @@ public class EnemyWarrior : MonoBehaviour
     private void M_Attack()
     {
         AttackNocice.SetActive(e_Warrior.counterjudgement);
-        if (P_distance() > e_Warrior.attack_aware_distance)
+        if (e_Warrior.DistacneWithTarget() > e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Move;
             e_Warrior.animator.SetBool("IsAttack", false);
@@ -137,7 +137,7 @@ public class EnemyWarrior : MonoBehaviour
             StartCoroutine(navigationSet());
         }
 
-        if (P_distance() < e_Warrior.attack_aware_distance)
+        if (e_Warrior.DistacneWithTarget() < e_Warrior.attack_aware_distance)
         {
             e_Warrior.monsterState = State.MonsterState.M_Attack;
             e_Warrior.animator.SetBool("IsAttack", true);
@@ -160,7 +160,7 @@ public class EnemyWarrior : MonoBehaviour
     {
         if (targeting)
         {
-            if (P_distance() > e_Warrior.attack_aware_distance)
+            if (e_Warrior.DistacneWithTarget() > e_Warrior.attack_aware_distance)
             {
                 e_Warrior.monsterState = State.MonsterState.M_Move;
                 e_Warrior.animator.SetBool("IsRun", true);
@@ -183,14 +183,6 @@ public class EnemyWarrior : MonoBehaviour
     {
         targeting = true;
     }
-    #region 플레이어와 거리 구하는 함수
-    private float P_distance()
-    {
-        offset = transform.position - target.transform.position;
-        float distance = offset.magnitude;
-        return distance;
-    }
-    #endregion 
 
     public void ExitHit()
     {

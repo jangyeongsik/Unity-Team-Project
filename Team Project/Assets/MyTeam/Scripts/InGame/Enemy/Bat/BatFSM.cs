@@ -112,7 +112,7 @@ public class BatFSM : MonoBehaviour
 
     private void Attack()
     {
-        if (distance() > bat.navigation.stoppingDistance)
+        if (bat.DistacneWithTarget() > bat.navigation.stoppingDistance)
         {
             bat.monsterState = State.MonsterState.M_Move;
             bat.animator.SetBool("isAttack", false);
@@ -136,7 +136,7 @@ public class BatFSM : MonoBehaviour
 
     private void Idle()
     {
-        if (distance() < bat.attack_aware_distance)
+        if (bat.DistacneWithTarget() < bat.attack_aware_distance)
         {
             bat.monsterState = State.MonsterState.M_Move;
             bat.animator.SetBool("isWalk", true);
@@ -164,7 +164,7 @@ public class BatFSM : MonoBehaviour
             StartCoroutine(navigationSet());
         }
 
-        if (distance() < bat.navigation.stoppingDistance)
+        if (bat.DistacneWithTarget() < bat.navigation.stoppingDistance)
         {
             bat.monsterState = State.MonsterState.M_Attack;
             bat.animator.SetBool("isAttack", true);
@@ -216,11 +216,5 @@ public class BatFSM : MonoBehaviour
     public void AttackSetting()
     {
         attackTime = 0;
-    }
-
-    private float distance()
-    {
-        float distance = (transform.position - target.transform.position).magnitude;
-        return distance;
     }
 }
