@@ -29,7 +29,7 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void EquipItem()
     {
-        EquipUI.GetComponent<EquipItem>().Equip(Inventory.Instance.pInven.EquipmentList[slotNum]);
+        EquipUI.GetComponent<EquipItem>().Equip(DataManager.Instance.AllInvenData.EquipmentList[slotNum]);
         GameData.Instance.player.damage = 1;
         GameData.Instance.player.movespeed = 1;
         GameData.Instance.player.counter_judgement = 1;
@@ -83,7 +83,7 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void MoveToCraftScreen()
     {
-        Equipment temp = Inventory.Instance.pInven.EquipmentList[slotNum];
+        Equipment temp = DataManager.Instance.AllInvenData.EquipmentList[slotNum];
         goToShop.ChangeScreen(3);
         goToShop.CraftCanvas.GetComponent<CraftController>().SetCraftTree(temp);
         gameObject.SetActive(false);

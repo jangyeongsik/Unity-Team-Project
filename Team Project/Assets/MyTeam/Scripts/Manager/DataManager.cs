@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System.Linq;
-using System;
 
 public class DataManager : SingletonMonobehaviour<DataManager>
 {
@@ -15,7 +13,6 @@ public class DataManager : SingletonMonobehaviour<DataManager>
     public List<Misc> m;
     public List<Equipment> pE;
     public int slotIdx = 0;
-    private StringBuilder sb;
     private string currentInvenDataName;
     private string currentEquipDataName;
 
@@ -47,7 +44,6 @@ public class DataManager : SingletonMonobehaviour<DataManager>
                 break;
         }
     }
-
     public void DeleteData()
     {
         AllInvenData.EquipmentList.Clear();
@@ -195,7 +191,6 @@ public class DataManager : SingletonMonobehaviour<DataManager>
         }
         JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
         InvenLoad();
-        Inventory.Instance.pInven = AllInvenData;
         //JsonInstance.CreateJsonFile(Application.dataPath, "/MyTeam/Resources/PlayerInvenData", AllInvenData);
     }
     public void RemoveEquipmentData(Equipment _pItem)
@@ -207,16 +202,15 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             if (temp == null) continue;
             if (temp.ID == _pItem.ID)
             {
-                if (AllInvenData.EquipmentList[i].count > 1)
+                if (AllInvenData.EquipmentList[i].count - 1 <= 0)
                 {
-                    AllInvenData.EquipmentList[i].count--;
-                    break;
+                    AllInvenData.EquipmentList.RemoveAt(i);
                 }
                 else
                 {
-                    AllInvenData.EquipmentList.Remove(AllInvenData.EquipmentList[i]);
-                    break;
+                    AllInvenData.EquipmentList[i].count--;
                 }
+                break;
             }
         }
         JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
@@ -231,16 +225,15 @@ public class DataManager : SingletonMonobehaviour<DataManager>
             if (temp == null) continue;
             if (temp.ID == _pItem.ID)
             {
-                if (AllInvenData.IngredientList[i].count > 1)
+                if (AllInvenData.IngredientList[i].count - count <= 0)
                 {
-                    AllInvenData.IngredientList[i].count -= count;
-                    break;
+                    AllInvenData.IngredientList.RemoveAt(i);
                 }
                 else
                 {
-                    AllInvenData.IngredientList.Remove(AllInvenData.IngredientList[i]);
-                    break;
+                    AllInvenData.IngredientList[i].count -= count;
                 }
+                break;
             }
         }
         JsonManageAndroid.Instance.SaveJsonFile(currentInvenDataName, AllInvenData);
@@ -296,21 +289,14 @@ public class DataManager : SingletonMonobehaviour<DataManager>
     }
     bool CheakDuplicateIngredientData(Ingredient _pInven, int count)
     {
-        for (int i = 0; i < AllInvenData.IngredientList.Count; i++)
+        foreach(Ingredient temp in AllInvenData.IngredientList)
         {
-            Ingredient temp;
-            temp = AllInvenData.IngredientList[i];
             if (temp == null)
                 continue;
 
             if (temp.ID == _pInven.ID)
             {
-                Debug.Log(AllInvenData.IngredientList[i].count);
-                Debug.Log(count);
-
-                AllInvenData.IngredientList[i].count += count;
-
-                Debug.Log(AllInvenData.IngredientList[i].count);
+                temp.count += count;
                 return true;
             }
         }

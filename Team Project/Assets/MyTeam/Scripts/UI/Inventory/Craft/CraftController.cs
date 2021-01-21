@@ -413,7 +413,6 @@ public class CraftController : MonoBehaviour
             CutEquipmentCount(itemID);
         }
         SetCraftTree(currentProd.productionID);
-        blockingLayer.SetActive(false);
     }
     //재료 개수 감소/삭제
     public void CutIngredientCount(int ing_1_ID, int ing_1_count, int ing_2_ID = 0, int ing_2_count = 0)
@@ -423,7 +422,6 @@ public class CraftController : MonoBehaviour
         {
             Inventory.Instance.RemoveIngredient(ing_2_ID, ing_2_count);
         }
-        Inventory.Instance.pInven = DataManager.Instance.AllInvenData;
     }
     public void CutEquipmentCount(int targetItemID, int forgingItemID = 0)
     {
@@ -464,7 +462,6 @@ public class CraftController : MonoBehaviour
             }
         }
         pEquip = DataManager.Instance.EquipInvenData.CurrentEquipmentList;
-        Inventory.Instance.pInven = DataManager.Instance.AllInvenData;
     }
     IEnumerator ForgeCoroutine()
     {

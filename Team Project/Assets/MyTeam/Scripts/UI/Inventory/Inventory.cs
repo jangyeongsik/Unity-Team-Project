@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class Inventory : SingletonMonobehaviour<Inventory>
 {
@@ -13,9 +10,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     public Slot.SlotAddition[] slots;
     public Transform slotHolder;
     public int slotCount;
-
-    //플레이어 인벤토리
-    public PlayerInven pInven = new PlayerInven();
     //아이템 이미지 리스트
     public IntSprite itemImages;
 
@@ -31,8 +25,6 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     private void Start()
     {
         itemImages = GameData.Instance.itemImages;
-        //플레이어 인벤토리 초기화
-        pInven = DataManager.Instance.AllInvenData;
         //인벤토리 탭 번호 (0 = 장비, 1 = 재료, 2 = 기타)
         InvenTabNum = 0;
         InvenTabs = InvenUI.GetComponentsInChildren<Toggle>();
@@ -40,21 +32,18 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         dropDown = menu.GetComponent<TMP_Dropdown>();
         //슬롯초기화
         slots = slotHolder.GetComponentsInChildren<Slot.SlotAddition>(); 
-        if (pInven == null){ slotCount = 0; }
-        else { slotCount = pInven.EquipmentList.Count; }
+        if (DataManager.Instance.AllInvenData == null){ slotCount = 0; }
+        else { slotCount = DataManager.Instance.AllInvenData.EquipmentList.Count; }
         SetSlotNumber();
         SlotChange(slotCount);
 
         //시작할 때 높은 등급 순으로 정렬
-        if (pInven != null)
+        if (DataManager.Instance.AllInvenData != null)
         {
             DataManager.Instance.SortByIDDecending(InvenTabNum);
-            pInven = DataManager.Instance.AllInvenData;
             SetImage();
         }
         isVisible = InvenUI.activeSelf;
-
-
     }
     private void Update()
     {
@@ -86,7 +75,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         {
             if (!CoroutineIsRunning)
             {
-                if (pInven != null)
+                if (DataManager.Instance.AllInvenData != null)
                 {
                     CoroutineIsRunning = true;
                     StartCoroutine(RefreshCoroutine());
@@ -99,19 +88,19 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         switch (InvenTabNum)
         {
             case 0:
-                for (int i = 0; i < pInven.EquipmentList.Count; i++)
+                for (int i = 0; i < DataManager.Instance.AllInvenData.EquipmentList.Count; i++)
                 {
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                 }
                 break;
             case 1:
-                for (int i = 0; i < pInven.IngredientList.Count; i++)
+                for (int i = 0; i < DataManager.Instance.AllInvenData.IngredientList.Count; i++)
                 {
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                 }
                 break;
             case 2:
-                for (int i = 0; i < pInven.MiscList.Count; i++)
+                for (int i = 0; i < DataManager.Instance.AllInvenData.MiscList.Count; i++)
                 {
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                 }
@@ -145,7 +134,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //슬롯버튼 한개 잠금해제
     public void AddSlot()
     {
-        if (pInven == null)
+        if (DataManager.Instance.AllInvenData == null)
         {
             slotCount = 0;
             SlotChange(slotCount);
@@ -154,13 +143,13 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         switch (InvenTabNum)
         {
             case 0:
-                slotCount = pInven.EquipmentList.Count;
+                slotCount = DataManager.Instance.AllInvenData.EquipmentList.Count;
                 break;
             case 1:
-                slotCount = pInven.IngredientList.Count;
+                slotCount = DataManager.Instance.AllInvenData.IngredientList.Count;
                 break;
             case 2:
-                slotCount = pInven.MiscList.Count;
+                slotCount = DataManager.Instance.AllInvenData.MiscList.Count;
                 break;
         }
         SlotChange(slotCount);
@@ -184,9 +173,9 @@ public class Inventory : SingletonMonobehaviour<Inventory>
         {
             case 0:
                 #region 장비 인벤토리 아이템 개수 따라 표시
-                for (int i = 0; i <= pInven.EquipmentList.Count; i++)
+                for (int i = 0; i <= DataManager.Instance.AllInvenData.EquipmentList.Count; i++)
                 {
-                    if (i >= pInven.EquipmentList.Count)
+                    if (i >= DataManager.Instance.AllInvenData.EquipmentList.Count)
                     {
                         if (i < slots.Length)
                         {
@@ -199,18 +188,18 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                         break;
                     }
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
-                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.EquipmentList[i].itemScriptID]; ;
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[DataManager.Instance.AllInvenData.EquipmentList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
                     slots[i].transform.GetChild(2).gameObject.SetActive(true);
-                    SetGradeColor(pInven.EquipmentList[i].itemGrade, i);
+                    SetGradeColor(DataManager.Instance.AllInvenData.EquipmentList[i].itemGrade, i);
                 }
                 #endregion
                 break;
             case 1:
                 #region 재료 인벤토리 아이템 개수 따라 표시
-                for (int i = 0; i <= pInven.IngredientList.Count; i++)
+                for (int i = 0; i <= DataManager.Instance.AllInvenData.IngredientList.Count; i++)
                 {
-                    if (i >= pInven.IngredientList.Count)
+                    if (i >= DataManager.Instance.AllInvenData.IngredientList.Count)
                     {
                         if (i < slots.Length)
                         {
@@ -223,17 +212,17 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                         break;
                     }
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
-                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.IngredientList[i].itemScriptID]; ;
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[DataManager.Instance.AllInvenData.IngredientList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
-                    SetGradeColor(pInven.IngredientList[i].itemGrade, i);
+                    SetGradeColor(DataManager.Instance.AllInvenData.IngredientList[i].itemGrade, i);
                 }
                 #endregion
                 break;
             case 2:
                 #region 기타 인벤토리 아이템 개수 따라 표시
-                for (int i = 0; i <= pInven.MiscList.Count; i++)
+                for (int i = 0; i <= DataManager.Instance.AllInvenData.MiscList.Count; i++)
                 {
-                    if (i >= pInven.MiscList.Count)
+                    if (i >= DataManager.Instance.AllInvenData.MiscList.Count)
                     {
                         if (i < slots.Length)
                         {
@@ -246,9 +235,9 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                         break;
                     }
                     slots[i].transform.GetChild(0).gameObject.SetActive(true);
-                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[pInven.MiscList[i].itemScriptID]; ;
+                    slots[i].transform.GetChild(0).GetComponent<Image>().sprite = itemImages[DataManager.Instance.AllInvenData.MiscList[i].itemScriptID]; ;
                     slots[i].GetComponent<ItemInfo>().RefreshCount(true);
-                    SetGradeColor(pInven.MiscList[i].itemGrade, i);
+                    SetGradeColor(DataManager.Instance.AllInvenData.MiscList[i].itemGrade, i);
                 }
                 #endregion
                 break;
@@ -333,7 +322,7 @@ public class Inventory : SingletonMonobehaviour<Inventory>
                 DataManager.Instance.SortByName(InvenTabNum);
                 break;
         }
-        pInven = DataManager.Instance.AllInvenData;
+        DataManager.Instance.AllInvenData = DataManager.Instance.AllInvenData;
         SetImage();
     }
     //=====================================
@@ -341,20 +330,20 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     //=====================================
     public Equipment FindEquipment(int itemID)
     {
-        for (int i = 0; i < pInven.EquipmentList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.AllInvenData.EquipmentList.Count; i++)
         {
-            if (pInven.EquipmentList[i].ID == itemID)
+            if (DataManager.Instance.AllInvenData.EquipmentList[i].ID == itemID)
             {
-                return pInven.EquipmentList[i];
+                return DataManager.Instance.AllInvenData.EquipmentList[i];
             }
         }
         return null;
     }
     public bool IsEquipmentExist(int itemID)
     {
-        for (int i = 0; i < pInven.EquipmentList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.AllInvenData.EquipmentList.Count; i++)
         {
-            if (pInven.EquipmentList[i].ID == itemID)
+            if (DataManager.Instance.AllInvenData.EquipmentList[i].ID == itemID)
             {
                 return true;
             }
@@ -363,20 +352,20 @@ public class Inventory : SingletonMonobehaviour<Inventory>
     }
     public Ingredient FindIngredient(int itemID)
     {
-        for (int i = 0; i < pInven.IngredientList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.AllInvenData.IngredientList.Count; i++)
         {
-            if (pInven.IngredientList[i].ID == itemID)
+            if (DataManager.Instance.AllInvenData.IngredientList[i].ID == itemID)
             {
-                return pInven.IngredientList[i];
+                return DataManager.Instance.AllInvenData.IngredientList[i];
             }
         }
         return null;
     }
     public bool IsIngredientExist(int itemID)
     {
-        for (int i = 0; i < pInven.IngredientList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.AllInvenData.IngredientList.Count; i++)
         {
-            if (pInven.IngredientList[i].ID == itemID)
+            if (DataManager.Instance.AllInvenData.IngredientList[i].ID == itemID)
             {
                 return true;
             }

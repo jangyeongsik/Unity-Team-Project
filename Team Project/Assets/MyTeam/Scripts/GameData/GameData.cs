@@ -97,10 +97,7 @@ public class GameData : SingletonMonobehaviour<GameData>
         if (i >= equipmentData.Count)
             return null;
 
-        Equipment p = new Equipment();
-        p = equipmentData[i];
-
-        return p;
+        return EquipmentDeepCopy(equipmentData[i]);
     }
     public Ingredient FindIngredientByID(int _ID)
     {
@@ -114,11 +111,39 @@ public class GameData : SingletonMonobehaviour<GameData>
         }
         if (i >= ingredientData.Count)
             return null;
-
-        Ingredient p = new Ingredient();
-        p = ingredientData[i];
-
-        return p;
+        
+        return IngredientDeepCopy(ingredientData[i]);
+    }
+    private Ingredient IngredientDeepCopy(Ingredient a)
+    {
+        Ingredient temp = new Ingredient();
+        temp.ID = a.ID;
+        temp.name = a.name;
+        temp.itemCategory = a.itemCategory;
+        temp.itemGrade = a.itemGrade;
+        temp.itemScriptID = a.itemScriptID;
+        temp.count = a.count;
+        return temp;
+    }
+    private Equipment EquipmentDeepCopy(Equipment e)
+    {
+        Equipment temp = new Equipment();
+        temp.ID = e.ID;
+        temp.name = e.name;
+        temp.itemCategory = e.itemCategory;
+        temp.equipmentType = e.equipmentType;
+        temp.itemGrade = e.itemGrade;
+        temp.itemScriptID = e.itemScriptID;
+        temp.damage = e.damage;
+        temp.speed = e.speed;
+        temp.critPercent = e.critPercent;
+        temp.critDamage = e.critDamage;
+        temp.HPAdd = e.HPAdd;
+        temp.staminaAdd = e.staminaAdd;
+        temp.counterJudgement = e.counterJudgement;
+        temp.count = e.count;
+        temp.productionID = e.productionID;
+        return temp;
     }
     //===================================================================
     //게임 끝날때 저장

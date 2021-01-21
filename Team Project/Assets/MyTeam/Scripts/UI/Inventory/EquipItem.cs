@@ -126,7 +126,6 @@ public class EquipItem : MonoBehaviour
                 DataManager.Instance.RemoveEquipmentData(_item);
 
                 pE = DataManager.Instance.EquipInvenData;
-                Inventory.Instance.pInven = DataManager.Instance.AllInvenData;
                 Inventory.Instance.AddSlot();
                 Inventory.Instance.SetImage();
                 SetButtonImage(_item);
@@ -138,7 +137,6 @@ public class EquipItem : MonoBehaviour
             DataManager.Instance.AddEquipInvenData(_item);
             DataManager.Instance.RemoveEquipmentData(_item);
             pE = DataManager.Instance.EquipInvenData;
-            Inventory.Instance.pInven = DataManager.Instance.AllInvenData;
             Inventory.Instance.AddSlot();
             Inventory.Instance.SetImage();
             SetButtonImage(_item);

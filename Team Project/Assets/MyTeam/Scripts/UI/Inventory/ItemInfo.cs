@@ -207,10 +207,10 @@ public class ItemInfo : MonoBehaviour
                 {
                     infoScreen.gameObject.SetActive(true);
                 }
-                if (slotNum < Inventory.Instance.pInven.EquipmentList.Count)
+                if (slotNum < DataManager.Instance.AllInvenData.EquipmentList.Count)
                 {
                     StringBuilder sb = new StringBuilder();
-                    Equipment e = Inventory.Instance.pInven.EquipmentList[slotNum];
+                    Equipment e = DataManager.Instance.AllInvenData.EquipmentList[slotNum];
                     //아이템 이미지 받아와 넣기
                     ISName.text = e.name;
                     sb.Append("장비");
@@ -252,10 +252,10 @@ public class ItemInfo : MonoBehaviour
                 {
                     ingredientInfoScreen.gameObject.SetActive(true);
                 }
-                if (slotNum < Inventory.Instance.pInven.IngredientList.Count)
+                if (slotNum < DataManager.Instance.AllInvenData.IngredientList.Count)
                 {
                     StringBuilder sb = new StringBuilder();
-                    Ingredient e = Inventory.Instance.pInven.IngredientList[slotNum];
+                    Ingredient e = DataManager.Instance.AllInvenData.IngredientList[slotNum];
                     //아이템 이미지 받아와 넣기
                     IISName.text = e.name;
                     sb.Append("재료");
@@ -284,10 +284,10 @@ public class ItemInfo : MonoBehaviour
             //MISC
             case 2:
                 #region 기타 리스트
-                if (slotNum < Inventory.Instance.pInven.MiscList.Count)
+                if (slotNum < DataManager.Instance.AllInvenData.MiscList.Count)
                 {
                     StringBuilder sb = new StringBuilder();
-                    Misc e = Inventory.Instance.pInven.MiscList[slotNum];
+                    Misc e = DataManager.Instance.AllInvenData.MiscList[slotNum];
                     //아이템 이미지 받아와 넣기
                     ISName.text = e.name;
                     sb.Append("열쇠");
@@ -314,13 +314,13 @@ public class ItemInfo : MonoBehaviour
             switch (InvenTabNum)
             {
                 case 0:
-                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.EquipmentList[slotNum].count.ToString());
+                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(DataManager.Instance.AllInvenData.EquipmentList[slotNum].count.ToString());
                     break;
                 case 1:
-                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.IngredientList[slotNum].count.ToString());
+                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(DataManager.Instance.AllInvenData.IngredientList[slotNum].count.ToString());
                     break;
                 case 2:
-                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(Inventory.Instance.pInven.EquipmentList[slotNum].count.ToString());
+                    gameObject.GetComponent<Slot.SlotAddition>().SetCountText(DataManager.Instance.AllInvenData.EquipmentList[slotNum].count.ToString());
                     break;
             }
         }

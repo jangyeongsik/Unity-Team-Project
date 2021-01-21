@@ -26,7 +26,6 @@ public class Npcprond : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(count);
 ;        if((DataManager.Instance.AllInvenData.EquipmentList.Count > 0 || DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count > 0) && !isChack)
         {
             isChack = true;
