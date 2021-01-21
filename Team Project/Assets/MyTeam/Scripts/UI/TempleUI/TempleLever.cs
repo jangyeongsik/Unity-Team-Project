@@ -30,7 +30,7 @@ public class TempleLever : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isClear)
+        if (isClear && !templePortal.activeSelf)
         {
             if (other.gameObject.CompareTag("Player"))
             {

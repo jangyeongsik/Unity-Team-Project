@@ -69,7 +69,6 @@ public class StageManager : MonoBehaviour
         }
 
     }
-
     private void Update()
     {
         //맵 클리어 이전일때
@@ -81,13 +80,21 @@ public class StageManager : MonoBehaviour
                 isClear = true;
 
                 //백신 클리어하면 아이템추가
-                if((stageKind == STAGEKIND.Chapter1_Normal || stageKind == STAGEKIND.Temple) && !isRegen)
+                if(stageKind == STAGEKIND.Chapter1_Normal && !isRegen)
                 {
                     string str = GameData.Instance.player.curSceneName;
                     string id = str.Substring(3);
                     Debug.Log("보상");
                     Debug.Log("str : " + str + " id : " + int.Parse(id));
                     GameEventToUI.Instance.OnItemDropInfo(true, int.Parse(id));
+                }
+                else if (stageKind == STAGEKIND.Temple)
+                {
+                    string str = GameData.Instance.player.curSceneName;
+                    string id = str.Substring(3);
+                    Debug.Log("보상");
+                    Debug.Log("str : " + str + " id : " + int.Parse(id));
+                    GameEventToUI.Instance.OnTempleItemDropInfo(true, int.Parse(id));
                 }
                 //리젠을 하지않는 맵이라면
                 if (!isRegen)

@@ -27,4 +27,5 @@ public class EquipmentInfoScreen : MonoBehaviour
             forgeButton.interactable = false;
         }
     }
+
 }

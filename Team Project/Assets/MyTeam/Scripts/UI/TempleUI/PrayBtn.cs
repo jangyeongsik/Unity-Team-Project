@@ -11,6 +11,10 @@ public class PrayBtn : MonoBehaviour
     public Button prayTenTimes;
     public TMP_Text keyCount;
     public int count;
+    private void OnEnable()
+    {
+        count = 0;
+    }
     public void SetPrayCount(int _count)
     {
         keyCount.text = _count.ToString();

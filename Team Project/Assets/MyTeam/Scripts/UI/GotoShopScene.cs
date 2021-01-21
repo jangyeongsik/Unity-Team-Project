@@ -76,10 +76,8 @@ public class GotoShopScene : MonoBehaviour
         }
         GameData.Instance.player.SetGravity(0.9f);
     }
-    
     private void Start()
     {
-
         CanvasList.Add(shopCanvas);
         CanvasList.Add(TalkCanvas);
         CanvasList.Add(miniMapCanvas);
