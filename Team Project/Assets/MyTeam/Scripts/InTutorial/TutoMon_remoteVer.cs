@@ -112,7 +112,7 @@ public class TutoMon_remoteVer : MonoBehaviour
 
     public void OnDeadEvent(int damage)
     {
-        Debug.Log("aaaaaaa");
+        
         monster.monsterState = State.MonsterState.M_Damage;
         monster.animator.SetTrigger("isHit");
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");

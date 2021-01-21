@@ -50,7 +50,7 @@ public class NpcRolin : MonoBehaviour
     {
         Vector3 dir = other.gameObject.transform.position - this.transform.position;
 
-        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 15);
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 7);
     }
     private void OnTriggerExit(Collider other)
     {

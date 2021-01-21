@@ -428,8 +428,6 @@ public class PlayerAttack : MonoBehaviour
             float fDmg = colorDmg * dmg;
             fDmg = Mathf.Clamp(fDmg, 1, 10);
 
-            Debug.Log((int)fDmg);
-
             curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent((int)fDmg);
         }
     }
