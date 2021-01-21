@@ -411,22 +411,26 @@ public class PlayerAttack : MonoBehaviour
     {
         if (curAttackEnemy == null) return;
         {
-            //switch (curAttackEnemy.tag)
-            //{
-            //    case "EnemyWarrior":
-            //        curAttackEnemy.GetComponent<EnemyWarrior>().AttackHit();
-            //        break;
-            //    case "EnemyArcher":
-            //        curAttackEnemy.GetComponent<EnemyArcher>().OnDeadEvent();
-            //        break;
-            //    case "EnemyViper":
-            //        curAttackEnemy.GetComponent<ViperFSM>().AttackHit();
-            //        break;
-            //    case "EnemyWolf":
-            //        curAttackEnemy.GetComponent<EnemyWolf>().AttackHit();
-            //        break;
-            //}
-            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
+            //플레이어 데미지 계산
+            float colorDmg = 0;
+            if (colorZone == COLORZONE.RED)
+                colorDmg = 0.5f;
+            else if (colorZone == COLORZONE.YELLOW)
+                colorDmg = 1f;
+            else if (colorZone == COLORZONE.GREEN)
+                colorDmg = 3f;
+
+            int dmg = 1 + (int)(GameData.Instance.player.damage * 0.1f);
+
+            if (DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON) != null)
+                dmg += DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade;
+
+            float fDmg = colorDmg * dmg;
+            fDmg = Mathf.Clamp(fDmg, 1, 10);
+
+            Debug.Log((int)fDmg);
+
+            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent((int)fDmg);
         }
     }
 

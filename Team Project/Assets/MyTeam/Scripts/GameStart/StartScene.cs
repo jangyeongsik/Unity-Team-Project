@@ -66,6 +66,7 @@ public class StartScene : MonoBehaviour
             return;
         }
         LoadingProgress.LoadScene("UI Scene");
+        GameData.Instance.PlayerSave();
         //Debug.Log(GameData.Instance.player.stamina);
         //SceneManager.LoadScene("Loading");
     }
@@ -182,6 +183,7 @@ public class StartScene : MonoBehaviour
         DataManager.Instance.DeleteData();
         StartCoroutine(sse.SetImageCoroutine());
 
+        GameData.Instance.PlayerSave();
     }
 
     //obj 팝업 액티브

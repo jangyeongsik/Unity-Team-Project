@@ -114,7 +114,6 @@ public class PlayerData
     //플레이어 데이터를 초기화한다
     public PlayerData DeleteData(int slot)
     {
-
         id = slot;
         hp = 4;
         currentHp = 4;
@@ -133,11 +132,13 @@ public class PlayerData
         tutorial = false;
         presetID = slot;
         bossClear = false;
-        skillIdx = new int[3] { 1, 2, 3 };
+        for (int i = 0; i < skillIdx.Length; ++i)
+            skillIdx[i] = i + 1;
         SaveSceneName = "MAP001";
         SavePortalName = "MAP001";
-        Talk_Box = new bool[28];
-        stageData = new List<StageData>();
+        for (int i = 0; i < Talk_Box.Length; ++i)
+            Talk_Box[i] = false;
+        stageData.Clear();
 
         return this;
     }
@@ -203,7 +204,7 @@ public class Player
     //저장 안할 변수들
     public Transform position;              //위치       
     public State.PlayerState m_state;       //상태
-    public float counterTime;               //카운터 판정 타임
+    public float counterTime;
     public float gravity;
     public bool isDashPossible;
     public PlayerSkill skill;
@@ -248,6 +249,20 @@ public class Player
         }
         overrideController.ApplyOverrides(applyList);
         animator.runtimeAnimatorController = overrideController;
+    }
+
+    public void DeletePlayer()
+    {
+        m_state = State.PlayerState.P_Idle;
+        gravity = 0f;
+        counterTime = 0f;
+        isDashPossible = true;
+        for (int i = 0; i < orgList.Count; ++i)
+            aniList[i] = orgList[i];
+        applyList.Clear();
+        isSceneMove = false;
+        curSceneName = "";
+        D_stageData.Clear();
     }
 }
 
