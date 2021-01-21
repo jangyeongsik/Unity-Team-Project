@@ -28,8 +28,6 @@ public class Monster : character
 
     public event System.Action EnemyDeadEvent;
 
-
-
     private void Start()
     {
         target = GameData.Instance.player.position.gameObject;
@@ -100,6 +98,14 @@ public class Monster : character
     public void TurnOffCautionPoint()
     {
         counterjudgement = false;
+    }
+    #endregion
+
+    #region 에너미 피격모션 빠지나오는 이벤트 호출용 함수.
+    public void ExitHit()
+    {
+        if (monsterState == State.MonsterState.M_Damage)
+            monsterState = State.MonsterState.M_Idle;
     }
     #endregion
 

@@ -213,11 +213,11 @@ public class EnemyWolf : MonoBehaviour
         }
     }
 
-    public void ExitHit()
-    {
-        if (monster.monsterState == State.MonsterState.M_Damage)
-            monster.monsterState = State.MonsterState.M_Idle;
-    }
+    //public void ExitHit()
+    //{
+    //    if (monster.monsterState == State.MonsterState.M_Damage)
+    //        monster.monsterState = State.MonsterState.M_Idle;
+    //}
 
     public void TargetLook()
     {

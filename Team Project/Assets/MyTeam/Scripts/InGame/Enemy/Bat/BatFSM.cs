@@ -203,15 +203,18 @@ public class BatFSM : MonoBehaviour
         }
     }
 
-    public void ExitHit()
-    {
-        if (!dead)
-        {
-            if (bat.monsterState == State.MonsterState.M_Damage)
-                bat.monsterState = State.MonsterState.M_Move;
-            bat.animator.SetBool("isWalk", true);
-        }
-    }
+    //public void ExitHit()
+    //{
+    //    //if (!dead)
+    //    //{
+    //    //    if (bat.monsterState == State.MonsterState.M_Damage)
+    //    //        bat.monsterState = State.MonsterState.M_Move;
+    //    //    bat.animator.SetBool("isWalk", true);
+    //    //}
+    //
+    //    if (bat.monsterState == State.MonsterState.M_Damage)
+    //        bat.monsterState = State.MonsterState.M_Idle;
+    //}
 
     public void AttackSetting()
     {

@@ -118,11 +118,11 @@ public class TutoMon_remoteVer : MonoBehaviour
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
     }
 
-    public void ExitHit()
-    {
-        if (monster.monsterState == State.MonsterState.M_Damage)
-            monster.monsterState = State.MonsterState.M_Idle;
-    }
+    //public void ExitHit()
+    //{
+    //    if (monster.monsterState == State.MonsterState.M_Damage)
+    //        monster.monsterState = State.MonsterState.M_Idle;
+    //}
 
 
     public void PlayerLookAt()

@@ -194,12 +194,15 @@ public class ViperFSM : MonoBehaviour
 
     public void ExitHit()
     {
-        if (!dead)
-        {
-            if (viper.monsterState == State.MonsterState.M_Damage)
-                viper.monsterState = State.MonsterState.M_Move;
-            viper.animator.SetBool("viperWalk", true);
-        }
+        //if (!dead)
+        //{
+        //    if (viper.monsterState == State.MonsterState.M_Damage)
+        //        viper.monsterState = State.MonsterState.M_Move;
+        //    viper.animator.SetBool("viperWalk", true);
+        //}
+
+        if (viper.monsterState == State.MonsterState.M_Damage)
+            viper.monsterState = State.MonsterState.M_Idle;
     }
 
     public void AttackSetting()

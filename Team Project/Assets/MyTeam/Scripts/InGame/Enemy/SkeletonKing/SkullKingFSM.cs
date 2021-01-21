@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -104,6 +105,7 @@ public class SkullKingFSM : MonoBehaviour
                     case State.MonsterState.M_Return:
                         break;
                     case State.MonsterState.M_Damage:
+                        GotDamage();
                         break;
                     case State.MonsterState.M_Dash:
                         break;
@@ -118,6 +120,11 @@ public class SkullKingFSM : MonoBehaviour
                 skullKing.counterjudgement = false;
             }
         }
+    }
+
+    private void GotDamage()
+    {
+        
     }
 
     IEnumerator navigationSet()
@@ -186,13 +193,13 @@ public class SkullKingFSM : MonoBehaviour
         targeting = true;
     }
 
-    public void ExitHit()
-    {
-        if (skullKing.monsterState == State.MonsterState.M_Damage)
-        {
-            skullKing.monsterState = State.MonsterState.M_Idle;
-        }
-    }
+    //public void ExitHit()
+    //{
+    //    if (skullKing.monsterState == State.MonsterState.M_Damage)
+    //    {
+    //        skullKing.monsterState = State.MonsterState.M_Idle;
+    //    }
+    //}
 
     void AttackCount()
     {
