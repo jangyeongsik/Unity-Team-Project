@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
     {
         if (enemys == null)
             enemys = GameObject.FindObjectsOfType<Monster>();
+            
         if (portals == null)
             portals = GameObject.FindObjectsOfType<TeleportMaster>();
 
@@ -56,6 +57,13 @@ public class StageManager : MonoBehaviour
                 isClear = true;
             }
         }
+
+        GameData.Instance.player.enemyData.Clear();
+        for (int i = 0; i < enemys.Length; ++i)
+        {
+            if(enemys[i].gameObject.activeSelf)
+                GameData.Instance.player.enemyData.Add(enemys[i].gameObject);
+        }
     }
 
     private void Start()
@@ -75,7 +83,7 @@ public class StageManager : MonoBehaviour
         if (isClear == false)
         {
             //맵에 몬스터가 남아있지않다면
-            if (GameObject.FindObjectOfType<Monster>() == null)
+            if (GameData.Instance.player.enemyData.Count == 0)
             {
                 isClear = true;
 

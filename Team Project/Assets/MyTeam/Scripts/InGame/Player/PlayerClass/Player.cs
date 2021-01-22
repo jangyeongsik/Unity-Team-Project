@@ -217,6 +217,7 @@ public class Player
     public bool isSceneMove = false;
     public string curSceneName;
     public Dictionary<string, bool> D_stageData = new Dictionary<string, bool>();
+    public List<GameObject> enemyData = new List<GameObject>();
 
     public void SetGravity(float gr)
     {
@@ -263,6 +264,12 @@ public class Player
         isSceneMove = false;
         curSceneName = "";
         D_stageData.Clear();
+        enemyData.Clear();
+    }
+
+    public void PopEnemyData(GameObject obj)
+    {
+        enemyData.Remove(obj);
     }
 }
 
