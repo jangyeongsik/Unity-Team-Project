@@ -19,7 +19,8 @@ public enum SoundKind
     Sound_Chapter2_Boss,
     Sound_Priest,
     Sound_Viper,
-    Sound_WolfSound
+    Sound_WolfSound,
+    Sound_UISound
 }
 
 public class SoundManager : SingletonMonobehaviour<SoundManager>
@@ -49,6 +50,9 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     [Header("제작 사운드")]
     public Sound[] ForgeSounds;
+
+    [Header("UI 사운드")]
+    public Sound[] UISounds;
     #endregion
 
     #region"사운드 딕셔너리들"
@@ -63,6 +67,7 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
     public Dictionary<string, AudioClip> D_WolfSound = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_BGMS = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> D_ForgeSounds = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> D_UISounds = new Dictionary<string, AudioClip>();
     #endregion
 
     private void Start()
@@ -111,6 +116,9 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
                 break;
             case SoundKind.Sound_WolfSound:
                 D_WolfSound.TryGetValue(name, out audioClip);
+                break;
+            case SoundKind.Sound_UISound:
+                D_UISounds.TryGetValue(name, out audioClip);
                 break;
         }
         if (audioClip != null)
