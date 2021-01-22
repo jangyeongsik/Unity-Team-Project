@@ -15,6 +15,7 @@ public class Key : MonoBehaviour
         resourceText.text = resource.ToString();
         GameEventToUI.Instance.keyCount += OnGetTempleKeys;
         GameEventToUI.Instance.LoseTempleKeys += OnLoseTempleKeys;
+        resourceText.text = GameData.Instance.player.keyCounter.ToString();
     }
 
     public void OnGetTempleKeys(int addition)
