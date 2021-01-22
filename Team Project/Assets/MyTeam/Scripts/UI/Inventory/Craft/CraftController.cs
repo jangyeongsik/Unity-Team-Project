@@ -31,6 +31,7 @@ public class CraftController : MonoBehaviour
     private Dictionary<string, Transform> craftButtons;
     private Dictionary<string, TMP_Text> ingredientTexts;
     public GameObject blockingLayer;
+    public GameObject menuButtonBlockingLayer;
 
     //텍스트 변경용 StringBuilder
     StringBuilder sb;
@@ -467,6 +468,7 @@ public class CraftController : MonoBehaviour
     {
         //BlockingLayer 켜기
         blockingLayer.SetActive(true);
+        menuButtonBlockingLayer.SetActive(true);
         do
         {
             forgeBar.GetComponent<Slider>().value += 0.01f;
@@ -477,6 +479,7 @@ public class CraftController : MonoBehaviour
         forgeButton.SetActive(true);
         //BlockingLayer 끄기
         blockingLayer.SetActive(false);
+        menuButtonBlockingLayer.SetActive(false);
         OnEquipmentInfoScreen(eqInfo.btnName, eqInfo.itemID);
     }
     IEnumerator ForgeSoundCoroutine()
