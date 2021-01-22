@@ -25,10 +25,12 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void CloseTab()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         gameObject.SetActive(false);
     }
     public void EquipItem()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         EquipUI.GetComponent<EquipItem>().Equip(DataManager.Instance.AllInvenData.EquipmentList[slotNum]);
         GameData.Instance.player.damage = 1;
         GameData.Instance.player.movespeed = 1;
@@ -46,11 +48,13 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void MoveToInventoryScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         goToShop.ChangeScreen(2);
         gameObject.SetActive(false);
     }
     public void UnEquipItem()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         DataManager.Instance.RemoveEquipInvenData(e);
         Inventory.Instance.AddEquipment(e.ID, 1);
         CloseTab();
@@ -83,6 +87,7 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void MoveToCraftScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         Equipment temp = DataManager.Instance.AllInvenData.EquipmentList[slotNum];
         goToShop.ChangeScreen(3);
         goToShop.CraftCanvas.GetComponent<CraftController>().SetCraftTree(temp);
@@ -90,12 +95,14 @@ public class ItemInfoScreen : MonoBehaviour
     }
     public void MoveToCraftScreen(Equipment e)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         goToShop.ChangeScreen(3);
         goToShop.CraftCanvas.GetComponent<CraftController>().SetCraftTree(e);
         gameObject.SetActive(false);
     }
     public void MoveToCraftScreenFromEquipUI()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         goToShop.ChangeScreen(3);
         goToShop.CraftCanvas.GetComponent<CraftController>().SetCraftTree(e);
         gameObject.SetActive(false);

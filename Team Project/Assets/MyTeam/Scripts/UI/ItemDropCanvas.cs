@@ -18,9 +18,15 @@ public class ItemDropCanvas : MonoBehaviour
     {
         GameEventToUI.Instance.ItemDropInfo -= OnItemDropInfo;
     }
-
+    public void Close()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
+        gameObject.SetActive(false);
+    }
     void OnItemDropInfo(bool value, int MapIdx)
     {
+        Debug.Log("Drop");
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "보상획득");
         gameObject.SetActive(value);
         Debug.Log("aaa");
         switch (MapIdx)

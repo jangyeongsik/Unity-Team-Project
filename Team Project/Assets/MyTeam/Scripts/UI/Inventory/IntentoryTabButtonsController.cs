@@ -22,6 +22,7 @@ public class IntentoryTabButtonsController : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "미니맵");
         Inventory.Instance.ChangeTab(tabNum);
     }
 }
