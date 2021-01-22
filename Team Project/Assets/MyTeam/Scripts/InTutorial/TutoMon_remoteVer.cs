@@ -6,10 +6,8 @@ using UnityEngine;
 public class TutoMon_remoteVer : MonoBehaviour
 {
     private Monster monster;
-
     private GameObject target;
     public Transform arrowTarget;
-
     public Transform arrowFirePoint;
     private Vector3 shotDirection;
 
@@ -17,7 +15,6 @@ public class TutoMon_remoteVer : MonoBehaviour
 
     Vector3 tPos;
 
-    bool counterjudgement;
     private bool attacking;
 
     private void Start()
@@ -112,7 +109,6 @@ public class TutoMon_remoteVer : MonoBehaviour
 
     public void OnDeadEvent(int damage)
     {
-        
         monster.monsterState = State.MonsterState.M_Damage;
         monster.animator.SetTrigger("isHit");
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");

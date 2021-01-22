@@ -15,7 +15,7 @@ public class Monster : character
 
     private GameObject target;                  //타겟 (플레이어)
 
-    public int dropItem_Key = 1;                //몬스터년이 드롭하는 아이템. (default 값 1로)
+    public int dropItem_Key = 1;                //몬스터가 드롭하는 아이템. (default 값 1로)
     public bool isGet;
     public bool monsterDead;
     public NavMeshAgent navigation;
