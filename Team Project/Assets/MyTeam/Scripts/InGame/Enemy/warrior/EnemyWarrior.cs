@@ -184,19 +184,6 @@ public class EnemyWarrior : MonoBehaviour
         targeting = true;
     }
 
-    //public void ExitHit()
-    //{
-    //    if (e_Warrior.monsterState == State.MonsterState.M_Damage)
-    //    e_Warrior.monsterState = State.MonsterState.M_Idle;
-    //}
-
-
-
-    //public KeyValuePair<bool, Transform> Player_AttackEvent()
-    //{
-    //    return new KeyValuePair<bool, Transform>(e_Warrior.counterjudgement, transform);
-    //}
-
     public void AttackSetting()
     {
         attackTime = 0;

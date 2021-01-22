@@ -15,32 +15,9 @@ public class NpcFSM : MonoBehaviour
     void Start()
     {
         npc = GetComponent<Npc>();
-       // NpcSetting();
         GameEventToUI.Instance.player_Trigger += isTrigger;
-       
-
     }
-    /*
-        private void NpcSetting()
-        {
-            npc.npcState = State.NpcState.N_Idle;
-            npc.animator = GetComponent<Animator>();
-        }
 
-        private void Update()
-        {
-            switch (npc.npcState)
-            {
-                case State.NpcState.N_Idle:
-                    Idle();
-                    break;
-            }
-        }
-
-        private void Idle()
-        {
-
-        }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -53,9 +30,7 @@ public class NpcFSM : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-
         Vector3 dir = other.gameObject.transform.position - this.transform.position;
-
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 7);
     }
 

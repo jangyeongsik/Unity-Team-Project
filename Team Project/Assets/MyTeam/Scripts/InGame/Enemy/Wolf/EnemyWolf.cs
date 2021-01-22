@@ -110,13 +110,13 @@ public class EnemyWolf : MonoBehaviour
                     break;
             }
         }
+
         if (monster.monsterState != State.MonsterState.M_Attack)
         {
             AttackNotice.SetActive(false);
             attackTime = 0;
             monster.counterjudgement = false;
         }
-
     }
 
     private void GotDamage()
@@ -188,12 +188,6 @@ public class EnemyWolf : MonoBehaviour
         }
     }
 
-    public void PlayerLookAt()
-    {
-        if (!dead)
-            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    }
-
     public void AttackSetting()
     {
         attackTime = 0;
@@ -213,20 +207,8 @@ public class EnemyWolf : MonoBehaviour
         }
     }
 
-    //public void ExitHit()
-    //{
-    //    if (monster.monsterState == State.MonsterState.M_Damage)
-    //        monster.monsterState = State.MonsterState.M_Idle;
-    //}
-
-    public void TargetLook()
-    {
-        if (!dead)
-            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    }
     public void AttackSound()
     {
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_WolfSound, "Attack");
     }
-
 }

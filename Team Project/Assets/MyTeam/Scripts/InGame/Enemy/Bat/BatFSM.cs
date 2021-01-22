@@ -180,12 +180,6 @@ public class BatFSM : MonoBehaviour
         running = false;
     }
 
-    //public void PlayerLookAt()
-    //{
-    //    if (!dead)
-    //        transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    //}
-
     public void AttackHit(int damage)
     {
         if (!dead)
@@ -202,19 +196,6 @@ public class BatFSM : MonoBehaviour
             }
         }
     }
-
-    //public void ExitHit()
-    //{
-    //    //if (!dead)
-    //    //{
-    //    //    if (bat.monsterState == State.MonsterState.M_Damage)
-    //    //        bat.monsterState = State.MonsterState.M_Move;
-    //    //    bat.animator.SetBool("isWalk", true);
-    //    //}
-    //
-    //    if (bat.monsterState == State.MonsterState.M_Damage)
-    //        bat.monsterState = State.MonsterState.M_Idle;
-    //}
 
     public void AttackSetting()
     {
