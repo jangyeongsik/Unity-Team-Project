@@ -29,6 +29,8 @@ public class Key : MonoBehaviour
         resourceText.text = GameData.Instance.player.keyCounter.ToString();
     }
 
+
+
     private void OnDestroy()
     {
         GameEventToUI.Instance.keyCount -= OnGetTempleKeys;

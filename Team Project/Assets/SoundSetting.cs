@@ -12,6 +12,8 @@ public class SoundSetting : MonoBehaviour
     {
         effectSetting.onValueChanged.AddListener(delegate { SetEffectVolume(); });
         bgmSetting.onValueChanged.AddListener(delegate { SetBGMVolume(); });
+        effectSetting.value = SoundManager.Instance.Effect_Audio.volume;
+        bgmSetting.value = SoundManager.Instance.BGM_Audio.volume;
     }
 
     void SetEffectVolume()
