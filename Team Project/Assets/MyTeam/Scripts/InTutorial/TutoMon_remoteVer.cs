@@ -74,7 +74,6 @@ public class TutoMon_remoteVer : MonoBehaviour
 
     private void Move()
     {
-        // float distanceToTarget = (transform.position - target.transform.position).magnitude;
         if (monster.DistacneWithTarget() < 8.0f)
         {
             monster.animator.SetBool("isAttack", true);
@@ -114,13 +113,6 @@ public class TutoMon_remoteVer : MonoBehaviour
         monster.animator.SetTrigger("isHit");
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Bone, "Hit");
     }
-
-    //public void ExitHit()
-    //{
-    //    if (monster.monsterState == State.MonsterState.M_Damage)
-    //        monster.monsterState = State.MonsterState.M_Idle;
-    //}
-
 
     public void PlayerLookAt()
     {

@@ -100,7 +100,7 @@ public class SkullKingFSM : MonoBehaviour
                         break;
                     case State.MonsterState.M_Attack:
                         KingAttack();
-                        AttackCount();
+                        //AttackCount();
                         break;
                     case State.MonsterState.M_Return:
                         break;
@@ -153,13 +153,9 @@ public class SkullKingFSM : MonoBehaviour
             skullKing.animator.SetBool("isWalk", true);
             skullKing.animator.SetBool("isAttack", true);
         }
-
         skullKing.monsterState = State.MonsterState.M_Move;
         skullKing.animator.SetBool("isWalk", true);
-        
     }
-
-
 
     //해골왕 등장 후 -> 움직이는 메서드 
     private void KingMove()
@@ -178,11 +174,11 @@ public class SkullKingFSM : MonoBehaviour
     //해골왕 움직이고, 타겟 거리 도달 하면 공격하는 메서드 
     private void KingAttack()
     {
+        AttackNotice.SetActive(skullKing.counterjudgement);
         if (skullKing.DistacneWithTarget() > skullKing.attack_aware_distance)
         {
             skullKing.monsterState = State.MonsterState.M_Move;
             skullKing.animator.SetBool("isAttack", false);
-            skullKing.movespeed = 0.0f;
         }
     }
 
@@ -191,28 +187,6 @@ public class SkullKingFSM : MonoBehaviour
     public void OnTargetingEvent()
     {
         targeting = true;
-    }
-
-    //public void ExitHit()
-    //{
-    //    if (skullKing.monsterState == State.MonsterState.M_Damage)
-    //    {
-    //        skullKing.monsterState = State.MonsterState.M_Idle;
-    //    }
-    //}
-
-    void AttackCount()
-    {
-        attackTime += Time.deltaTime;
-        if(attackTime > attackCountMin && attackTime < attackCountMax)
-        {
-            skullKing.counterjudgement = true;
-        }
-        else
-        {
-            skullKing.counterjudgement = false;
-        }
-        AttackNotice.SetActive(skullKing.counterjudgement);
     }
 
     public void AttackSetting()
@@ -237,6 +211,5 @@ public class SkullKingFSM : MonoBehaviour
     {
         skullKing.monsterState = State.MonsterState.M_Idle;
     }
-
 
 }
