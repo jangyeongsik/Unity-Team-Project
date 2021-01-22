@@ -53,7 +53,9 @@ public class NpcFSM : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+
         Vector3 dir = other.gameObject.transform.position - this.transform.position;
+
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 7);
     }
 
@@ -61,7 +63,6 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-
             GameEventToUI.Instance.OnEventTalkBtn(false);
             GameEventToUI.Instance.talk_box -= return_Talk_id;
             trigger = false;

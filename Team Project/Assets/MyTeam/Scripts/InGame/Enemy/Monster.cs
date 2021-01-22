@@ -15,7 +15,7 @@ public class Monster : character
 
     private GameObject target;                  //타겟 (플레이어)
 
-    public int dropItem_Key = 1;                //몬스터년이 드롭하는 아이템. (default 값 1로)
+    public int dropItem_Key = 1;                //몬스터가 드롭하는 아이템. (default 값 1로)
     public bool isGet;
     public bool monsterDead;
     public NavMeshAgent navigation;
@@ -27,8 +27,6 @@ public class Monster : character
     public event System.Action<int> EnemyHitEvent;
 
     public event System.Action EnemyDeadEvent;
-
-
 
     private void Start()
     {
@@ -100,6 +98,22 @@ public class Monster : character
     public void TurnOffCautionPoint()
     {
         counterjudgement = false;
+    }
+    #endregion
+
+    #region 에너미 피격모션 빠지나오는 이벤트 호출용 함수.
+    public void ExitHit()
+    {
+        if (monsterState == State.MonsterState.M_Damage)
+            monsterState = State.MonsterState.M_Idle;
+    }
+    #endregion
+
+    #region 에너미 타겟(플레이어) 바라보게 함.
+    public void PlayerLookAt()
+    {
+        if (gameObject.activeSelf == true)
+            transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
     }
     #endregion
 

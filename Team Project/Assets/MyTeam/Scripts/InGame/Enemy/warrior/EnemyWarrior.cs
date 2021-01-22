@@ -184,11 +184,11 @@ public class EnemyWarrior : MonoBehaviour
         targeting = true;
     }
 
-    public void ExitHit()
-    {
-        if (e_Warrior.monsterState == State.MonsterState.M_Damage)
-        e_Warrior.monsterState = State.MonsterState.M_Idle;
-    }
+    //public void ExitHit()
+    //{
+    //    if (e_Warrior.monsterState == State.MonsterState.M_Damage)
+    //    e_Warrior.monsterState = State.MonsterState.M_Idle;
+    //}
 
 
 
@@ -224,8 +224,6 @@ public class EnemyWarrior : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
-
-
         }
     }
 }

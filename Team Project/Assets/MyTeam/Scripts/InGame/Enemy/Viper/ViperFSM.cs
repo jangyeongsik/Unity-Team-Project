@@ -169,11 +169,11 @@ public class ViperFSM : MonoBehaviour
         running = false;
     }
 
-    public void PlayerLookAt()
-    {   
-        if(!dead)
-        transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
-    }
+    //public void PlayerLookAt()
+    //{   
+    //    if(!dead)
+    //    transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z));
+    //}
 
     public void AttackHit(int damage)
     {
@@ -192,15 +192,18 @@ public class ViperFSM : MonoBehaviour
         }
     }
 
-    public void ExitHit()
-    {
-        if (!dead)
-        {
-            if (viper.monsterState == State.MonsterState.M_Damage)
-                viper.monsterState = State.MonsterState.M_Move;
-            viper.animator.SetBool("viperWalk", true);
-        }
-    }
+    //public void ExitHit()
+    //{
+    //    //if (!dead)
+    //    //{
+    //    //    if (viper.monsterState == State.MonsterState.M_Damage)
+    //    //        viper.monsterState = State.MonsterState.M_Move;
+    //    //    viper.animator.SetBool("viperWalk", true);
+    //    //}
+    //
+    //    if (viper.monsterState == State.MonsterState.M_Damage)
+    //        viper.monsterState = State.MonsterState.M_Idle;
+    //}
 
     public void AttackSetting()
     {
