@@ -85,7 +85,10 @@ public class Monster : character
 
         GameEventToUI.Instance.OnEventMonsterDrop(dropItem_Key);
 
-        GameEventToUI.Instance.OnPlayerHp_Increase(1, 15);
+        GameEventToUI.Instance.OnPlayerHp_Increase(1, 30);
+
+        //현재 스테이지 정보에 본인을 뺀다
+        GameData.Instance.player.PopEnemyData(position.gameObject);
     }
     #endregion
 

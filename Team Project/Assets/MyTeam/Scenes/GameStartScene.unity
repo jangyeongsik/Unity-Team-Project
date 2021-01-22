@@ -2268,6 +2268,7 @@ MonoBehaviour:
     - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 21300000, guid: 51fabf4aa8137e840b7a7afdcaa90425, type: 3}
     - {fileID: 21300000, guid: 23763de22e8444e47999ccdf5fe67a6a, type: 3}
+  playerIdx: 0
   playerData: []
   player:
     id: 0
@@ -2306,6 +2307,7 @@ MonoBehaviour:
     aniList: []
     isSceneMove: 0
     curSceneName: 
+    enemyData: []
   equipmentData:
   - ID: 1000
     name: "\uD3C9\uBC94\uD55C \uAC11\uC637"
@@ -7354,6 +7356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318801273406304293, guid: fba8bb4b3eab0064886ceea598c517ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595720380354877689, guid: fba8bb4b3eab0064886ceea598c517ec,
         type: 3}
