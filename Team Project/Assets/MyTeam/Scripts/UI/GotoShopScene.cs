@@ -67,7 +67,7 @@ public class GotoShopScene : MonoBehaviour
         //SceneMgr.Instance.LoadScene("MAP015", "FromMap015 ToMap002");
         if (GameData.Instance.player.tutorial == false)
         {
-            SceneMgr.Instance.LoadScene("MAP015", "FromMap015 ToMap016");
+            SceneMgr.Instance.LoadScene("MAP000", "FromMap000 ToMap000");
         }
         else
         {
