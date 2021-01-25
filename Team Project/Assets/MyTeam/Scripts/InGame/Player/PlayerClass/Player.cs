@@ -36,6 +36,7 @@ public class PlayerData
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                       //현재 체력
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     public PlayerData(int slot)
     {
@@ -77,6 +78,7 @@ public class PlayerData
                 player.D_stageData.Add(stageData[i].key, stageData[i].value);
             }
         }
+        player.tpActivate = tpActivate;
 
         return player;
     }
@@ -108,6 +110,7 @@ public class PlayerData
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
         stageData = new List<StageData>();
+        tpActivate = new bool[3];
 
         return this;
     }
@@ -139,7 +142,10 @@ public class PlayerData
         for (int i = 0; i < Talk_Box.Length; ++i)
             Talk_Box[i] = false;
         stageData.Clear();
-
+        for (int i = 0; i < 3; i++)
+        {
+            tpActivate[i] = false;
+        }
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
@@ -169,7 +175,7 @@ public class PlayerData
         SavePortalName = player.SavePortalName;
         Talk_Box = player.Talk_Box;
         stageData = player.stageData;
-
+        tpActivate = player.tpActivate;
     }
 }
 
@@ -200,6 +206,7 @@ public class Player
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                     //현재 체력
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     //저장 안할 변수들
     public Transform position;              //위치       
