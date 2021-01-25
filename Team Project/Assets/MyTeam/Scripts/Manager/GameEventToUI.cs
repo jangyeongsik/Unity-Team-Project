@@ -102,6 +102,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
     }
     #endregion
 
+    #region"게임오버"
+    public event System.Action gameover;
+    public void OnGameOver()
+    {
+        gameover?.Invoke();
+    }
+    #endregion
+
     public delegate KeyValuePair<bool, Transform> AttackEnvent();
     public AttackEnvent Player_Attack;
 

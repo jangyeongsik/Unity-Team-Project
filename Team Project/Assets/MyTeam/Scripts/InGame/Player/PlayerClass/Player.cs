@@ -289,7 +289,19 @@ public class Player
     {
         enemyData.Remove(obj);
     }
+
+    public void PlayerGameOver()
+    {
+        //플레이어 체력회복
+        currentHp = 1;
+        GameEventToUI.Instance.OnPlayerHp_Increase(GameData.Instance.player.hp * 2, 100);
+        //상태 초기화
+        animator.Play("Idle");
+        GameData.Instance.PlayerSave();
+        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+    }
 }
+
 
 [Serializable]
 public class StageData
