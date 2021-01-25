@@ -24,6 +24,7 @@ public class VaccineLever : MonoBehaviour
 
                 UIEventToGame.Instance.ActivateVaccineCampPortal += ActiavateVaccineCampPortal;
                 GameEventToUI.Instance.OnLeverPopup(true, leverName, description);
+                GameEventToUI.Instance.OnEventDodbogi(true);
             }
         }
     }
@@ -33,9 +34,9 @@ public class VaccineLever : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-
-                GameEventToUI.Instance.OnLeverPopup(false, leverName, description);
                 UIEventToGame.Instance.ActivateVaccineCampPortal -= ActiavateVaccineCampPortal;
+                GameEventToUI.Instance.OnLeverPopup(false, leverName, description);
+                GameEventToUI.Instance.OnEventDodbogi(false);
             }
         }
     }

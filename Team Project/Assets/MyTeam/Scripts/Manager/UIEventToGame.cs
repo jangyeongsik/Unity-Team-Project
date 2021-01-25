@@ -81,7 +81,7 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public event System.Action<bool> ActivateVaccineCampPortal;
     public event System.Action<bool> ActivateTemplePortal;
     public event System.Action<bool> ActivateTemple;
-
+    public event System.Action<string, string> SkillName;
     public event System.Action JoystickSetting;
     public void OnTPActivate(bool isOn)
     {
@@ -116,5 +116,10 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnUIEventMinMap()
     {
         minMap();
+    }
+
+    public void OnUIEventSkillName(string skillName, string skillCylinderCount)
+    {
+        SkillName(skillName, skillCylinderCount);
     }
 }

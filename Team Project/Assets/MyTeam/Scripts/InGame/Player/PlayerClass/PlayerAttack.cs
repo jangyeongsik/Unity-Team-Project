@@ -40,8 +40,6 @@ public class PlayerAttack : MonoBehaviour
         GameEventToUI.Instance.Player_Hit += PlayerHit;
         GameEventToUI.Instance.Player_Boss_Hit += PlayerBossHit;
         UIEventToGame.Instance.Player_Delay += PlayerDelay;
-
-
     }
 
     private void OnDestroy()
@@ -143,7 +141,6 @@ public class PlayerAttack : MonoBehaviour
                             //에너미 히트 이벤트
                             EnemyHitEvent();
                         }
-                        
                         break;
                 }
                 break;

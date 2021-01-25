@@ -35,6 +35,7 @@ public class TempleLever : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 GameEventToUI.Instance.OnTemplePopup(true, isActivated, leverName);
+                GameEventToUI.Instance.OnEventDodbogi(true);
             }
         }
     }
@@ -45,6 +46,7 @@ public class TempleLever : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 GameEventToUI.Instance.OnTemplePopup(false, isActivated, leverName);
+                GameEventToUI.Instance.OnEventDodbogi(false);
             }
         }
     }

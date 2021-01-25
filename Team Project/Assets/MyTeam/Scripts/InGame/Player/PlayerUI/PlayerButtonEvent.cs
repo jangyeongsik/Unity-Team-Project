@@ -8,9 +8,11 @@ public class PlayerButtonEvent : MonoBehaviour
     private bool templeOnOff = false;
     private bool talkOnOff = false;
     private bool miniMapOnOff = false;
+    private bool dodbogiOnOff = false;
     [SerializeField]
     GameObject vCam;
     GameObject _instance;
+    public GameObject dodboji;
     public bool minmapOnOff;
 
     [SerializeField] GameObject minmapCam;
@@ -29,6 +31,13 @@ public class PlayerButtonEvent : MonoBehaviour
             Destroy(vCam.gameObject);
         }
         UIEventToGame.Instance.minMap += MinMapOnOff;
+        GameEventToUI.Instance.dodbogiImgOnOff += DodbogiOnOff;
+    }
+
+    private void OnDestroy()
+    {
+        UIEventToGame.Instance.minMap -= MinMapOnOff;
+        GameEventToUI.Instance.dodbogiImgOnOff -= DodbogiOnOff;
     }
     private void Update()
     {
@@ -73,5 +82,9 @@ public class PlayerButtonEvent : MonoBehaviour
         }
     }*/
 
+    public void DodbogiOnOff(bool isOn)
+    {
+        dodboji.SetActive(isOn);
+    }
 
 }
