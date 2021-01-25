@@ -37,6 +37,7 @@ public class NpcRolin : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(count);
         if(attackCount > 5 && !isChack)
         {
             isChack = true;
@@ -101,9 +102,12 @@ public class NpcRolin : MonoBehaviour
 
     public int return_Talk_id()
     {
+        if (count >= 4)
+        {
+            return talk_id[3];
+        }
         return talk_id[count];
     }
-
 
     public void TalkChange()
     {
