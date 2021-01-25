@@ -18,6 +18,7 @@ public class SkillPreset : MonoBehaviour
     //선택, 디폴트 색
     Color selectColor = new Color(1, 121/255, 121/255);
     Color defalt = new Color(1, 1, 1);
+    Color DeActive = new Color(0, 0, 0);
 
     //스킬 프리셋 이미지
     Image[] skillImages;
@@ -57,6 +58,19 @@ public class SkillPreset : MonoBehaviour
         for (int i = 0; i < GameData.Instance.player.skillIdx.Length; ++i)
         {
             btnImages[i].sprite = skillImages[GameData.Instance.player.skillIdx[i]-1].sprite;
+        }
+        for(int i = 0; i < GameData.Instance.player.skillShop.Length; ++i)
+        {
+            if(!GameData.Instance.player.skillShop[i])
+            {
+                skillImages[i].color = DeActive;
+                skillImages[i].raycastTarget = false;
+            }
+            else
+            {
+                skillImages[i].color = defalt;
+                skillImages[i].raycastTarget = true;
+            }
         }
 
         skillImages[selectIdx].color = selectColor;

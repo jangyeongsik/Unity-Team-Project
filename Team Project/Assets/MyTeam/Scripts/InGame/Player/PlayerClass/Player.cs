@@ -35,7 +35,8 @@ public class PlayerData
     public string SavePortalName;               //저장한 씬으로 갈 포탈이름
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
-    public float currentHp;                       //현재 체력
+    public float currentHp;                     //현재 체력
+    public bool[] skillShop;                    //스킬 구매 여부
 
     public PlayerData(int slot)
     {
@@ -69,6 +70,7 @@ public class PlayerData
         player.SavePortalName = SavePortalName;
         player.Talk_Box = Talk_Box;
         player.stageData = stageData;
+        player.skillShop = skillShop;
         player.D_stageData.Clear();
         for(int i = 0; i < stageData.Count; ++i)
         {
@@ -84,7 +86,6 @@ public class PlayerData
     //새로운 플레이어 데이터를 만든다
     public PlayerData CreateNewPlayer(int slot, string name)
     {
-
         id = slot;
         hp = 4;
         currentHp = 4;
@@ -108,6 +109,14 @@ public class PlayerData
         SavePortalName = "MAP001";
         Talk_Box = new bool[28];
         stageData = new List<StageData>();
+        skillShop = new bool[8];
+        for(int i = 0; i < skillShop.Length; ++i)
+        {
+            if (i <= 2)
+                skillShop[i] = true;
+            else
+                skillShop[i] = false;
+        }
 
         return this;
     }
@@ -139,6 +148,13 @@ public class PlayerData
         for (int i = 0; i < Talk_Box.Length; ++i)
             Talk_Box[i] = false;
         stageData.Clear();
+        for (int i = 0; i < skillShop.Length; ++i)
+        {
+            if (i <= 2)
+                skillShop[i] = true;
+            else
+                skillShop[i] = false;
+        }
 
         return this;
     }
@@ -169,6 +185,7 @@ public class PlayerData
         SavePortalName = player.SavePortalName;
         Talk_Box = player.Talk_Box;
         stageData = player.stageData;
+        skillShop = player.skillShop;
 
     }
 }
@@ -200,6 +217,7 @@ public class Player
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                     //현재 체력
+    public bool[] skillShop;                    //스킬 구매 여부
 
     //저장 안할 변수들
     public Transform position;              //위치       
@@ -271,7 +289,19 @@ public class Player
     {
         enemyData.Remove(obj);
     }
+
+    public void PlayerGameOver()
+    {
+        //플레이어 체력회복
+        currentHp = 1;
+        GameEventToUI.Instance.OnPlayerHp_Increase(GameData.Instance.player.hp * 2, 100);
+        //상태 초기화
+        animator.Play("Idle");
+        GameData.Instance.PlayerSave();
+        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+    }
 }
+
 
 [Serializable]
 public class StageData

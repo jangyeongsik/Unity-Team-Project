@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     bool isReadyToCounter = false;
 
     Transform curAttackEnemy = null;
+    List<Transform> AttackEnemy = new List<Transform>();
 
     public float ArrowRadius = 1.5f;
 
@@ -279,6 +280,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     //디버깅
+    
     private void OnDrawGizmos()
     {
         //적인식범위
@@ -287,6 +289,7 @@ public class PlayerAttack : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.up, ArrowRadius);
+
     }
 
     ////화살 충돌상태면 화살카운터 가능으로
@@ -408,6 +411,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (curAttackEnemy == null) return;
         {
+            //공격범위 계산
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 2f, LayerMask.GetMask("Enemy"));
             //플레이어 데미지 계산
             float colorDmg = 0;
             if (colorZone == COLORZONE.RED)
@@ -425,7 +430,13 @@ public class PlayerAttack : MonoBehaviour
             float fDmg = colorDmg * dmg;
             fDmg = Mathf.Clamp(fDmg, 1, 10);
 
-            curAttackEnemy.GetComponent<Monster>().OnEnemyHitEvent((int)fDmg);
+            Monster mon = null;
+            for (int i = 0; i < colliders.Length; ++i)
+            {
+                mon = colliders[i].GetComponent<Monster>();
+                if (mon.monsterState == State.MonsterState.M_Dead) continue;
+                mon.OnEnemyHitEvent((int)fDmg);
+            }
         }
     }
 

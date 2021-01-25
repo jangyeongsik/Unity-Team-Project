@@ -38,7 +38,7 @@ public class NpcRolin : MonoBehaviour
     private void Update()
     {
         Debug.Log(count);
-        if(attackCount > 5 && !isChack)
+        if(attackCount >= 5 && !isChack)
         {
             isChack = true;
             count++;
