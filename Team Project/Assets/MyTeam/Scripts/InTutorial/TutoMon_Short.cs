@@ -109,14 +109,6 @@ public class TutoMon_Short : MonoBehaviour
         targeting = true;
     }
 
-    public void ExitHit()
-    {
-        if (skull.monsterState == State.MonsterState.M_Damage)
-        {
-            skull.monsterState = State.MonsterState.M_Idle;
-        }
-    }
-
     public void PlayerLookAt()
     {
         transform.LookAt(target.transform);
@@ -128,6 +120,7 @@ public class TutoMon_Short : MonoBehaviour
         hitCount++;
         skull.animator.SetBool("IsAttack", false);
         skull.animator.SetTrigger("Hit");
+        skull.monsterState = State.MonsterState.M_Damage;
         if (GameEventToUI.Instance.OnAttack_SuccessEvent())
         {
             GameEventToUI.Instance.OnAttactReset();
