@@ -77,6 +77,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "드롭아이템 멘트박스"
     public event System.Action isGet;
+    #endregion 
+
+    #region "선택형 텔레포터 팝업"
+    public event System.Action<bool, string> SelectiveTeleport;
+    public void ActivateSelectiveTeleporter(bool isOn, string curSceneName)
+    {
+        SelectiveTeleport?.Invoke(isOn, curSceneName);
+    }
     #endregion
 
     #region "아이템 드랍"

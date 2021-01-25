@@ -8,7 +8,6 @@ public class Sound
     public string name;
     public AudioClip clip;
 }
-
 public enum SoundKind
 {
     Sound_PlayerMove,

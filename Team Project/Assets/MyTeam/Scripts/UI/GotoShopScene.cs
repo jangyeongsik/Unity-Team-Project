@@ -19,8 +19,6 @@ public class GotoShopScene : MonoBehaviour
     public GameObject MinimapCanvas;
     public GameObject SettingCanvas;
     public GameObject QuitGameScreen;
-    public GameObject TPCanvas;
-    public GameObject TPOperateCanvas;
     public GameObject CraftCanvas;
     public GameObject LeverCanvas;
     public Temple TempleCanvas;
@@ -55,8 +53,6 @@ public class GotoShopScene : MonoBehaviour
     private void Awake()
     {
         GameEventToUI.Instance.onOff += ShopOn;
-        GameEventToUI.Instance.TPOpearteOnOff += OnOffTPOperateCanvas;
-        GameEventToUI.Instance.TPCanvasOnOff += OnOffTPCanvas;
         GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
         GameEventToUI.Instance.templeOnOff += OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff += TalkOff;
@@ -96,8 +92,6 @@ public class GotoShopScene : MonoBehaviour
     private void OnDestroy()
     {
         GameEventToUI.Instance.onOff -= ShopOn;
-        GameEventToUI.Instance.TPOpearteOnOff -= OnOffTPOperateCanvas;
-        GameEventToUI.Instance.TPCanvasOnOff -= OnOffTPCanvas;
         GameEventToUI.Instance.leverOnOff -= OnOffLeverPopup;
         GameEventToUI.Instance.templeOnOff -= OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff -= TalkOff;
@@ -329,14 +323,6 @@ public class GotoShopScene : MonoBehaviour
     {
         MinimapCanvasOnOff = !MinimapCanvasOnOff;
         MinimapCanvas.SetActive(MinimapCanvasOnOff);
-    }
-    public void OnOffTPOperateCanvas(bool isOn)
-    {
-        TPOperateCanvas.SetActive(isOn);
-    }
-    public void OnOffTPCanvas(bool isOn)
-    {
-        TPCanvas.SetActive(isOn);
     }
     public void OnOffLeverPopup(bool isOn, string name, string description)
     {

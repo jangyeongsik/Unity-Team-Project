@@ -37,6 +37,7 @@ public class PlayerData
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                     //현재 체력
     public bool[] skillShop;                    //스킬 구매 여부
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     public PlayerData(int slot)
     {
@@ -79,6 +80,7 @@ public class PlayerData
                 player.D_stageData.Add(stageData[i].key, stageData[i].value);
             }
         }
+        player.tpActivate = tpActivate;
 
         return player;
     }
@@ -117,6 +119,7 @@ public class PlayerData
             else
                 skillShop[i] = false;
         }
+        tpActivate = new bool[3];
 
         return this;
     }
@@ -155,7 +158,10 @@ public class PlayerData
             else
                 skillShop[i] = false;
         }
-
+        for (int i = 0; i < 3; i++)
+        {
+            tpActivate[i] = false;
+        }
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
@@ -186,7 +192,7 @@ public class PlayerData
         Talk_Box = player.Talk_Box;
         stageData = player.stageData;
         skillShop = player.skillShop;
-
+        tpActivate = player.tpActivate;
     }
 }
 
@@ -218,6 +224,7 @@ public class Player
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                     //현재 체력
     public bool[] skillShop;                    //스킬 구매 여부
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     //저장 안할 변수들
     public Transform position;              //위치       
