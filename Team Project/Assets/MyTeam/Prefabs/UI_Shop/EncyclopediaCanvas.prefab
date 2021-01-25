@@ -1886,6 +1886,7 @@ GameObject:
   - component: {fileID: 5764673221128248576}
   - component: {fileID: 8058876144092839282}
   - component: {fileID: 1155737050647439845}
+  - component: {fileID: 5312494519201172373}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -1992,7 +1993,41 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8058876144092839282}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6019660482771682266}
+        m_MethodName: NoBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6773290056308622807}
+        m_MethodName: OpenSkillBuyInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5312494519201172373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127271102759476725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc662648da3b70d4fb3ea278d6622f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4169915106293186916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2564038648353893096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2344,7 +2379,6 @@ GameObject:
   - component: {fileID: 2768503050239238134}
   - component: {fileID: 2889037071748857400}
   - component: {fileID: 1081135599060053728}
-  - component: {fileID: 6801182768437082933}
   m_Layer: 5
   m_Name: SkillName
   m_TagString: Untagged
@@ -2412,21 +2446,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &6801182768437082933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4599946048811677087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3cf2eede222daa418832c35d6fe1c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillNameText: {fileID: 0}
-  SkillCylinderCountText: {fileID: 0}
-  CurrentCylinderCountText: {fileID: 0}
 --- !u!1 &4606243577855349035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,6 +3433,7 @@ GameObject:
   - component: {fileID: 2349799026476443720}
   - component: {fileID: 3168295032297747118}
   - component: {fileID: 7362828674195152014}
+  - component: {fileID: 8076587979790102433}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3520,7 +3540,41 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3168295032297747118}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6019660482771682266}
+        m_MethodName: BuySkillBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6773290056308622807}
+        m_MethodName: OpenSkillBuyInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8076587979790102433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637111610734357524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc662648da3b70d4fb3ea278d6622f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9080512771206135517
 GameObject:
   m_ObjectHideFlags: 0
