@@ -126,6 +126,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool, string, string> leverOnOff;
     public event System.Action<bool, bool, string> templeOnOff;
     public event System.Action<bool> talkButOnOff;
+    public event System.Action<bool> dodbogiImgOnOff;
     public event System.Action talkOnOff;
 
     public event System.Action talkBtnEvent;
@@ -204,6 +205,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventTalkBtn(bool isOn)
     {
         talkButOnOff(isOn);
+    }
+
+    public void OnEventDodbogi(bool isOn)
+    {
+        dodbogiImgOnOff(isOn);
     }
 
     public void OnEvent_TalkBox(int id) {
