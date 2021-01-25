@@ -73,6 +73,9 @@ public class UIEventToGame : Singleton<UIEventToGame>
     }
     #endregion
 
+    public delegate int SkillId();
+    public SkillId skillId;
+
     //텔레포터 isActivated로 변경
     public event System.Action<bool> TPActivate;
     //텔레포터 작동 안함 메시지 보냄
@@ -82,6 +85,7 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public event System.Action<bool> ActivateTemplePortal;
     public event System.Action<bool> ActivateTemple;
     public event System.Action<string, string> SkillName;
+    
     public event System.Action JoystickSetting;
     public void OnTPActivate(bool isOn)
     {
@@ -90,6 +94,11 @@ public class UIEventToGame : Singleton<UIEventToGame>
     public void OnCancel(bool isOn)
     {
         CancelActivate(isOn);
+    }
+
+    public int UIeventSkillId()
+    {
+        return skillId();
     }
     public void OnSwordChangeEvent(int index)
     {

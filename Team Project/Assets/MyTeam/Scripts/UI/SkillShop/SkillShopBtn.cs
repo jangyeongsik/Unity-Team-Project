@@ -9,10 +9,10 @@ public class SkillShopBtn : MonoBehaviour
     public Text skillName;
     bool InfoWindowOnoff;
 
-
     public void OpenSkillBuyInfo()
     {
         InfoWindowOnoff = !InfoWindowOnoff;
+
         SkillInfo.SetActive(InfoWindowOnoff);
     }
 }

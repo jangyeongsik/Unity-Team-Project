@@ -108,7 +108,7 @@ public class PlayerData
         bossClear = false;
         skillIdx = new int[3] { 1, 2, 3 };
         SaveSceneName = "MAP001";
-        SavePortalName = "MAP001";
+        SavePortalName = "STPPoint001";
         Talk_Box = new bool[28];
         stageData = new List<StageData>();
         skillShop = new bool[8];
@@ -147,7 +147,7 @@ public class PlayerData
         for (int i = 0; i < skillIdx.Length; ++i)
             skillIdx[i] = i + 1;
         SaveSceneName = "MAP001";
-        SavePortalName = "MAP001";
+        SavePortalName = "STPPoint001";
         for (int i = 0; i < Talk_Box.Length; ++i)
             Talk_Box[i] = false;
         stageData.Clear();

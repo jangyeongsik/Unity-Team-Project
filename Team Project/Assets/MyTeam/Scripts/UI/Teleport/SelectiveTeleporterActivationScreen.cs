@@ -13,7 +13,6 @@ public class SelectiveTeleporterActivationScreen : MonoBehaviour
     
     private void OnEnable()
     {
-        Debug.Log("ActivationScreen Enabled");
         currentActivatedTpPointsCount = 0;
         for (int i = 0; i < 3; i++)
         {
