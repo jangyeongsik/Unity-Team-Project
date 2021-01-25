@@ -112,6 +112,7 @@ public class EquipItem : MonoBehaviour
     }
     public void Equip(Equipment _item)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         int i = 0;
         Equipment temp = _item;
         pE = DataManager.Instance.EquipInvenData;
@@ -182,6 +183,7 @@ public class EquipItem : MonoBehaviour
     }
     public void ShowEquipItemInfo(string val)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         StringBuilder sb = new StringBuilder();
         Equipment e;
         if (!infoScreen.gameObject.activeSelf)

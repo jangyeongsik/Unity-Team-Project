@@ -182,6 +182,10 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         {
             D_ForgeSounds.Add(ForgeSounds[i].name, ForgeSounds[i].clip);
         }
+        for (int i = 0; i < UISounds.Length; i++)
+        {
+            D_UISounds.Add(UISounds[i].name, UISounds[i].clip);
+        }
     }
     public void PlayForgeSound(string name)
     {

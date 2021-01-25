@@ -237,6 +237,7 @@ public class GotoShopScene : MonoBehaviour
     public void QuitGameScreenOn()
     {
         QuitGameScreen.SetActive(true);
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
     }
     public void LogOut()
     {
@@ -244,6 +245,7 @@ public class GotoShopScene : MonoBehaviour
         {
             DataManager.Instance.DeleteData();
         }
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         SceneMgr.CurrentSceneName = "";
         GameData.Instance.PlayerSave();
         Inventory.Instance.Destroy();
@@ -261,6 +263,7 @@ public class GotoShopScene : MonoBehaviour
     //드랍다운 메뉴로 키기
     public void OpenUIThroughDropdownMenu()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
         ChangeScreen(Menu.transform.GetChild(0).GetComponent<TMP_Dropdown>().value);
     }
     //화면 전환
