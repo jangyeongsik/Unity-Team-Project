@@ -10,6 +10,8 @@ public class HeartUI : MonoBehaviour
 
     int currentHeart;
 
+    public GameObject healEffect;
+
     private void Awake()
     {
         hearts = transform.Find("Active").GetComponentsInChildren<Image>();
@@ -47,6 +49,9 @@ public class HeartUI : MonoBehaviour
     private void Update()
     {
         GameData.Instance.player.currentHp = hearts[currentHeart].fillAmount + currentHeart;
+
+        if (Input.GetKeyDown(KeyCode.P))
+            AddHeart(1, 30);
     }
 
     private void OnDestroy()
@@ -76,6 +81,12 @@ public class HeartUI : MonoBehaviour
     public void AddHeart(int value, int per)
     {
         if (Random.Range(0, 100) > per) return;
+        if(per != 100)
+        {
+            GameObject obj = Instantiate(healEffect) as GameObject;
+            obj.transform.position = GameData.Instance.player.position.position + Vector3.up;
+            Destroy(obj, 1);
+        }
         for(int j = 0; j < value; j++)
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
