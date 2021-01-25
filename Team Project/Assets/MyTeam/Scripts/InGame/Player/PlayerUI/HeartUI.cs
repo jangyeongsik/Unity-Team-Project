@@ -11,11 +11,17 @@ public class HeartUI : MonoBehaviour
     int currentHeart;
 
     public GameObject healEffect;
+    Image LessHp;
+    Image Hit;
 
     private void Awake()
     {
         hearts = transform.Find("Active").GetComponentsInChildren<Image>();
         disabled = transform.Find("Disabled").GetComponentsInChildren<Image>();
+        LessHp = GameObject.Find("Less Hp").GetComponent<Image>();
+        LessHp.gameObject.SetActive(false);
+        Hit = GameObject.Find("Hit").GetComponent<Image>();
+        Hit.gameObject.SetActive(false);
 
         for(int i = 0; i < hearts.Length; ++i)
         {
@@ -49,6 +55,10 @@ public class HeartUI : MonoBehaviour
     private void Update()
     {
         GameData.Instance.player.currentHp = hearts[currentHeart].fillAmount + currentHeart;
+        if (LessHp.gameObject.activeSelf && GameData.Instance.player.currentHp > 1)
+            LessHp.gameObject.SetActive(false);
+        else if (!LessHp.gameObject.activeSelf && GameData.Instance.player.currentHp <= 1)
+            LessHp.gameObject.SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.P))
             AddHeart(1, 30);
@@ -76,6 +86,9 @@ public class HeartUI : MonoBehaviour
             }
             hearts[currentHeart].fillAmount -= 0.5f;
         }
+
+        if (!LessHp.gameObject.activeSelf)
+            StartCoroutine(HitActive());
     }
 
     public void AddHeart(int value, int per)
@@ -100,6 +113,7 @@ public class HeartUI : MonoBehaviour
                 hearts[currentHeart].fillAmount += 0.5f;
             }
         }
+
     }
 
     void SetNewHeart(int idx, float amount = 1)
@@ -117,5 +131,12 @@ public class HeartUI : MonoBehaviour
             SetNewHeart(GameData.Instance.player.hp - 1,0);
             AddHeart(2, 100);
         }
+    }
+
+    IEnumerator HitActive()
+    {
+        Hit.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        Hit.gameObject.SetActive(false);
     }
 }
