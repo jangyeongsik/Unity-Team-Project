@@ -87,6 +87,7 @@ public class NpcVoltaire : MonoBehaviour
     private void OnDestroy()
     {
         GameEventToUI.Instance.player_Trigger -= isTrigger;
+        GameEventToUI.Instance.talkBtnEvent -= TalkChange;
     }
     private void OnTriggerStay(Collider other)
     {

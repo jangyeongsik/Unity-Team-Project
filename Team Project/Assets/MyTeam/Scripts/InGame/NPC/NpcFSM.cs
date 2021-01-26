@@ -13,17 +13,22 @@ public class NpcFSM : MonoBehaviour
     {
         GameEventToUI.Instance.player_Trigger += isTrigger;
         GameEventToUI.Instance.talkBtnEvent += TalkChange;
-        if (GameData.Instance.player.Talk_Box[0] == true)
-        {
-            GameEventToUI.Instance.OnEventSkillShopPush();
-        }
+
     }
 
-
+    private void OnDestroy()
+    {
+        GameEventToUI.Instance.player_Trigger -= isTrigger;
+        GameEventToUI.Instance.talkBtnEvent -= TalkChange;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            if (GameData.Instance.player.Talk_Box[0])
+            {
+                GameEventToUI.Instance.OnEventSkillShopPush();
+            }
             GameEventToUI.Instance.OnEventTalkBtn(true);
             GameEventToUI.Instance.talk_box += return_Talk_id;
             trigger = true;
@@ -39,6 +44,10 @@ public class NpcFSM : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            if (GameData.Instance.player.Talk_Box[0])
+            {
+                GameEventToUI.Instance.onEventSkillShopback();
+            }
             GameEventToUI.Instance.OnEventTalkBtn(false);
             GameEventToUI.Instance.talk_box -= return_Talk_id;
             trigger = false;
@@ -64,6 +73,5 @@ public class NpcFSM : MonoBehaviour
     {
         GameData.Instance.player.Talk_Box[0] = true;
         GameEventToUI.Instance.talkBtnEvent -= TalkChange;
-        GameEventToUI.Instance.OnEventSkillShopPush();
     }
 }

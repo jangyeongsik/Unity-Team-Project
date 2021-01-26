@@ -61,6 +61,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.joystick_on += joystickon;
         GameEventToUI.Instance.joystick_off += joystickoff;
         GameEventToUI.Instance.skillShopPush += PushShop;
+        GameEventToUI.Instance.skillShopback += BackShop;
         //SceneMgr.Instance.LoadScene("MAP028", "FromMap028 ToMap016");
         if (GameData.Instance.player.tutorial == false)
         {
@@ -99,6 +100,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.joystick_on -= joystickon;
         GameEventToUI.Instance.joystick_off -= joystickoff;
         GameEventToUI.Instance.skillShopPush -= PushShop;
+        GameEventToUI.Instance.skillShopback -= BackShop;
     }
 
     void Update()
@@ -369,5 +371,9 @@ public class GotoShopScene : MonoBehaviour
     public void PushShop()
     {
         GameEventToUI.Instance.skillShop += ShopOn;
+    }
+    public void BackShop()
+    {
+        GameEventToUI.Instance.skillShop -= ShopOn;
     }
 }

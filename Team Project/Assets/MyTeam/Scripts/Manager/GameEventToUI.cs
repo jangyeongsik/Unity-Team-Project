@@ -170,6 +170,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action npc_talk_Next;
 
     public event System.Action skillShopPush;
+    public event System.Action skillShopback;
 
     public void OnNpc_name_Setting(int data)
     {
@@ -302,6 +303,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventSkillShopPush()
     {
         skillShopPush();
+    }
+
+    public void onEventSkillShopback()
+    {
+        skillShopback();
     }
 
     #region 레버 충돌시 팝업창 출현
