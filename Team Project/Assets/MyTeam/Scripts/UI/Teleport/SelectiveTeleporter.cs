@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SelectiveTeleporter : MonoBehaviour
 {
+    bool isTeleporting;
+    private void Start()
+    {
+        isTeleporting = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
+        if (isTeleporting) return;
         if (other.CompareTag("Player"))
         {
             GameEventToUI.Instance.ActivateSelectiveTeleporter(true, GameData.Instance.player.curSceneName);
@@ -15,6 +21,7 @@ public class SelectiveTeleporter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isTeleporting = false;
             GameEventToUI.Instance.ActivateSelectiveTeleporter(false, GameData.Instance.player.curSceneName);
         }
     }

@@ -636,4 +636,13 @@ public class CraftController : MonoBehaviour
     }
     #endregion
     #endregion
+    #region 팝업이 떠있으면 끄기
+    private void OnDisable()
+    {
+        //정보창 떠있으면 끄기
+        if (ingredientInfoScreen.activeSelf) { ingredientInfoScreen.SetActive(false); }
+        if (equipmentInfoScreen.activeSelf) { equipmentInfoScreen.SetActive(false); }
+        if (specialIngScreen.activeSelf) { specialIngScreen.SetActive(false); }
+    }
+    #endregion
 }
