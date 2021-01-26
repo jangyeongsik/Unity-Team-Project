@@ -10,14 +10,17 @@ public class CraftButton : MonoBehaviour
     
     public void OnIngredientInfoScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         cCon.OnIngredientInfoScreen(btnName, itemID);
     }
     public void OnEquipmentInfoScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         cCon.OnEquipmentInfoScreen(btnName, itemID);
     }
     public void OnSpecialIngScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         cCon.SetSpecialIngredientImages();
     }
 }

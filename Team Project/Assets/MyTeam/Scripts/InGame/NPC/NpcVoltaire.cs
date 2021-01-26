@@ -37,12 +37,11 @@ public class NpcVoltaire : MonoBehaviour
         {
             t_count = 1;
         }
-        if (p_2.activeSelf && !p_1.activeSelf)
+        else if (p_2.activeSelf && !p_1.activeSelf)
         {
             t_count = 1;
         }
-
-        if (p_1.activeSelf && p_2.activeSelf && !isTrue)
+        else if (p_1.activeSelf && p_2.activeSelf && !isTrue)
         {
             t_count = 2;
             isTrue = true;
@@ -51,11 +50,13 @@ public class NpcVoltaire : MonoBehaviour
             box2.SetActive(false);
         }
 
+        quest_str.Clear();
         quest_str.Append(t_count.ToString());
         quest_str.Append(" / 2");
         switch (count)
         {
             case 1:
+            case 2:
                 UIEventToGame.Instance.OnUiEventQuest_Name("신전 및 석상 상호작용");
                 UIEventToGame.Instance.OnUiEventQuest_Count(quest_str.ToString());
                 break;
@@ -66,7 +67,7 @@ public class NpcVoltaire : MonoBehaviour
                 break;
 
         }
-        quest_str.Clear();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,6 +112,10 @@ public class NpcVoltaire : MonoBehaviour
 
     public int return_Talk_id()
     {
+        if (count >= 4)
+        {
+            return talk_id[3];
+        }
         return talk_id[count];
     }
     public void TalkChange()

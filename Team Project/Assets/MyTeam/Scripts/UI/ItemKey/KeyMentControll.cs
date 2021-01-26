@@ -9,7 +9,7 @@ public class KeyMentControll : MonoBehaviour
     public float alphaSpeed;        //투명해지는 속도 
     TextMeshPro mentBox;
     Color alpha;
-    public GameObject obj;          //아이템 습득 로그창. 
+    public GameObject obj;         //아이템 습득 로그창.  
 
     bool isOpen = false;
 
@@ -18,11 +18,6 @@ public class KeyMentControll : MonoBehaviour
         mentBox = GetComponent<TextMeshPro>();
         obj.SetActive(false);
         GameEventToUI.Instance.isGet += OnOpenMentBox;
-    }
-
-    void Update()
-    {
-
     }
 
     public void OnOpenMentBox()

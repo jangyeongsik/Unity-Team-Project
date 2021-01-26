@@ -77,6 +77,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     #region "드롭아이템 멘트박스"
     public event System.Action isGet;
+    #endregion 
+
+    #region "선택형 텔레포터 팝업"
+    public event System.Action<bool, string> SelectiveTeleport;
+    public void ActivateSelectiveTeleporter(bool isOn, string curSceneName)
+    {
+        SelectiveTeleport?.Invoke(isOn, curSceneName);
+    }
     #endregion
 
     #region "아이템 드랍"
@@ -99,6 +107,14 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnAddMaxHp(int add)
     {
         AddMaxHp?.Invoke(add);
+    }
+    #endregion
+
+    #region"게임오버"
+    public event System.Action gameover;
+    public void OnGameOver()
+    {
+        gameover?.Invoke();
     }
     #endregion
 
@@ -126,7 +142,9 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool, string, string> leverOnOff;
     public event System.Action<bool, bool, string> templeOnOff;
     public event System.Action<bool> talkButOnOff;
+    public event System.Action<bool> dodbogiImgOnOff;
     public event System.Action talkOnOff;
+    public event System.Action skillShop;
 
     public event System.Action talkBtnEvent;
 
@@ -151,6 +169,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public event System.Action npc_talk_Next;
 
+    public event System.Action skillShopPush;
 
     public void OnNpc_name_Setting(int data)
     {
@@ -204,6 +223,11 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public void OnEventTalkBtn(bool isOn)
     {
         talkButOnOff(isOn);
+    }
+
+    public void OnEventDodbogi(bool isOn)
+    {
+        dodbogiImgOnOff(isOn);
     }
 
     public void OnEvent_TalkBox(int id) {
@@ -270,7 +294,15 @@ public class GameEventToUI : Singleton<GameEventToUI>
         talkBtnEvent();
     }
 
+    public void onEventSkillShop()
+    {
+        skillShop();
+    }
 
+    public void OnEventSkillShopPush()
+    {
+        skillShopPush();
+    }
 
     #region 레버 충돌시 팝업창 출현
     public void OnLeverPopup(bool isOn, string name = " ", string description = " ")

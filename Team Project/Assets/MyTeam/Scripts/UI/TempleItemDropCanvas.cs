@@ -63,7 +63,11 @@ public class TempleItemDropCanvas : MonoBehaviour
             Debug.Log(i + " " + rewards[i]);
         }
     }
-
+    public void Close()
+    {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
+        gameObject.SetActive(false);
+    }
     private void OnDestroy()
     {
         GameEventToUI.Instance.TempleItemDropInfo -= OnItemDropInfo;
@@ -71,6 +75,7 @@ public class TempleItemDropCanvas : MonoBehaviour
 
     void OnItemDropInfo(bool value, int MapIdx)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "보상획득");
         gameObject.SetActive(value);
         //스위치 문은 추후에 신전 추가되면 활성화 시키기
         //switch (MapIdx)

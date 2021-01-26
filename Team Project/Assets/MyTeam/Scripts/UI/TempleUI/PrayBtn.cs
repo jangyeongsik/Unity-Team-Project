@@ -17,16 +17,19 @@ public class PrayBtn : MonoBehaviour
     }
     public void SetPrayCount(int _count)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         keyCount.text = _count.ToString();
         count = _count;
     }
     public void CloseUI()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
     }
     public void Pray()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         if (count <= 0) return;
         if (count > GameData.Instance.player.keyCounter) return;
         UIEventToGame.Instance.OnActivateTemplePortal(true);

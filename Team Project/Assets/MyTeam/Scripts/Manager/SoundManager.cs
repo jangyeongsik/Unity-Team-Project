@@ -8,7 +8,6 @@ public class Sound
     public string name;
     public AudioClip clip;
 }
-
 public enum SoundKind
 {
     Sound_PlayerMove,
@@ -181,6 +180,10 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         for (int i = 0; i < ForgeSounds.Length; i++)
         {
             D_ForgeSounds.Add(ForgeSounds[i].name, ForgeSounds[i].clip);
+        }
+        for (int i = 0; i < UISounds.Length; i++)
+        {
+            D_UISounds.Add(UISounds[i].name, UISounds[i].clip);
         }
     }
     public void PlayForgeSound(string name)

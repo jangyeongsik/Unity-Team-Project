@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         //방향키 wasd이동
-        Move();
+        //Move();
         PlayerDash();
         controller.Move(Vector3.down * GameData.Instance.player.gravity * Time.deltaTime);
         if(GameData.Instance.player.currentHp <= 0 && GameData.Instance.player.m_state != State.PlayerState.P_Dead && GameData.Instance.player.curSceneName != "")

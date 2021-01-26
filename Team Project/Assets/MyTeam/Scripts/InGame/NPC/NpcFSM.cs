@@ -5,17 +5,18 @@ using UnityEngine.AI;
 
 public class NpcFSM : MonoBehaviour
 {
-    private Npc npc;
-    Vector3 originPos;
-    [SerializeField] int talk_id;
-    [SerializeField] int next_talk_id;
+    [SerializeField] int[] talk_id;
 
     private bool trigger =false;
 
     void Start()
     {
-        npc = GetComponent<Npc>();
         GameEventToUI.Instance.player_Trigger += isTrigger;
+        GameEventToUI.Instance.talkBtnEvent += TalkChange;
+        if (GameData.Instance.player.Talk_Box[0] == true)
+        {
+            GameEventToUI.Instance.OnEventSkillShopPush();
+        }
     }
 
 
@@ -44,6 +45,8 @@ public class NpcFSM : MonoBehaviour
         }
     }
 
+
+
     public bool isTrigger()
     {
         return trigger;
@@ -51,6 +54,16 @@ public class NpcFSM : MonoBehaviour
 
     public int return_Talk_id()
     {
-        return talk_id;
+        if (GameData.Instance.player.Talk_Box[0])
+        {
+            return talk_id[1];
+        }
+        return talk_id[0];
+    }
+    public void TalkChange()
+    {
+        GameData.Instance.player.Talk_Box[0] = true;
+        GameEventToUI.Instance.talkBtnEvent -= TalkChange;
+        GameEventToUI.Instance.OnEventSkillShopPush();
     }
 }

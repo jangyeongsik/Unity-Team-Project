@@ -60,13 +60,18 @@ public class StartScene : MonoBehaviour
     //씬 로드
     public void GoToMainGameScene()
     {
-        if(GameData.Instance.player.p_name == "")
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
+        if (GameData.Instance.player.p_name == "")
         {
             startErrorPopup.SetActive(true);
             return;
         }
         LoadingProgress.LoadScene("UI Scene");
         GameData.Instance.PlayerSave();
+        if (!GameData.Instance.playerData[GameData.Instance.playerIdx].tutorial)
+        {
+            DataManager.Instance.DeleteData();
+        }
     }
     //Debug.Log(GameData.Instance.player.stamina);
     //SceneManager.LoadScene("Loading");}
@@ -101,6 +106,7 @@ public class StartScene : MonoBehaviour
                 StartCoroutine(sse.SetImageCoroutine());
             }
         }
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
     }
 
     //스텟 텍스트 설정
@@ -141,6 +147,7 @@ public class StartScene : MonoBehaviour
     //슬롯 생성
     public void CreatePlayer(GameObject obj)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
         if (inputField == null)
             inputField = obj.transform.Find("InputField").GetComponent<InputField>();
         //입력 검사
@@ -174,6 +181,7 @@ public class StartScene : MonoBehaviour
     //슬롯 데이터 삭제
     public void DeleteSlot(GameObject obj)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
         GameData.Instance.DeletePlayerData(slotIdx);
         obj.SetActive(false);
 

@@ -198,6 +198,7 @@ public class ItemInfo : MonoBehaviour
     #endregion
     public void ShowItemInfo()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         switch (InvenTabNum)
         {
             //EQUIPMENT

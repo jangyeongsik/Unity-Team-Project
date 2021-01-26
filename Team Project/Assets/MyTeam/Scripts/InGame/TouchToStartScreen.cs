@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartScence : MonoBehaviour
+public class TouchToStartScreen : MonoBehaviour
 {
-    public void StartSence()
+    public void TouchToStart()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "터치투스타트");
         SceneManager.LoadScene("GameStartScene");
     }
 }

@@ -35,7 +35,9 @@ public class PlayerData
     public string SavePortalName;               //저장한 씬으로 갈 포탈이름
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
-    public float currentHp;                       //현재 체력
+    public float currentHp;                     //현재 체력
+    public bool[] skillShop;                    //스킬 구매 여부
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     public PlayerData(int slot)
     {
@@ -69,6 +71,7 @@ public class PlayerData
         player.SavePortalName = SavePortalName;
         player.Talk_Box = Talk_Box;
         player.stageData = stageData;
+        player.skillShop = skillShop;
         player.D_stageData.Clear();
         for(int i = 0; i < stageData.Count; ++i)
         {
@@ -77,6 +80,7 @@ public class PlayerData
                 player.D_stageData.Add(stageData[i].key, stageData[i].value);
             }
         }
+        player.tpActivate = tpActivate;
 
         return player;
     }
@@ -84,7 +88,6 @@ public class PlayerData
     //새로운 플레이어 데이터를 만든다
     public PlayerData CreateNewPlayer(int slot, string name)
     {
-
         id = slot;
         hp = 4;
         currentHp = 4;
@@ -105,9 +108,18 @@ public class PlayerData
         bossClear = false;
         skillIdx = new int[3] { 1, 2, 3 };
         SaveSceneName = "MAP001";
-        SavePortalName = "MAP001";
+        SavePortalName = "STPPoint001";
         Talk_Box = new bool[28];
         stageData = new List<StageData>();
+        skillShop = new bool[8];
+        for(int i = 0; i < skillShop.Length; ++i)
+        {
+            if (i <= 2)
+                skillShop[i] = true;
+            else
+                skillShop[i] = false;
+        }
+        tpActivate = new bool[3];
 
         return this;
     }
@@ -135,11 +147,21 @@ public class PlayerData
         for (int i = 0; i < skillIdx.Length; ++i)
             skillIdx[i] = i + 1;
         SaveSceneName = "MAP001";
-        SavePortalName = "MAP001";
+        SavePortalName = "STPPoint001";
         for (int i = 0; i < Talk_Box.Length; ++i)
             Talk_Box[i] = false;
         stageData.Clear();
-
+        for (int i = 0; i < skillShop.Length; ++i)
+        {
+            if (i <= 2)
+                skillShop[i] = true;
+            else
+                skillShop[i] = false;
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            tpActivate[i] = false;
+        }
         return this;
     }
     //플레이어에 있는것들을 플레이어 데이터에 넣는다
@@ -169,7 +191,8 @@ public class PlayerData
         SavePortalName = player.SavePortalName;
         Talk_Box = player.Talk_Box;
         stageData = player.stageData;
-
+        skillShop = player.skillShop;
+        tpActivate = player.tpActivate;
     }
 }
 
@@ -200,6 +223,8 @@ public class Player
     public bool[] Talk_Box;                     //대화 시스템 관리
     public List<StageData> stageData;           //스테이지 데이터
     public float currentHp;                     //현재 체력
+    public bool[] skillShop;                    //스킬 구매 여부
+    public bool[] tpActivate;                   //선택형 텔레포터 활성화
 
     //저장 안할 변수들
     public Transform position;              //위치       
@@ -271,7 +296,19 @@ public class Player
     {
         enemyData.Remove(obj);
     }
+
+    public void PlayerGameOver()
+    {
+        //플레이어 체력회복
+        currentHp = 1;
+        GameEventToUI.Instance.OnPlayerHp_Increase(GameData.Instance.player.hp * 2, 100);
+        //상태 초기화
+        animator.Play("Idle");
+        GameData.Instance.PlayerSave();
+        SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
+    }
 }
+
 
 [Serializable]
 public class StageData

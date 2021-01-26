@@ -142,7 +142,6 @@ public class EnemyWarrior : MonoBehaviour
             e_Warrior.monsterState = State.MonsterState.M_Attack;
             e_Warrior.animator.SetBool("IsAttack", true);
         } 
-        
     }
 
     IEnumerator navigationSet()

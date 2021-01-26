@@ -10,10 +10,21 @@ public class HeartUI : MonoBehaviour
 
     int currentHeart;
 
+    public GameObject healEffect;
+    Image LessHp;
+    Image Hit;
+    GameObject gameOver;
+
     private void Awake()
     {
         hearts = transform.Find("Active").GetComponentsInChildren<Image>();
         disabled = transform.Find("Disabled").GetComponentsInChildren<Image>();
+        LessHp = GameObject.Find("Less Hp").GetComponent<Image>();
+        LessHp.gameObject.SetActive(false);
+        Hit = GameObject.Find("Hit").GetComponent<Image>();
+        Hit.gameObject.SetActive(false);
+        gameOver = GameObject.Find("GameOver");
+        gameOver.SetActive(false);
 
         for(int i = 0; i < hearts.Length; ++i)
         {
@@ -42,11 +53,19 @@ public class HeartUI : MonoBehaviour
         GameEventToUI.Instance.playerHP_Decrease += CutHeart;
         GameEventToUI.Instance.playerHP_Increase += AddHeart;
         GameEventToUI.Instance.AddMaxHp += AddMaxHp;
+        GameEventToUI.Instance.gameover += OnGameOver;
     }
 
     private void Update()
     {
         GameData.Instance.player.currentHp = hearts[currentHeart].fillAmount + currentHeart;
+        if (LessHp.gameObject.activeSelf && GameData.Instance.player.currentHp > 1)
+            LessHp.gameObject.SetActive(false);
+        else if (!LessHp.gameObject.activeSelf && GameData.Instance.player.currentHp <= 1)
+            LessHp.gameObject.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.P))
+            AddHeart(1, 30);
     }
 
     private void OnDestroy()
@@ -54,6 +73,7 @@ public class HeartUI : MonoBehaviour
         GameEventToUI.Instance.playerHP_Decrease -= CutHeart;
         GameEventToUI.Instance.playerHP_Increase -= AddHeart;
         GameEventToUI.Instance.AddMaxHp -= AddMaxHp;
+        GameEventToUI.Instance.gameover -= OnGameOver;
     }
 
     public void CutHeart(int damage)
@@ -71,11 +91,20 @@ public class HeartUI : MonoBehaviour
             }
             hearts[currentHeart].fillAmount -= 0.5f;
         }
+
+        if (!LessHp.gameObject.activeSelf)
+            StartCoroutine(HitActive());
     }
 
     public void AddHeart(int value, int per)
     {
         if (Random.Range(0, 100) > per) return;
+        if(per != 100)
+        {
+            GameObject obj = Instantiate(healEffect) as GameObject;
+            obj.transform.position = GameData.Instance.player.position.position + Vector3.up;
+            Destroy(obj, 1);
+        }
         for(int j = 0; j < value; j++)
         {
             if (hearts[currentHeart].fillAmount == 1 && currentHeart < GameData.Instance.player.hp -1)
@@ -89,6 +118,7 @@ public class HeartUI : MonoBehaviour
                 hearts[currentHeart].fillAmount += 0.5f;
             }
         }
+
     }
 
     void SetNewHeart(int idx, float amount = 1)
@@ -106,5 +136,26 @@ public class HeartUI : MonoBehaviour
             SetNewHeart(GameData.Instance.player.hp - 1,0);
             AddHeart(2, 100);
         }
+    }
+
+    IEnumerator HitActive()
+    {
+        Hit.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        Hit.gameObject.SetActive(false);
+    }
+
+    void OnGameOver()
+    {
+        StartCoroutine(GameOver());
+    }
+
+    IEnumerator GameOver()
+    {
+        gameOver.SetActive(true);
+        GameData.Instance.player.PlayerGameOver();
+        yield return new WaitForSeconds(2);
+        gameOver.SetActive(false);
+        
     }
 }

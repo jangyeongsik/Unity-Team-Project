@@ -13,11 +13,13 @@ public class Temple : MonoBehaviour
 
     public void Cancel()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         TempleSelectUI.SetActive(false);
         gameObject.SetActive(false);
     }
     public void Enter()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         TempleSelectUI.SetActive(false);
         PrayUI.SetActive(true);
         PrayUINameText.text = TempleSelectUINameText.text;

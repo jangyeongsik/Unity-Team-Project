@@ -37,7 +37,7 @@ public class NpcRolin : MonoBehaviour
     }
     private void Update()
     {
-        if(attackCount > 5 && !isChack)
+        if(attackCount >= 5 && !isChack)
         {
             isChack = true;
             count++;
@@ -50,6 +50,7 @@ public class NpcRolin : MonoBehaviour
         switch (count)
         {
             case 1:
+            case 2:
                 UIEventToGame.Instance.OnUiEventQuest_Name("몬스터 공격 카운트");
                 UIEventToGame.Instance.OnUiEventQuest_Count(quest_str.ToString());
                 break;
@@ -101,9 +102,12 @@ public class NpcRolin : MonoBehaviour
 
     public int return_Talk_id()
     {
+        if (count >= 4)
+        {
+            return talk_id[3];
+        }
         return talk_id[count];
     }
-
 
     public void TalkChange()
     {

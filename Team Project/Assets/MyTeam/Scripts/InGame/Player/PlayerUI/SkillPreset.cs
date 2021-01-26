@@ -18,6 +18,7 @@ public class SkillPreset : MonoBehaviour
     //선택, 디폴트 색
     Color selectColor = new Color(1, 121/255, 121/255);
     Color defalt = new Color(1, 1, 1);
+    Color DeActive = new Color(0, 0, 0);
 
     //스킬 프리셋 이미지
     Image[] skillImages;
@@ -58,6 +59,19 @@ public class SkillPreset : MonoBehaviour
         {
             btnImages[i].sprite = skillImages[GameData.Instance.player.skillIdx[i]-1].sprite;
         }
+        for(int i = 0; i < GameData.Instance.player.skillShop.Length; ++i)
+        {
+            if(!GameData.Instance.player.skillShop[i])
+            {
+                skillImages[i].color = DeActive;
+                skillImages[i].raycastTarget = false;
+            }
+            else
+            {
+                skillImages[i].color = defalt;
+                skillImages[i].raycastTarget = true;
+            }
+        }
 
         skillImages[selectIdx].color = selectColor;
         btnImages[curSkillIdx].color = selectColor;
@@ -66,6 +80,7 @@ public class SkillPreset : MonoBehaviour
     //현재 무슨버튼 눌렀는지 바꿔줌
     public void SelectSkill(int idx)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         skillImages[selectIdx].color = defalt;
         skillImages[idx].color = selectColor;
         selectIdx = idx;
@@ -74,6 +89,7 @@ public class SkillPreset : MonoBehaviour
     //선택한 스킬 빨간칠
     public void SelectSkillBtn(int idx)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         btnImages[curSkillIdx].color = defalt;
         btnImages[idx].color = selectColor;
         curSkillIdx = idx;
@@ -82,8 +98,9 @@ public class SkillPreset : MonoBehaviour
     //선택한 애니메이션 적용
     public void EquipSkill()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         //이미 장착한게 있는지 확인
-        for(int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
+        for (int i = 0; i < GameData.Instance.player.aniList.Count; ++i)
         {
             if (i == curSkillIdx) continue;
             if (GameData.Instance.player.aniList[i] == skills[selectIdx]) return;
@@ -95,6 +112,7 @@ public class SkillPreset : MonoBehaviour
 
     public void Cancle()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         gameObject.SetActive(false);
     }
 

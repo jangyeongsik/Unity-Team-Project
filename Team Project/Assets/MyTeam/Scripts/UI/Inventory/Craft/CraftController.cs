@@ -241,6 +241,7 @@ public class CraftController : MonoBehaviour
     #region 장비중 아이템 클릭 시 
     public void ChangeTreeByEquipItem(int eT)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         Equipment e = new Equipment();
         bool isFound = false;
         for (int i = 0; i < pEquip.Count; i++)
@@ -254,23 +255,26 @@ public class CraftController : MonoBehaviour
         }
         if (!isFound)
         {
-            switch (eT)
+            if (!GameData.Instance.player.curSceneName.Equals("MAP000"))
             {
-                case 1:
-                    SetCraftTree(10005);
-                    break;
-                case 2:
-                    SetCraftTree(10001);
-                    break;
-                case 3:
-                    SetCraftTree(10003);
-                    break;
-                case 4:
-                    SetCraftTree(10004);
-                    break;
-                case 5:
-                    SetCraftTree(10002);
-                    break;
+                switch (eT)
+                {
+                    case 1:
+                        SetCraftTree(10005);
+                        break;
+                    case 2:
+                        SetCraftTree(10001);
+                        break;
+                    case 3:
+                        SetCraftTree(10003);
+                        break;
+                    case 4:
+                        SetCraftTree(10004);
+                        break;
+                    case 5:
+                        SetCraftTree(10002);
+                        break;
+                }
             }
             return;
         }
@@ -281,6 +285,7 @@ public class CraftController : MonoBehaviour
     //재료 정보 화면 출력
     public void OnIngredientInfoScreen(string btnName, int itemID)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         ActiveIngredientInfoScreen();
         ingInfo.itemImage.sprite = SetIngredientImage(itemID);
         ingInfo.itemName.text = FindIngredientItem(itemID).name;
@@ -294,6 +299,7 @@ public class CraftController : MonoBehaviour
     //장비 정보 화면 출력
     public void OnEquipmentInfoScreen(string btnName, int itemID)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         Equipment e = FindEquipmentItem(itemID);
         ActiveEquipmentInfoScreen();
         eqInfo.itemImage.sprite = SetEquipmentImage(itemID);
@@ -361,6 +367,7 @@ public class CraftController : MonoBehaviour
     {
         if (!ingredientInfoScreen.activeSelf)
         {
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
             ingredientInfoScreen.SetActive(true);
         }
     }
@@ -368,6 +375,7 @@ public class CraftController : MonoBehaviour
     {
         if (ingredientInfoScreen.activeSelf)
         {
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
             ingredientInfoScreen.SetActive(false);
         }
     }
@@ -377,6 +385,7 @@ public class CraftController : MonoBehaviour
     {
         if (!equipmentInfoScreen.activeSelf)
         {
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
             equipmentInfoScreen.SetActive(true);
         }
     }
@@ -384,6 +393,7 @@ public class CraftController : MonoBehaviour
     {
         if (equipmentInfoScreen.activeSelf)
         {
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
             equipmentInfoScreen.SetActive(false);
         }
     }
@@ -494,6 +504,7 @@ public class CraftController : MonoBehaviour
     #region 특수 재료 선택 창
     public void SelectSpecialIngredient(int num)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         if (currentProd != null)
         {
             switch (num)
@@ -611,16 +622,27 @@ public class CraftController : MonoBehaviour
     {
         if (!specialIngScreen.activeSelf)
         {
+            SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
             specialIngScreen.SetActive(true);
         }
     }
     public void InactiveSpecialIngScreen()
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
         if (specialIngScreen.activeSelf)
         {
             specialIngScreen.SetActive(false);
         }
     }
     #endregion
+    #endregion
+    #region 팝업이 떠있으면 끄기
+    private void OnDisable()
+    {
+        //정보창 떠있으면 끄기
+        if (ingredientInfoScreen.activeSelf) { ingredientInfoScreen.SetActive(false); }
+        if (equipmentInfoScreen.activeSelf) { equipmentInfoScreen.SetActive(false); }
+        if (specialIngScreen.activeSelf) { specialIngScreen.SetActive(false); }
+    }
     #endregion
 }

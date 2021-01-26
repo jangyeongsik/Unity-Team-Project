@@ -22,6 +22,7 @@ public class MenuButtonsController : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭1");
         gtSS.ChangeScreen(ToggleNum + 1);
     }
     public void SetIsOn()
