@@ -73,7 +73,7 @@ public class BossTartos : MonoBehaviour
 
         if (hp <= 0)
         {
-            GameEventToUI.Instance.OnEvent_TalkBox(8029);
+            GameEventToUI.Instance.OnEvent_TalkBox(8018);
             tartos.animator.SetTrigger("Dead");
             tartos.bossState = State.BossState.B_Dead;
             monster.monsterState = State.MonsterState.M_Dead;

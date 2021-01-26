@@ -43,7 +43,7 @@ public class BossKelgon : MonoBehaviour
         hp -= damage;
         if(hp <= 0)
         {
-            GameEventToUI.Instance.OnEvent_TalkBox(8026);
+            GameEventToUI.Instance.OnEvent_TalkBox(8015);
             kelgon.animator.SetTrigger("Dead");
             kelgon.bossState = State.BossState.B_Dead;
             monster.monsterState = State.MonsterState.M_Dead;
