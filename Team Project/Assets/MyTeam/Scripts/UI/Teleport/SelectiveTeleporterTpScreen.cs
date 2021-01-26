@@ -15,12 +15,14 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
     StringBuilder sb;
     string DestMapName;
 
-    private void Start()
+    private void OnEnable()
     {
         sb = new StringBuilder();
         tpPointsIsActivated = new bool[3];
+
         //포인트 불러오기
         tpPointImages = transform.GetChild(3).GetComponentsInChildren<Image>();
+
         //플레이어 데이터에서 읽어와서 이미지 변경
         for (int i = 0; i < 3; i++)
         {
@@ -60,6 +62,7 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
                 DestMapName = sb.ToString();
                 if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
                 {
+                    gameObject.SetActive(false);
                     SceneMgr.Instance.LoadScene(DestMapName, "STPPoint001");
                 }
                 break;
@@ -68,6 +71,7 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
                 DestMapName = sb.ToString();
                 if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
                 {
+                    gameObject.SetActive(false);
                     SceneMgr.Instance.LoadScene(DestMapName, "STPPoint014");
                 }
                 break;
@@ -76,12 +80,11 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
                 DestMapName = sb.ToString();
                 if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
                 {
+                    gameObject.SetActive(false);
                     SceneMgr.Instance.LoadScene(DestMapName, "STPPoint021");
                 }
                 break;
         }
-        
-        
     }
     public void Close()
     {

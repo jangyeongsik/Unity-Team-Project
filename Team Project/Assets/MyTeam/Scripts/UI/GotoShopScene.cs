@@ -88,7 +88,6 @@ public class GotoShopScene : MonoBehaviour
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
         UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
-
     private void OnDestroy()
     {
         GameEventToUI.Instance.onOff -= ShopOn;
@@ -117,7 +116,6 @@ public class GotoShopScene : MonoBehaviour
     {
         shopCanvas.SetActive(isOn);
     }
-
     public void Talk_Box_Print()
     {
         joystickoff();
@@ -137,7 +135,6 @@ public class GotoShopScene : MonoBehaviour
         MinMapCam.SetActive(minMapOpen);
         UIEventToGame.Instance.OnUIEventMinMap();
     }
-
     public void TalkBox(int id)
     {
         joystickoff();
@@ -148,7 +145,6 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.OnNpc_name_print();
         GameEventToUI.Instance.Onnpc_talk_print();
     }
-
     public void TalkOff()
     {
         TalkCanvas.SetActive(false);
@@ -157,8 +153,6 @@ public class GotoShopScene : MonoBehaviour
     {
         miniMapCanvas.SetActive(isOn);
     }
-   
-
     void NextDialouge()
     {
         if (startTalking)
@@ -177,7 +171,6 @@ public class GotoShopScene : MonoBehaviour
             }
         }
     }
-
     //장비창(캐릭터 창) 켜기
     public void EquipmentScreenOn()
     {

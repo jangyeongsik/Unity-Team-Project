@@ -68,6 +68,10 @@ public class StartScene : MonoBehaviour
         }
         LoadingProgress.LoadScene("UI Scene");
         GameData.Instance.PlayerSave();
+        if (!GameData.Instance.playerData[GameData.Instance.playerIdx].tutorial)
+        {
+            DataManager.Instance.DeleteData();
+        }
     }
     //Debug.Log(GameData.Instance.player.stamina);
     //SceneManager.LoadScene("Loading");}
