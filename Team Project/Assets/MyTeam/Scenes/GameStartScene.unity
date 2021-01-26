@@ -2294,6 +2294,8 @@ MonoBehaviour:
     Talk_Box: 
     stageData: []
     currentHp: 0
+    skillShop: 
+    tpActivate: 
     position: {fileID: 0}
     m_state: 0
     counterTime: 0
@@ -3137,11 +3139,6 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1428765315}
-    - target: {fileID: 5948767843721168047, guid: 4cf26a4fff95b9243b0492ed423d5162,
-        type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7786459
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf26a4fff95b9243b0492ed423d5162, type: 3}
 --- !u!1 &813191576
@@ -7348,19 +7345,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 817142096, guid: fba8bb4b3eab0064886ceea598c517ec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3335105917166867135, guid: fba8bb4b3eab0064886ceea598c517ec,
         type: 3}
       propertyPath: m_Name
       value: player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4318801273406304293, guid: fba8bb4b3eab0064886ceea598c517ec,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595720380354877689, guid: fba8bb4b3eab0064886ceea598c517ec,
         type: 3}
@@ -7476,15 +7464,9 @@ PrefabInstance:
         type: 3}
       propertyPath: dodboji
       value: 
-      objectReference: {fileID: 1816810131}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba8bb4b3eab0064886ceea598c517ec, type: 3}
---- !u!1 &1816810131 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5604796205360012151, guid: fba8bb4b3eab0064886ceea598c517ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 1816810130}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852026023
 GameObject:
   m_ObjectHideFlags: 0
