@@ -45,7 +45,7 @@ public class npc_talk_chage : MonoBehaviour
             count = 0;
             GameEventToUI.Instance.OnEventJoystick();
             GameEventToUI.Instance.OnEventTalkoff();
-            if (GameData.Instance.player.tutorial == true)
+            if (GameData.Instance.player.tutorial == true && GameData.Instance.player.Talk_Box[0] == true)
             {
                 GameEventToUI.Instance.onEventSkillShop();
             }
