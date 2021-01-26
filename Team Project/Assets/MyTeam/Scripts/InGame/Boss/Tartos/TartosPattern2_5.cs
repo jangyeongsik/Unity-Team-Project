@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TartosPattom2_2 : StateMachineBehaviour
+public class TartosPattern2_5 : StateMachineBehaviour
 {
     BossData tartos;
     BossTartos bossTartos;
+
 
     GameObject patton2_1;
     GameObject patton2_2;
@@ -15,12 +16,10 @@ public class TartosPattom2_2 : StateMachineBehaviour
     GameObject patton2_6;
     GameObject patton2_7;
     GameObject patton2_8;
-
     GameObject patton2_C;
 
-    TartosPattom2_1 num;
-    int number2;
 
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (tartos == null)
@@ -30,15 +29,13 @@ public class TartosPattom2_2 : StateMachineBehaviour
         if (bossTartos == null)
             bossTartos = animator.transform.parent.GetComponent<BossTartos>();
 
-        if (num == null)
-            num = animator.GetBehaviour<TartosPattom2_1>();
-
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_Chapter2_Boss, "Pattern2");
 
         tartos.position.position = bossTartos.pattern2Point.position;
+        tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
         tartos.navigation.SetDestination(bossTartos.pattern2Point.position);
 
-        number2 = num.number;
+
 
         if (patton2_1 == null)
             patton2_1 = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_1;
@@ -59,47 +56,33 @@ public class TartosPattom2_2 : StateMachineBehaviour
         if (patton2_C == null)
             patton2_C = animator.transform.parent.GetComponent<BossTartos>().tartosPatton2_Center;
 
-        if (number2 == 2)
-            animator.SetBool("pattern3", true);
-        else
-            animator.SetBool("pattern3", false);
+
     }
 
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         tartos.position.position = bossTartos.pattern2Point.position;
         tartos.transform.rotation = Quaternion.Euler(0, -90, 0);
-        if (number2 == 0)
-        {
-            patton2_5.SetActive(true);
-            patton2_6.SetActive(true);
-            patton2_7.SetActive(true);
-            patton2_8.SetActive(true);
-        }
-        else if (number2 == 1)
-        {
-            patton2_2.SetActive(true);
-            patton2_4.SetActive(true);
-            patton2_5.SetActive(true);
-            patton2_7.SetActive(true);
-        }
-        else
-        {
-            patton2_3.SetActive(true);
-            patton2_5.SetActive(true);
-        }
 
+        patton2_1.SetActive(true);
+        patton2_2.SetActive(true);
+        patton2_3.SetActive(true);
+        patton2_4.SetActive(true);
+        patton2_5.SetActive(true);
+        patton2_6.SetActive(true);
+        patton2_7.SetActive(true);
+
+        
     }
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
 
-        if (number2 == 0)
-            bossTartos.PaticleOn2_1_2();
-        else if (number2 == 1)
-            bossTartos.PaticleOn2_2_2();
-        else
-            bossTartos.PaticleOn2_3_2();
-            
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        bossTartos.PaticleOff2_3_1();
+
+        bossTartos.PaticleOn2_3_5();
+
         patton2_1.SetActive(false);
         patton2_2.SetActive(false);
         patton2_3.SetActive(false);
@@ -107,9 +90,18 @@ public class TartosPattom2_2 : StateMachineBehaviour
         patton2_5.SetActive(false);
         patton2_6.SetActive(false);
         patton2_7.SetActive(false);
-        patton2_8.SetActive(false);
-        if (number2 != 2)
-            patton2_C.SetActive(false);
-
+        patton2_C.SetActive(false);
     }
+
+    // OnStateMove is called right after Animator.OnAnimatorMove()
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that processes and affects root motion
+    //}
+
+    // OnStateIK is called right after Animator.OnAnimatorIK()
+    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that sets up animation IK (inverse kinematics)
+    //}
 }

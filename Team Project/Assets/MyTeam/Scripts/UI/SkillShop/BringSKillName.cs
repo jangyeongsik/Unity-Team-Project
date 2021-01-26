@@ -7,7 +7,6 @@ public class BringSKillName : MonoBehaviour
 {
     public Text skillNameText;
     public Text SkillCylinderCountText;
-    public Text CurrentCylinderCountText;
 
     private void Start()
     {
@@ -15,10 +14,7 @@ public class BringSKillName : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        CurrentCylinderCountText.text = GameData.Instance.player.cylinderCounter.ToString();
-    }
+
 
     private void OnDestroy()
     {
@@ -31,8 +27,5 @@ public class BringSKillName : MonoBehaviour
         SkillCylinderCountText.text = skillCylinderCount;
     }
 
-    public void PopCurrentCylinderCount(string currentCylinderCount)
-    {
-        CurrentCylinderCountText.text = currentCylinderCount;
-    }
+
 }

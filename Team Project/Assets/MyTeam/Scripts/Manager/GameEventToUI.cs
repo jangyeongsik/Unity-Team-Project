@@ -144,6 +144,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
     public event System.Action<bool> talkButOnOff;
     public event System.Action<bool> dodbogiImgOnOff;
     public event System.Action talkOnOff;
+    public event System.Action skillShop;
 
     public event System.Action talkBtnEvent;
 
@@ -168,6 +169,7 @@ public class GameEventToUI : Singleton<GameEventToUI>
 
     public event System.Action npc_talk_Next;
 
+    public event System.Action skillShopPush;
 
     public void OnNpc_name_Setting(int data)
     {
@@ -292,7 +294,15 @@ public class GameEventToUI : Singleton<GameEventToUI>
         talkBtnEvent();
     }
 
+    public void onEventSkillShop()
+    {
+        skillShop();
+    }
 
+    public void OnEventSkillShopPush()
+    {
+        skillShopPush();
+    }
 
     #region 레버 충돌시 팝업창 출현
     public void OnLeverPopup(bool isOn, string name = " ", string description = " ")

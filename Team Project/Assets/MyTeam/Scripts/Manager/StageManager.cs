@@ -11,7 +11,7 @@ public enum STAGEKIND
 public class StageManager : MonoBehaviour
 {
     public STAGEKIND stageKind;
-    public bool isClear = false;
+    public bool isClear = true;
     public bool isRegen = true;
 
 
@@ -74,6 +74,15 @@ public class StageManager : MonoBehaviour
         {
             SoundManager.Instance.BGM_Audio.clip = clip;
             SoundManager.Instance.BGM_Audio.Play();
+        }
+
+        if (stageKind == STAGEKIND.Temple || (stageKind == STAGEKIND.Chapter1_Normal && isRegen == false))
+        {
+            isClear = false;
+        }
+        else
+        {
+            isClear = true;
         }
 
     }

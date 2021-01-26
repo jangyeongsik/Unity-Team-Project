@@ -13,6 +13,10 @@ public class NpcFSM : MonoBehaviour
     {
         GameEventToUI.Instance.player_Trigger += isTrigger;
         GameEventToUI.Instance.talkBtnEvent += TalkChange;
+        if (GameData.Instance.player.Talk_Box[0] == true)
+        {
+            GameEventToUI.Instance.OnEventSkillShopPush();
+        }
     }
 
 
@@ -41,6 +45,8 @@ public class NpcFSM : MonoBehaviour
         }
     }
 
+
+
     public bool isTrigger()
     {
         return trigger;
@@ -58,5 +64,6 @@ public class NpcFSM : MonoBehaviour
     {
         GameData.Instance.player.Talk_Box[0] = true;
         GameEventToUI.Instance.talkBtnEvent -= TalkChange;
+        GameEventToUI.Instance.OnEventSkillShopPush();
     }
 }

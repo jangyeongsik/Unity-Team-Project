@@ -52,7 +52,7 @@ public class GotoShopScene : MonoBehaviour
 
     private void Awake()
     {
-        GameEventToUI.Instance.onOff += ShopOn;
+        GameEventToUI.Instance.skillShop += ShopOn;
         GameEventToUI.Instance.leverOnOff += OnOffLeverPopup;
         GameEventToUI.Instance.templeOnOff += OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff += TalkOff;
@@ -60,6 +60,7 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.talkButOnOff += Talk_Box_onOff;
         GameEventToUI.Instance.joystick_on += joystickon;
         GameEventToUI.Instance.joystick_off += joystickoff;
+        GameEventToUI.Instance.skillShopPush += PushShop;
         //SceneMgr.Instance.LoadScene("MAP028", "FromMap028 ToMap016");
         if (GameData.Instance.player.tutorial == false)
         {
@@ -90,7 +91,6 @@ public class GotoShopScene : MonoBehaviour
     }
     private void OnDestroy()
     {
-        GameEventToUI.Instance.onOff -= ShopOn;
         GameEventToUI.Instance.leverOnOff -= OnOffLeverPopup;
         GameEventToUI.Instance.templeOnOff -= OnOffTemplePopup;
         GameEventToUI.Instance.talkOnOff -= TalkOff;
@@ -98,7 +98,9 @@ public class GotoShopScene : MonoBehaviour
         GameEventToUI.Instance.talkButOnOff -= Talk_Box_onOff;
         GameEventToUI.Instance.joystick_on -= joystickon;
         GameEventToUI.Instance.joystick_off -= joystickoff;
+        GameEventToUI.Instance.skillShopPush -= PushShop;
     }
+
     void Update()
     {
         NextDialouge();
@@ -112,9 +114,14 @@ public class GotoShopScene : MonoBehaviour
         else
             Menu.SetActive(true);
     }
-    public void ShopOn(bool isOn)
+    public void ShopOn()
     {
-        shopCanvas.SetActive(isOn);
+        shopCanvas.SetActive(true);
+    }
+
+    public void ShopOff()
+    {
+        shopCanvas.SetActive(false);
     }
     public void Talk_Box_Print()
     {
@@ -357,5 +364,10 @@ public class GotoShopScene : MonoBehaviour
     public void Talk_Box_onOff(bool isOn)
     {
         TalkBtn.SetActive(isOn);
+    }
+
+    public void PushShop()
+    {
+        GameEventToUI.Instance.skillShop += ShopOn;
     }
 }
