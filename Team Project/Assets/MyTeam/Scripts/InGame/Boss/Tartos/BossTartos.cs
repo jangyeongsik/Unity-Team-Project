@@ -190,40 +190,115 @@ public class BossTartos : MonoBehaviour
         tartosPattonPaticle1_5.SetActive(false);
     }
     #endregion
-    #region 패턴2 파티클
-    public void PaticleOn2_1()
+    #region 패턴2_1 파티클
+    public void PaticleOn2_1_1()
+    {
+        tartosPattonPaticle2_1.SetActive(true);
+        tartosPattonPaticle2_2.SetActive(true);
+        tartosPattonPaticle2_3.SetActive(true);
+        tartosPattonPaticle2_4.SetActive(true);
+    }
+    public void PaticleOn2_1_2()
+    {
+        tartosPattonPaticle2_5.SetActive(true);
+        tartosPattonPaticle2_6.SetActive(true);
+        tartosPattonPaticle2_7.SetActive(true);
+        tartosPattonPaticle2_8.SetActive(true);
+    }
+    public void PaticleOff2_1_1()
+    {
+        tartosPattonPaticle2_1.SetActive(false);
+        tartosPattonPaticle2_2.SetActive(false);
+        tartosPattonPaticle2_3.SetActive(false);
+        tartosPattonPaticle2_4.SetActive(false);
+    }
+    public void PaticleOff2_1_2()
+    {
+        tartosPattonPaticle2_5.SetActive(false);
+        tartosPattonPaticle2_6.SetActive(false);
+        tartosPattonPaticle2_7.SetActive(false);
+        tartosPattonPaticle2_8.SetActive(false);
+    }
+    #endregion
+    #region 패턴 2_2파티클
+
+    public void PaticleOn2_2_1()
     {
         tartosPattonPaticle2_1.SetActive(true);
         tartosPattonPaticle2_3.SetActive(true);
+        tartosPattonPaticle2_6.SetActive(true);
         tartosPattonPaticle2_8.SetActive(true);
     }
-    public void PaticleOn2_2()
+
+    public void PaticleOn2_2_2()
     {
         tartosPattonPaticle2_2.SetActive(true);
+        tartosPattonPaticle2_4.SetActive(true);
         tartosPattonPaticle2_5.SetActive(true);
         tartosPattonPaticle2_7.SetActive(true);
     }
-    public void PaticleOn2_3()
+
+    public void PaticleOff2_2_1()
+    {
+        tartosPattonPaticle2_1.SetActive(false);
+        tartosPattonPaticle2_3.SetActive(false);
+        tartosPattonPaticle2_6.SetActive(false);
+        tartosPattonPaticle2_8.SetActive(false);
+    }
+
+    public void PaticleOff2_2_2()
+    {
+        tartosPattonPaticle2_2.SetActive(false);
+        tartosPattonPaticle2_4.SetActive(false);
+        tartosPattonPaticle2_5.SetActive(false);
+        tartosPattonPaticle2_7.SetActive(false);
+    }
+    #endregion
+    #region 패턴2_3파티클
+
+    public void PaticleOn2_3_1()
+    {
+        tartosPattonPaticle2_1.SetActive(true);
+        tartosPattonPaticle2_2.SetActive(true);
+    }
+
+    public void PaticleOn2_3_2()
+    {
+        tartosPattonPaticle2_3.SetActive(true);
+        tartosPattonPaticle2_5.SetActive(true);
+    }
+
+    public void PaticleOn2_3_3()
+    {
+        tartosPattonPaticle2_7.SetActive(true);
+        tartosPattonPaticle2_8.SetActive(true);
+    }
+    public void PaticleOn2_3_4()
     {
         tartosPattonPaticle2_4.SetActive(true);
         tartosPattonPaticle2_6.SetActive(true);
     }
-    public void PaticleOff2_1()
+
+    public void PaticleOn2_3_5()
+    {
+        tartosPattonPaticle2_1.SetActive(true);
+        tartosPattonPaticle2_2.SetActive(true);
+        tartosPattonPaticle2_3.SetActive(true);
+        tartosPattonPaticle2_4.SetActive(true);
+        tartosPattonPaticle2_5.SetActive(true);
+        tartosPattonPaticle2_6.SetActive(true);
+        tartosPattonPaticle2_7.SetActive(true);
+    }
+    public void PaticleOff2_3_1()
     {
         tartosPattonPaticle2_1.SetActive(false);
-        tartosPattonPaticle2_3.SetActive(false);
-        tartosPattonPaticle2_8.SetActive(false);
-    }
-    public void PaticleOff2_2()
-    {
         tartosPattonPaticle2_2.SetActive(false);
-        tartosPattonPaticle2_5.SetActive(false);
-        tartosPattonPaticle2_7.SetActive(false);
-    }
-    public void PaticleOff2_3()
-    {
+        tartosPattonPaticle2_3.SetActive(false);
         tartosPattonPaticle2_4.SetActive(false);
+        tartosPattonPaticle2_5.SetActive(false);
         tartosPattonPaticle2_6.SetActive(false);
+        tartosPattonPaticle2_7.SetActive(false);
+        tartosPattonPaticle2_8.SetActive(false);
     }
     #endregion
 }
