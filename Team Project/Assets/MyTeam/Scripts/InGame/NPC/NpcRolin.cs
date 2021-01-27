@@ -41,9 +41,12 @@ public class NpcRolin : MonoBehaviour
         {
             isChack = true;
             count++;
-            Collider.SetActive(false);
             GameEventToUI.Instance.TutoAttack -= AttackCount;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
+        }
+        if(count >=3)
+        {
+            Collider.SetActive(false);
         }
         quest_str.Append(attackCount.ToString());
         quest_str.Append(" / 5");

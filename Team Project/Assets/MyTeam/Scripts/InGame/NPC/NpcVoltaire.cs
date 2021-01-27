@@ -47,9 +47,12 @@ public class NpcVoltaire : MonoBehaviour
             isTrue = true;
             count++;
             GameEventToUI.Instance.talkBtnEvent += TalkChange;
+            
+        }
+        if(count >= 3)
+        {
             box2.SetActive(false);
         }
-
         quest_str.Clear();
         quest_str.Append(t_count.ToString());
         quest_str.Append(" / 2");
