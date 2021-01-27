@@ -5,8 +5,8 @@ using System;
 public enum EQUIPMENTTYPE
 {
     WEAPON = 1,
-    ARMOR,
     HELM,
+    ARMOR,
     GLOVE,
     BOOTS
 }

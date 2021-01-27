@@ -104,6 +104,7 @@ public class CraftController : MonoBehaviour
     {
         //플레이어가 장비하고 있는 아이템 불러오기
         pEquip = DataManager.Instance.EquipInvenData.CurrentEquipmentList;
+        pEquip.Sort((a, b) => a.equipmentType.CompareTo(b.equipmentType));
         if (pEquip == null)
         {
             return;
@@ -263,10 +264,10 @@ public class CraftController : MonoBehaviour
                         SetCraftTree(10005);
                         break;
                     case 2:
-                        SetCraftTree(10001);
+                        SetCraftTree(10003);
                         break;
                     case 3:
-                        SetCraftTree(10003);
+                        SetCraftTree(10001);
                         break;
                     case 4:
                         SetCraftTree(10004);
@@ -356,8 +357,6 @@ public class CraftController : MonoBehaviour
         sb.Clear();
         sb.AppendFormat("공격력 : {0}\n", e.damage);
         sb.AppendFormat("속도 : {0}\n", e.speed);
-        sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-        sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
         sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
         eqInfo.description.text = sb.ToString();
     }

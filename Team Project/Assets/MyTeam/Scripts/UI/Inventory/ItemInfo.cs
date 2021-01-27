@@ -196,6 +196,7 @@ public class ItemInfo : MonoBehaviour
         }
     }
     #endregion
+    #region 아이템 설명 창 띄우기
     public void ShowItemInfo()
     {
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "메뉴클릭2");
@@ -220,8 +221,6 @@ public class ItemInfo : MonoBehaviour
                     sb.Clear();
                     sb.AppendFormat("공격력 : {0}\n", e.damage);
                     sb.AppendFormat("속도 : {0}\n", e.speed);
-                    sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                    sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                     sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                     ISStat.text = sb.ToString();
                     sb.Clear();
@@ -307,6 +306,8 @@ public class ItemInfo : MonoBehaviour
                 break;
         }
     }
+    #endregion
+    #region 아이템 개수 새로고침 (실시간 반영)
     public void RefreshCount(bool isAdded)
     {
         InvenTabNum = Inventory.Instance.InvenTabNum;
@@ -326,4 +327,5 @@ public class ItemInfo : MonoBehaviour
             }
         }
     }
+    #endregion
 }

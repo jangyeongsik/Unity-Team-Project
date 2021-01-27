@@ -208,8 +208,6 @@ public class EquipItem : MonoBehaviour
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
                 sb.AppendFormat("속도 : {0}\n", e.speed);
-                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 TStat.text = sb.ToString();
                 sb.Clear();
@@ -248,8 +246,6 @@ public class EquipItem : MonoBehaviour
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
                 sb.AppendFormat("속도 : {0}\n", e.speed);
-                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 TStat.text = sb.ToString();
                 sb.Clear();
@@ -288,8 +284,6 @@ public class EquipItem : MonoBehaviour
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
                 sb.AppendFormat("속도 : {0}\n", e.speed);
-                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 TStat.text = sb.ToString();
                 sb.Clear();
@@ -328,8 +322,6 @@ public class EquipItem : MonoBehaviour
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
                 sb.AppendFormat("속도 : {0}\n", e.speed);
-                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 TStat.text = sb.ToString();
                 sb.Clear();
@@ -368,8 +360,6 @@ public class EquipItem : MonoBehaviour
                 sb.Clear();
                 sb.AppendFormat("공격력 : {0}\n", e.damage);
                 sb.AppendFormat("속도 : {0}\n", e.speed);
-                sb.AppendFormat("치명타 피해 : {0}\n", e.critDamage);
-                sb.AppendFormat("치명타 확률 : {0}\n", e.critPercent);
                 sb.AppendFormat("카운터 판정 : {0}\n", e.counterJudgement);
                 TStat.text = sb.ToString();
                 sb.Clear();

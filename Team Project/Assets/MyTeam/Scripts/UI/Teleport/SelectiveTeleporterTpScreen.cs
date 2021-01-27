@@ -6,6 +6,7 @@ using System.Text;
 
 public class SelectiveTeleporterTpScreen : MonoBehaviour
 {
+    public GameObject Popup;
     public int curTPPointIdx;
     public int destTPPointIdx;
     public bool[] tpPointsIsActivated;
@@ -39,6 +40,7 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
     }
     private void Update()
     {
+        //위치 표시용 마커 움직이기
         if (marker.transform.position != tpPointImages[destTPPointIdx].transform.position)
         {
             float x = 0f;
@@ -54,40 +56,51 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
     }
     public void Warp()
     {
-        sb.Clear();
-        switch (destTPPointIdx)
+        if (GameData.Instance.player.tpActivate[destTPPointIdx])
         {
-            case 0:
-                sb.Append("MAP001");
-                DestMapName = sb.ToString();
-                if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
-                {
-                    gameObject.SetActive(false);
-                    SceneMgr.Instance.LoadScene(DestMapName, "STPPoint001");
-                }
-                break;
-            case 1:
-                sb.Append("MAP014");
-                DestMapName = sb.ToString();
-                if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
-                {
-                    gameObject.SetActive(false);
-                    SceneMgr.Instance.LoadScene(DestMapName, "STPPoint014");
-                }
-                break;
-            case 2:
-                sb.Append("MAP021");
-                DestMapName = sb.ToString();
-                if (GameData.Instance.player.tpActivate[destTPPointIdx] && destTPPointIdx != curTPPointIdx)
-                {
-                    gameObject.SetActive(false);
-                    SceneMgr.Instance.LoadScene(DestMapName, "STPPoint021");
-                }
-                break;
+            sb.Clear();
+            switch (destTPPointIdx)
+            {
+                case 0:
+                    sb.Append("MAP001");
+                    DestMapName = sb.ToString();
+                    if (destTPPointIdx != curTPPointIdx)
+                    {
+                        gameObject.SetActive(false);
+                        SceneMgr.Instance.LoadScene(DestMapName, "STPPoint001");
+                    }
+                    break;
+                case 1:
+                    sb.Append("MAP014");
+                    DestMapName = sb.ToString();
+                    if (destTPPointIdx != curTPPointIdx)
+                    {
+                        gameObject.SetActive(false);
+                        SceneMgr.Instance.LoadScene(DestMapName, "STPPoint014");
+                    }
+                    break;
+                case 2:
+                    sb.Append("MAP021");
+                    DestMapName = sb.ToString();
+                    if (destTPPointIdx != curTPPointIdx)
+                    {
+                        gameObject.SetActive(false);
+                        SceneMgr.Instance.LoadScene(DestMapName, "STPPoint021");
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            Popup.SetActive(true);
         }
     }
     public void Close()
     {
+        if (Popup.activeSelf)
+        {
+            Popup.SetActive(false);
+        }
         gameObject.SetActive(false);
     }
 }
