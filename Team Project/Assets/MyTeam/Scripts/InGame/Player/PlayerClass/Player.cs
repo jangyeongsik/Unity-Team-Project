@@ -255,7 +255,7 @@ public class Player
             animator.enabled = true;
         controller.enabled = false;
         position.position = pos;
-        if(!(curSceneName == "MAP000" || curSceneName == "MAP001"))
+        if(!(curSceneName == "MAP000"))
             isSceneMove = true;
 
         yield return new WaitForSeconds(0.2f);
