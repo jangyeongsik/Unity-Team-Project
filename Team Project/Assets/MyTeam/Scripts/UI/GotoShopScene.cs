@@ -88,12 +88,31 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(EquipInfoScreen);
         CanvasList.Add(IngredientInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
-        //if (DataManager.Instance.EquipInvenData.CurrentEquipmentList.Exists())
-        //{
-        //
-        //}
-        UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
+        //장착 무기가 있으면 캐릭터 검 이미지 변경
+        if (CheckEquipmentExists())
+        {
+            UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
+        }
+        //없으면 무조건 0번 무기로
+        else
+        {
+            UIEventToGame.Instance.OnSwordChangeEvent(1);
+        }
     }
+    #region 장착 아이템에 무기가 있는지 체크
+    private bool CheckEquipmentExists()
+    {
+        if (DataManager.Instance.EquipInvenData.CurrentEquipmentList == null) return false;
+        foreach (Equipment e in DataManager.Instance.EquipInvenData.CurrentEquipmentList)
+        {
+            if (e.equipmentType.Equals(EQUIPMENTTYPE.WEAPON))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    #endregion
     private void OnDestroy()
     {
         GameEventToUI.Instance.leverOnOff -= OnOffLeverPopup;
