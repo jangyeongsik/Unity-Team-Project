@@ -13,7 +13,7 @@ public class StageManager : MonoBehaviour
     public STAGEKIND stageKind;
     public bool isClear = true;
     public bool isRegen = true;
-
+    private bool isAble = false;
 
     Monster[] enemys;
 
@@ -55,6 +55,7 @@ public class StageManager : MonoBehaviour
                 for (int i = 0; i < enemys.Length; ++i)
                     enemys[i].gameObject.SetActive(false);
                 isClear = true;
+                isAble = true;
             }
         }
 
@@ -76,7 +77,7 @@ public class StageManager : MonoBehaviour
             SoundManager.Instance.BGM_Audio.Play();
         }
 
-        if (stageKind == STAGEKIND.Temple || (stageKind == STAGEKIND.Chapter1_Normal && isRegen == false))
+        if (stageKind == STAGEKIND.Temple || (stageKind == STAGEKIND.Chapter1_Normal && !isRegen))
         {
             isClear = false;
         }
@@ -95,17 +96,19 @@ public class StageManager : MonoBehaviour
             if (GameData.Instance.player.enemyData.Count == 0)
             {
                 isClear = true;
-
                 //백신 클리어하면 아이템추가
-                if(stageKind == STAGEKIND.Chapter1_Normal && !isRegen)
+                if (!isAble)
                 {
-                    string str = GameData.Instance.player.curSceneName;
-                    string id = str.Substring(3);
-                    Debug.Log("보상");
-                    Debug.Log("str : " + str + " id : " + int.Parse(id));
-                    GameEventToUI.Instance.OnItemDropInfo(true, int.Parse(id));
+                    if (stageKind == STAGEKIND.Chapter1_Normal && !isRegen)
+                    {
+                        string str = GameData.Instance.player.curSceneName;
+                        string id = str.Substring(3);
+                        Debug.Log("보상");
+                        Debug.Log("str : " + str + " id : " + int.Parse(id));
+                        GameEventToUI.Instance.OnItemDropInfo(true, int.Parse(id));
+                    }
                 }
-                else if (stageKind == STAGEKIND.Temple)
+                if (stageKind == STAGEKIND.Temple)
                 {
                     string str = GameData.Instance.player.curSceneName;
                     string id = str.Substring(3);

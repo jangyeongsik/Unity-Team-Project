@@ -10,6 +10,7 @@ public class SelectiveTeleporterActivationScreen : MonoBehaviour
     [SerializeField]
     private int currentActivatedTpPointsCount;
     public TMP_Text cylinderRequired;
+    private int requiredCount;
     
     private void OnEnable()
     {
@@ -25,22 +26,25 @@ public class SelectiveTeleporterActivationScreen : MonoBehaviour
         {
             case 0:
                 cylinderRequired.text = "0";
+                requiredCount = 0;
                 break;
             case 1:
                 cylinderRequired.text = "20";
+                requiredCount = 20;
                 break;
             case 2:
                 cylinderRequired.text = "40";
+                requiredCount = 40;
                 break;
         }
     }
     public void ActivateTpPoint()
     {
-        if (GameData.Instance.player.cylinderCounter >= currentActivatedTpPointsCount)
+        if (GameData.Instance.player.cylinderCounter >= requiredCount)
         {
             //플레이어 실린더 개수 줄이기, 저장
             GameData.Instance.player.tpActivate[TPPointIdx] = true;
-            GameData.Instance.player.cylinderCounter -= currentActivatedTpPointsCount;
+            GameData.Instance.player.cylinderCounter -= requiredCount;
             GameData.Instance.PlayerSave();
 
             //팝업 끄기, TPScreen키기

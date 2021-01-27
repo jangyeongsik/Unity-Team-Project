@@ -17,13 +17,10 @@ public class VaccineLever : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("a");
         if (sM.isClear && !isUsed)
         {
-            Debug.Log("b");
             if (other.gameObject.CompareTag("Player"))
             {
-                Debug.Log("c");
                 UIEventToGame.Instance.ActivateVaccineCampPortal += ActiavateVaccineCampPortal;
                 GameEventToUI.Instance.OnLeverPopup(true, leverName, description);
             }

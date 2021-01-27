@@ -52,15 +52,18 @@ public class TempleItemDropCanvas : MonoBehaviour
         //101 ~ 104 딕셔너리에 기본으로 0 집어넣기
         for (int i = 101; i < 105; i++)
         {
-            if (!rewards.ContainsKey(i))
+            if (rewards != null)
             {
-                rewards.Add(i, 0);
+                if (!rewards.ContainsKey(i))
+                {
+                    rewards.Add(i, 0);
+                }
+                else
+                {
+                    rewards[i] = 0;
+                }
+                Debug.Log(i + " " + rewards[i]);
             }
-            else
-            {
-                rewards[i] = 0;
-            }
-            Debug.Log(i + " " + rewards[i]);
         }
     }
     public void Close()

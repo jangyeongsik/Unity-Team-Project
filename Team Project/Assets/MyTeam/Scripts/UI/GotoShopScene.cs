@@ -88,6 +88,10 @@ public class GotoShopScene : MonoBehaviour
         CanvasList.Add(EquipInfoScreen);
         CanvasList.Add(IngredientInfoScreen);
         Toggles = UIMenuButtons.transform.GetChild(0).GetComponentsInChildren<Toggle>();
+        //if (DataManager.Instance.EquipInvenData.CurrentEquipmentList.Exists())
+        //{
+        //
+        //}
         UIEventToGame.Instance.OnSwordChangeEvent(DataManager.Instance.FindEquipment(EQUIPMENTTYPE.WEAPON).itemGrade);
     }
     private void OnDestroy()
