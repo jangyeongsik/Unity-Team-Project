@@ -50,11 +50,11 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     if(cylinder > 25)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
+                        CylinderCounter(25);
                         OpenSuccedWindow();
                     }
                     else
                     {
-                        Debug.Log("씰린더 부족");
                         OpenFailWindow();
                     }
                     break;
@@ -62,6 +62,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     if (cylinder > 30)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
+                        CylinderCounter(30);
                         OpenSuccedWindow();
                     }
                     else
@@ -73,6 +74,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     if (cylinder > 35)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
+                        CylinderCounter(35);
                         OpenSuccedWindow();
                     }
                     else
@@ -84,6 +86,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     if (cylinder > 40)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
+                        CylinderCounter(40);
                         OpenSuccedWindow();
                     }
                     else
@@ -92,9 +95,10 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     }
                     break;
                 case 7:
-                    if (cylinder >= 0)
+                    if (cylinder >= 45)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
+                        CylinderCounter(45);
                         OpenSuccedWindow();
                     }
                     else
@@ -110,7 +114,10 @@ public class SkillNameToInfoWindow : MonoBehaviour
         }
         UIEventToGame.Instance.skillId -= SkillId;
     }
-
+    public void CylinderCounter(int count)
+    {
+        GameData.Instance.player.cylinderCounter -= count;
+    }
     public void NoBtn()
     {
         UIEventToGame.Instance.skillId -= SkillId;
