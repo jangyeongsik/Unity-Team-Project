@@ -59,7 +59,6 @@ public class BossKelgon : MonoBehaviour
             if (paticle3.activeSelf)
                 paticle3.SetActive(false);
             GameData.Instance.player.bossClear = true;
-
         }
     }
 

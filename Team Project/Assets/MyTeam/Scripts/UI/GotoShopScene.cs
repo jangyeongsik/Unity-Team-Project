@@ -71,6 +71,7 @@ public class GotoShopScene : MonoBehaviour
         {
             SceneMgr.Instance.LoadScene(GameData.Instance.player.SaveSceneName, GameData.Instance.player.SavePortalName);
         }
+        
         GameData.Instance.player.SetGravity(0.9f);
     }
     private void Start()
