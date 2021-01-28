@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pattern2_CenterColi : MonoBehaviour
 {
     BossData bossData;
+    bool isTrigger;
     float timer;
     float dotTime = 1.5f;
 
@@ -16,11 +17,32 @@ public class Pattern2_CenterColi : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= dotTime)
+        if (isTrigger)
         {
-            GameEventToUI.Instance.OnPlayerBossHit(bossData.position, 1, bossData.bossState);
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer >= dotTime)
+            {
+                GameEventToUI.Instance.OnPlayerBossHit(bossData.position, 1, bossData.bossState);
+                timer = 0;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            isTrigger = true;
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            isTrigger = false;
         }
     }
 

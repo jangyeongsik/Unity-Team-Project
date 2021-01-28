@@ -13,6 +13,7 @@ public class Npcprond : MonoBehaviour
     private bool isChack = false;
     private bool giveitem = false;
     public GameObject box;
+    public GameObject box2;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class Npcprond : MonoBehaviour
         if(count >=3 && DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count > 0)
         {
             box.SetActive(false);
+            box2.SetActive(false);
         }
     }
 
