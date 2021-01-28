@@ -107,8 +107,6 @@ public class StageManager : MonoBehaviour
                     {
                         string str = GameData.Instance.player.curSceneName;
                         string id = str.Substring(3);
-                        Debug.Log("보상");
-                        Debug.Log("str : " + str + " id : " + int.Parse(id));
                         GameEventToUI.Instance.OnItemDropInfo(true, int.Parse(id));
                     }
                 }
@@ -116,8 +114,6 @@ public class StageManager : MonoBehaviour
                 {
                     string str = GameData.Instance.player.curSceneName;
                     string id = str.Substring(3);
-                    Debug.Log("보상");
-                    Debug.Log("str : " + str + " id : " + int.Parse(id));
                     GameEventToUI.Instance.OnTempleItemDropInfo(true, int.Parse(id));
                 }
                 //리젠을 하지않는 맵이라면
@@ -128,7 +124,6 @@ public class StageManager : MonoBehaviour
                     {
                         if(GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
                         {
-                            Debug.Log("true");
                             GameData.Instance.player.stageData[i].value = true;
                         }
                     }

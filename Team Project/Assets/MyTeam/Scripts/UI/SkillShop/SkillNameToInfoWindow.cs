@@ -5,7 +5,6 @@ using UnityEngine;
 public class SkillNameToInfoWindow : MonoBehaviour
 {
     public int skillId;
-    int cylinder;
     bool buySucced;
 
     public GameObject SucceedWindow;
@@ -13,7 +12,6 @@ public class SkillNameToInfoWindow : MonoBehaviour
 
     private void Start()
     {
-        cylinder = GameData.Instance.player.cylinderCounter;
         SucceedWindow.SetActive(false);
         FailWinodw.SetActive(false);
     }
@@ -47,7 +45,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
             switch (UIEventToGame.Instance.UIeventSkillId())
             {
                 case 3:
-                    if(cylinder > 25)
+                    if(GameData.Instance.player.cylinderCounter > 25)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
                         CylinderCounter(25);
@@ -59,7 +57,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     }
                     break;
                 case 4:
-                    if (cylinder > 30)
+                    if (GameData.Instance.player.cylinderCounter > 30)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
                         CylinderCounter(30);
@@ -71,7 +69,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     }
                     break;
                 case 5:
-                    if (cylinder > 35)
+                    if (GameData.Instance.player.cylinderCounter > 35)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
                         CylinderCounter(35);
@@ -83,7 +81,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     }
                     break;
                 case 6:
-                    if (cylinder > 40)
+                    if (GameData.Instance.player.cylinderCounter > 40)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
                         CylinderCounter(40);
@@ -95,7 +93,7 @@ public class SkillNameToInfoWindow : MonoBehaviour
                     }
                     break;
                 case 7:
-                    if (cylinder >= 45)
+                    if (GameData.Instance.player.cylinderCounter >= 45)
                     {
                         GameData.Instance.player.skillShop[UIEventToGame.Instance.UIeventSkillId()] = true;
                         CylinderCounter(45);

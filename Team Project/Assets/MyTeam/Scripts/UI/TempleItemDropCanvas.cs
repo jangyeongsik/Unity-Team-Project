@@ -48,7 +48,7 @@ public class TempleItemDropCanvas : MonoBehaviour
     {
         //열쇠 2개 = 보상 1개, 열쇠 5개 = 보상 3개, 열쇠 10 개 = 보상 7개
         //보상 갯수 설정
-        rewardCount = (pBtn.count == 2) ? 1 : (pBtn.count == 5) ? 3 : (pBtn.count == 10) ? 7 : 0;
+        rewardCount = (pBtn.count == 5) ? 1 : (pBtn.count == 10) ? 3 : (pBtn.count == 20) ? 7 : 0;
         //101 ~ 104 딕셔너리에 기본으로 0 집어넣기
         for (int i = 101; i < 105; i++)
         {
@@ -62,7 +62,6 @@ public class TempleItemDropCanvas : MonoBehaviour
                 {
                     rewards[i] = 0;
                 }
-                Debug.Log(i + " " + rewards[i]);
             }
         }
     }
