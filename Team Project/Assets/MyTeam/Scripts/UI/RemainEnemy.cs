@@ -9,6 +9,9 @@ public class RemainEnemy : MonoBehaviour
 
     private void Update()
     {
-        value.text = GameData.Instance.player.enemyData.Count.ToString();
+        if (GameData.Instance.player.curSceneName.Equals("MAP000"))
+            value.text = "0";
+        else 
+            value.text = GameData.Instance.player.enemyData.Count.ToString();
     }
 }
