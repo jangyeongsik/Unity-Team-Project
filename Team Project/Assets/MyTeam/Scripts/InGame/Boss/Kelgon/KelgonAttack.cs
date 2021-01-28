@@ -170,8 +170,9 @@ public class KelgonAttack : MonoBehaviour
 
     public void BossClear()
     {
-        transform.parent.gameObject.SetActive(false);
         GameData.Instance.player.PopEnemyData(kelgon.position.gameObject);
+        GameData.Instance.player.bossClear = true;
+        transform.parent.gameObject.SetActive(false);
     }
 
     public void paticleOn()

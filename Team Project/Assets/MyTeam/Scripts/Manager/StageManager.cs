@@ -81,6 +81,10 @@ public class StageManager : MonoBehaviour
         {
             isClear = false;
         }
+        else if(stageKind == STAGEKIND.Boss)
+        {
+
+        }
         else
         {
             isClear = true;
