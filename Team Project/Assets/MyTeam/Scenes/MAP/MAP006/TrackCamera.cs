@@ -18,5 +18,9 @@ public class TrackCamera : MonoBehaviour
                 cameraMovingCount = 0.0f;
             }
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

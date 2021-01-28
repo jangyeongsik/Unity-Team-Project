@@ -12,6 +12,7 @@ public class Npcprond : MonoBehaviour
     private bool trigger =false;
     private bool isChack = false;
     private bool giveitem = false;
+    public GameObject box;
 
     void Start()
     {
@@ -52,6 +53,10 @@ public class Npcprond : MonoBehaviour
                 UIEventToGame.Instance.OnUiEventQuest_Count(" ");
                 count++;
                 break;
+        }
+        if(count >=3 && DataManager.Instance.EquipInvenData.CurrentEquipmentList.Count > 0)
+        {
+            box.SetActive(false);
         }
     }
 

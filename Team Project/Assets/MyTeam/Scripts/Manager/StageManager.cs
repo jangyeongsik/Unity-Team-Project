@@ -81,6 +81,10 @@ public class StageManager : MonoBehaviour
         {
             isClear = false;
         }
+        else if(stageKind == STAGEKIND.Boss)
+        {
+
+        }
         else
         {
             isClear = true;
@@ -124,11 +128,13 @@ public class StageManager : MonoBehaviour
                     {
                         if(GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
                         {
+                            Debug.Log("true");
                             GameData.Instance.player.stageData[i].value = true;
                         }
                     }
                     //인게임중 확인할 값변경
                     GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName] = true;
+                    Debug.Log(GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName]);
                 }
             }
         }
