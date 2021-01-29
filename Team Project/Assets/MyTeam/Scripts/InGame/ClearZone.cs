@@ -8,7 +8,9 @@ public class ClearZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (portalName == null)
+            return;
+        if (other.CompareTag("Player"))
         {
             GameData.Instance.player.isSceneMove = true;
             GameEventToUI.Instance.OnPlayerHp_Decrease(2);

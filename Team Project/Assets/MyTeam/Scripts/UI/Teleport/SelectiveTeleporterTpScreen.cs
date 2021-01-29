@@ -103,4 +103,11 @@ public class SelectiveTeleporterTpScreen : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
+    public void ClosePopUp()
+    {
+        if (Popup.activeSelf)
+        {
+            Popup.SetActive(false);
+        }
+    }
 }

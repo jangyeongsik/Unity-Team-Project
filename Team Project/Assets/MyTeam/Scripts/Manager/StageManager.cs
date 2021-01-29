@@ -129,8 +129,7 @@ public class StageManager : MonoBehaviour
                     }
                     //인게임중 확인할 값변경
                     GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName] = true;
-                    Debug.Log(GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName]);
-                }
+                    }
             }
         }
         else
