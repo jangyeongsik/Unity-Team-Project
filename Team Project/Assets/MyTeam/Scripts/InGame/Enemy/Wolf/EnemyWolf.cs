@@ -38,7 +38,8 @@ public class EnemyWolf : MonoBehaviour
 
     private void OnDestroy()
     {
-        monster.EnemyHitEvent -= AttackHit;
+        if(monster != null)
+            monster.EnemyHitEvent -= AttackHit;
     }
 
     private void WolfSetting()

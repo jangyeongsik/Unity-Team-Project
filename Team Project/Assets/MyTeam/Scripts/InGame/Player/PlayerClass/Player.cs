@@ -258,6 +258,7 @@ public class Player
         if(!(curSceneName == "MAP000"))
             isSceneMove = true;
 
+        Debug.Log(pos);
         yield return new WaitForSeconds(0.2f);
         controller.enabled = true;
         gravity = 10f;

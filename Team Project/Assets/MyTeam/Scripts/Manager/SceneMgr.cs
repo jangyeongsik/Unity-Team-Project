@@ -14,6 +14,7 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
 
     IEnumerator MovePlayer(string SceneName, string portalName)
     {
+        Debug.Log(portalName);
         ScreenFade.Instance.OnFadeIn(1);
 
         if (CurrentSceneName != "")
@@ -31,6 +32,5 @@ public class SceneMgr : SingletonMonobehaviour<SceneMgr>
             yield return new WaitForEndOfFrame();
         }
         StartCoroutine(GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position));
-        //GameData.Instance.player.PlayerMovePosition(GameObject.Find(portalName).transform.position);
     }
 }

@@ -23,7 +23,7 @@ public class StageManager : MonoBehaviour
     {
         if (enemys == null)
             enemys = GameObject.FindObjectsOfType<Monster>();
-            
+
         if (portals == null)
             portals = GameObject.FindObjectsOfType<TeleportMaster>();
 
@@ -62,7 +62,7 @@ public class StageManager : MonoBehaviour
         GameData.Instance.player.enemyData.Clear();
         for (int i = 0; i < enemys.Length; ++i)
         {
-            if(enemys[i].gameObject.activeSelf)
+            if (enemys[i].gameObject.activeSelf)
                 GameData.Instance.player.enemyData.Add(enemys[i].gameObject);
         }
     }
@@ -70,8 +70,8 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         AudioClip clip;
-        SoundManager.Instance.D_BGMS.TryGetValue(stageKind.ToString(),out clip);
-        if(SoundManager.Instance.BGM_Audio.clip != clip)
+        SoundManager.Instance.D_BGMS.TryGetValue(stageKind.ToString(), out clip);
+        if (SoundManager.Instance.BGM_Audio.clip != clip)
         {
             SoundManager.Instance.BGM_Audio.clip = clip;
             SoundManager.Instance.BGM_Audio.Play();
@@ -81,7 +81,7 @@ public class StageManager : MonoBehaviour
         {
             isClear = false;
         }
-        else if(stageKind == STAGEKIND.Boss)
+        else if (stageKind == STAGEKIND.Boss)
         {
 
         }
@@ -120,16 +120,16 @@ public class StageManager : MonoBehaviour
                 if (!isRegen)
                 {
                     //저장하기위한 값변경
-                    for(int i =0; i < GameData.Instance.player.stageData.Count; ++i)
+                    for (int i = 0; i < GameData.Instance.player.stageData.Count; ++i)
                     {
-                        if(GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
+                        if (GameData.Instance.player.stageData[i].key.Equals(GameData.Instance.player.curSceneName))
                         {
                             GameData.Instance.player.stageData[i].value = true;
                         }
                     }
                     //인게임중 확인할 값변경
                     GameData.Instance.player.D_stageData[GameData.Instance.player.curSceneName] = true;
-                    }
+                }
             }
         }
         else
@@ -141,7 +141,5 @@ public class StageManager : MonoBehaviour
                     portals[i].mesh.mesh = portals[i].Active;
             }
         }
-
-    }
-
+    } 
 }
