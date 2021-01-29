@@ -54,7 +54,6 @@ public class EnemyWarrior : MonoBehaviour
     {
         if(e_Warrior != null)
             e_Warrior.EnemyHitEvent -= AttackHit;
-        
     }
 
     private void Update()
