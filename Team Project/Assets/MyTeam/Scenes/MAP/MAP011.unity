@@ -3856,36 +3856,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 497248801}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &502336418
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 502336419}
-  m_Layer: 0
-  m_Name: CorpseSP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &502336419
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502336418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 0, z: 2.105}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1724269985}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &508617330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4745,7 +4715,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e36d1665a1fbca941917ca67c0afdd9a, type: 3}
       propertyPath: m_Name
-      value: Skeleton01_m
+      value: LeverSkeleton
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e36d1665a1fbca941917ca67c0afdd9a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13209,29 +13179,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 999440269}
     m_Modifications:
-    - target: {fileID: 100000, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
       propertyPath: m_Name
-      value: Corpse01_i
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 100008, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: LeverCorpse
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13277,18 +13227,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.0948002
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.0948
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.0948002
-      objectReference: {fileID: 0}
+    - target: {fileID: 1724269987, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
+      propertyPath: templePortal
+      value: 
+      objectReference: {fileID: 1213321343}
+    - target: {fileID: 1724269987, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
+      propertyPath: sM
+      value: 
+      objectReference: {fileID: 999440270}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966f10fd3007df94482a09ae9fd630bf, type: 3}
 --- !u!4 &1724269985 stripped
@@ -13297,43 +13243,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1724269984}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1724269986 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100006, guid: 966f10fd3007df94482a09ae9fd630bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1724269984}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1724269987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724269986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7cbfa41a29905449fdb2d8e0e3ddda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leverName: "\uBAA8\uD5D8\uAC00\uC758 \uC2DC\uCCB4"
-  description: "\uC544\uC9C1\uB3C4 \uAFC8\uD2C0\uAC70\uB9AC\uACE0 \uC788\uB294 \uC2DC\uCCB4...
-    \uBD88\uC30D\uD55C \uC2DC\uCCB4\uC758 \uBAB8\uC5D0 \uBC15\uD78C \uCE7C\uC744
-    \uBE7C\uB0B8\uB2E4."
-  templePortal: {fileID: 1213321343}
-  sM: {fileID: 999440270}
---- !u!65 &1724269988
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724269986}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 1}
 --- !u!1001 &1729784563
 PrefabInstance:
   m_ObjectHideFlags: 0
