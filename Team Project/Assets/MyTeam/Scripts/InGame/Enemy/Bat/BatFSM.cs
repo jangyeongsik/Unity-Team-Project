@@ -52,7 +52,8 @@ public class BatFSM : MonoBehaviour
 
     private void OnDestroy()
     {
-        bat.EnemyHitEvent -= AttackHit;
+        if(bat != null)
+            bat.EnemyHitEvent -= AttackHit;
     }
 
     private void Update()

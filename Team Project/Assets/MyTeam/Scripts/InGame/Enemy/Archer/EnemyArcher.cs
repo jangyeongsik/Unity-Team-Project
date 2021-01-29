@@ -60,7 +60,8 @@ public class EnemyArcher : MonoBehaviour
 
     private void OnDestroy()
     {
-        monster.EnemyHitEvent -= OnDeadEvent;
+        if(monster != null)
+            monster.EnemyHitEvent -= OnDeadEvent;
     }
     private void Update()
     {

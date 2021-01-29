@@ -43,6 +43,7 @@ public class TeleportMaster : MonoBehaviour
     {
         if (GameData.Instance.player.isSceneMove)
             GameData.Instance.player.isSceneMove = false;
-        clearZone.portalName = transform;
+        if(clearZone != null)
+            clearZone.portalName = transform;
     }
 }

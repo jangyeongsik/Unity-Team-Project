@@ -52,7 +52,8 @@ public class EnemyWarrior : MonoBehaviour
 
     private void OnDestroy()
     {
-        e_Warrior.EnemyHitEvent -= AttackHit;
+        if(e_Warrior != null)
+            e_Warrior.EnemyHitEvent -= AttackHit;
         
     }
 

@@ -56,7 +56,8 @@ public class ViperFSM : MonoBehaviour
 
     private void OnDestroy()
     {
-        viper.EnemyHitEvent -= AttackHit;
+        if(viper != null)
+            viper.EnemyHitEvent -= AttackHit;
     }
 
     private void Update()

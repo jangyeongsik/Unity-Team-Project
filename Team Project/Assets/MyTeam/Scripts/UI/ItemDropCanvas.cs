@@ -25,10 +25,8 @@ public class ItemDropCanvas : MonoBehaviour
     }
     void OnItemDropInfo(bool value, int MapIdx)
     {
-        Debug.Log("Drop");
         SoundManager.Instance.OnPlayOneShot(SoundKind.Sound_UISound, "보상획득");
         gameObject.SetActive(value);
-        Debug.Log("aaa");
         switch (MapIdx)
         {
             case 008:

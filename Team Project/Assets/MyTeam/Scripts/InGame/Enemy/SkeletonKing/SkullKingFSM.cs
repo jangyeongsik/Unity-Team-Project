@@ -53,7 +53,8 @@ public class SkullKingFSM : MonoBehaviour
 
     private void OnDestroy()
     {
-        skullKing.EnemyHitEvent -= AttackHit;
+        if(skullKing != null)
+            skullKing.EnemyHitEvent -= AttackHit;
 
     }
 
